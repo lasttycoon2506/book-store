@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon src/app.local.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,3 +16,4 @@
     "nodemon": "^3.0.2"
   }
 }
+
