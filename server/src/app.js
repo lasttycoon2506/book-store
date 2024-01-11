@@ -1,6 +1,10 @@
 const express = require('express')
+const morgan = require("morgan")
+
 const app = express()
 
-app.get('/', (req, res) => res.send('testing...'))
+app.use(morgan('dev'))
+app.use(require("./routes"))
+
 
 module.exports = app;
