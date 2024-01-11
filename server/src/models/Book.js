@@ -10,6 +10,6 @@ const bookSchema = new dynamoose.Schema({
     "timestamps": true
 })
 
-const User = dynamoose.model("User", userSchema)
+const Book = dynamoose.model("Book", bookSchema)
 
-module.exports = User
+module.exports = Book
