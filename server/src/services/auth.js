@@ -34,5 +34,5 @@ exports.registerUser = async function(newUser) {
         throw new Error(err)
     }
 
-    return registerUser
+    return registeredUser
 }
