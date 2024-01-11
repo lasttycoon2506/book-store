@@ -1,7 +1,7 @@
 const dynamoose = require("dynamoose");
 
 const userSchema = new dynamoose.Schema({
-    "id": String, // UUIDv4 ID
+    "id": String, 
     "username": String,
     "password": String,
     "firstName": String,
