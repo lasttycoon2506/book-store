@@ -2,7 +2,23 @@ const authService = require('../services/auth')
 
 
 exports.register = async function(req, res) {
-    const newUserInput = req.body
+    try {
+        const {
+            username,
+            password,
+            email,
+            firstName,
+            lastName,
+            phone,
+            address,
+            city,
+            state,
+            zip,
+        } = req.body
+    }
+    catch (err) {
+        res.status(500).json({ message: "An error occurred while registering." });
+    }
 
     var newUser
     try {
