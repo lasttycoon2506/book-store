@@ -1,5 +1,6 @@
 const router = require("express").Router()
+const newBook = require("../controllers/books")
 
-router.post('/register', (req, res) => res.send("is this working?") )
+router.post('/register', newBook)
 
 module.exports = router;

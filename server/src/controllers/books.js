@@ -1,4 +1,3 @@
-const router = require("express").Router()
 
 
 exports.register = async function(req, res) {
@@ -8,4 +7,3 @@ exports.register = async function(req, res) {
     res.json(newUserInput)
 }
 
-module.exports = createBook;
