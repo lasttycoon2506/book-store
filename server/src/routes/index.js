@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const booksRoutes = require('./books')
+const usersRoutes = require('./books')
 
 router.get('/', (req, res) => res.send('Hello world!'))
 
-router.use('/books', booksRoutes)
+router.use('/users', usersRoutes)
 
 module.exports = router;
 
