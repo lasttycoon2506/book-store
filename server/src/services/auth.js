@@ -21,13 +21,13 @@ exports.registerUser = async function(newUser) {
             "id": uuid,
             "username": newUser.username,
             "password": hashedPass,
-            "firstName": String,
-            "lastName": String,
-            "email": String,
-            "address": String,
-            "city": String,
-            "state": String,
-            "zip": String,
+            "firstName": newUser.firstName,
+            "lastName": newUser.lastName,
+            "email": newUser.email,
+            "address": newUser.address,
+            "city": newUser.city,
+            "state": newUser.state,
+            "zip": newUser.zip,
         })
     } catch (err) {
         console.log(err)
