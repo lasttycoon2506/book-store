@@ -3,6 +3,7 @@ const app = express()
 
 const dotenv = require('dotenv');
 dotenv.config();
+const config = require('../env').get(process.env.NODE_ENV);
 
 const morgan = require("morgan")
 app.use(morgan('dev'))
@@ -11,8 +12,8 @@ app.use(express.json())
 
 const dynamoose = require("dynamoose")
 dynamoose.aws.sdk.config.update({
-    "accessKeyId": process.env.AWS_ACCESS_KEY_ID,
-    "secretAccessKey": process.env.AWS_SECRET_ACCESS_KEY,
+    "accessKeyId": config.awsAccessKeyId,
+    "secretAccessKey": config.awsSecretKey,
     "region": "us-east-2",
 });
 
