@@ -3,7 +3,6 @@ const app = express()
 
 const dotenv = require('dotenv');
 dotenv.config();
-const config = require('../env').get(process.env.NODE_ENV);
 
 const morgan = require("morgan")
 app.use(morgan('dev'))
