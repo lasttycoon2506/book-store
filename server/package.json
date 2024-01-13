@@ -1,25 +1,20 @@
 {
-  "name": "server",
+  "name": "BookStore",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Mock Bookstore",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.local.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "keywords": [],
+  "author": "WR",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1535.0",
-    "aws-serverless-express": "^3.4.0",
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^16.3.1",
-    "dynamoose": "^4.0.0",
-    "express": "^4.18.2",
-    "morgan": "^1.10.0",
-    "uuid": "^9.0.1"
+    "@aws-sdk/client-dynamodb": "^3.18.0",
+    "@aws-sdk/util-dynamodb": "^3.18.0"
   },
   "devDependencies": {
+    "serverless-iam-roles-per-function": "^3.2.0",
     "nodemon": "^3.0.2"
   }
 }
