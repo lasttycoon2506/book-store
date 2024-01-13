@@ -20,7 +20,7 @@ functions:
     name: get-post
     memorySize: 128 # mb
     timeout: 5 # seconds
-    events:
+    events: 
       - http:
           path: post/{postId}
           method: GET
