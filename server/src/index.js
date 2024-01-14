@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const usersRoutes = require('./users')
+const usersRoutes = require('./routes/users')
 
 router.get('/', (req, res) => res.send('Hello world!'))
 
