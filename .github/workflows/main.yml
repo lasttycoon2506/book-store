@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: yarn install
     - name: serverless deploy
-      uses: server/serverless/github-action@master
+      uses: serverless/github-action@master
       with:
         args: deploy
       env:
