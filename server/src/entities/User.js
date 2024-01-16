@@ -1,4 +1,4 @@
-class User {
+class Customer {
     constructor(name, age, email) {
         this.name = name;
         this.age = age;
