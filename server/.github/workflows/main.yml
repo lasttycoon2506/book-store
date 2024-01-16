@@ -12,8 +12,6 @@ jobs:
       with:
         path: '**/node_modules'
         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-    - name: AWS Lambda Deploy
-      uses: appleboy/lambda-action@v0.1.9
     - name: Use Node.js 20.x
       uses: actions/setup-node@v1
       with:
