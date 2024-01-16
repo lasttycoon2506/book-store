@@ -8,6 +8,7 @@ const {
 } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
+
 const getPost = async (event) => {
     const response = { statusCode: 200 };
 
