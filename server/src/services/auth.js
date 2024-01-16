@@ -1,28 +1,29 @@
-const User = require("../models/User")
 const bcrypt = require("bcryptjs")
 const {v4: uuidv4} = require("uuid")
 
-exports.registerUser = async function(newUser) {
+exports.registerCustomer = async function(newCustomer) {
     try {
         const uuid = uuidv4()
         const salt = await bcrypt.genSalt(10)
-        const hashedPass = await bcrypt.hash(newUser.password, salt)
-        registeredUser = await User.create({
+        const hashedPass = await bcrypt.hash(newCustomer.password, salt)
+
+        //to-do customer model gen...
+        registeredCustomer = await Customer.create({
             "id": uuid,
-            "username": newUser.username,
+            "username": newCustomer.Customername,
             "password": hashedPass,
-            "firstName": newUser.firstName,
-            "lastName": newUser.lastName,
-            "email": newUser.email,
-            "address": newUser.address,
-            "city": newUser.city,
-            "state": newUser.state,
-            "zip": newUser.zip,
+            "firstName": newCustomer.firstName,
+            "lastName": newCustomer.lastName,
+            "email": newCustomer.email,
+            "address": newCustomer.address,
+            "city": newCustomer.city,
+            "state": newCustomer.state,
+            "zip": newCustomer.zip,
         })
     } catch (err) {
         console.log(err)
         throw new Error(err)
     }
 
-    return registeredUser
+    return registeredCustomer
 }
