@@ -11,13 +11,13 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: '**/node_modules'
-        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/npm.lock') }}
     - name: Use Node.js 20.x
       uses: actions/setup-node@v1
       with:
         node-version: 20.x
     - name: Install dependencies
-      run: yarn install
+      run: npm install
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
