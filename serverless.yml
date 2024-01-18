@@ -4,99 +4,99 @@ provider:
   name: aws
   runtime: nodejs20.x
   stage: dev
-  region: us-east-2
+  region: us-east-1
   environment:
-    DYNAMODB_TABLE_NAME: ${self:custom.postsTableName}
+    DYNAMODB_TABLE_NAME: ${self:custom.booksTableName}
 
 custom:
-  postsTableName: posts-table-${self:provider.stage}
+  booksTableName: books-table-${self:provider.stage}
 
 plugins:
   - serverless-iam-roles-per-function
 
 functions:
-  getPost:
-    handler: server/api.getPost
-    name: get-post
+  getBook:
+    handler: server/api.getBook
+    name: get-book
     memorySize: 128 # mb
     timeout: 5 # seconds
     events: 
       - http:
-          path: post/{postId}
+          path: book/{bookId}
           method: GET
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:GetItem"
-        Resource: !GetAtt PostsTable.Arn
-  createPost:
-    handler: server/api.createPost
-    name: create-post
+        Resource: !GetAtt BooksTable.Arn
+  addBook:
+    handler: server/api.addBook
+    name: add-book
     memorySize: 128 # mb
     timeout: 5 # seconds
     events:
       - http:
-          path: post
+          path: book
           method: POST
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:PutItem"
-        Resource: !GetAtt PostsTable.Arn
-  updatePost:
-    handler: server/api.updatePost
-    name: update-post
+        Resource: !GetAtt BooksTable.Arn
+  updateBook:
+    handler: server/api.updateBook
+    name: update-book
     memorySize: 128 # mb
     timeout: 5 # seconds
     events:
       - http:
-          path: post/{postId}
+          path: book/{bookId}
           method: PUT
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:UpdateItem"
-        Resource: !GetAtt PostsTable.Arn
-  deletePost:
-    handler: server/api.deletePost
-    name: delete-post
+        Resource: !GetAtt BooksTable.Arn
+  deleteBook:
+    handler: server/api.deleteBook
+    name: delete-book
     memorySize: 128 # mb
     timeout: 5 # seconds
     events:
       - http:
-          path: post/{postId}
+          path: book/{bookId}
           method: DELETE
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:DeleteItem"
-        Resource: !GetAtt PostsTable.Arn
-  getAllPosts:
-    handler: server/api.getAllPosts
-    name: get-all-posts
+        Resource: !GetAtt BooksTable.Arn
+  getAllBooks:
+    handler: server/api.getAll
+    name: get-all-books
     memorySize: 128 # mb
     timeout: 5 # seconds
     events:
       - http:
-          path: posts
+          path: books
           method: GET
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "dynamodb:Scan"
-        Resource: !GetAtt PostsTable.Arn
+        Resource: !GetAtt BooksTable.Arn
 
 resources:
   Resources:
-    PostsTable:
+    BooksTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.postsTableName}
+        TableName: ${self:custom.booksTableName}
         AttributeDefinitions:
-          - AttributeName: postId
+          - AttributeName: bookId
             AttributeType: S
         KeySchema:
-          - AttributeName: postId
+          - AttributeName: bookId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
