@@ -39,7 +39,7 @@ const getBook = async (event) => {
 };
 
 
-const createbook = async (event) => {
+const createBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -68,7 +68,7 @@ const createbook = async (event) => {
 };
 
 
-const updatebook = async (event) => {
+const updateBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -107,7 +107,7 @@ const updatebook = async (event) => {
 };
 
 
-const deletebook = async (event) => {
+const deleteBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -135,7 +135,7 @@ const deletebook = async (event) => {
 };
 
 
-const getAllbooks = async () => {
+const getAllBooks = async () => {
     const response = { statusCode: 200 };
 
     try {
@@ -162,8 +162,8 @@ const getAllbooks = async () => {
 
 module.exports = {
     getBook,
-    createbook,
-    updatebook,
-    deletebook,
-    getAllbooks,
+    createBook,
+    updateBook,
+    deleteBook,
+    getAllBooks,
 };
