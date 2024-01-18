@@ -9,19 +9,19 @@ const {
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
 //testing deploy....
-const getPost = async (event) => {
+const getBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ postId: event.pathParameters.postId }),
+            Key: marshall({ bookId: event.pathParameters.bookId }),
         };
         const { Item } = await db.send(new GetItemCommand(params));
 
         console.log({ Item });
         response.body = JSON.stringify({
-            message: "Successfully retrieved post.",
+            message: "Successfully retrieved book.",
             data: (Item) ? unmarshall(Item) : {},
             rawData: Item,
         });
@@ -29,7 +29,7 @@ const getPost = async (event) => {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to get post.",
+            message: "Failed to get book.",
             errorMsg: e.message,
             errorStack: e.stack,
         });
@@ -39,7 +39,7 @@ const getPost = async (event) => {
 };
 
 
-const createPost = async (event) => {
+const createbook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -51,14 +51,14 @@ const createPost = async (event) => {
         const createResult = await db.send(new PutItemCommand(params));
 
         response.body = JSON.stringify({
-            message: "Successfully created post.",
+            message: "Successfully created book.",
             createResult,
         });
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to create post.",
+            message: "Failed to create book.",
             errorMsg: e.message,
             errorStack: e.stack,
         });
@@ -68,7 +68,7 @@ const createPost = async (event) => {
 };
 
 
-const updatePost = async (event) => {
+const updatebook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -76,7 +76,7 @@ const updatePost = async (event) => {
         const objKeys = Object.keys(body);
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ postId: event.pathParameters.postId }),
+            Key: marshall({ bookId: event.pathParameters.bookId }),
             UpdateExpression: `SET ${objKeys.map((_, index) => `#key${index} = :value${index}`).join(", ")}`,
             ExpressionAttributeNames: objKeys.reduce((acc, key, index) => ({
                 ...acc,
@@ -90,14 +90,14 @@ const updatePost = async (event) => {
         const updateResult = await db.send(new UpdateItemCommand(params));
 
         response.body = JSON.stringify({
-            message: "Successfully updated post.",
+            message: "Successfully updated book.",
             updateResult,
         });
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to update post.",
+            message: "Failed to update book.",
             errorMsg: e.message,
             errorStack: e.stack,
         });
@@ -107,25 +107,25 @@ const updatePost = async (event) => {
 };
 
 
-const deletePost = async (event) => {
+const deletebook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ postId: event.pathParameters.postId }),
+            Key: marshall({ bookId: event.pathParameters.bookId }),
         };
         const deleteResult = await db.send(new DeleteItemCommand(params));
 
         response.body = JSON.stringify({
-            message: "Successfully deleted post.",
+            message: "Successfully deleted book.",
             deleteResult,
         });
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to delete post.",
+            message: "Failed to delete book.",
             errorMsg: e.message,
             errorStack: e.stack,
         });
@@ -135,14 +135,14 @@ const deletePost = async (event) => {
 };
 
 
-const getAllPosts = async () => {
+const getAllbooks = async () => {
     const response = { statusCode: 200 };
 
     try {
         const { Items } = await db.send(new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME }));
 
         response.body = JSON.stringify({
-            message: "Successfully retrieved all posts.",
+            message: "Successfully retrieved all books.",
             data: Items.map((item) => unmarshall(item)),
             Items,
         });
@@ -150,7 +150,7 @@ const getAllPosts = async () => {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to retrieve posts.",
+            message: "Failed to retrieve books.",
             errorMsg: e.message,
             errorStack: e.stack,
         });
@@ -161,9 +161,9 @@ const getAllPosts = async () => {
 
 
 module.exports = {
-    getPost,
-    createPost,
-    updatePost,
-    deletePost,
-    getAllPosts,
+    getBook,
+    createbook,
+    updatebook,
+    deletebook,
+    getAllbooks,
 };
