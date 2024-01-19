@@ -23,7 +23,7 @@ plugins:
 
 functions:
   getBook:
-    handler: server/api.getBook
+    handler: server/src/controllers/books.getBook
     name: get-book
     memorySize: 128 # mb
     timeout: 5 # seconds
