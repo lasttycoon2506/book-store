@@ -16,8 +16,8 @@ custom:
 
 plugins:
   - serverless-iam-roles-per-function
-  - serverless-offline
   - serverless-dynamodb
+  - serverless-offline
 
 functions:
   getBook:
