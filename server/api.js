@@ -18,7 +18,6 @@ const getBook = async (event) => {
         };
         const { Item } = await db.send(new GetItemCommand(params));
 
-        console.log({ Item });
         response.body = JSON.stringify({
             message: "Successfully retrieved book.",
             data: (Item) ? unmarshall(Item) : {},
