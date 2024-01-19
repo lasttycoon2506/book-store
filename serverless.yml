@@ -10,9 +10,14 @@ provider:
 
 custom:
   booksTableName: books-table-${self:provider.stage}
+  serverless-dynamodb:
+    port: 8000
+    docker: false
 
 plugins:
   - serverless-iam-roles-per-function
+  - serverless-offline
+  - serverless-dynamodb
 
 functions:
   getBook:
