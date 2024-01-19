@@ -51,7 +51,7 @@ functions:
           - "dynamodb:PutItem"
         Resource: !GetAtt BooksTable.Arn
   updateBook:
-    handler: server/api.updateBook
+    handler: server/src/controllers/books.updateBook
     name: update-book
     memorySize: 128 # mb
     timeout: 5 # seconds
