@@ -37,7 +37,7 @@ functions:
           - "dynamodb:GetItem"
         Resource: !GetAtt BooksTable.Arn
   createBook:
-    handler: server/api.createBook
+    handler: server/src/controllers/books.createBook
     name: create-book
     memorySize: 128 # mb
     timeout: 5 # seconds
