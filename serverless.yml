@@ -13,6 +13,8 @@ custom:
   serverless-dynamodb:
     port: 8000
     docker: false
+    start:
+      migrate: true
 
 plugins:
   - serverless-iam-roles-per-function
