@@ -65,7 +65,7 @@ functions:
           - "dynamodb:UpdateItem"
         Resource: !GetAtt BooksTable.Arn
   deleteBook:
-    handler: server/api.deleteBook
+    handler: server/src/controllers/books.deleteBook
     name: delete-book
     memorySize: 128 # mb
     timeout: 5 # seconds

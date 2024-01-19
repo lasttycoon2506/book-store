@@ -2,7 +2,8 @@ const db = require("../../dbConnector");
 const {
     GetItemCommand,
     PutItemCommand,
-    UpdateItemCommand
+    UpdateItemCommand, 
+    DeleteItemCommand
 } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
@@ -102,4 +103,31 @@ const updateBook = async (event) => {
     return response;
 };
 
-module.exports = {getBook, createBook, updateBook}
+const deleteBook = async (event) => {
+    const response = { statusCode: 200 };
+
+    try {
+        const params = {
+            TableName: process.env.DYNAMODB_TABLE_NAME,
+            Key: marshall({ bookId: event.pathParameters.bookId }),
+        };
+        const deleteResult = await db.send(new DeleteItemCommand(params));
+
+        response.body = JSON.stringify({
+            message: "Successfully deleted book.",
+            deleteResult,
+        });
+    } catch (e) {
+        console.error(e);
+        response.statusCode = 500;
+        response.body = JSON.stringify({
+            message: "Failed to delete book.",
+            errorMsg: e.message,
+            errorStack: e.stack,
+        });
+    }
+
+    return response;
+};
+
+module.exports = {getBook, createBook, updateBook, deleteBook}
