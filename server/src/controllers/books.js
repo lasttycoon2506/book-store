@@ -1,5 +1,5 @@
 const db = require("../../dbConnector");
-const Book = require("../classes/Book.js");
+const Book = require("../entities/Book.ts");
 const {
     GetItemCommand,
     PutItemCommand,
