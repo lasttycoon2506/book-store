@@ -10,7 +10,7 @@ const {
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
 
-export const getBook = async (event) => {
+const getBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -39,7 +39,7 @@ export const getBook = async (event) => {
     return response;
 };
 
-export const createBook = async (event) => {
+const createBook = async (event) => {
     const response = { statusCode: 200 };
     
     const {title, 
@@ -77,7 +77,7 @@ export const createBook = async (event) => {
     return response;
 };
 
-export const updateBook = async (event) => {
+const updateBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -115,7 +115,7 @@ export const updateBook = async (event) => {
     return response;
 };
 
-export const deleteBook = async (event) => {
+const deleteBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -142,7 +142,7 @@ export const deleteBook = async (event) => {
     return response;
 };
 
-export const getAllBooks = async () => {
+const getAllBooks = async () => {
     const response = { statusCode: 200 };
 
     try {
@@ -164,4 +164,12 @@ export const getAllBooks = async () => {
     }
 
     return response;
+};
+
+module.exports = {
+    getBook,
+    createBook,
+    updateBook,
+    deleteBook,
+    getAllBooks,
 };
