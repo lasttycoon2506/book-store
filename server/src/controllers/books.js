@@ -1,4 +1,5 @@
 const db = require("../../dbConnector");
+const Book = require("../classes/Book");
 const {
     GetItemCommand,
     PutItemCommand,
