@@ -1,5 +1,5 @@
 const db = require("../../dbConnector");
-const Book = require("../classes/Book");
+const Book = require("../classes/Book.js");
 const {
     GetItemCommand,
     PutItemCommand,
@@ -50,7 +50,7 @@ const createBook = async (event) => {
         stock
     } = event.body;
 
-    const newBook = new Book(title, author, pages, genre, price, stock);
+    const newBook = new Book({title, author, pages, genre, price, stock});
     
     try {
         // const body = JSON.parse(event.body);

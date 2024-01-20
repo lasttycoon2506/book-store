@@ -1,4 +1,11 @@
-class Book {
+abstract class Book {
+  title: string;
+  author: string;
+  pages: number;
+  genre: string;
+  price: number;
+  stock: number;
+  
   constructor(title, author, pages, genre, price, stock) {
     this.title = title;
     this.author = author;
