@@ -41,12 +41,22 @@ const getBook = async (event) => {
 
 const createBook = async (event) => {
     const response = { statusCode: 200 };
+    
+    const {title, 
+        author, 
+        pages, 
+        genre, 
+        price, 
+        stock
+    } = event.body;
 
+    const newBook = new Book(title, author, pages, genre, price, stock);
+    
     try {
-        const body = JSON.parse(event.body);
+        // const body = JSON.parse(event.body);
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Item: marshall(body || {}),
+            Item: marshall(newBook),
         };
         const createResult = await db.send(new PutItemCommand(params));
 
