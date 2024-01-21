@@ -6,10 +6,10 @@ provider:
   stage: dev
   region: us-east-1
   environment:
-    DYNAMODB_TABLE_NAME: ${self:custom.booksTableName}
+    DYNAMODB_TABLE_NAME: ${self:custom.bookStoreTableName}
 
 custom:
-  booksTableName: books-table-${self:provider.stage}
+  bookStoreTableName: bookStore-table-${self:provider.stage}
   serverless-dynamodb:
     port: 8000
     docker: false
@@ -82,18 +82,18 @@ functions:
         Action:
           - "dynamodb:Scan"
         Resource: !GetAtt BooksTable.Arn
-  # getCustomer:
-  #   handler: server/src/controllers/customers.getCustomer
-  #   name: get-customer
-  #   events: 
-  #     - http:
-  #         path: book/{bookId}
-  #         method: GET
-  #   iamRoleStatements:
-  #     - Effect: "Allow"
-  #       Action:
-  #         - "dynamodb:GetItem"
-  #       Resource: !GetAtt BooksTable.Arn
+  getCustomer:
+    handler: server/src/controllers/customers.getCustomer
+    name: get-customer
+    events: 
+      - http:
+          path: customer/{customerId}
+          method: GET
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "dynamodb:GetItem"
+        Resource: !GetAtt BooksTable.Arn
   
 
 resources:
@@ -101,7 +101,7 @@ resources:
     BooksTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.booksTableName}
+        TableName: ${self:custom.bookStoreTableName}
         AttributeDefinitions:
           - AttributeName: bookId
             AttributeType: S
