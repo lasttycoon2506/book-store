@@ -24,7 +24,6 @@ plugins:
 functions:
   getBook:
     handler: server/src/controllers/books.getBook
-    name: get-book
     events: 
       - http:
           path: book/{bookId}
@@ -36,7 +35,6 @@ functions:
         Resource: !GetAtt BooksTable.Arn
   createBook:
     handler: server/src/controllers/books.createBook
-    name: create-book
     events:
       - http:
           path: book
@@ -48,7 +46,6 @@ functions:
         Resource: !GetAtt BooksTable.Arn
   updateBook:
     handler: server/src/controllers/books.updateBook
-    name: update-book
     events:
       - http:
           path: book/{bookId}
@@ -60,7 +57,6 @@ functions:
         Resource: !GetAtt BooksTable.Arn
   deleteBook:
     handler: server/src/controllers/books.deleteBook
-    name: delete-book
     events:
       - http:
           path: book/{bookId}
@@ -72,7 +68,6 @@ functions:
         Resource: !GetAtt BooksTable.Arn
   getAllBooks:
     handler: server/src/controllers/books.getAllBooks
-    name: get-all-books
     events:
       - http:
           path: books
@@ -84,7 +79,6 @@ functions:
         Resource: !GetAtt BooksTable.Arn
   getCustomer:
     handler: server/src/controllers/customers.getCustomer
-    name: get-customer
     events: 
       - http:
           path: customer/{customerId}
