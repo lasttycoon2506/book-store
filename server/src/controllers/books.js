@@ -1,4 +1,4 @@
-import { client } from "../../dbConnector.js";
+import { client } from "../../db.js";
 import { Book } from "../entities/Book.js";
 import {
     GetItemCommand,
