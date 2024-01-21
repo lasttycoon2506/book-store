@@ -8,3 +8,5 @@ class Book  {
     this.stock = stock;
   }
 }
+
+module.exports = Book;

@@ -1,16 +1,16 @@
-const db = require("../../dbConnector");
-const Book = require("../entities/Book.ts");
-const {
+import { client } from "../../dbConnector.js";
+// const Book = require("../entities/Book.js");
+import {
     GetItemCommand,
     PutItemCommand,
     UpdateItemCommand, 
     DeleteItemCommand,
     ScanCommand
-} = require("@aws-sdk/client-dynamodb");
-const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
+} from "@aws-sdk/client-dynamodb";
+import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 
-const getBook = async (event) => {
+export const getBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -18,7 +18,7 @@ const getBook = async (event) => {
             TableName: process.env.DYNAMODB_TABLE_NAME,
             Key: marshall({ bookId: event.pathParameters.bookId }),
         };
-        const { Item } = await db.send(new GetItemCommand(params));
+        const { Item } = await client.send(new GetItemCommand(params));
 
         console.log({ Item });
         response.body = JSON.stringify({
@@ -39,26 +39,26 @@ const getBook = async (event) => {
     return response;
 };
 
-const createBook = async (event) => {
+export const createBook = async (event) => {
     const response = { statusCode: 200 };
     
-    const {title, 
-        author, 
-        pages, 
-        genre, 
-        price, 
-        stock
-    } = event.body;
+    // const {title, 
+    //     author, 
+    //     pages, 
+    //     genre, 
+    //     price, 
+    //     stock
+    // } = event.body;
 
-    const newBook = new Book(title, author, pages, genre, price, stock);
+    // const newBook = new Book(title, author, pages, genre, price, stock);
     
     try {
-        // const body = JSON.parse(event.body);
+        const body = JSON.parse(event.body);
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Item: marshall(newBook),
+            Item: marshall(body),
         };
-        const createResult = await db.send(new PutItemCommand(params));
+        const createResult = await client.send(new PutItemCommand(params));
 
         response.body = JSON.stringify({
             message: "Successfully created book.",
@@ -77,7 +77,7 @@ const createBook = async (event) => {
     return response;
 };
 
-const updateBook = async (event) => {
+export const updateBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -96,7 +96,7 @@ const updateBook = async (event) => {
                 [`:value${index}`]: body[key],
             }), {})),
         };
-        const updateResult = await db.send(new UpdateItemCommand(params));
+        const updateResult = await client.send(new UpdateItemCommand(params));
 
         response.body = JSON.stringify({
             message: "Successfully updated book.",
@@ -115,7 +115,7 @@ const updateBook = async (event) => {
     return response;
 };
 
-const deleteBook = async (event) => {
+export const deleteBook = async (event) => {
     const response = { statusCode: 200 };
 
     try {
@@ -123,7 +123,7 @@ const deleteBook = async (event) => {
             TableName: process.env.DYNAMODB_TABLE_NAME,
             Key: marshall({ bookId: event.pathParameters.bookId }),
         };
-        const deleteResult = await db.send(new DeleteItemCommand(params));
+        const deleteResult = await client.send(new DeleteItemCommand(params));
 
         response.body = JSON.stringify({
             message: "Successfully deleted book.",
@@ -142,11 +142,11 @@ const deleteBook = async (event) => {
     return response;
 };
 
-const getAllBooks = async () => {
+export const getAllBooks = async () => {
     const response = { statusCode: 200 };
 
     try {
-        const { Items } = await db.send(new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME }));
+        const { Items } = await client.send(new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME }));
 
         response.body = JSON.stringify({
             message: "Successfully retrieved all books.",
@@ -166,10 +166,3 @@ const getAllBooks = async () => {
     return response;
 };
 
-module.exports = {
-    getBook,
-    createBook,
-    updateBook,
-    deleteBook,
-    getAllBooks,
-};
