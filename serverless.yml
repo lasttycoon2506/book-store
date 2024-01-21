@@ -23,7 +23,7 @@ plugins:
 
 functions:
   getBook:
-    handler: server/src/controllers/books.getBook
+    handler: server/src/handlers/books.getBook
     events: 
       - http:
           path: book/{bookId}
@@ -34,7 +34,7 @@ functions:
           - "dynamodb:GetItem"
         Resource: !GetAtt BooksTable.Arn
   createBook:
-    handler: server/src/controllers/books.createBook
+    handler: server/src/handlers/books.createBook
     events:
       - http:
           path: book
@@ -45,7 +45,7 @@ functions:
           - "dynamodb:PutItem"
         Resource: !GetAtt BooksTable.Arn
   updateBook:
-    handler: server/src/controllers/books.updateBook
+    handler: server/src/handlers/books.updateBook
     events:
       - http:
           path: book/{bookId}
@@ -56,7 +56,7 @@ functions:
           - "dynamodb:UpdateItem"
         Resource: !GetAtt BooksTable.Arn
   deleteBook:
-    handler: server/src/controllers/books.deleteBook
+    handler: server/src/handlers/books.deleteBook
     events:
       - http:
           path: book/{bookId}
@@ -67,7 +67,7 @@ functions:
           - "dynamodb:DeleteItem"
         Resource: !GetAtt BooksTable.Arn
   getAllBooks:
-    handler: server/src/controllers/books.getAllBooks
+    handler: server/src/handlers/books.getAllBooks
     events:
       - http:
           path: books
@@ -78,7 +78,7 @@ functions:
           - "dynamodb:Scan"
         Resource: !GetAtt BooksTable.Arn
   getCustomer:
-    handler: server/src/controllers/customers.getCustomer
+    handler: server/src/handlers/customers.getCustomer
     events: 
       - http:
           path: customer/{customerId}
