@@ -1,5 +1,5 @@
 import { client } from "../../dbConnector.js";
-// const Book = require("../entities/Book.js");
+import { Book } from "../entities/Book.js";
 import {
     GetItemCommand,
     PutItemCommand,
@@ -42,21 +42,21 @@ export const getBook = async (event) => {
 export const createBook = async (event) => {
     const response = { statusCode: 200 };
     
-    // const {title, 
-    //     author, 
-    //     pages, 
-    //     genre, 
-    //     price, 
-    //     stock
-    // } = event.body;
+    const {title, 
+        author, 
+        pages, 
+        genre, 
+        price, 
+        stock
+    } = JSON.parse(event.body);
 
-    // const newBook = new Book(title, author, pages, genre, price, stock);
+    const newBook = new Book(title, author, pages, genre, price, stock);
     
     try {
-        const body = JSON.parse(event.body);
+        // const body = JSON.parse(event.body);
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Item: marshall(body),
+            Item: marshall(newBook),
         };
         const createResult = await client.send(new PutItemCommand(params));
 

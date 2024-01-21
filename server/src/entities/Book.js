@@ -1,4 +1,4 @@
-class Book  {
+export class Book  {
   constructor(title, author, pages, genre, price, stock) {
     this.title = title;
     this.author = author;
@@ -9,4 +9,3 @@ class Book  {
   }
 }
 
-module.exports = Book;
