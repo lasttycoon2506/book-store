@@ -43,21 +43,20 @@ export const createBook = async (event) => {
     const response = { statusCode: 200 };
     
     const { 
-            bookId,
-            title, 
-            author, 
-            pages, 
-            genre, 
-            price, 
-            stock
-                    } = JSON.parse(event.body);
+        bookId,
+        title, 
+        author, 
+        pages, 
+        genre, 
+        price, 
+        stock } = JSON.parse(event.body);
 
     const newBook = new Book(bookId, title, author, pages, genre, price, stock);
 
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Item: marshall(newBook, { convertClassInstanceToMap: true}  ),
+            Item: marshall(newBook, {convertClassInstanceToMap: true}),
         };
         const createResult = await client.send(new PutItemCommand(params));
 
