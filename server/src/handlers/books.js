@@ -12,11 +12,10 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 export const getBook = async (event) => {
     const response = { statusCode: 200 };
-
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ bookId: event.pathParameters.bookId }),
+            Key: marshall({ bookId: event.pathParameters.bookId }, { bookId: event.pathParameters.bookId }),
         };
         const { Item } = await client.send(new GetItemCommand(params));
 

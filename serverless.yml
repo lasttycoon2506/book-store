@@ -26,7 +26,7 @@ functions:
     handler: server/src/handlers/books.getBook
     events: 
       - http:
-          path: book/{PK}
+          path: book/{bookId}
           method: GET
     iamRoleStatements:
       - Effect: "Allow"
@@ -48,7 +48,7 @@ functions:
     handler: server/src/handlers/books.updateBook
     events:
       - http:
-          path: book/{PK}
+          path: book/{bookId}
           method: PUT
     iamRoleStatements:
       - Effect: "Allow"
@@ -59,7 +59,7 @@ functions:
     handler: server/src/handlers/books.deleteBook
     events:
       - http:
-          path: book/{PK}
+          path: book/{bookId}
           method: DELETE
     iamRoleStatements:
       - Effect: "Allow"
