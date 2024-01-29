@@ -26,7 +26,7 @@ functions:
     handler: server/src/handlers/books.getBook
     events: 
       - http:
-          path: book/{bookId}
+          path: book/{PK}
           method: GET
     iamRoleStatements:
       - Effect: "Allow"
@@ -48,7 +48,7 @@ functions:
     handler: server/src/handlers/books.updateBook
     events:
       - http:
-          path: book/{bookId}
+          path: book/{PK}
           method: PUT
     iamRoleStatements:
       - Effect: "Allow"
@@ -59,7 +59,7 @@ functions:
     handler: server/src/handlers/books.deleteBook
     events:
       - http:
-          path: book/{bookId}
+          path: book/{PK}
           method: DELETE
     iamRoleStatements:
       - Effect: "Allow"
@@ -97,11 +97,15 @@ resources:
       Properties:
         TableName: ${self:custom.bookStoreTableName}
         AttributeDefinitions:
-          - AttributeName: bookId
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
             AttributeType: S
         KeySchema:
-          - AttributeName: bookId
+          - AttributeName: PK
             KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
