@@ -38,3 +38,40 @@ export const getCustomer = async (event) => {
 
     return response;
 };
+
+export const createCustomer = async (event) => {
+    const response = { statusCode: 200 };
+    
+    const { 
+        customerId,
+        uesrName, 
+        password, 
+        name, 
+        email, 
+        address } = JSON.parse(event.body);
+
+    const newCustomer = new Customer(customerId, uesrName, password, name, email, address);
+
+    try {
+        const params = {
+            TableName: process.env.DYNAMODB_TABLE_NAME,
+            Item: marshall(newCustomer, {convertClassInstanceToMap: true}),
+        };
+        const createResult = await client.send(new PutItemCommand(params));
+
+        response.body = JSON.stringify({
+            message: "Successfully created customer",
+            createResult,
+        });
+    } catch (e) {
+        console.error(e);
+        response.statusCode = 500;
+        response.body = JSON.stringify({
+            message: "Failed to create customer.",
+            errorMsg: e.message,
+            errorStack: e.stack,
+        });
+    }
+
+    return response;
+};
