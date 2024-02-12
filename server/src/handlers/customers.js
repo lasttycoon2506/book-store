@@ -107,3 +107,28 @@ export const updateCustomer = async (event) => {
     }
     return response;
 };
+
+export const deleteCustomer = async (event) => {
+    const response = { statusCode: 200 };
+    try {
+        const params = {
+            TableName: process.env.DYNAMODB_TABLE_NAME,
+            Key: marshall({ customerId: event.pathParameters.customerId }),
+        };
+        const deleteResult = await client.send(new DeleteItemCommand(params));
+
+        response.body = JSON.stringify({
+            message: "Successfully deleted customer",
+            deleteResult,
+        });
+    } catch (e) {
+        console.error(e);
+        response.statusCode = 500;
+        response.body = JSON.stringify({
+            message: "Failed to delete customer",
+            errorMsg: e.message,
+            errorStack: e.stack,
+        });
+    }
+    return response;
+};
