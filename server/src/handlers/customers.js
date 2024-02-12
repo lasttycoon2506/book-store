@@ -12,7 +12,6 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 export const getCustomer = async (event) => {
     const response = { statusCode: 200 };
-
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
@@ -35,13 +34,11 @@ export const getCustomer = async (event) => {
             errorStack: e.stack,
         });
     }
-
     return response;
 };
 
 export const createCustomer = async (event) => {
     const response = { statusCode: 200 };
-    
     const { 
         customerId,
         uesrName, 
@@ -72,13 +69,11 @@ export const createCustomer = async (event) => {
             errorStack: e.stack,
         });
     }
-
     return response;
 };
 
 export const updateCustomer = async (event) => {
     const response = { statusCode: 200 };
-
     try {
         const body = JSON.parse(event.body);
         const objKeys = Object.keys(body);
