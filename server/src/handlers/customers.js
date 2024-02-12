@@ -75,3 +75,40 @@ export const createCustomer = async (event) => {
 
     return response;
 };
+
+export const updateCustomer = async (event) => {
+    const response = { statusCode: 200 };
+
+    try {
+        const body = JSON.parse(event.body);
+        const objKeys = Object.keys(body);
+        const params = {
+            TableName: process.env.DYNAMODB_TABLE_NAME,
+            Key: marshall({ bookId: event.pathParameters.bookId }),
+            UpdateExpression: `SET ${objKeys.map((_, index) => `#key${index} = :value${index}`).join(", ")}`,
+            ExpressionAttributeNames: objKeys.reduce((acc, key, index) => ({
+                ...acc,
+                [`#key${index}`]: key,
+            }), {}),
+            ExpressionAttributeValues: marshall(objKeys.reduce((acc, key, index) => ({
+                ...acc,
+                [`:value${index}`]: body[key],
+            }), {})),
+        };
+        const updateResult = await client.send(new UpdateItemCommand(params));
+
+        response.body = JSON.stringify({
+            message: "Successfully updated customer",
+            updateResult,
+        });
+    } catch (e) {
+        console.error(e);
+        response.statusCode = 500;
+        response.body = JSON.stringify({
+            message: "Failed to update customer",
+            errorMsg: e.message,
+            errorStack: e.stack,
+        });
+    }
+    return response;
+};
