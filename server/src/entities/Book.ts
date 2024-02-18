@@ -1,4 +1,4 @@
-import { Item }from './Item';
+import { Item } from './Item';
 
 
 export class Book extends Item {
@@ -20,9 +20,9 @@ export class Book extends Item {
     this.price = price;
     this.stock = stock;
   }
-  
+
   get pk(): string {
-    throw new Error('Method not implemented.');
+    return `BOOK#${this.bookId}`;
   }
   get sk(): string {
     throw new Error('Method not implemented.');
