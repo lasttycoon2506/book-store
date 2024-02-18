@@ -25,7 +25,7 @@ export class Book extends Item {
     return `BOOK#${this.bookId}`;
   }
   get sk(): string {
-    throw new Error('Method not implemented.');
+    return `BOOK#${this.bookId}`;
   }
   toItem(): Record<string, unknown> {
     throw new Error('Method not implemented.');
