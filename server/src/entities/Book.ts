@@ -20,5 +20,16 @@ export class Book extends Item {
     this.price = price;
     this.stock = stock;
   }
+  
+  get pk(): string {
+    throw new Error('Method not implemented.');
+  }
+  get sk(): string {
+    throw new Error('Method not implemented.');
+  }
+  toItem(): Record<string, unknown> {
+    throw new Error('Method not implemented.');
+  }
+
 }
 
