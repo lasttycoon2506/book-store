@@ -9,7 +9,7 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
-
+    
 export const getBook = async (event) => {
     const response = { statusCode: 200 };
     try {
