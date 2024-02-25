@@ -36,7 +36,16 @@ export class Book extends Item {
 	}
 
 	toItem(): Record<string, unknown> {
-		throw new Error('Method not implemented.');
+		return {
+			...this.keys(),
+			bookId: { S: (this.bookId) },
+			title: { S: this.title },
+			author: { S: this.author },
+			pages: { N: this.pages.toString() },
+			genre: { S: this.genre },
+			price: { N: this.price.toString() },
+			stock: { N: this.stock.toString() }
+		}
 	}
 
 }
