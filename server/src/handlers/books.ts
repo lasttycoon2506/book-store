@@ -10,17 +10,20 @@ import {
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
     
-export const getBook = async (book: Book) => {
-    const response = { statusCode: 200 };
+export async function getBook(bookId: number): Promise<Book> {
+    type response = {statusCode: 200, 
+                    body: {message: string, data: Record<string, any>, rawData: Record<string, any>}
+                    };
+                    
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ bookId: book.pathParameters.bookId }, { bookId: event.pathParameters.bookId }),
+            Key: marshall({ bookId: bookId }),
         };
         const { Item } = await client.send(new GetItemCommand(params));
 
         console.log({ Item });
-        response.body = JSON.stringify({
+        const r: response = JSON.stringify({
             message: "Successfully retrieved book.",
             data: (Item) ? unmarshall(Item) : {},
             rawData: Item,
