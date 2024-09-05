@@ -1,9 +1,9 @@
 export type Customer = {
-    userName: String;
-    password: String;
-    firstName: String;
-    lastName: String;
-    email: String;
-    address: String;
+    userName: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    address: string;
 }
     
