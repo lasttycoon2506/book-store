@@ -166,18 +166,19 @@ export async function getAllBooks(): Promise<responseData> {
         const { Items } = await client.send(new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME }));
 
         response.body = JSON.stringify({
-            message: "Successfully retrieved all books.",
+            message: "Successfully retrieved all books",
             data: Items.map((item) => unmarshall(item)),
             Items,
         });
-    } catch (e) {
-        console.error(e);
+    } catch (error: any) {
+        console.error(error);
         response.statusCode = 500;
-        response.body = JSON.stringify({
-            message: "Failed to retrieve books.",
-            errorMsg: e.message,
-            errorStack: e.stack,
-        });
+        response = {
+            statusCode: 500,
+            statusMessage: "Failed to retrieve books",
+            errorMsg: error.message,
+            errorStack: error.stack,
+        };
     }
 
     return response;
