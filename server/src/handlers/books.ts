@@ -9,7 +9,7 @@ import {
     AttributeValue,
     PutItemCommandOutput,
     UpdateItemCommandOutput,
-    DeleteItemCommandOutput
+    DeleteItemCommandOutput,
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
@@ -48,7 +48,7 @@ export async function getBook(bookId: number): Promise<responseData> {
             rawData: Item
             };
         
-    } catch (error: any) {
+    } catch (error) {
         console.error(error);
         response = {
             statusCode: 500,
