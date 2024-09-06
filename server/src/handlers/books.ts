@@ -161,9 +161,7 @@ export async function deleteBook(bookId: number): Promise<responseData> {
     return response;
 };
 
-export const getAllBooks = async () => {
-    const response = { statusCode: 200 };
-
+export async function getAllBooks(): Promise<responseData> {
     try {
         const { Items } = await client.send(new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME }));
 
