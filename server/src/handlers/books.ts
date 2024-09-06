@@ -118,14 +118,14 @@ export async function updateBook(bookId: number): Promise<responseData> {
 
         response = {
             statusCode: 200,
-            statusMessage: "Successfully updated book.",
+            statusMessage: "Successfully updated book",
             updateResult,
         };
     } catch (error: any) {
         console.error(error);
         response= {
             statusCode: 500,
-            statusMessage: "Failed to update book.",
+            statusMessage: "Failed to update book",
             errorMsg: error.message,
             errorStack: error.stack,
         };
@@ -143,15 +143,16 @@ export async function deleteBook(bookId: number): Promise<responseData> {
         };
         const deleteResult = await client.send(new DeleteItemCommand(params));
 
-        response.body = JSON.stringify({
-            message: "Successfully deleted book.",
+        response = {
+            statusCode: 200,
+            statusMessage: "Successfully deleted book",
             deleteResult,
-        });
+        };
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
         response.body = JSON.stringify({
-            message: "Failed to delete book.",
+            message: "Failed to delete book",
             errorMsg: e.message,
             errorStack: e.stack,
         });
