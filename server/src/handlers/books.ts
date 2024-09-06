@@ -8,7 +8,8 @@ import {
     ScanCommand,
     AttributeValue,
     PutItemCommandOutput,
-    UpdateItemCommandOutput
+    UpdateItemCommandOutput,
+    DeleteItemCommandOutput
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
@@ -20,6 +21,7 @@ type responseData = {
     rawData?: Record<string, AttributeValue>,
     createResult?: PutItemCommandOutput,
     updateResult?: UpdateItemCommandOutput,
+    deleteResult?: DeleteItemCommandOutput,
     errorMsg?: string,
     errorStack?: string
     };
@@ -137,7 +139,7 @@ export async function deleteBook(bookId: number): Promise<responseData> {
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ bookId: event.pathParameters.bookId }),
+            Key: marshall({ bookId: bookId }),
         };
         const deleteResult = await client.send(new DeleteItemCommand(params));
 
