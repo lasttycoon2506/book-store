@@ -119,14 +119,14 @@ export async function updateBook(bookId: number): Promise<responseData> {
             statusMessage: "Successfully updated book.",
             updateResult,
         };
-    } catch (e) {
-        console.error(e);
-        response.statusCode = 500;
-        response.body = JSON.stringify({
-            message: "Failed to update book.",
-            errorMsg: e.message,
-            errorStack: e.stack,
-        });
+    } catch (error: any) {
+        console.error(error);
+        response= {
+            statusCode: 500,
+            statusMessage: "Failed to update book.",
+            errorMsg: error.message,
+            errorStack: error.stack,
+        };
     }
 
     return response;
