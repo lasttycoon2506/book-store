@@ -169,7 +169,7 @@ export async function getAllBooks(): Promise<responseData> {
         response = {
             statusCode: 200,
             statusMessage: "Successfully retrieved all books",
-            data: Items.map((item) => unmarshall(item)),
+            data: Items?.map((item) => unmarshall(item)) ?? [],
             Items,
         };
     } catch (error: any) {
