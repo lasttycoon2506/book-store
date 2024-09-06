@@ -27,7 +27,7 @@ let response: responseData = {
     statusMessage: ""
 };
 
-export async function getBook(bookId: number): Promise<Book> {              
+export async function getBook(bookId: number): Promise<responseData> {              
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
@@ -53,7 +53,7 @@ export async function getBook(bookId: number): Promise<Book> {
         };
     }
 
-    return response.data as Book;
+    return response;
 };
 
 
