@@ -132,9 +132,8 @@ export async function updateBook(bookId: number): Promise<responseData> {
     return response;
 };
 
-export const deleteBook = async (event) => {
-    const response = { statusCode: 200 };
 
+export async function deleteBook(bookId: number): Promise<responseData> {
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
