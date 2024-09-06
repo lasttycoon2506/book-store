@@ -14,7 +14,7 @@ import {
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 
-type responseData = {
+interface responseData {
     statusCode: number,
     statusMessage: string, 
     data?: Record<string, any>, 
@@ -25,7 +25,7 @@ type responseData = {
     Items?: Record<string, AttributeValue>[],
     errorMsg?: string,
     errorStack?: string
-    };
+    }
     
 let response: responseData = {
     statusCode: 0,
