@@ -148,14 +148,14 @@ export async function deleteBook(bookId: number): Promise<responseData> {
             statusMessage: "Successfully deleted book",
             deleteResult,
         };
-    } catch (e) {
-        console.error(e);
-        response.statusCode = 500;
-        response.body = JSON.stringify({
-            message: "Failed to delete book",
-            errorMsg: e.message,
-            errorStack: e.stack,
-        });
+    } catch (error: any) {
+        console.error(error);
+        response = {
+            statusCode: 500,
+            statusMessage: "Failed to delete book",
+            errorMsg: error.message,
+            errorStack: error.stack,
+        };
     }
 
     return response;
