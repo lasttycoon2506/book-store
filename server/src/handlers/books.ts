@@ -22,6 +22,7 @@ type responseData = {
     createResult?: PutItemCommandOutput,
     updateResult?: UpdateItemCommandOutput,
     deleteResult?: DeleteItemCommandOutput,
+    Items?: Record<string, AttributeValue>[],
     errorMsg?: string,
     errorStack?: string
     };
@@ -165,11 +166,12 @@ export async function getAllBooks(): Promise<responseData> {
     try {
         const { Items } = await client.send(new ScanCommand({ TableName: process.env.DYNAMODB_TABLE_NAME }));
 
-        response.body = JSON.stringify({
-            message: "Successfully retrieved all books",
+        response = {
+            statusCode: 200,
+            statusMessage: "Successfully retrieved all books",
             data: Items.map((item) => unmarshall(item)),
             Items,
-        });
+        };
     } catch (error: any) {
         console.error(error);
         response.statusCode = 500;
