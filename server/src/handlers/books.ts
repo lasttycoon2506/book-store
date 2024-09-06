@@ -115,6 +115,7 @@ export async function updateBook(bookId: number): Promise<responseData> {
         const updateResult = await client.send(new UpdateItemCommand(params));
 
         response = {
+            statusCode: 200,
             statusMessage: "Successfully updated book.",
             updateResult,
         };
