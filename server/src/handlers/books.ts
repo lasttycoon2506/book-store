@@ -6,7 +6,8 @@ import {
     UpdateItemCommand, 
     DeleteItemCommand,
     ScanCommand,
-    AttributeValue
+    AttributeValue,
+    PutItemCommandOutput
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
@@ -16,17 +17,17 @@ type responseData = {
     statusMessage: string, 
     data?: Record<string, any>, 
     rawData?: Record<string, AttributeValue>,
+    createResult?: PutItemCommandOutput,
     errorMsg?: string,
     errorStack?: string
     };
     
+let response: responseData = {
+    statusCode: 0,
+    statusMessage: ""
+};
 
 export async function getBook(bookId: number): Promise<Book> {              
-    let response: responseData = {
-                                    statusCode: 0,
-                                    statusMessage: ""
-    };
-    
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
@@ -57,8 +58,6 @@ export async function getBook(bookId: number): Promise<Book> {
 
 
 export async function createBook(book: Book): Promise<number> {
-    const response = { statusCode: 200 };
-    
     const { 
         bookId,
         title, 
@@ -77,10 +76,11 @@ export async function createBook(book: Book): Promise<number> {
         };
         const createResult = await client.send(new PutItemCommand(params));
 
-        response.body = JSON.stringify({
-            message: "Successfully created book.",
+        response = {
+            statusCode: 200,
+            statusMessage: "Successfully created book.",
             createResult,
-        });
+        };
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
