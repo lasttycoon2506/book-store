@@ -7,7 +7,8 @@ import {
     DeleteItemCommand,
     ScanCommand,
     AttributeValue,
-    PutItemCommandOutput
+    PutItemCommandOutput,
+    UpdateItemCommandOutput
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
@@ -18,6 +19,7 @@ type responseData = {
     data?: Record<string, any>, 
     rawData?: Record<string, AttributeValue>,
     createResult?: PutItemCommandOutput,
+    updateResult?: UpdateItemCommandOutput,
     errorMsg?: string,
     errorStack?: string
     };
