@@ -40,13 +40,13 @@ export async function getBook(bookId: number): Promise<response> {
             rawData: Item
             };
         
-    } catch (e) {
-        console.error(e);
-        r = {
+    } catch (error: any) {
+        console.error(error);
+        response = {
             statusCode: 500,
             statusMessage: "Failed to get book",
-            errorMsg: e.message,
-            errorStack: e.stack,
+            errorMsg: error.message,
+            errorStack: error.stack,
         };
     }
 
