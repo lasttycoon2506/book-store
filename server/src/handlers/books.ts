@@ -11,7 +11,7 @@ import {
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
     
-export async function getBook(bookId: number): Promise<response> {
+export async function getBook(bookId: number): Promise<Book> {
     type responseData = {statusCode: number,
                     statusMessage: string, 
                     data?: Record<string, any>, 
@@ -50,7 +50,7 @@ export async function getBook(bookId: number): Promise<response> {
         };
     }
 
-    return response;
+    return response.data as Book;
 };
 
 export const createBook = async (event) => {
