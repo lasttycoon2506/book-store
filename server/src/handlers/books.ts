@@ -95,14 +95,11 @@ export async function createBook(book: Book): Promise<responseData> {
 };
 
 export async function updateBook(bookId: number): Promise<responseData> {
-    const response = { statusCode: 200 };
-
     try {
-        const body = JSON.parse(event.body);
-        const objKeys = Object.keys(body);
+        const objKeys = Object.keys(bookId);
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
-            Key: marshall({ bookId: event.pathParameters.bookId }),
+            Key: marshall({ bookId: bookId }),
             UpdateExpression: `SET ${objKeys.map((_, index) => `#key${index} = :value${index}`).join(", ")}`,
             ExpressionAttributeNames: objKeys.reduce((acc, key, index) => ({
                 ...acc,
@@ -110,15 +107,15 @@ export async function updateBook(bookId: number): Promise<responseData> {
             }), {}),
             ExpressionAttributeValues: marshall(objKeys.reduce((acc, key, index) => ({
                 ...acc,
-                [`:value${index}`]: body[key],
+                [`:value${index}`]: key,
             }), {})),
         };
         const updateResult = await client.send(new UpdateItemCommand(params));
 
-        response.body = JSON.stringify({
-            message: "Successfully updated book.",
+        response = {
+            statusMessage: "Successfully updated book.",
             updateResult,
-        });
+        };
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
