@@ -10,19 +10,21 @@ import {
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
+
+type responseData = {
+    statusCode: number,
+    statusMessage: string, 
+    data?: Record<string, any>, 
+    rawData?: Record<string, AttributeValue>,
+    errorMsg?: string,
+    errorStack?: string
+    };
     
-export async function getBook(bookId: number): Promise<Book> {
-    type responseData = {statusCode: number,
-                    statusMessage: string, 
-                    data?: Record<string, any>, 
-                    rawData?: Record<string, AttributeValue>,
-                    errorMsg?: string,
-                    errorStack?: string
-                    };
-                    
+
+export async function getBook(bookId: number): Promise<Book> {              
     let response: responseData = {
-                        statusCode: 0,
-                        statusMessage: ""
+                                    statusCode: 0,
+                                    statusMessage: ""
     };
     
     try {
@@ -53,7 +55,8 @@ export async function getBook(bookId: number): Promise<Book> {
     return response.data as Book;
 };
 
-export const createBook = async (event) => {
+
+export async function createBook(book: Book): Promise<number> {
     const response = { statusCode: 200 };
     
     const { 
@@ -63,9 +66,9 @@ export const createBook = async (event) => {
         pages, 
         genre, 
         price, 
-        stock } = JSON.parse(event.body);
+        stock } = book;
 
-    const newBook = new Book(bookId, title, author, pages, genre, price, stock);
+    const newBook: Book = {bookId, title, author, pages, genre, price, stock};
 
     try {
         const params = {
