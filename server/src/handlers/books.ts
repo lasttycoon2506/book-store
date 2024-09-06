@@ -94,7 +94,7 @@ export async function createBook(book: Book): Promise<responseData> {
     return response;
 };
 
-export const updateBook = async (event) => {
+export async function updateBook(bookId: number): Promise<responseData> {
     const response = { statusCode: 200 };
 
     try {
