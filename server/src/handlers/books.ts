@@ -12,10 +12,11 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
     
 export async function getBook(bookId: number): Promise<response> {
-    type response = {message: string, 
-                            data: Record<string, any>, 
-                            rawData?: Record<string, AttributeValue>
-                        };
+    type response = {statusCode: number,
+                    message: string, 
+                    data: Record<string, any>, 
+                    rawData?: Record<string, AttributeValue>
+                    };
                     
     try {
         const params = {
@@ -26,6 +27,7 @@ export async function getBook(bookId: number): Promise<response> {
 
         console.log({ Item });
         const r: response = {
+            statusCode: 200,
             message:"Successfully retrieved book.",
             data: (Item) ? unmarshall(Item) : {},
             rawData: Item
