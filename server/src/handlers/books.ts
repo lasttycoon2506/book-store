@@ -57,7 +57,7 @@ export async function getBook(bookId: number): Promise<Book> {
 };
 
 
-export async function createBook(book: Book): Promise<number> {
+export async function createBook(book: Book): Promise<responseData> {
     const { 
         bookId,
         title, 
@@ -78,17 +78,17 @@ export async function createBook(book: Book): Promise<number> {
 
         response = {
             statusCode: 200,
-            statusMessage: "Successfully created book.",
+            statusMessage: "Successfully created book",
             createResult,
         };
-    } catch (e) {
-        console.error(e);
-        response.statusCode = 500;
-        response.body = JSON.stringify({
-            message: "Failed to create book.",
-            errorMsg: e.message,
-            errorStack: e.stack,
-        });
+    } catch (error: any) {
+        console.error(error);
+        response = {
+            statusCode: 500,
+            statusMessage: "Failed to create book",
+            errorMsg: error.message,
+            errorStack: error.stack,
+        };
     }
 
     return response;
