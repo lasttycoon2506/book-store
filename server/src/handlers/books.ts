@@ -12,35 +12,42 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
     
 export async function getBook(bookId: number): Promise<response> {
-    type response = {statusCode: number,
-                    message: string, 
-                    data: Record<string, any>, 
-                    rawData?: Record<string, AttributeValue>
+    type responseData = {statusCode: number,
+                    statusMessage: string, 
+                    data?: Record<string, any>, 
+                    rawData?: Record<string, AttributeValue>,
+                    errorMsg?: string,
+                    errorStack?: string
                     };
                     
+    let response: responseData = {
+                        statusCode: 0,
+                        statusMessage: ""
+    };
+    
     try {
         const params = {
             TableName: process.env.DYNAMODB_TABLE_NAME,
             Key: marshall({ bookId: bookId }),
         };
         const { Item } = await client.send(new GetItemCommand(params));
-
+        
         console.log({ Item });
-        const r: response = {
+        response = {
             statusCode: 200,
-            message:"Successfully retrieved book.",
+            statusMessage: "Successfully retrieved book",
             data: (Item) ? unmarshall(Item) : {},
             rawData: Item
-            }
+            };
         
     } catch (e) {
         console.error(e);
-        response.statusCode = 500;
-        response.body = JSON.stringify({
-            message: "Failed to get book.",
+        r = {
+            statusCode: 500,
+            statusMessage: "Failed to get book",
             errorMsg: e.message,
             errorStack: e.stack,
-        });
+        };
     }
 
     return response;
