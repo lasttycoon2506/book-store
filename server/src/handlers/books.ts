@@ -5,15 +5,17 @@ import {
     PutItemCommand,
     UpdateItemCommand, 
     DeleteItemCommand,
-    ScanCommand
+    ScanCommand,
+    AttributeValue
 } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
     
-export async function getBook(bookId: number): Promise<Book> {
-    type response = {statusCode: 200, 
-                    body: {message: string, data: Record<string, any>, rawData: Record<string, any>}
-                    };
+export async function getBook(bookId: number): Promise<response> {
+    type response = {message: string, 
+                            data: Record<string, any>, 
+                            rawData?: Record<string, AttributeValue>
+                        };
                     
     try {
         const params = {
@@ -23,11 +25,12 @@ export async function getBook(bookId: number): Promise<Book> {
         const { Item } = await client.send(new GetItemCommand(params));
 
         console.log({ Item });
-        const r: response = JSON.stringify({
-            message: "Successfully retrieved book.",
+        const r: response = {
+            message:"Successfully retrieved book.",
             data: (Item) ? unmarshall(Item) : {},
-            rawData: Item,
-        });
+            rawData: Item
+            }
+        
     } catch (e) {
         console.error(e);
         response.statusCode = 500;
