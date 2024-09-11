@@ -14,8 +14,8 @@ export class Data extends Stack {
             bucketName: 'books-bucket',
         })
 
-        this.booksTable = new Table(this, 'books-table', {
-            tableName: 'booksTable',
+        this.booksTable = new Table(this, 'Books-table', {
+            tableName: 'books-table',
             partitionKey: {
                     name: 'id',
                     type: AttributeType.STRING
