@@ -3,7 +3,7 @@ import { AttributeType, ITable, Table } from "aws-cdk-lib/aws-dynamodb";
 import { Bucket, IBucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 
-export class data extends Stack {
+export class Data extends Stack {
     public readonly booksBucket: IBucket;
     public readonly booksTable: ITable;
     
