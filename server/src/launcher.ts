@@ -1,1 +1,5 @@
-//starting entry-point for program
+import { App } from "aws-cdk-lib";
+
+
+const app = new App()
+
