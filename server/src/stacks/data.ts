@@ -1,12 +1,17 @@
-import { Stack } from "aws-cdk-lib";
+import { Stack, StackProps } from "aws-cdk-lib";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
-import { IBucket } from "aws-cdk-lib/aws-s3";
+import { Bucket, IBucket } from "aws-cdk-lib/aws-s3";
+import { Construct } from "constructs";
 
 export class data extends Stack {
-    public readonly booksTable: ITable;
     public readonly booksBucket: IBucket;
+    public readonly booksTable: ITable;
     
-    constructor(scope: , id: string, props?: ) {
-        // constructor implementation goes here
+    constructor(scope: Construct, id: string, props?: StackProps) {
+        super(scope, id, props);
+
+        this.booksBucket = new Bucket(this, 'Books-Bucket', {
+            bucketName: 'books-bucket',
+        })
     }
 }
