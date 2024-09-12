@@ -10,8 +10,8 @@ export class Data extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        this.booksBucket = new Bucket(this, 'Books-Bucket', {
-            bucketName: 'books-bucket',
+        this.booksBucket = new Bucket(this, 'BooksBuck', {
+            bucketName: 'booksbuck',
         })
 
         this.booksTable = new Table(this, 'Books-table', {
