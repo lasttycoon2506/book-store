@@ -22,6 +22,7 @@ export class Lambdas extends Stack {
         const booksLambda = new NodejsFunction(this, 'BooksLambda', {
             runtime: Runtime.NODEJS_18_X,
             handler: 'handler',
+            // needs updating...
             entry: (join(__dirname, '..','..', 'services', 'spaces', 'handler.ts')),
             environment: {
                 TABLE_NAME: props.booksTable.tableName
