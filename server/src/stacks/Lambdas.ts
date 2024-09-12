@@ -5,6 +5,7 @@ import { LambdaIntegration } from "aws-cdk-lib/aws-apigateway";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
 import { Runtime, Tracing } from "aws-cdk-lib/aws-lambda";
 import { join } from "path";
+import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 
 
 interface booksTableProps extends StackProps {
@@ -27,5 +28,18 @@ export class Lambdas extends Stack {
             },
             timeout: Duration.minutes(1)
         })
+
+        booksLambda.addToRolePolicy(new PolicyStatement({
+            effect: Effect.ALLOW,
+            resources: [props.booksTable.tableArn],
+            actions:[
+                'dynamodb:PutItem',
+                'dynamodb:Scan',
+                'dynamodb:GetItem',
+                'dynamodb:UpdateItem',
+                'dynamodb:DeleteItem'
+            ]
+        }))
+
     }
 }
