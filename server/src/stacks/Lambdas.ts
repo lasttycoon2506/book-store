@@ -41,6 +41,7 @@ export class Lambdas extends Stack {
                 'dynamodb:DeleteItem'
             ]
         }))
-
+        this.booksLambdaIntegration = new LambdaIntegration(booksLambda);
     }
+
 }
