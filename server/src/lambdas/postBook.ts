@@ -13,18 +13,17 @@ export async function postBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCl
             TableName: 'books-table',
             Item: marshall(book)
         }
-        ))
+        ));
         return {
             statusCode: 201,
             body: book.id
-        }
+        };
     }
     catch (error) {
-        console.log(error)
+        console.log(error);
         return{
             statusCode: 400,
             body: error.message
-        }
+        };
     }
-    
 }

@@ -3,10 +3,13 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { Context } from "vm";
 import { getBook } from "./getBook";
 import { getAllBooks } from "./getAllBooks";
+import { postBook } from "./postBook";
 
 const dbClient = new DynamoDBClient({})
 
 export async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
+    let response: APIGatewayProxyResult;
+
     switch (event.httpMethod) {
         case "GET": 
             // if ("id" in event.queryStringParameters) {
@@ -14,9 +17,11 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
             //     return response;
             // }
             
-                const response = await getAllBooks(dbClient);
-                return response;
-            
+            response = await getAllBooks(dbClient);
+            return response;
+        case "POST":
+            response = await postBook(event, dbClient);
+            return response;
     }
 }
 
