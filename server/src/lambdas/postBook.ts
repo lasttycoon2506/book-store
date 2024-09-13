@@ -13,5 +13,9 @@ export async function postBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCl
         Item: marshall(book)
     }
     ))
-    return postResult;
+    
+    return {
+        statusCode: 201,
+        body: book.id
+    }
 }
