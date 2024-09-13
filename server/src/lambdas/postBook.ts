@@ -5,17 +5,26 @@ import { genRandomUUID } from "../utils/uuid";
 
 
 export async function postBook(event: APIGatewayProxyEvent, dbclient: DynamoDBClient): Promise<APIGatewayProxyResult> {
-    const book = JSON.parse(event.body);
-    book.id = genRandomUUID();
+    try {
+        const book = JSON.parse(event.body);
+        book.id = genRandomUUID();
 
-    const postResult = dbclient.send(new PutItemCommand({
-        TableName: 'books-table',
-        Item: marshall(book)
+        const postResult = dbclient.send(new PutItemCommand({
+            TableName: 'books-table',
+            Item: marshall(book)
+        }
+        ))
+        return {
+            statusCode: 201,
+            body: book.id
+        }
     }
-    ))
+    catch (error) {
+        console.log(error)
+        return{
+            statusCode: 400,
+            body: error.message
+        }
+    }
     
-    return {
-        statusCode: 201,
-        body: book.id
-    }
 }
