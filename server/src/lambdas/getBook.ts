@@ -1,18 +1,19 @@
-import { DynamoDBClient, GetItemCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import { Key } from "aws-cdk-lib/aws-kms";
 
 export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBClient) {
-    const bookId = event.pathParameters
+    const bookId = event.queryStringParameters['id']
 
+    const docClient = DynamoDBDocumentClient.from(dbclient)
     
-    const queryParams = {
+    const command = new GetCommand({
         TableName: process.env.TABLE_NAME,
-        Key: { bookId }
-    }
+        Key: {
+            id: bookId
+    }})
     
-
-    const command = new GetItemCommand(queryParams)
-    const book = await dbclient.send(command
+    const book = await docClient.send(command
     )
 }
