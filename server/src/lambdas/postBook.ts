@@ -1,13 +1,17 @@
 import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import { genRandomUUID } from "../utils/uuid";
+
 
 export async function postBook(event: APIGatewayProxyEvent, dbclient: DynamoDBClient): Promise<APIGatewayProxyResult> {
-    const book = event.body;
+    const book = JSON.parse(event.body);
+    book.id = genRandomUUID();
 
     const postResult = dbclient.send(new PutItemCommand({
         TableName: 'books-table',
         Item: marshall(book)
     }
     ))
+    return postResult;
 }
