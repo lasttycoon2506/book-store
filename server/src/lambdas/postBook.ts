@@ -9,7 +9,7 @@ export async function postBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCl
         const book = JSON.parse(event.body);
         book.id = genRandomUUID();
 
-        const postResult = dbclient.send(new PutItemCommand({
+        const postResult = await dbclient.send(new PutItemCommand({
             TableName: 'books-table',
             Item: marshall(book)
         }
