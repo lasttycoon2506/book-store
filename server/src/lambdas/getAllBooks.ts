@@ -10,14 +10,15 @@ export async function getAllBooks(dbclient: DynamoDBClient): Promise<APIGatewayP
     }));
 
     const allBooksUnmarshalled = allBooks.Items.map(item => unmarshall(item));
-    return allBooksUnmarshalled;
-
+    return {statusCode: 200, 
+        body: JSON.stringify(allBooksUnmarshalled)
+    };
     }
     catch (error) {
         console.log(error)
         return {
             statusCode: 400,
-            message: error.message
+            body: error.message
         };
     }    
     

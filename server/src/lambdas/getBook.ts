@@ -14,14 +14,17 @@ export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCli
         Key: {
             id: bookId
     }}))
-    return book;
+    return {
+        statusCode: 200,
+        body: JSON.stringify(book)
+    };
 
     }
     catch (error) {
         console.log(error);
         return {
             statusCode: 400,
-            message: error.message
+            body: error.message
         };
     }
 }
