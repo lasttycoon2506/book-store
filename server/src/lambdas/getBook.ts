@@ -1,9 +1,9 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { APIGatewayProxyEvent } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 
 
-export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBClient) {
+export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBClient): Promise<APIGatewayProxyResult> {
     const bookId = event.queryStringParameters['id'];
 
     const docClient = DynamoDBDocumentClient.from(dbclient);
