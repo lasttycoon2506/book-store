@@ -8,11 +8,20 @@ export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCli
 
     const docClient = DynamoDBDocumentClient.from(dbclient)
     
+    try {
     const book = await docClient.send(new GetCommand({
         TableName: process.env.TABLE_NAME,
         Key: {
             id: bookId
     }}))
-    
+    return book
 
+    }
+    catch (error) {
+        console.log(error)
+        return {
+            statusCode: 400,
+            message: error.message
+        }
+    }
 }
