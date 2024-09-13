@@ -9,16 +9,15 @@ export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCli
     const docClient = DynamoDBDocumentClient.from(dbclient);
     
     try {
-    const book = await docClient.send(new GetCommand({
-        TableName: process.env.TABLE_NAME,
-        Key: {
-            id: bookId
-    }}))
-    return {
-        statusCode: 200,
-        body: JSON.stringify(book)
-    };
-
+        const book = await docClient.send(new GetCommand({
+            TableName: process.env.TABLE_NAME,
+            Key: {
+                id: bookId
+        }}))
+        return {
+            statusCode: 200,
+            body: JSON.stringify(book)
+        };
     }
     catch (error) {
         console.log(error);

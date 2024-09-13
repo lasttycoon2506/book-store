@@ -5,14 +5,14 @@ import { APIGatewayProxyResult } from "aws-lambda";
 
 export async function getAllBooks(dbclient: DynamoDBClient): Promise<APIGatewayProxyResult> {
     try {
-    const allBooks = await dbclient.send(new ScanCommand({
-        TableName: process.env.TABLE_NAME
-    }));
+        const allBooks = await dbclient.send(new ScanCommand({
+            TableName: process.env.TABLE_NAME
+        }));
 
-    const allBooksUnmarshalled = allBooks.Items.map(item => unmarshall(item));
-    return {statusCode: 200, 
-        body: JSON.stringify(allBooksUnmarshalled)
-    };
+        const allBooksUnmarshalled = allBooks.Items.map(item => unmarshall(item));
+        return {statusCode: 200, 
+            body: JSON.stringify(allBooksUnmarshalled)
+        };
     }
     catch (error) {
         console.log(error)
@@ -21,5 +21,4 @@ export async function getAllBooks(dbclient: DynamoDBClient): Promise<APIGatewayP
             body: error.message
         };
     }    
-    
 }
