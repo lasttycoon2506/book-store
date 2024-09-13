@@ -9,7 +9,7 @@ export async function getAllBooks(dbclient: DynamoDBClient) {
     }));
 
     const allBooksUnmarshalled = allBooks.Items.map(item => unmarshall(item));
-    return allBooksUnmarshalled
+    return allBooksUnmarshalled;
 
     }
     catch (error) {
@@ -17,7 +17,7 @@ export async function getAllBooks(dbclient: DynamoDBClient) {
         return {
             statusCode: 400,
             message: error.message
-        }
+        };
     }    
     
 }

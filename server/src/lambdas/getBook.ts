@@ -4,9 +4,9 @@ import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
 
 
 export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBClient) {
-    const bookId = event.queryStringParameters['id']
+    const bookId = event.queryStringParameters['id'];
 
-    const docClient = DynamoDBDocumentClient.from(dbclient)
+    const docClient = DynamoDBDocumentClient.from(dbclient);
     
     try {
     const book = await docClient.send(new GetCommand({
@@ -14,14 +14,14 @@ export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCli
         Key: {
             id: bookId
     }}))
-    return book
+    return book;
 
     }
     catch (error) {
-        console.log(error)
+        console.log(error);
         return {
             statusCode: 400,
             message: error.message
-        }
+        };
     }
 }
