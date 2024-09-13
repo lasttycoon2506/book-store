@@ -8,14 +8,16 @@ const dbClient = new DynamoDBClient({})
 
 export async function handler(event: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
     switch (event.httpMethod) {
-        case 'GET': 
-            if (event.queryStringParameters['id']) {
-                const response = await getBook(event, dbClient);
-                return response;
-            }
-            else {
+        case "GET": 
+            // if ("id" in event.queryStringParameters) {
+            //     const response = await getBook(event, dbClient);
+            //     return response;
+            // }
+            
                 const response = await getAllBooks(dbClient)
                 return response
-            }
+            
     }
 }
+
+
