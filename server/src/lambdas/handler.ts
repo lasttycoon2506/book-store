@@ -14,8 +14,8 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
             //     return response;
             // }
             
-                const response = await getAllBooks(dbClient)
-                return response
+                const response = await getAllBooks(dbClient);
+                return response;
             
     }
 }
