@@ -8,5 +8,5 @@ export async function getAllBooks(dbclient: DynamoDBClient) {
     }));
         
     const allBooksUnmarshalled = allBooks.Items.map(item => unmarshall(item));
-    
+    return allBooksUnmarshalled
 }
