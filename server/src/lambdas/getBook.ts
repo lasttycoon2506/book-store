@@ -12,8 +12,7 @@ export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCli
     }
     
 
-
-    dbclient.send(new GetItemCommand({
-
-    }))
+    const command = new GetItemCommand(queryParams)
+    const book = await dbclient.send(command
+    )
 }
