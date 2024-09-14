@@ -4,7 +4,7 @@ import { Lambdas } from "./stacks/Lambdas";
 
 
 const app = new App()
-const data = new Data(app, 'DataStack');
+const dataStack = new Data(app, 'DataStack');
 const lambdaStack = new Lambdas(app, 'LambdaStack', {
-    booksTable: data.booksTable
+    booksTable: dataStack.booksTable
 })
