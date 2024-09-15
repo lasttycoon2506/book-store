@@ -13,15 +13,12 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
     switch (event.httpMethod) {
         case "GET": 
             if (event.queryStringParameters) {
-                if ("id" in event.queryStringParameters) {
-                    const response = await getBook(event, dbClient);
-                    return response;
-                }
-                response = await getAllBooks(dbClient);
+                const response = await getBook(event, dbClient);
                 return response;
             }
             else {
-                
+                response = await getAllBooks(dbClient);
+                return response;
             }
         case "POST":
             response = await postBook(event, dbClient);
