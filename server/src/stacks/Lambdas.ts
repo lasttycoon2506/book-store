@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { LambdaIntegration } from "aws-cdk-lib/aws-apigateway";
 import { ITable } from "aws-cdk-lib/aws-dynamodb";
-import { Runtime, Tracing } from "aws-cdk-lib/aws-lambda";
+import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { join } from "path";
 import { Effect, PolicyStatement } from "aws-cdk-lib/aws-iam";
 
@@ -20,7 +20,7 @@ export class Lambdas extends Stack {
         super(scope, id, props)
 
         const booksLambda = new NodejsFunction(this, 'BooksLambda', {
-            runtime: Runtime.NODEJS_18_X,
+            runtime: Runtime.NODEJS_20_X,
             handler: 'handler',
             entry: (join(__dirname, '..', 'lambdas', 'handler.ts')),
             environment: {
