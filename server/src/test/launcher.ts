@@ -4,6 +4,8 @@ process.env.AWS_REGION = "us-east-1";
 process.env.TABLE_NAME = "books-table";
 
 
-handler({httpMethod: 'DELETE',
-    queryStringParameters: {id: 'ae37f8e8-aefa-4dfa-9d0f-26fca1631a4a'}
+handler({httpMethod: 'POST',
+    body: JSON.stringify({bookTitle: 'labs in paradise',
+        pages: 24
+    })
 } as any, {} as any).then(result => console.log(result));

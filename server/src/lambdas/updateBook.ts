@@ -8,7 +8,7 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
     const requestBodyKey = Object.keys(parsedBody)[0];
     const requestBodyValue = parsedBody[requestBodyKey];
 
-    const response = docClient.send(new UpdateCommand({
+    const response = await docClient.send(new UpdateCommand({
         TableName: process.env.TABLE_NAME,
         Key: {
             id: event.queryStringParameters["id"]
