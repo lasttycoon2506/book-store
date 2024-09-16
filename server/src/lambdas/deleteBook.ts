@@ -1,4 +1,4 @@
-import { DeleteItemCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DeleteCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 
@@ -10,5 +10,10 @@ export async function deleteBook(context: APIGatewayEvent, dbclient: DynamoDBCli
         Key: {
             id: context.queryStringParameters["id"]
         }
-    }))
+    }));
+
+    return {
+        statusCode: 201,
+        body: JSON.stringify(response)
+    };
 }
