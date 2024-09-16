@@ -1,5 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib"
-import { LambdaIntegration } from "aws-cdk-lib/aws-apigateway"
+import { LambdaIntegration, ResourceOptions, RestApi } from "aws-cdk-lib/aws-apigateway"
 import { Construct } from "constructs";
 
 interface ApiStackProps extends StackProps {
@@ -11,6 +11,13 @@ export class Api extends Stack {
         super(scope, id, props);
 
 
-        
+        const api = new RestApi(this, 'booksApi');
+
+        const optionsWithCors: ResourceOptions = {
+            defaultCorsPreflightOptions: {
+                allowOrigins: Cors.ALL_ORIGINS,
+                allowMethods: Cors.ALL_METHODS
+            }
+        }
     }
 }
