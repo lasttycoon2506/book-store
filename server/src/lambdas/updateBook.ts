@@ -5,8 +5,11 @@ import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 
 export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClient): Promise<APIGatewayProxyResult> {
     const parsedBody = JSON.parse(event.body);
-    const requestBodyKey = Object.keys(parsedBody)[1];
-    const requestBodyValue = parsedBody[requestBodyKey];
+    const bodyKeys = Object.keys(parsedBody);
+    const titleKey = bodyKeys[0];
+    const titleValue = bodyKeys[0];
+    const pagesKey = bodyKeys[1];
+    const pagesValue = bodyKeys[1];
 
 
     const response = await dbClient.send(new UpdateItemCommand({
@@ -14,13 +17,13 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
             id: marshall(event.queryStringParameters["id"])
         },
         ExpressionAttributeNames: {
-            "#T": requestBodyKey,
-            "#P": requestBodyKey
+            "#T": titleKey,
+            "#P": pagesKey
         },
         ExpressionAttributeValues: {
-            ':t': marshall(requestBodyValue)
+            ':t': marshall(titleValue)
             ,
-            ':p': marshall(requestBodyValue)
+            ':p': marshall(pagesValue)
         
         },
         TableName: process.env.TABLE_NAME,
