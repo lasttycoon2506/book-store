@@ -5,6 +5,7 @@ import { getBook } from "./getBook";
 import { getAllBooks } from "./getAllBooks";
 import { postBook } from "./postBook";
 import { deleteBook } from "./deleteBook";
+import { updateBook } from "./updateBook";
 
 const dbClient = new DynamoDBClient({})
 
@@ -23,6 +24,9 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
             }
         case "POST":
             response = await postBook(event, dbClient);
+            return response;
+        case "PUT":
+            response = await updateBook(event, dbClient)
             return response;
         case "DELETE":
             response = await deleteBook(event, dbClient)
