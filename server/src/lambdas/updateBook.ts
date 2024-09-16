@@ -1,16 +1,14 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBClient, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 
 
 export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClient): Promise<APIGatewayProxyResult> {
-    const docClient = DynamoDBDocumentClient.from(dbClient);
     const parsedBody = JSON.parse(event.body);
     const requestBodyKey = Object.keys(parsedBody)[1];
     const requestBodyValue = parsedBody[requestBodyKey];
 
 
-    const response = await docClient.send(new UpdateCommand({
+    const response = await dbClient.send(new UpdateItemCommand({
         Key: {
             id: event.queryStringParameters["id"]
         },
