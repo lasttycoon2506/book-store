@@ -1,4 +1,5 @@
 import { DynamoDBClient, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+import { marshall } from "@aws-sdk/util-dynamodb";
 import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 
 
@@ -10,19 +11,17 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
 
     const response = await dbClient.send(new UpdateItemCommand({
         Key: {
-            id: event.queryStringParameters["id"]
+            id: marshall(event.queryStringParameters["id"])
         },
         ExpressionAttributeNames: {
             "#T": requestBodyKey,
             "#P": requestBodyKey
         },
         ExpressionAttributeValues: {
-            ':t': {
-                S: requestBodyValue
-            },
-            ':p': {
-                N: requestBodyValue
-            }
+            ':t': marshall(requestBodyValue)
+            ,
+            ':p': marshall(requestBodyValue)
+        
         },
         TableName: process.env.TABLE_NAME,
         UpdateExpression: 'SET #T = :t, #P = :p',
