@@ -11,27 +11,35 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
     const pagesKey = bodyKeys[1];
     const pagesValue = bodyKeys[1];
 
-
-    const response = await dbClient.send(new UpdateItemCommand({
-        Key: {
-            id: marshall(event.queryStringParameters["id"])
-        },
-        ExpressionAttributeNames: {
-            "#T": titleKey,
-            "#P": pagesKey
-        },
-        ExpressionAttributeValues: {
-            ':t': marshall(titleValue)
-            ,
-            ':p': marshall(pagesValue)
-        
-        },
-        TableName: process.env.TABLE_NAME,
-        UpdateExpression: 'SET #T = :t, #P = :p',
-        ReturnValues: 'ALL_NEW'
-    }))
-    return {
-        statusCode: 201,
-        body: JSON.stringify(response)
+    try {
+        const response = await dbClient.send(new UpdateItemCommand({
+            Key: {
+                id: marshall(event.queryStringParameters["id"])
+            },
+            ExpressionAttributeNames: {
+                "#T": titleKey,
+                "#P": pagesKey
+            },
+            ExpressionAttributeValues: {
+                ':t': marshall(titleValue)
+                ,
+                ':p': marshall(pagesValue)
+            
+            },
+            TableName: process.env.TABLE_NAME,
+            UpdateExpression: 'SET #T = :t, #P = :p',
+            ReturnValues: 'ALL_NEW'
+        }))
+        return {
+            statusCode: 201,
+            body: JSON.stringify(response)
+        }
+    }
+    catch (error) {
+        console.log(error)
+        return {
+            statusCode: 400,
+            body: error.message
+        }
     }
 }
