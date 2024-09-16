@@ -1,5 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib"
-import { LambdaIntegration, ResourceOptions, RestApi } from "aws-cdk-lib/aws-apigateway"
+import { Cors, LambdaIntegration, ResourceOptions, RestApi } from "aws-cdk-lib/aws-apigateway"
 import { Construct } from "constructs";
 
 interface ApiStackProps extends StackProps {
@@ -19,5 +19,11 @@ export class Api extends Stack {
                 allowMethods: Cors.ALL_METHODS
             }
         }
+        
+        const bookResource = api.root.addResource('books', optionsWithCors);
+        bookResource.addMethod("GET", props.booksLambdaIntegration)
+        bookResource.addMethod("POST", props.booksLambdaIntegration)
+        bookResource.addMethod("PUT", props.booksLambdaIntegration)
+        bookResource.addMethod("DELETE", props.booksLambdaIntegration)
     }
 }
