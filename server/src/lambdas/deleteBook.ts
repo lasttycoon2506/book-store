@@ -5,15 +5,24 @@ import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 export async function deleteBook(event: APIGatewayEvent, dbclient: DynamoDBClient): Promise<APIGatewayProxyResult> {
     const docClient = DynamoDBDocumentClient.from(dbclient);
 
-    const response = await docClient.send(new DeleteCommand({
-        TableName: process.env.TABLE_NAME,
-        Key: {
-            id: event.queryStringParameters["id"]
+    try {
+        const response = await docClient.send(new DeleteCommand({
+            TableName: process.env.TABLE_NAME,
+            Key: {
+                id: event.queryStringParameters["id"]
+            }
+        }));
+    
+        return {
+            statusCode: 201,
+            body: JSON.stringify(response)
+        };
+    }
+    catch (error) {
+        console.log(error)
+        return {
+            statusCode: 400,
+            body: error.message
         }
-    }));
-
-    return {
-        statusCode: 201,
-        body: JSON.stringify(response)
-    };
+    }
 }
