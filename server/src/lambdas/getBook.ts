@@ -11,7 +11,7 @@ export async function getBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCli
             const book = await docClient.send(new GetCommand({
                 TableName: process.env.TABLE_NAME,
                 Key: {
-                    id: event.queryStringParameters['id']
+                    id: event.queryStringParameters["id"]
             }}))
             if (book.Item) {
                 return {

@@ -5,8 +5,9 @@ import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClient): Promise<APIGatewayProxyResult> {
     const docClient = DynamoDBDocumentClient.from(dbClient);
     const parsedBody = JSON.parse(event.body);
-    const requestBodyKey = Object.keys(parsedBody)[0];
+    const requestBodyKey = Object.keys(parsedBody)[1];
     const requestBodyValue = parsedBody[requestBodyKey];
+
 
     const response = await docClient.send(new UpdateCommand({
         TableName: process.env.TABLE_NAME,
@@ -14,15 +15,15 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
             id: event.queryStringParameters["id"]
         },
         UpdateExpression: 'set #zzzNew = :new',
+        ExpressionAttributeNames: {
+            '#zzzNew': requestBodyKey
+        },
         ExpressionAttributeValues: {
             ':new': {
                 S: requestBodyValue
             }
         },
-        ExpressionAttributeNames: {
-            '#zzzNew': requestBodyKey
-        },
-        ReturnValues: 'UPDATED_NEW'
+        ReturnValues: 'ALL_NEW'
     }))
     return {
         statusCode: 201,
