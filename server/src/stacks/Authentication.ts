@@ -1,10 +1,11 @@
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
-import { CfnUserPoolGroup, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
+import { CfnIdentityPool, CfnUserPoolGroup, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
 import { Construct } from "constructs";
 
 export class Authentication extends Stack{
     public userPool: UserPool;
     private userPoolClient: UserPoolClient;
+    private identityPool: CfnIdentityPool;
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
@@ -12,6 +13,7 @@ export class Authentication extends Stack{
         this.createUserPool();
         this.createUserPoolClient();
         this.createAdminGroup();
+        this.createIdentityPool();
     }
 
     private createUserPool() {
@@ -49,4 +51,17 @@ export class Authentication extends Stack{
             groupName: 'admins'
         })
     };
+
+    private createIdentityPool() {
+        this.identityPool = new CfnIdentityPool(this, 'BookstoreIdentityPool', {
+            allowUnauthenticatedIdentities: true,
+            cognitoIdentityProviders: [{
+                clientId : this.userPoolClient.userPoolClientId,
+                providerName : this.userPool.userPoolProviderName
+            }]
+        })
+        new CfnOutput(this, 'BookstoreIdentityPoolId', {
+            value: this.identityPool.ref
+        })
+    }
 }
