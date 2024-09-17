@@ -5,15 +5,26 @@ import { Construct } from "constructs";
 export class Authentication extends Stack{
     private userPool: UserPool;
     private userPoolClient: UserPoolClient;
-    
+
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        this.authenticationUserPool();
-        this.authnenticationUserPoolClient();
+        this.createUserPool();
+        this.createUserPoolClient();
     }
 
-    private authenticationUserPool(){};
-    private authnenticationUserPoolClient(){};
+    private createUserPool(){
+        this.userPool = new UserPool(this, 'BookstoreUserPool', 
+            {
+                selfSignUpEnabled: true,
+                signInAliases: {
+                    username: true,
+                    email: true
+                }
+            }
+        )
+    };
+
+    private createUserPoolClient(){};
 
 }
