@@ -10,7 +10,10 @@ const dataStack = new Data(app, 'DataStack');
 const lambdaStack = new Lambdas(app, 'LambdaStack', {
     booksTable: dataStack.booksTable
 });
-const authenticationStack = new Authentication(app, 'AuthenticationStack');
+const authenticationStack = new Authentication(app, 'AuthenticationStack', {
+    booksBucket: dataStack.booksBucket
+}
+);
 const apiStack = new Api(app, 'ApiStack', {
     booksLambdaIntegration: lambdaStack.booksLambdaIntegration,
     userPool: authenticationStack.userPool

@@ -122,6 +122,7 @@ export class Authentication extends Stack {
             resources: [booksBucket.bucketArn + '/*']
         }))
     }
+    
     private attachRoles() {
         new CfnIdentityPoolRoleAttachment(this, 'AttachRoles', {
             identityPoolId: this.identityPool.ref,
