@@ -95,5 +95,17 @@ export class Authentication extends Stack{
                 'sts:AssumeRoleWithWebIdentity'
             )
         })
+        this.adminRole = new Role(this, 'CognitoAdminRole', {
+            assumedBy: new FederatedPrincipal('cognito-identity.amazonaws.com', {
+                StringEquals: {
+                    'cognito-identity.amazonaws.com:aud': this.identityPool.ref
+                },
+                'ForAnyValue:StringLike': {
+                    'cognito-identity.amazonaws.com:amr': 'authenticated'
+                }
+            },
+                'sts:AssumeRoleWithWebIdentity'
+            )
+        })
     }
 }
