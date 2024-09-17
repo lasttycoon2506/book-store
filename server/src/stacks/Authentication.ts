@@ -1,5 +1,5 @@
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
-import { CfnIdentityPool, CfnUserPoolGroup, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
+import { CfnIdentityPool, CfnIdentityPoolRoleAttachment, CfnUserPoolGroup, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
 import { Effect, FederatedPrincipal, PolicyStatement, Role } from "aws-cdk-lib/aws-iam";
 import { IBucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
@@ -22,6 +22,7 @@ export class Authentication extends Stack {
         this.createUserPoolClient();
         this.createIdentityPool();
         this.createRoles(props.booksBucket);
+        this.attachRoles();
         this.createAdminGroup();
     }
 
@@ -57,7 +58,8 @@ export class Authentication extends Stack {
     private createAdminGroup() {
         new CfnUserPoolGroup(this, 'BookstoreAdmins', {
             userPoolId: this.userPool.userPoolId,
-            groupName: 'admins'
+            groupName: 'admins',
+            roleArn: this.adminRole.roleArn
         })
     };
 
@@ -119,5 +121,21 @@ export class Authentication extends Stack {
             ],
             resources: [booksBucket.bucketArn + '/*']
         }))
+    }
+    private attachRoles() {
+        new CfnIdentityPoolRoleAttachment(this, 'AttachRoles', {
+            identityPoolId: this.identityPool.ref,
+            roles: {
+                'authenticated': this.authenticatedRole.roleArn,
+                'unauthenticated': this.unAuthenticatedRole.roleArn
+            },
+            roleMappings: {
+                adminsMapping: {
+                    type: 'Token',
+                    ambiguousRoleResolution: 'AuthenticatedRole',
+                    identityProvider: `cognito-idp.${this.region}.amazonaws.com/${this.userPool.userPoolId}:${this.userPoolClient.userPoolClientId}`
+                } 
+            }
+        })
     }
 }
