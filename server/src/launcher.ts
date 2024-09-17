@@ -12,5 +12,6 @@ const lambdaStack = new Lambdas(app, 'LambdaStack', {
 });
 const authenticationStack = new Authentication(app, 'AuthenticationStack');
 const apiStack = new Api(app, 'ApiStack', {
-    booksLambdaIntegration: lambdaStack.booksLambdaIntegration
+    booksLambdaIntegration: lambdaStack.booksLambdaIntegration,
+    userPool: authenticationStack.userPool
 });
