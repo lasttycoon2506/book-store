@@ -1,5 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib"
-import { CognitoUserPoolsAuthorizer, Cors, LambdaIntegration, ResourceOptions, RestApi } from "aws-cdk-lib/aws-apigateway"
+import { AuthorizationType, CognitoUserPoolsAuthorizer, Cors, LambdaIntegration, MethodOptions, ResourceOptions, RestApi } from "aws-cdk-lib/aws-apigateway"
 import { IUserPool } from "aws-cdk-lib/aws-cognito";
 import { Construct } from "constructs";
 
@@ -21,17 +21,24 @@ export class Api extends Stack {
 
         authorizer._attachToApi(api);
 
+        const authOptions: MethodOptions = {
+            authorizationType: AuthorizationType.COGNITO,
+            authorizer: {
+                authorizerId: authorizer.authorizerId
+            }
+        };
+
         const optionsWithCors: ResourceOptions = {
             defaultCorsPreflightOptions: {
                 allowOrigins: Cors.ALL_ORIGINS,
                 allowMethods: Cors.ALL_METHODS
             }
-        }
+        };
         
         const bookResource = api.root.addResource('books', optionsWithCors);
-        bookResource.addMethod("GET", props.booksLambdaIntegration)
-        bookResource.addMethod("POST", props.booksLambdaIntegration)
-        bookResource.addMethod("PUT", props.booksLambdaIntegration)
-        bookResource.addMethod("DELETE", props.booksLambdaIntegration)
+        bookResource.addMethod("GET", props.booksLambdaIntegration, authOptions);
+        bookResource.addMethod("POST", props.booksLambdaIntegration, authOptions);
+        bookResource.addMethod("PUT", props.booksLambdaIntegration, authOptions);
+        bookResource.addMethod("DELETE", props.booksLambdaIntegration, authOptions);
     }
 }
