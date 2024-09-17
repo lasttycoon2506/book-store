@@ -1,5 +1,5 @@
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
-import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
+import { CfnUserPoolGroup, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
 import { Construct } from "constructs";
 
 export class Authentication extends Stack{
@@ -11,9 +11,10 @@ export class Authentication extends Stack{
 
         this.createUserPool();
         this.createUserPoolClient();
+        this.createAdminGroup();
     }
 
-    private createUserPool(){
+    private createUserPool() {
         this.userPool = new UserPool(this, 'BookstoreUserPool', 
             {
                 selfSignUpEnabled: true,
@@ -28,8 +29,7 @@ export class Authentication extends Stack{
         });
     };
 
-
-    private createUserPoolClient(){
+    private createUserPoolClient() {
         this.userPoolClient = this.userPool.addClient('BookstoreUserPoolClient', {
             authFlows: {
                 adminUserPassword: true,
@@ -40,6 +40,13 @@ export class Authentication extends Stack{
         })
         new CfnOutput(this, 'BookstoreUserPoolClientId', {
             value: this.userPoolClient.userPoolClientId
+        })
+    };
+
+    private createAdminGroup() {
+        new CfnUserPoolGroup(this, 'BookstoreAdmins', {
+            userPoolId: this.userPool.userPoolId,
+            groupName: 'admins'
         })
     };
 }
