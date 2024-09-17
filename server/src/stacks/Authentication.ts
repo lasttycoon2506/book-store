@@ -1,4 +1,4 @@
-import { Stack, StackProps } from "aws-cdk-lib";
+import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import { UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
 import { Construct } from "constructs";
 
@@ -23,7 +23,11 @@ export class Authentication extends Stack{
                 }
             }
         )
+        new CfnOutput(this, 'BookstoreUserPool', {
+            value: this.userPool.userPoolId
+        });
     };
+
 
     private createUserPoolClient(){
         this.userPoolClient = this.userPool.addClient('BookstoreUserPoolClient', {
@@ -34,6 +38,8 @@ export class Authentication extends Stack{
                 userSrp: true
             }
         })
+        new CfnOutput(this, 'BookstoreUserPoolClient', {
+            value: this.userPoolClient.userPoolClientId
+        })
     };
-
 }
