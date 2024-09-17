@@ -25,6 +25,15 @@ export class Authentication extends Stack{
         )
     };
 
-    private createUserPoolClient(){};
+    private createUserPoolClient(){
+        this.userPoolClient = this.userPool.addClient('BookstoreUserPoolClient', {
+            authFlows: {
+                adminUserPassword: true,
+                custom: true,
+                userPassword: true,
+                userSrp: true
+            }
+        })
+    };
 
 }
