@@ -83,5 +83,17 @@ export class Authentication extends Stack{
                 'sts:AssumeRoleWithWebIdentity'
             )
         })
+        this.unAuthenticatedRole = new Role(this, 'CognitoDefaultUnAuthenticatedRole', {
+            assumedBy: new FederatedPrincipal('cognito-identity.amazonaws.com', {
+                StringEquals: {
+                    'cognito-identity.amazonaws.com:aud': this.identityPool.ref
+                },
+                'ForAnyValue:StringLike': {
+                    'cognito-identity.amazonaws.com:amr': 'unauthenticated'
+                }
+            },
+                'sts:AssumeRoleWithWebIdentity'
+            )
+        })
     }
 }
