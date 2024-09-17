@@ -13,7 +13,7 @@ export class Data extends Stack {
         this.booksBucket = new Bucket(this, 'BooksBuck', {
             bucketName: 'booksbuck',
         })
-
+        
         this.booksTable = new Table(this, 'Books-table', {
             tableName: 'books-table',
             partitionKey: {

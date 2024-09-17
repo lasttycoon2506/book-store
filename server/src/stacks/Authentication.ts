@@ -23,7 +23,7 @@ export class Authentication extends Stack{
                 }
             }
         )
-        new CfnOutput(this, 'BookstoreUserPool', {
+        new CfnOutput(this, 'BookstoreUserPoolId', {
             value: this.userPool.userPoolId
         });
     };
@@ -38,7 +38,7 @@ export class Authentication extends Stack{
                 userSrp: true
             }
         })
-        new CfnOutput(this, 'BookstoreUserPoolClient', {
+        new CfnOutput(this, 'BookstoreUserPoolClientId', {
             value: this.userPoolClient.userPoolClientId
         })
     };
