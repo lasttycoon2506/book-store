@@ -1,19 +1,24 @@
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import { CfnIdentityPool, CfnUserPoolGroup, UserPool, UserPoolClient } from "aws-cdk-lib/aws-cognito";
+import { FederatedPrincipal, Role } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 
 export class Authentication extends Stack{
     public userPool: UserPool;
     private userPoolClient: UserPoolClient;
     private identityPool: CfnIdentityPool;
+    private authenticatedRole: Role;
+    private unAuthenticatedRole: Role;
+    private adminRole: Role;
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
         this.createUserPool();
         this.createUserPoolClient();
-        this.createAdminGroup();
         this.createIdentityPool();
+        this.createRoles();
+        this.createAdminGroup();
     }
 
     private createUserPool() {
@@ -62,6 +67,21 @@ export class Authentication extends Stack{
         })
         new CfnOutput(this, 'BookstoreIdentityPoolId', {
             value: this.identityPool.ref
+        })
+    }
+
+    private createRoles() {
+        this.authenticatedRole = new Role(this, 'CognitoDefaultAuthenticatedRole', {
+            assumedBy: new FederatedPrincipal('cognito-identity.amazonaws.com', {
+                StringEquals: {
+                    'cognito-identity.amazonaws.com:aud': this.identityPool.ref
+                },
+                'ForAnyValue:StringLike': {
+                    'cognito-identity.amazonaws.com:amr': 'authenticated'
+                }
+            },
+                'sts:AssumeRoleWithWebIdentity'
+            )
         })
     }
 }
