@@ -1,4 +1,5 @@
 import { Stack, StackProps } from "aws-cdk-lib";
+import { Distribution, OriginAccessIdentity } from "aws-cdk-lib/aws-cloudfront";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { Construct } from "constructs";
@@ -23,6 +24,12 @@ export class UiDeployment extends Stack {
             destinationBucket: deploymentBucket
         });
 
-        
+        const originIdentity = new OriginAccessIdentity(this, 'OriginAccessIdentity');
+        deploymentBucket.grantRead(originIdentity);
+
+        const distrubtion = new Distribution(this, 'BookstoreDistribution', {
+            
+        })
+
     }
 }
