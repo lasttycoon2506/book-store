@@ -16,7 +16,7 @@ export async function postBook(event: APIGatewayProxyEvent, dbclient: DynamoDBCl
         ));
         return {
             statusCode: 201,
-            body: book.id
+            body: JSON.stringify(postResult.Attributes.id)
         };
     }
     catch (error) {
