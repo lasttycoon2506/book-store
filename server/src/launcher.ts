@@ -15,8 +15,8 @@ const authenticationStack = new Authentication(app, 'AuthenticationStack', {
     booksBucket: dataStack.booksBucket
 }
 );
-const apiStack = new Api(app, 'ApiStack', {
+new Api(app, 'ApiStack', {
     booksLambdaIntegration: lambdaStack.booksLambdaIntegration,
     userPool: authenticationStack.userPool
 });
-const uiDeploymentStack = new UiDeployment(app, 'UiDeploymentStack');
+new UiDeployment(app, 'UiDeploymentStack');
