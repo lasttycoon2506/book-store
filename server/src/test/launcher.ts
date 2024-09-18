@@ -9,4 +9,4 @@ handler({httpMethod: 'PUT',
     body: JSON.stringify({bookTitle: 'gats',
         pages: 5
     })
-} as any, {} as any).then(result => console.log(result));
+} as any).then(result => console.log(result));

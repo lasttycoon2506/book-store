@@ -7,6 +7,6 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.strict,
   ...tseslint.configs.stylistic,{
-    ignores: ["cdk.out/"]
+    ignores: ["cdk.out/", "src/test/"]
   }
 );  
