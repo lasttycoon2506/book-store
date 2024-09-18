@@ -1,6 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { Context } from "vm";
 import { getBook } from "./getBook";
 import { getAllBooks } from "./getAllBooks";
 import { postBook } from "./postBook";
@@ -14,7 +13,7 @@ export async function handler(event: APIGatewayProxyEvent): Promise<APIGatewayPr
     let response: APIGatewayProxyResult;
 
     switch (event.httpMethod) {
-        case "GET": 
+        case "GET": {
             if (event.queryStringParameters) {
                 const getResponse = await getBook(event, dbClient);
                 response = getResponse;
@@ -24,18 +23,22 @@ export async function handler(event: APIGatewayProxyEvent): Promise<APIGatewayPr
                 response = getAllResponse;
             }
             break;
-        case "POST":
+        }
+        case "POST": {
             const postResponse = await postBook(event, dbClient);
             response = postResponse;
             break;
-        case "PUT":
+        }
+        case "PUT": {
             const putResponse = await updateBook(event, dbClient)
             response = putResponse;
             break;
-        case "DELETE":
+        }
+        case "DELETE": {
             const deleteResponse = await deleteBook(event, dbClient)
             response = deleteResponse;
             break;
+        }
     }
 
     addCorsHeader(response);
