@@ -6,6 +6,7 @@ import { getAllBooks } from "./getAllBooks";
 import { postBook } from "./postBook";
 import { deleteBook } from "./deleteBook";
 import { updateBook } from "./updateBook";
+import { addCorsHeader } from "../utils/corsHeader";
 
 const dbClient = new DynamoDBClient({})
 
@@ -15,24 +16,30 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
     switch (event.httpMethod) {
         case "GET": 
             if (event.queryStringParameters) {
-                const response = await getBook(event, dbClient);
-                return response;
+                const getResponse = await getBook(event, dbClient);
+                response = getResponse;
             }
             else {
-                response = await getAllBooks(dbClient);
-                return response;
+                const getAllResponse = await getAllBooks(dbClient);
+                response = getAllResponse;
             }
+            break;
         case "POST":
-            response = await postBook(event, dbClient);
-            return response;
+            const postResponse = await postBook(event, dbClient);
+            response = postResponse;
+            break;
         case "PUT":
-            response = await updateBook(event, dbClient)
-            return response;
+            const putResponse = await updateBook(event, dbClient)
+            response = putResponse;
+            break;
         case "DELETE":
-            response = await deleteBook(event, dbClient)
-            return response;
+            const deleteResponse = await deleteBook(event, dbClient)
+            response = deleteResponse;
+            break;
     }
-    
+
+    addCorsHeader(response);
+    return response;
 }
 
 
