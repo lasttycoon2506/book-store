@@ -1,6 +1,7 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import { Bucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
+import { join } from "path";
 
 export class UiDeployment extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
@@ -10,6 +11,6 @@ export class UiDeployment extends Stack {
             bucketName: 'bookstore-frontend'
         })
 
-        
+        const uiPath = join(__dirname, "..", "..", "..", "client", "dist")
     }
 }
