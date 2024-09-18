@@ -1,3 +1,11 @@
 import { NavLink } from "react-router-dom";
 
-<NavLink></NavLink>
+
+type NavBarProps = {
+    userName: string | undefined;
+};
+
+export default function NavBar({ userName } : NavBarProps){
+
+    <NavLink></NavLink>
+}
