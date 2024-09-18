@@ -12,7 +12,7 @@ export class UiDeployment extends Stack {
         super(scope, id, props);
 
         const deploymentBucket = new Bucket(this, 'UiDeploymentBucket', {
-            bucketName: 'bookstore-frontend'
+            bucketName: 'bsfrontend'
         });
 
         const uiPath = join(__dirname, "..", "..", "..", "client", "dist");
