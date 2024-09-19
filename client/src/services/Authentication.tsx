@@ -1,5 +1,6 @@
 import { Amplify } from "aws-amplify";
 import { AuthenticationStack } from "../../../server/outputs.json"
+import { signIn, SignInOutput } from "@aws-amplify/auth";
 
 const awsRegion = "us-east-1";
 
@@ -14,12 +15,33 @@ Amplify.configure({
 })
 
 export class Authentication {
+    private user: SignInOutput | undefined;
+    private userName: string = "";
+
+    
     async login(userName: string, password: string): Promise<Object | undefined> {
-        return {
-            user: 'chacha'
-        };
-    };
+        try {
+            const signInResult: SignInOutput = await signIn({
+                username: userName,
+                password: password,
+                options: {
+                    authFlowType: "USER_PASSWORD_AUTH"
+                }
+            });
+
+            if (signInResult) {
+                this.user = signInResult;
+                this.userName = userName;
+                return this.user;
+            }
+        }
+        catch (error) {
+            console.log(error);
+            return undefined;
+        }
+    }
+
     public getUserName(): string {
-        return 'some user';
+        return this.userName;
     };
 }
