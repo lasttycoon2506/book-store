@@ -29,7 +29,7 @@ function App() {
           element: <div> books pg </div>
         },
         {
-          path:"/createBooks",
+          path:"/createBook",
           element: <div> createbooks pg </div>
         },
       ]

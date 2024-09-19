@@ -27,7 +27,7 @@ export default function NavBar({ userName } : NavBarProps){
             <NavLink to="/"> Home </NavLink>
             <NavLink to="/profile"> Profile </NavLink>
             <NavLink to="/books"> Books </NavLink>
-            <NavLink to="/createBook"> Home </NavLink>
+            <NavLink to="/createBook"> Create Book</NavLink>
             {renderLoginLogout()}
         </div>
     )
