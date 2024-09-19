@@ -31,4 +31,10 @@ export default function Login({authentication, setUserNameCb}: LoginProps) {
             setErrorMsg('username & pw required');
         };
     };
+
+    function showLoginResult(): JSX.Element | undefined {
+        if (errorMsg) {
+           return <label> {errorMsg} </label>;
+        }
+    }
 }
