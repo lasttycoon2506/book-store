@@ -1,7 +1,7 @@
 import { APIGatewayProxyResult } from "aws-lambda";
 
 
-export function addCorsHeader(res: APIGatewayProxyResult){
+export function addCorsHeader(res: APIGatewayProxyResult): void {
     if (!res.headers) {
         res.headers = {}
     }
