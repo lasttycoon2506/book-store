@@ -28,12 +28,9 @@ export class Authentication {
                     authFlowType: "USER_PASSWORD_AUTH"
                 }
             });
-
-            if (signInResult) {
-                this.user = signInResult;
-                this.userName = userName;
-                return this.user;
-            }
+            this.user = signInResult;
+            this.userName = userName;
+            return this.user;
         }
         catch (error) {
             console.log(error);
