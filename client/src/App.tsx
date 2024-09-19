@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import NavBar from './components/NavBar'
 
 function App() {
@@ -10,7 +10,9 @@ function App() {
   const router = createBrowserRouter([
     {
       element: (
+        <>
         <NavBar userName={userName}/> 
+        </>
       ),
       children: [
         {
