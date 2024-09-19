@@ -7,13 +7,13 @@ type LoginProps = {
     setUserNameCb: (userName: string) => void;
 }
 
-export default function Login({authentication, setUserNameCb}: LoginProps) {
+export default function Login({authentication, setUserNameCb}: LoginProps): JSX.Element {
     const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errorMsg, setErrorMsg] = useState<string>("");
     const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
 
-    const submit = async (event: SyntheticEvent) => {
+    const submit = async (event: SyntheticEvent): Promise<void> => {
         event.preventDefault();
         if (userName && password) {
             const loginResult = await authentication.login(userName, password);
@@ -48,7 +48,7 @@ export default function Login({authentication, setUserNameCb}: LoginProps) {
             <input
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-            />``
+            />
             <br />
             <label>Password</label>
             <input

@@ -8,7 +8,7 @@ import { Authentication } from './services/Authentication'
 
 const authentication = new Authentication(); 
 
-function App() {
+function App(): JSX.Element {
   const [userName, setuserName] = useState<string | undefined>(undefined)
 
   

@@ -6,7 +6,7 @@ export class Authentication {
             user: 'chacha'
         };
     };
-    public getUserName() {
+    public getUserName(): string {
         return 'some user';
     };
 }

@@ -5,8 +5,8 @@ type NavBarProps = {
     userName: string | undefined;
 };
 
-export default function NavBar({ userName } : NavBarProps){
-    function renderLoginLogout() {
+export default function NavBar({ userName } : NavBarProps): JSX.Element {
+    function renderLoginLogout(): JSX.Element {
         if (userName) {
             return (
                 <NavLink to ="/logout" style={{float:"right"}}> 
