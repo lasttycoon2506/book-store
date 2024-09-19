@@ -2,6 +2,11 @@ import { useState } from 'react'
 import './App.css'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import NavBar from './components/NavBar'
+import Login from './components/Login'
+import { Authentication } from './services/Authentication'
+
+
+const authentication = new Authentication(); 
 
 function App() {
   const [userName, setuserName] = useState<string | undefined>(undefined)
@@ -19,6 +24,10 @@ function App() {
         {
           path:"/",
           element: <div> welcome home </div>
+        },
+        {
+          path:"/login",
+          element: <Login authentication={authentication} setUserNameCb={setuserName}></Login>
         },
         {
           path:"/profile",
