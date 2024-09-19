@@ -6,6 +6,17 @@ type NavBarProps = {
 };
 
 export default function NavBar({ userName } : NavBarProps){
-
-    <NavLink></NavLink>
+    function setNavBar() {
+        if (userName) {
+            <NavLink to = '/logout'> 
+            {userName} 
+            </NavLink>
+        }
+        else {
+            <NavLink to = '/signup'>
+                
+            </NavLink>
+        }
+    }
+    
 }
