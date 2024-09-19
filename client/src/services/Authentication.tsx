@@ -2,7 +2,7 @@ import { Amplify } from "aws-amplify";
 import { AuthenticationStack } from "../../../server/outputs.json"
 import { signIn, SignInOutput } from "@aws-amplify/auth";
 
-const awsRegion = "us-east-1";
+// const awsRegion = "us-east-1";
 
 Amplify.configure({
     Auth: {

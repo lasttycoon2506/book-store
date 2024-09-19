@@ -7,12 +7,12 @@ import { Construct } from "constructs";
 import { existsSync } from "fs";
 import { join } from "path";
 
-export class UiDeployment extends Stack {
+export class Ui extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        const deploymentBucket = new Bucket(this, 'UiDeploymentBucket', {
-            bucketName: 'bsfrontend'
+        const deploymentBucket = new Bucket(this, 'UiBucket', {
+            bucketName: 'bs-fe'
         });
 
         const uiPath = join(__dirname, "..", "..", "..", "client", "dist");

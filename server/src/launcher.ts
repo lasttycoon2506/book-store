@@ -3,7 +3,7 @@ import { Data } from "./stacks/Data";
 import { Lambdas } from "./stacks/Lambdas";
 import { Api } from "./stacks/Api";
 import { Authentication } from "./stacks/Authentication";
-import { UiDeployment } from "./stacks/UiDeployment";
+import { Ui } from "./stacks/Ui";
 
 
 const app = new App();
@@ -19,4 +19,4 @@ new Api(app, 'ApiStack', {
     booksLambdaIntegration: lambdaStack.booksLambdaIntegration,
     userPool: authenticationStack.userPool
 });
-// new UiDeployment(app, 'UiDeploymentStack');
+new Ui(app, 'UiStack');

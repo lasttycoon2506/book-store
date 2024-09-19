@@ -4,5 +4,3 @@
 
 GET {{url}}/books
 
-
-GET {{url}}/books/
