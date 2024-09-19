@@ -19,4 +19,4 @@ new Api(app, 'ApiStack', {
     booksLambdaIntegration: lambdaStack.booksLambdaIntegration,
     userPool: authenticationStack.userPool
 });
-new UiDeployment(app, 'UiDeploymentStack');
+// new UiDeployment(app, 'UiDeploymentStack');

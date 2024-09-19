@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy": "cdk deploy --all --outputs-file outputs.json --require-approval never",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
