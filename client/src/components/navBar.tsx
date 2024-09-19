@@ -6,17 +6,22 @@ type NavBarProps = {
 };
 
 export default function NavBar({ userName } : NavBarProps){
-    function setNavBar() {
+    function renderLoginLogout() {
         if (userName) {
-            <NavLink to = '/logout'> 
-            {userName} 
-            </NavLink>
+            return (
+                <NavLink to ="/logout" style={{float:"right"}}> 
+                    {userName} 
+                </NavLink> 
+            );
         }
         else {
-            <NavLink to = '/signup'>
-                
-            </NavLink>
+            return (
+                <NavLink to = "/login" style={{float:"right"}}>
+                    Login
+                </NavLink>
+            );
         }
     }
+    
     
 }
