@@ -11,14 +11,27 @@ function App() {
     {
       element: (
         <>
-        <NavBar userName={userName}/> 
+          <NavBar userName={userName}/> 
+          <Outlet />
         </>
       ),
       children: [
         {
           path:"/",
           element: <div> welcome home </div>
-        }
+        },
+        {
+          path:"/profile",
+          element: <div> profile pg </div>
+        },
+        {
+          path:"/books",
+          element: <div> books pg </div>
+        },
+        {
+          path:"/createBooks",
+          element: <div> createbooks pg </div>
+        },
       ]
     }
   ])
