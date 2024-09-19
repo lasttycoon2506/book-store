@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { Authentication } from "../services/Authentication";
+import { Navigate } from "react-router-dom";
 
 type LoginProps = {
     authentication: Authentication;
@@ -37,4 +38,29 @@ export default function Login({authentication, setUserNameCb}: LoginProps) {
            return <label> {errorMsg} </label>;
         }
     }
+
+    return (
+        <div role="main">
+          {loginSuccess && <Navigate to="/profile" replace={true} />}
+          <h2>Please login</h2>
+          <form onSubmit={(e) => submit(e)}>
+            <label>User name</label>
+            <input
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />``
+            <br />
+            <label>Password</label>
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+            />
+            <br />
+            <input type="submit" value="Login" />
+          </form>
+          <br />
+          {showLoginResult()}
+        </div>
+      );
 }
