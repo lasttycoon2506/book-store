@@ -121,13 +121,6 @@ export class Authentication extends Stack {
             ],
             resources: [booksBucket.bucketArn + '/*']
         }));
-        this.adminRole.addToPolicy(new PolicyStatement({
-            effect: Effect.ALLOW,
-            actions: [
-                's3:ListAllMyBuckets'
-            ],
-            resources: ['*']
-        }));
     }
     
     private attachRoles() {
