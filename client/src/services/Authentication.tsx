@@ -1,6 +1,6 @@
 import { Amplify } from "aws-amplify";
 import { AuthenticationStack } from "../../../server/outputs.json"
-import { signIn, SignInOutput } from "@aws-amplify/auth";
+import { fetchAuthSession, signIn, SignInOutput } from "@aws-amplify/auth";
 
 // const awsRegion = "us-east-1";
 
@@ -17,6 +17,7 @@ Amplify.configure({
 export class Authentication {
     private user: SignInOutput | undefined;
     private userName: string = "";
+    private jwToken: string | undefined;
 
     
     async login(userName: string, password: string): Promise<Object | undefined> {
@@ -36,6 +37,11 @@ export class Authentication {
             console.log(error);
             return undefined;
         }
+    }
+
+    async getToken() {
+        const session = await fetchAuthSession();
+        return session.tokens?.idToken?.toString()
     }
 
     public getUserName(): string {
