@@ -13,9 +13,10 @@ export default function CreateBook({ database }: CreateBookProps) {
 
     async function submit(event: SyntheticEvent){
         if (title && author) {
-            const createResult = await database.createBook(title, author);
+            const id = await database.createBook(title, author);
             setTitle("");
             setAuthor("");
+            setCreateResult(`book ${id} created`)
         }
         else {
             setCreateResult("title & author reqd.");
