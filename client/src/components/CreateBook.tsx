@@ -11,12 +11,13 @@ export default function CreateBook({ database }: CreateBookProps) {
     const [author, setAuthor] = useState<string>("");
     const [createResult, setCreateResult] = useState<string>("");
 
-    async function submit(event: SyntheticEvent){
+    const submit = async(event:SyntheticEvent): Promise<void> => {
+        event.preventDefault();
         if (title && author) {
             const id = await database.createBook(title, author);
+            setCreateResult(`book ${id} created`);
             setTitle("");
             setAuthor("");
-            setCreateResult(`book ${id} created`)
         }
         else {
             setCreateResult("title & author reqd.");
@@ -30,9 +31,10 @@ export default function CreateBook({ database }: CreateBookProps) {
         return (
             <form onSubmit={(e) => submit(e)}>
                 <label> title </label>
-                <input value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input value={title} onChange={(e) => setTitle(e.target.value)} /> <br/>
                 <label> author </label>
-                <input value={author} onChange={(e) => setAuthor(e.target.value)} />
+                <input value={author} onChange={(e) => setAuthor(e.target.value)} /> <br/>
+                <input type="submit" value="create book"/>
             </form>
         )
     }
@@ -40,7 +42,7 @@ export default function CreateBook({ database }: CreateBookProps) {
     return (
         <div>
             {renderForm()}
-            {createResult? <h3>{createResult}</h3>: undefined}
+            {createResult} 
         </div>
     );
 }
