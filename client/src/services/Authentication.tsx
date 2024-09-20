@@ -36,7 +36,6 @@ export class Authentication {
             this.userName = userName;
             this.jwToken = await this.getSessionToken();
             console.log(this.jwToken);
-            this.genTempCredentials;
             return this.user;
         }
         catch (error) {

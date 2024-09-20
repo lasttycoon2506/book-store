@@ -8,7 +8,9 @@ export class Database {
     }
     
     async createBook(title: string, author: string) {
-        return "123";
+        const tempCreds = this.authentication.getTempCredentials;
+        console.log(tempCreds);
+        
     }
 
     isAuthorized() {
