@@ -1,6 +1,6 @@
 import { Amplify } from "aws-amplify";
 import { AuthenticationStack } from "../../../server/outputs.json"
-import { fetchAuthSession, signIn, SignInOutput } from "@aws-amplify/auth";
+import { AuthUser, fetchAuthSession, getCurrentUser, signIn, SignInOutput } from "@aws-amplify/auth";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
 
@@ -17,7 +17,7 @@ Amplify.configure({
 })
 
 export class Authentication {
-    private user: SignInOutput | undefined;
+    private user: SignInOutput | AuthUser | undefined;
     private userName: string = "";
     private jwToken: string | undefined;
     private tempCredentials: Object | undefined;
@@ -25,28 +25,33 @@ export class Authentication {
     
     async login(userName: string, password: string): Promise<Object | undefined> {
         try {
-            const signInResult: SignInOutput = await signIn({
-                username: userName,
-                password: password,
-                options: {
-                    authFlowType: "USER_PASSWORD_AUTH"
-                }
-            });
-            this.user = signInResult;
-            this.userName = userName;
-            this.jwToken = await this.getSessionToken();
-            console.log(this.jwToken);
-            return this.user;
+            const user = await getCurrentUser();
+            if (user) {
+                this.user = user;
+            }
+            else {
+                const signInResult: SignInOutput = await signIn({
+                    username: userName,
+                    password: password,
+                    options: {
+                        authFlowType: "USER_PASSWORD_AUTH"
+                    }
+                });
+                this.user = signInResult;
+                this.userName = userName;
+                await this.getSessionToken();
+                return this.user;
+            }
         }
         catch (error) {
-            console.log(error);
+            console.log(error)
             return undefined;
         }
     }
 
-    private async getSessionToken(): Promise<string | undefined> {
+    private async getSessionToken(): Promise<void> {
         const session = await fetchAuthSession();
-        return session.tokens?.idToken?.toString()
+        this.jwToken = session.tokens?.idToken?.toString();
     }
 
     public getUserName(): string {
@@ -73,7 +78,7 @@ export class Authentication {
                 }
             })
         })
-        return cognitoIdentity.config.credentials;
+        return cognitoIdentity.config.credentials();
     }
 
 

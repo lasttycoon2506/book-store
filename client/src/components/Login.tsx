@@ -17,10 +17,6 @@ export default function Login({authentication, setUserNameCb}: LoginProps): JSX.
         event.preventDefault();
         if (userName && password) {
             const loginResult = await authentication.login(userName, password);
-            const userName2 = authentication.getUserName();
-            if (userName2) {
-                setUserNameCb(userName2);
-            }
             if (loginResult) {
                 setLoginSuccess(true);
             }
