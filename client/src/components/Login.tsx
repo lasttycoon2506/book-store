@@ -4,10 +4,10 @@ import { Navigate } from "react-router-dom";
 
 type LoginProps = {
     authentication: Authentication;
-    setUserNameCb: (userName: string) => void;
+    setUserNameCallBack: (userName: string) => void;
 }
 
-export default function Login({authentication, setUserNameCb}: LoginProps): JSX.Element {
+export default function Login({authentication, setUserNameCallBack}: LoginProps): JSX.Element {
     const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errorMsg, setErrorMsg] = useState<string>("");
@@ -17,6 +17,11 @@ export default function Login({authentication, setUserNameCb}: LoginProps): JSX.
         event.preventDefault();
         if (userName && password) {
             const loginResult = await authentication.login(userName, password);
+            const userNameCallBack = authentication.getUserName();
+            if (userNameCallBack) {
+              setUserNameCallBack(userNameCallBack);
+              setLoginSuccess(true);
+            }
             if (loginResult) {
                 setLoginSuccess(true);
             }

@@ -12,7 +12,7 @@ const authentication = new Authentication();
 const database = new Database(authentication);
 
 function App(): JSX.Element {
-  const [userName, setuserName] = useState<string | undefined>(undefined)
+  const [userName, setUserName] = useState<string | undefined>(undefined)
 
   
   const router = createBrowserRouter([
@@ -30,7 +30,7 @@ function App(): JSX.Element {
         },
         {
           path:"/login",
-          element: <Login authentication={authentication} setUserNameCb={setuserName}/>
+          element: <Login authentication={authentication} setUserNameCallBack={setUserName}/>
         },
         {
           path:"/profile",

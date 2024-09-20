@@ -28,6 +28,7 @@ export class Authentication {
             const user = await getCurrentUser();
             if (user) {
                 this.user = user;
+                this.userName = userName;
             }
             else {
                 const signInResult: SignInOutput = await signIn({
