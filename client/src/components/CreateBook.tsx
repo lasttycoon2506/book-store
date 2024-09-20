@@ -6,7 +6,7 @@ type CreateBookProps = {
     database: Database;
 }
 
-export default function CreateBook({ database }: CreateBookProps) {
+export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     const [title, setTitle] = useState<string>("");
     const [author, setAuthor] = useState<string>("");
     const [createResult, setCreateResult] = useState<string>("");
@@ -24,7 +24,7 @@ export default function CreateBook({ database }: CreateBookProps) {
         }
     }
 
-    function renderForm() {
+    function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
             return <NavLink to="/login"> Login </NavLink>
         }
