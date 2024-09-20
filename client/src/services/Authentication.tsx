@@ -1,8 +1,10 @@
 import { Amplify } from "aws-amplify";
 import { AuthenticationStack } from "../../../server/outputs.json"
 import { fetchAuthSession, signIn, SignInOutput } from "@aws-amplify/auth";
+import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
 
-// const awsRegion = "us-east-1";
+const awsRegion = "us-east-1";
 
 Amplify.configure({
     Auth: {
@@ -18,6 +20,7 @@ export class Authentication {
     private user: SignInOutput | undefined;
     private userName: string = "";
     private jwToken: string | undefined;
+    private tempCredentials: Object | undefined;
 
     
     async login(userName: string, password: string): Promise<Object | undefined> {
@@ -41,7 +44,7 @@ export class Authentication {
         }
     }
 
-    async getSessionToken(): Promise<string | undefined> {
+    private async getSessionToken(): Promise<string | undefined> {
         const session = await fetchAuthSession();
         return session.tokens?.idToken?.toString()
     }
@@ -49,4 +52,23 @@ export class Authentication {
     public getUserName(): string {
         return this.userName;
     };
+
+    public async genTempCredentials() {
+        const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`;
+        const cognitoIdentity = new CognitoIdentityClient({
+            credentials: fromCognitoIdentityPool({
+                clientConfig: {
+                    region: awsRegion
+                },
+                identityPoolId: AuthenticationStack.BookstoreIdentityPoolId,
+                logins: {
+                    [cognitoIdentityPool]: this.jwToken!
+                }
+            })
+        })
+        this.tempCredentials = cognitoIdentity.config.credentials;
+        return this.tempCredentials;
+    }
+
+
 }
