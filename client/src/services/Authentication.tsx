@@ -41,7 +41,7 @@ export class Authentication {
         }
     }
 
-    async getSessionToken() {
+    async getSessionToken(): Promise<string | undefined> {
         const session = await fetchAuthSession();
         return session.tokens?.idToken?.toString()
     }
