@@ -79,7 +79,8 @@ export class Authentication {
                 }
             })
         })
-        return cognitoIdentity.config.credentials();
+        const credentials = await cognitoIdentity.config.credentials();
+        return credentials;
     }
 
 

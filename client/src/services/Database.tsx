@@ -8,7 +8,7 @@ export class Database {
     }
     
     async createBook(title: string, author: string) {
-        const tempCreds = this.authentication.getTempCredentials();
+        const tempCreds = await this.authentication.getTempCredentials();
         console.log(tempCreds);
     }
 

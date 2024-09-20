@@ -13,7 +13,6 @@ const database = new Database(authentication);
 
 function App(): JSX.Element {
   const [userName, setUserName] = useState<string | undefined>(undefined)
-
   
   const router = createBrowserRouter([
     {
