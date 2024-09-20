@@ -31,6 +31,8 @@ export class Authentication {
             });
             this.user = signInResult;
             this.userName = userName;
+            this.jwToken = await this.getSessionToken();
+            console.log(this.jwToken);
             return this.user;
         }
         catch (error) {
@@ -39,7 +41,7 @@ export class Authentication {
         }
     }
 
-    async getToken() {
+    async getSessionToken() {
         const session = await fetchAuthSession();
         return session.tokens?.idToken?.toString()
     }
