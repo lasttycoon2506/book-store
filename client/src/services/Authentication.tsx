@@ -54,7 +54,14 @@ export class Authentication {
         return this.userName;
     };
 
-    public async genTempCredentials(): Promise<Object> {
+    public async getTempCredentials(): Promise<Object> {
+        if (!this.tempCredentials) {
+            this.tempCredentials = await this.genTempCredentials();
+        }
+        return this.tempCredentials;
+    }
+
+    private async genTempCredentials(): Promise<Object> {
         const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`;
         const cognitoIdentity = new CognitoIdentityClient({
             credentials: fromCognitoIdentityPool({
