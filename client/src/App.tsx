@@ -4,9 +4,12 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Login from './components/Login'
 import { Authentication } from './services/Authentication'
+import CreateBook from './components/CreateBook'
+import { Database } from './services/Database'
 
 
 const authentication = new Authentication(); 
+const database = new Database();
 
 function App(): JSX.Element {
   const [userName, setuserName] = useState<string | undefined>(undefined)
@@ -27,7 +30,7 @@ function App(): JSX.Element {
         },
         {
           path:"/login",
-          element: <Login authentication={authentication} setUserNameCb={setuserName}></Login>
+          element: <Login authentication={authentication} setUserNameCb={setuserName}/>
         },
         {
           path:"/profile",
@@ -39,7 +42,7 @@ function App(): JSX.Element {
         },
         {
           path:"/createBook",
-          element: <div> createbooks pg </div>
+          element: <CreateBook database={database}/>
         },
       ]
     }
