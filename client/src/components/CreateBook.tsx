@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
 
@@ -9,9 +9,17 @@ type CreateBookProps = {
 export default function CreateBook({ database }: CreateBookProps) {
     const [title, setTitle] = useState<string>("");
     const [author, setAuthor] = useState<string>("");
+    const [createResult, setCreateResult] = useState<string>("");
 
-    function submit(){
-
+    async function submit(event: SyntheticEvent){
+        if (title && author) {
+            const createResult = await database.createBook(title, author);
+            setTitle("");
+            setAuthor("");
+        }
+        else {
+            setCreateResult("title & author reqd.");
+        }
     }
 
     function renderForm() {
@@ -28,4 +36,10 @@ export default function CreateBook({ database }: CreateBookProps) {
         )
     }
 
+    return (
+        <div>
+            {renderForm()}
+            {createResult? <h3>{createResult}</h3>: undefined}
+        </div>
+    );
 }
