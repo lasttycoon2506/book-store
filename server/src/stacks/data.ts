@@ -1,4 +1,4 @@
-import { Stack, StackProps } from "aws-cdk-lib";
+import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import { AttributeType, ITable, Table } from "aws-cdk-lib/aws-dynamodb";
 import { Bucket, IBucket } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
@@ -11,8 +11,11 @@ export class Data extends Stack {
         super(scope, id, props);
 
         this.booksBucket = new Bucket(this, 'BooksBuck', {
-            bucketName: 'booksbuck',
+            bucketName: 'booksbuck'
         })
+        new CfnOutput(this, 'BooksBucketName', {
+            value: this.booksBucket.bucketName
+        });
         
         this.booksTable = new Table(this, 'Books-table', {
             tableName: 'books-table',
