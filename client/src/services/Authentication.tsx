@@ -73,8 +73,7 @@ export class Authentication {
                 }
             })
         })
-        this.tempCredentials = cognitoIdentity.config.credentials;
-        return this.tempCredentials;
+        return cognitoIdentity.config.credentials;
     }
 
 

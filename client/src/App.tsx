@@ -9,7 +9,7 @@ import { Database } from './services/Database'
 
 
 const authentication = new Authentication(); 
-const database = new Database();
+const database = new Database(authentication);
 
 function App(): JSX.Element {
   const [userName, setuserName] = useState<string | undefined>(undefined)
