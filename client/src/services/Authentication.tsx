@@ -36,6 +36,7 @@ export class Authentication {
             this.userName = userName;
             this.jwToken = await this.getSessionToken();
             console.log(this.jwToken);
+            this.genTempCredentials;
             return this.user;
         }
         catch (error) {
@@ -53,7 +54,7 @@ export class Authentication {
         return this.userName;
     };
 
-    public async genTempCredentials() {
+    public async genTempCredentials(): Promise<Object> {
         const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`;
         const cognitoIdentity = new CognitoIdentityClient({
             credentials: fromCognitoIdentityPool({
