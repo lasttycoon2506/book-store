@@ -22,7 +22,8 @@ export class Database {
                 Authorization: this.authentication.jwToken!
             }
         })
-       
+       const postResultJson = await postResult.json()
+       return postResultJson.id;
     }
 
 
