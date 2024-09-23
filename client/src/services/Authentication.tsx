@@ -29,6 +29,8 @@ export class Authentication {
             if (user) {
                 this.user = user;
                 this.userName = userName;
+                await this.getSessionToken();
+                return this.user;
             }
             else {
                 const signInResult: SignInOutput = await signIn({
@@ -39,10 +41,10 @@ export class Authentication {
                     }
                 });
                 this.user = signInResult;
-                this.userName = userName;
-                await this.getSessionToken();
-                return this.user;
             }
+            this.userName = userName;
+            await this.getSessionToken();
+            return this.user;
         }
         catch (error) {
             console.log(error)
@@ -62,7 +64,6 @@ export class Authentication {
     public async getTempCredentials(): Promise<Object> {
         if (!this.tempCredentials) {
             this.tempCredentials = await this.genTempCredentials();
-            const ttt = 4;
         }
         return this.tempCredentials;
     }
@@ -79,7 +80,7 @@ export class Authentication {
                     [cognitoIdentityPool]: this.jwToken!
                 }
             })
-        })
+        });
         const credentials = await cognitoIdentity.config.credentials();
         return credentials;
     }
