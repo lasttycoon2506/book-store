@@ -12,8 +12,19 @@ export class Database {
     
     async createBook(title: string, author: string) {
         const tempCreds = await this.authentication.getTempCredentials();
+        const book = {} as any;
+        book.title = title;
+        book.author = author;
+        const postResult = await fetch(bookstoreApiUrl, {
+            method: "POST",
+            body: JSON.stringify(book),
+            headers: {
+                Authorization: this.authentication.jwToken!
+            }
+        })
        
     }
+
 
     isAuthorized() {
         return true;

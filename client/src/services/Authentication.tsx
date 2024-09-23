@@ -19,7 +19,7 @@ Amplify.configure({
 export class Authentication {
     private user: SignInOutput | AuthUser | undefined;
     private userName: string = "";
-    private jwToken: string | undefined;
+    public jwToken: string | undefined;
     private tempCredentials: Object | undefined;
 
     
