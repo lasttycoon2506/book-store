@@ -44,10 +44,13 @@ export class Authentication {
                     }
                 });
                 this.user = signInResult;
+                if (this.user) {
+                    this.userName = userName;
+                    await this.getSessionToken();
+                    return this.user;
+                }
+                return false;
             }
-            this.userName = userName;
-            await this.getSessionToken();
-            return this.user;
         }
         catch (error) {
             console.log(error)
