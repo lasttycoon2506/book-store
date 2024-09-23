@@ -12,7 +12,7 @@ export class Ui extends Stack {
         super(scope, id, props);
 
         const deploymentBucket = new Bucket(this, 'UiBucket', {
-            bucketName: 'bs-fe'
+            bucketName: 'books-fe'
         });
 
         const uiPath = join(__dirname, "..", "..", "..", "client", "dist");
