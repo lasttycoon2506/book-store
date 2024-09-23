@@ -27,8 +27,11 @@ export class Authentication {
         try {
             const user = await getCurrentUser();
             if (user) {
+                if (userName !== user.username) {
+                    return false;
+                }
                 this.user = user;
-                this.userName = userName;
+                this.userName = user.username;
                 await this.getSessionToken();
                 return this.user;
             }
