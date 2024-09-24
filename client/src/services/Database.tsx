@@ -19,9 +19,9 @@ export class Database {
             method: "POST",
             body: JSON.stringify(book),
             headers: {
-                Authorization: this.authentication.jwToken!
+                "Authorization": this.authentication.jwToken!
             }
-        })
+        });
        const postResultJson = await postResult.json()
        return postResultJson.id;
     }

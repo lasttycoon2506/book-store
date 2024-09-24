@@ -50,7 +50,7 @@ export class Authentication {
                     return this.user;
                 }
                 return false;
-            }
+           }
         }
         catch (error) {
             console.log(error)
