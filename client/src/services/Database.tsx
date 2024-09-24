@@ -11,7 +11,6 @@ export class Database {
     }
     
     async createBook(title: string, author: string) {
-        const tempCreds = await this.authentication.getTempCredentials();
         const book = {} as any;
         book.title = title;
         book.author = author;
