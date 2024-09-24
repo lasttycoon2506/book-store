@@ -9,7 +9,7 @@ import { addCorsHeader } from "../utils/corsHeader";
 
 const dbClient = new DynamoDBClient({})
 
-export async function handler(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
+async function handler(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
     let response: APIGatewayProxyResult;
 
     switch (event.httpMethod) {
@@ -45,4 +45,5 @@ export async function handler(event: APIGatewayProxyEvent): Promise<APIGatewayPr
     return response;
 }
 
+export {handler};
 
