@@ -1,12 +1,11 @@
 import { handler } from "../lambdas/handler";
 
 process.env.AWS_REGION = "us-east-1";
-process.env.TABLE_NAME = "books-table";
+process.env.TABLE_NAME = "book-table";
 
 
-handler({httpMethod: 'PUT',
-    queryStringParameters: {id: 'a811f04e-119a-4802-8f69-2a5f40aeaf68'},
-    body: JSON.stringify({bookTitle: 'gats',
-        pages: 5
+handler({httpMethod: 'POST',
+    body: JSON.stringify({bookTitle: 'g',
+        pages: 10
     })
 } as any).then(result => console.log(result));
