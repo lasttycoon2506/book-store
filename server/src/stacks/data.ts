@@ -36,7 +36,7 @@ export class Data extends Stack {
         this.booksTable = new Table(this, 'Books-table', {
             tableName: 'book-table',
             partitionKey: {
-                    name: 'id',
+                    name: "id",
                     type: AttributeType.STRING
             }
         })

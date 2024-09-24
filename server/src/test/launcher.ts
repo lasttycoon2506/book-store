@@ -5,7 +5,7 @@ process.env.TABLE_NAME = "book-table";
 
 
 handler({httpMethod: 'POST',
-    body: JSON.stringify({bookTitle: 'g',
+    body: JSON.stringify({bookTitle: 'ab',
         pages: 10
     })
 } as any).then(result => console.log(result));
