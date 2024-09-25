@@ -30,7 +30,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
-            return <NavLink to={"/login"}> Must Login </NavLink>
+            return <NavLink to={"/login"}> Must Login First</NavLink>
         }
         return (
             <form onSubmit={(e) => submit(e)}>
@@ -39,13 +39,13 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 <label> author </label>
                 <input value={author} onChange={(e) => setAuthor(e.target.value)} /> <br/>
                 <label> pages </label>
-                <input value={pages} onChange={(e) => setPages(Number(e.target.value))} /> <br/>
+                <input type="number" value={pages} onChange={(e) => setPages(Number(e.target.value))} /> <br/>
                 <label> genre </label>
                 <input value={genre} onChange={(e) => setGenre(e.target.value)} /> <br/>
                 <label> price </label>
-                <input value={price} onChange={(e) => setPrice(Number(e.target.value))} /> <br/>
+                <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} /> <br/>
                 <label> stock </label>
-                <input value={stock} onChange={(e) => setStock(Number(e.target.value))} /> <br/>
+                <input type="number" value={stock} onChange={(e) => setStock(Number(e.target.value))} /> <br/>
                 <input type="submit" value="create book"/>
             </form>
         )
