@@ -9,6 +9,10 @@ type CreateBookProps = {
 export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     const [title, setTitle] = useState<string>("");
     const [author, setAuthor] = useState<string>("");
+    const [pages, setPages] = useState<number>();
+    const [genre, setGenre] = useState<string>("");
+    const [price, setPrice] = useState<number>();
+    const [stock, setStock] = useState<number>();
     const [createResult, setCreateResult] = useState<string>("");
 
     const submit = async(event:SyntheticEvent): Promise<void> => {
