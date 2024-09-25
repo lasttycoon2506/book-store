@@ -6,6 +6,7 @@ import Login from './components/Login'
 import { Authentication } from './services/Authentication'
 import CreateBook from './components/CreateBook'
 import { Database } from './services/Database'
+import ViewAllBooks from './components/ViewAllBooks'
 
 
 const authentication = new Authentication(); 
@@ -37,7 +38,7 @@ function App(): JSX.Element {
         },
         {
           path:"/books",
-          element: <div> books pg </div>
+          element: <ViewAllBooks database={database}/>
         },
         {
           path:"/createBook",
