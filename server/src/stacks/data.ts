@@ -1,6 +1,6 @@
 import { CfnOutput, Stack, StackProps } from "aws-cdk-lib";
 import { AttributeType, ITable, Table } from "aws-cdk-lib/aws-dynamodb";
-import { Bucket, BucketAccessControl, HttpMethods, IBucket, ObjectOwnership } from "aws-cdk-lib/aws-s3";
+import { Bucket, HttpMethods, IBucket, ObjectOwnership } from "aws-cdk-lib/aws-s3";
 import { Construct } from "constructs";
 
 export class Data extends Stack {
