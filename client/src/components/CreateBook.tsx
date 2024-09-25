@@ -17,14 +17,14 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
 
     const submit = async(event:SyntheticEvent): Promise<void> => {
         event.preventDefault();
-        if (title && author) {
+        if (title && author && pages && genre && price && stock) {
             const id = await database.createBook(title, author);
             setCreateResult(`book ${id} created`);
             setTitle("");
             setAuthor("");
         }
         else {
-            setCreateResult("title & author reqd.");
+            setCreateResult("Missing Field(s)!");
         }
     }
 
