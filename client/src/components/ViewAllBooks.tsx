@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Database } from "../services/Database"
 import type { Book as BookModel} from "../models/model";
 import Book from "./Book";
+import { NavLink } from "react-router-dom";
 
 type ViewAllBooksProps = {
     database: Database;
@@ -19,6 +20,9 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     }, []);
 
     function renderAllBooks() {
+        if (!database.isAuthorized()) {
+            return <NavLink to={"/login"}> Must Login First</NavLink>
+        }
         const bookList: any[] = [];
         if (books) {
             for(const book of books){
