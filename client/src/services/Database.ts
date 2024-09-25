@@ -22,14 +22,7 @@ export class Database {
        return allBooks;
     }
     
-    async createBook(title: string, author: string, pages: number, genre: string, price: number, stock: number): Promise<any> {
-        const book = {} as any;
-        book.title = title;
-        book.author = author;
-        book.pages = pages;
-        book.genre = genre;
-        book.price = price;
-        book.stock = stock;
+    async createBook(book: Book): Promise<any> {
         const postResult = await fetch(bookstoreApiUrl, {
             method: "POST",
             body: JSON.stringify(book),
