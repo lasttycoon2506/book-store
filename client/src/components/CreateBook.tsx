@@ -1,6 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
+import { Book } from "../models/model";
 
 type CreateBookProps = {
     database: Database;
@@ -18,7 +19,15 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     const submit = async(event:SyntheticEvent): Promise<void> => {
         event.preventDefault();
         if (title && author && pages && genre && price && stock) {
-            const id = await database.createBook(title, author);
+            const book: Book = {
+                title: title,
+                author: author,
+                pages: pages,
+                genre: genre,
+                price: price,
+                stock: stock
+            }
+            const id = await database.createBook(book);
             setCreateResult(`book ${id} created`);
             setTitle("");
             setAuthor("");
