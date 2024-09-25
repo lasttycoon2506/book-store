@@ -10,7 +10,7 @@ export class Database {
         this.authentication = authentication;
     }
     
-    async createBook(title: string, author: string) {
+    async createBook(title: string, author: string): Promise<any> {
         const book = {} as any;
         book.title = title;
         book.author = author;
