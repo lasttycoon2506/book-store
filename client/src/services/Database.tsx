@@ -1,5 +1,6 @@
 import { Authentication } from "./Authentication";
 import { ApiStack } from "../../../server/outputs.json"
+import { Book } from "../models/model";
 
 const bookstoreApiUrl = ApiStack.booksApiEndpoint04E49D0B + 'books';
 
@@ -10,7 +11,7 @@ export class Database {
         this.authentication = authentication;
     }
 
-    async getAllBooks(): Promise<Book> {
+    async getAllBooks(): Promise<Book[]> {
         const getAllBooksResult = await fetch(bookstoreApiUrl, {
             method: "GET",
             headers: {
