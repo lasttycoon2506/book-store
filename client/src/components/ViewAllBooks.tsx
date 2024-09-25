@@ -36,5 +36,12 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
             }
         }
         return bookList;
-    }
+    };
+
+    return (
+        <div>
+            <h3> All Books </h3>
+            {renderAllBooks()}
+        </div>
+    );
 }
