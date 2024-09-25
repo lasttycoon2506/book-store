@@ -30,7 +30,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
-            return <NavLink to="/login"> Login </NavLink>
+            return <NavLink to={"/login"}> Must Login </NavLink>
         }
         return (
             <form onSubmit={(e) => submit(e)}>
