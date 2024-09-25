@@ -39,13 +39,13 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 <label> author </label>
                 <input value={author} onChange={(e) => setAuthor(e.target.value)} /> <br/>
                 <label> pages </label>
-                <input value={pages} onChange={(e) => setPages(e.target.value)} /> <br/>
+                <input value={pages} onChange={(e) => setPages(Number(e.target.value))} /> <br/>
                 <label> genre </label>
                 <input value={genre} onChange={(e) => setGenre(e.target.value)} /> <br/>
                 <label> price </label>
-                <input value={price} onChange={(e) => setPrice(e.target.value)} /> <br/>
+                <input value={price} onChange={(e) => setPrice(Number(e.target.value))} /> <br/>
                 <label> stock </label>
-                <input value={stock} onChange={(e) => setStock(e.target.value)} /> <br/>
+                <input value={stock} onChange={(e) => setStock(Number(e.target.value))} /> <br/>
                 <input type="submit" value="create book"/>
             </form>
         )
