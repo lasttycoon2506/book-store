@@ -9,6 +9,17 @@ export class Database {
     constructor(authentication: Authentication){
         this.authentication = authentication;
     }
+
+    async getAllBooks(): Promise<Book> {
+        const getAllBooksResult = await fetch(bookstoreApiUrl, {
+            method: "GET",
+            headers: {
+                "Authorization": this.authentication.jwToken!
+            }
+        });
+       const allBooks = await getAllBooksResult.json()
+       return allBooks;
+    }
     
     async createBook(title: string, author: string): Promise<any> {
         const book = {} as any;
