@@ -31,6 +31,10 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             setCreateResult(`book ${id} created`);
             setTitle("");
             setAuthor("");
+            setPages(0);
+            setGenre("");
+            setPrice(0);
+            setStock(0);
         }
         else {
             setCreateResult("Missing Field(s)!");
