@@ -91,5 +91,10 @@ export class Authentication {
         return credentials;
     }
 
-
+    isAuthorized() {
+        if (this.user) {
+            return true;
+        }
+        return false;
+    }
 }

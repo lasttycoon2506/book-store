@@ -39,6 +39,6 @@ export class Database {
 
 
     isAuthorized() {
-        return true;
+        return this.authentication.isAuthorized();
     }
 }
