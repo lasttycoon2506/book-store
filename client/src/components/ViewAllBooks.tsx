@@ -13,11 +13,12 @@ type ViewAllBooksProps = {
 export default function ViewAllBooks({database}: ViewAllBooksProps){
     const [books, setBooks] = useState<BookModel[]>();
 
+    const getAllBooks = async () => { 
+        const allBooks = await database.getAllBooks();
+        setBooks(allBooks);
+    }
+    
     useEffect(() => {
-        const getAllBooks = async () => { 
-            const allBooks = await database.getAllBooks();
-            setBooks(allBooks);
-        }
         getAllBooks();
     }, []);
 
