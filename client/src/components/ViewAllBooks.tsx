@@ -35,7 +35,10 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         if (statusCode === 200) {
           const updatedBookList = books?.filter(book => book.id !== bookId);
           setBooks(updatedBookList);
-        };
+        }
+        else {
+          console.error(`Unable to delete Book status code: ${statusCode}`)
+        }
     }
 
     useEffect(() => {
