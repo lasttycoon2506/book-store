@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Database } from "../services/Database"
 import type { Book as BookModel} from "../models/model";
-import Book from "./Book";
 import { NavLink } from "react-router-dom";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import styled from "@mui/material/styles/styled";
 import TableRow from "@mui/material/TableRow";
+
 
 type ViewAllBooksProps = {
     database: Database;
@@ -46,29 +46,76 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         if (!database.isAuthorized()) {
             return <NavLink to={"/login"}> Must Login First</NavLink>
         }
-        const bookList: any[] = [];
-        if (books) {
-            for(const book of books){
-                bookList.push(
-                    <Book 
-                        id={book.id}
-                        title={book.title}
-                        author={book.author}
-                        pages={book.pages}
-                        genre={book.genre}
-                        price={book.price}
-                        stock={book.stock}
-                        />
-                )
-            }
-        }
-        return bookList;
+        return (
+            <TableContainer component={Paper}>
+          <Typography
+              sx={{ flex: '1 1 100%' }}
+              variant="h3"
+              id="tableTitle"
+              component="div"
+              align='center'
+            >
+              Your Exercises
+            </Typography>
+          <Table sx={{ minWidth: 900 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align='center'> Name </StyledTableCell>
+                <StyledTableCell align="center">Reps</StyledTableCell>
+                <StyledTableCell align="center">Weight</StyledTableCell>
+                <StyledTableCell align="center">Unit (LB / KG)</StyledTableCell>
+                <StyledTableCell align="center">Date</StyledTableCell>    
+                <StyledTableCell align="center">Edit</StyledTableCell>
+                <StyledTableCell align="center">Delete</StyledTableCell>    
+                </TableRow>
+            </TableHead>
+            <TableBody>
+              {exercises.map((exercise) => (
+                <StyledTableRow key={exercise}>
+                  <StyledTableCell component="th" scope="row" align='center'>  {exercise.name}  </StyledTableCell>
+                  <StyledTableCell align="center">{exercise.reps}</StyledTableCell>
+                  <StyledTableCell align="center">{exercise.weight}</StyledTableCell>
+                  <StyledTableCell align="center">{exercise.unit}</StyledTableCell>
+                  <StyledTableCell align="center">{exercise.date}</StyledTableCell>
+                  <StyledTableCell align='center'> 
+                  <Button
+                      onClick={() => {
+                        onEdit(exercise);
+                      }}
+                    >
+                      <IconButton aria-label="edit" size="large">
+                      <EditIcon />
+                    </IconButton>
+                  </Button> 
+                  </StyledTableCell>
+                  <StyledTableCell align='center'>
+                  <Button
+                      onClick={() => {
+                        onDelete(exercise._id);
+                      }}
+                    >
+                      <IconButton aria-label="delete" size="large">
+                      <DeleteIcon />
+                    </IconButton>
+                  </Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))} 
+            </TableBody>
+          </Table>
+          <Typography align='center'
+              >  <Button
+              onClick={() => {
+                navigate('/add-exercise')
+              }}
+              variant="contained"
+              size='large'
+            >
+              Add
+          </Button>
+            </Typography>
+        </TableContainer>
+        );
     };
 
-    return (
-        <div>
-            <h3> All Books </h3>
-            {renderAllBooks()}
-        </div>
-    );
 }
