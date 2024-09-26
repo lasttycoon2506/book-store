@@ -22,7 +22,7 @@ export class Database {
        return allBooks;
     }
     
-    async createBook(book: Book): Promise<any> {
+    async createBook(book: Book): Promise<string> {
         const postResult = await fetch(bookstoreApiUrl, {
             method: "POST",
             body: JSON.stringify(book),
@@ -34,6 +34,17 @@ export class Database {
        return postResultJson.id;
     }
 
+    async deleteBook(bookId: string): Promise<string> {
+        const deleteResult = await fetch(bookstoreApiUrl, {
+            method: "DELETE",
+            body: JSON.stringify(bookId),
+            headers: {
+                "Authorization": this.authentication.jwToken!
+            }
+        });
+       const deleteResultJson = await deleteResult.json()
+       return deleteResultJson.id;
+    }
 
     isAuthorized() {
         return this.authentication.isAuthorized();
