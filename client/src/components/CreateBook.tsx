@@ -28,6 +28,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 stock: stock
             }
             const id = await database.createBook(book);
+            if (id) {
             setCreateResult(`${title} by ${author} created`);
             setTitle("");
             setAuthor("");
@@ -35,6 +36,10 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             setGenre("");
             setPrice(0);
             setStock(0);
+            }
+            else {
+                console.error("Unable to create book!")
+            }
         }
         else {
             setCreateResult("Missing Field(s)!");
