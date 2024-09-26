@@ -28,7 +28,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     const getAllBooks = async () => { 
         const allBooks = await database.getAllBooks();
         setBooks(allBooks);
-    }
+    };
     
     const deleteBook = async (bookId: string) => {
         const statusCode = await database.deleteBook(bookId);
@@ -39,7 +39,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         else {
           console.error(`Unable to delete Book status code: ${statusCode}`)
         }
-    }
+    };
 
     useEffect(() => {
         getAllBooks();

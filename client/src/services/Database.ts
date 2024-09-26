@@ -34,6 +34,18 @@ export class Database {
        return postResultJson.id;
     }
 
+    async editBook(book: Book): Promise<number> {
+        const editResponse = await fetch(`${bookstoreApiUrl}?id=${book.id}`, {
+            method: "EDIT",
+            body: JSON.stringify(book),
+            headers: {
+                "Authorization": this.authentication.jwToken!
+            }
+        });
+       const editResponseJson = await editResponse.json()
+       return editResponseJson.$metadata.httpStatusCode;
+    }
+
     async deleteBook(bookId: string): Promise<number> {
         const deleteResult = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
             method: "DELETE",
