@@ -5,7 +5,16 @@ import { NavLink } from "react-router-dom";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import styled from "@mui/material/styles/styled";
 import TableRow from "@mui/material/TableRow";
-
+import TableContainer from "@mui/material/TableContainer";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import TableHead from "@mui/material/TableHead";
+import TableBody from "@mui/material/TableBody";
+import Table from "@mui/material/Table";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
 
 type ViewAllBooksProps = {
     database: Database;
