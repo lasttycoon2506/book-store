@@ -12,26 +12,26 @@ export class Database {
     }
 
     async getAllBooks(): Promise<Book[]> {
-        const getAllBooksResult = await fetch(bookstoreApiUrl, {
+        const getAllBooksResponse = await fetch(bookstoreApiUrl, {
             method: "GET",
             headers: {
                 "Authorization": this.authentication.jwToken!
             }
         });
-       const allBooks = await getAllBooksResult.json()
+       const allBooks = await getAllBooksResponse.json()
        return allBooks;
     }
     
     async createBook(book: Book): Promise<string> {
-        const postResult = await fetch(bookstoreApiUrl, {
+        const postResponse = await fetch(bookstoreApiUrl, {
             method: "POST",
             body: JSON.stringify(book),
             headers: {
                 "Authorization": this.authentication.jwToken!
             }
         });
-       const postResultJson = await postResult.json()
-       return postResultJson.id;
+       const postResponseJson = await postResponse.json()
+       return postResponseJson.id;
     }
 
     async editBook(book: Book): Promise<number> {
@@ -47,14 +47,14 @@ export class Database {
     }
 
     async deleteBook(bookId: string): Promise<number> {
-        const deleteResult = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
+        const deleteResponse = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": this.authentication.jwToken!
             }
         });
-       const deleteResultJson = await deleteResult.json()
-       return deleteResultJson.$metadata.httpStatusCode;
+       const deleteResponseJson = await deleteResponse.json()
+       return deleteResponseJson.$metadata.httpStatusCode;
     }
 
     isAuthorized() {
