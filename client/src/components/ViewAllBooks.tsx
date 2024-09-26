@@ -15,6 +15,14 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
+import type {} from '@mui/x-data-grid/themeAugmentation';
+import { GridRowsProp } from "@mui/x-data-grid/models/gridRows";
+import { GridColDef } from "@mui/x-data-grid/models/colDef/gridColDef";
+import { DataGrid } from "@mui/x-data-grid/DataGrid/DataGrid";
+
+
+
+
 
 
 type ViewAllBooksProps = {
@@ -45,101 +53,123 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         getAllBooks();
     }, []);
 
-    const StyledTableCell = styled(TableCell)(({ theme }) => ({
-        [`&.${tableCellClasses.head}`]: {
-          backgroundColor: theme.palette.common.black,
-          color: theme.palette.common.white,
-        },
-        [`&.${tableCellClasses.body}`]: {
-          fontSize: 14,
-        },
-      }));
+    // const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    //     [`&.${tableCellClasses.head}`]: {
+    //       backgroundColor: theme.palette.common.black,
+    //       color: theme.palette.common.white,
+    //     },
+    //     [`&.${tableCellClasses.body}`]: {
+    //       fontSize: 14,
+    //     },
+    //   }));
 
-      const StyledTableRow = styled(TableRow)(({ theme }) => ({
-        '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
-        },
-        '&:last-child td, &:last-child th': {
-          border: 0,
-        },
-      }));
+    //   const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    //     '&:nth-of-type(odd)': {
+    //       backgroundColor: theme.palette.action.hover,
+    //     },
+    //     '&:last-child td, &:last-child th': {
+    //       border: 0,
+    //     },
+    //   }));
+
+      const rows: GridRowsProp = [
+        { id: 1, col1: 'Hello', col2: 'World' },
+        { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
+        { id: 3, col1: 'MUI', col2: 'is Amazing' },
+      ];
+      
+      const columns: GridColDef[] = [
+        { field: 'col1', headerName: 'Title', width: 150 },
+        { field: 'col2', headerName: 'Author', width: 150 },
+        { field: 'col3', headerName: 'Pages', width: 150 },
+        { field: 'col4', headerName: 'Genre', width: 150 },
+        { field: 'col5', headerName: 'Price', width: 150 },
+        { field: 'col6', headerName: 'Stock', width: 150 }
+      ];
+      
 
     function loadAllBooks() {
         if (!database.isAuthorized()) {
             return <NavLink to={"/login"}> Must Login First</NavLink>
         }
-        if (books) {
-          return (
-            <TableContainer component={Paper}>
-              <Typography
-                  sx={{ flex: '1 1 100%' }}
-                  variant="h3"
-                  id="tableTitle"
-                  component="div"
-                  align='center'
-                >
-                  All Books
-                </Typography>
-              <Table sx={{ minWidth: 900 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell align='center'> Title </StyledTableCell>
-                    <StyledTableCell align="center"> Author </StyledTableCell>
-                    <StyledTableCell align="center"> Pgs </StyledTableCell>
-                    <StyledTableCell align="center"> Genre </StyledTableCell>
-                    <StyledTableCell align="center"> Price </StyledTableCell>    
-                    <StyledTableCell align="center"> Stock </StyledTableCell>
-                    <StyledTableCell align="center"> Edit </StyledTableCell>
-                    <StyledTableCell align="center"> Delete </StyledTableCell>    
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                  {books.map((book) => (
-                    <StyledTableRow key={book.id}>
-                      <StyledTableCell component="th" scope="row" align='center'>  {book.title}  </StyledTableCell>
-                      <StyledTableCell align="center"> {book.author} </StyledTableCell>
-                      <StyledTableCell align="center"> {book.pages} </StyledTableCell>
-                      <StyledTableCell align="center"> {book.genre} </StyledTableCell>
-                      <StyledTableCell align="center"> {book.price} </StyledTableCell>
-                      <StyledTableCell align="center"> {book.stock} </StyledTableCell>
-                      <StyledTableCell align='center'>
-                      <Button
+        return (
+          <div style={{ height: 300, width: '100%' }}>
+        <DataGrid rows={rows} columns={columns} />
+        </div>
+        )
+        
+      //   if (books) {
+      //     return (
+      //       <TableContainer component={Paper}>
+      //         <Typography
+      //             sx={{ flex: '1 1 100%' }}
+      //             variant="h3"
+      //             id="tableTitle"
+      //             component="div"
+      //             align='center'
+      //           >
+      //             All Books
+      //           </Typography>
+      //         <Table sx={{ minWidth: 900 }} aria-label="customized table">
+      //           <TableHead>
+      //             <TableRow>
+      //               <StyledTableCell align='center'> Title </StyledTableCell>
+      //               <StyledTableCell align="center"> Author </StyledTableCell>
+      //               <StyledTableCell align="center"> Pgs </StyledTableCell>
+      //               <StyledTableCell align="center"> Genre </StyledTableCell>
+      //               <StyledTableCell align="center"> Price </StyledTableCell>    
+      //               <StyledTableCell align="center"> Stock </StyledTableCell>
+      //               <StyledTableCell align="center"> Edit </StyledTableCell>
+      //               <StyledTableCell align="center"> Delete </StyledTableCell>    
+      //               </TableRow>
+      //           </TableHead>
+      //           <TableBody>
+      //             {books.map((book) => (
+      //               <StyledTableRow key={book.id}>
+      //                 <StyledTableCell component="th" scope="row" align='center'>  {book.title}  </StyledTableCell>
+      //                 <StyledTableCell align="center"> {book.author} </StyledTableCell>
+      //                 <StyledTableCell align="center"> {book.pages} </StyledTableCell>
+      //                 <StyledTableCell align="center"> {book.genre} </StyledTableCell>
+      //                 <StyledTableCell align="center"> {book.price} </StyledTableCell>
+      //                 <StyledTableCell align="center"> {book.stock} </StyledTableCell>
+      //                 <StyledTableCell align='center'>
+      //                 <Button
                           
-                        >
-                          <IconButton aria-label="edit" size="large">
-                          <EditIcon />
-                        </IconButton>
-                      </Button> 
-                      </StyledTableCell>
-                      <StyledTableCell align='center'>
-                      <Button
-                          onClick={ () => {
-                            deleteBook(book.id!) 
-                          }}
-                        >
-                          <IconButton aria-label="delete" size="large">
-                          <DeleteIcon />
-                        </IconButton>
-                      </Button>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))} 
-                </TableBody>
-              </Table>
-              <Typography align='center'
-                  >  <Button
-                  onClick={() => {
-                    navigate("/createBook")
-                  }}
-                  variant="contained"
-                  size='large'
-                >
-                  Add
-              </Button>
-                </Typography>
-          </TableContainer>
-          );
-      };
+      //                   >
+      //                     <IconButton aria-label="edit" size="large">
+      //                     <EditIcon />
+      //                   </IconButton>
+      //                 </Button> 
+      //                 </StyledTableCell>
+      //                 <StyledTableCell align='center'>
+      //                 <Button
+      //                     onClick={ () => {
+      //                       deleteBook(book.id!) 
+      //                     }}
+      //                   >
+      //                     <IconButton aria-label="delete" size="large">
+      //                     <DeleteIcon />
+      //                   </IconButton>
+      //                 </Button>
+      //                 </StyledTableCell>
+      //               </StyledTableRow>
+      //             ))} 
+      //           </TableBody>
+      //         </Table>
+      //         <Typography align='center'
+      //             >  <Button
+      //             onClick={() => {
+      //               navigate("/createBook")
+      //             }}
+      //             variant="contained"
+      //             size='large'
+      //           >
+      //             Add
+      //         </Button>
+      //           </Typography>
+      //     </TableContainer>
+      //     );
+      // };
     };
 
     return (
