@@ -28,7 +28,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 stock: stock
             }
             const id = await database.createBook(book);
-            setCreateResult(`book ${id} created`);
+            setCreateResult(`${title} by ${author} created`);
             setTitle("");
             setAuthor("");
             setPages(0);
