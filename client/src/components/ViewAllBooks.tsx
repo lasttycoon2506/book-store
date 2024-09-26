@@ -52,7 +52,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         },
       }));
 
-    function renderAllBooks() {
+    function loadAllBooks() {
         if (!database.isAuthorized()) {
             return <NavLink to={"/login"}> Must Login First</NavLink>
         }
@@ -92,9 +92,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
                       <StyledTableCell align="center"> {book.stock} </StyledTableCell>
                       <StyledTableCell align='center'> 
                       <Button
-                          onClick={() => {
-                            onEdit(book);
-                          }}
+                          
                         >
                           <IconButton aria-label="edit" size="large">
                           <EditIcon />
@@ -103,9 +101,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
                       </StyledTableCell>
                       <StyledTableCell align='center'>
                       <Button
-                          onClick={() => {
-                            onDelete(book._id);
-                          }}
+                          
                         >
                           <IconButton aria-label="delete" size="large">
                           <DeleteIcon />
@@ -131,5 +127,9 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
           );
       };
     };
+
+    return (
+      loadAllBooks()
+    )
 
 }
