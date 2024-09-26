@@ -5,6 +5,7 @@ import Book from "./Book";
 import { NavLink } from "react-router-dom";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import styled from "@mui/material/styles/styled";
+import TableRow from "@mui/material/TableRow";
 
 type ViewAllBooksProps = {
     database: Database;
@@ -29,6 +30,15 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         },
         [`&.${tableCellClasses.body}`]: {
           fontSize: 14,
+        },
+      }));
+
+      const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.action.hover,
+        },
+        '&:last-child td, &:last-child th': {
+          border: 0,
         },
       }));
 
