@@ -27,16 +27,22 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
             },
             ExpressionAttributeNames: {
                 "#T": titleKey,
-                "#P": pagesKey
+                "#A": authorKey,
+                "#PG": pagesKey,
+                "#G": genreKey,
+                "#PR": priceKey,
+                "#S": stockKey
             },
             ExpressionAttributeValues: {
-                ':t': marshall(titleValue)
-                ,
-                ':p': marshall(pagesValue)
-            
+                ':t': marshall(titleValue),
+                ':a': marshall(authorValue),
+                ':pg': marshall(pagesValue),
+                ':g': marshall(genreValue),
+                ':pr': marshall(priceValue),
+                ':s': marshall(stockValue)
             },
             TableName: process.env.TABLE_NAME,
-            UpdateExpression: 'SET #T = :t, #P = :p',
+            UpdateExpression: 'SET #T = :t, #A = :a, #PG = :pg, #G = :g, #PR = :pr, #S = :s',
             ReturnValues: 'ALL_NEW'
         }))
         return {
