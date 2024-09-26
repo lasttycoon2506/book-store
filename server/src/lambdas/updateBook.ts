@@ -8,9 +8,18 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
     const bodyKeys = Object.keys(parsedBody);
     const titleKey = bodyKeys[0];
     const titleValue = bodyKeys[0];
-    const pagesKey = bodyKeys[1];
-    const pagesValue = bodyKeys[1];
-
+    const authorKey = bodyKeys[1];
+    const authorValue = bodyKeys[1];
+    const pagesKey = bodyKeys[2];
+    const pagesValue = bodyKeys[2];
+    const genreKey = bodyKeys[3];
+    const genreValue = bodyKeys[3];
+    const priceKey = bodyKeys[4];
+    const priceValue = bodyKeys[4];
+    const stockKey = bodyKeys[5];
+    const stockValue = bodyKeys[5];
+    
+	
     try {
         const response = await dbClient.send(new UpdateItemCommand({
             Key: {
