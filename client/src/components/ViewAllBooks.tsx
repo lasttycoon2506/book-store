@@ -83,14 +83,14 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
                 </TableHead>
                 <TableBody>
                   {books.map((book) => (
-                    <StyledTableRow key={book}>
+                    <StyledTableRow key={book.id}>
                       <StyledTableCell component="th" scope="row" align='center'>  {book.title}  </StyledTableCell>
                       <StyledTableCell align="center"> {book.author} </StyledTableCell>
                       <StyledTableCell align="center"> {book.pages} </StyledTableCell>
                       <StyledTableCell align="center"> {book.genre} </StyledTableCell>
                       <StyledTableCell align="center"> {book.price} </StyledTableCell>
                       <StyledTableCell align="center"> {book.stock} </StyledTableCell>
-                      <StyledTableCell align='center'> 
+                      <StyledTableCell align='center'>
                       <Button
                           
                         >
