@@ -34,16 +34,15 @@ export class Database {
        return postResultJson.id;
     }
 
-    async deleteBook(bookId: string): Promise<string> {
-        const deleteResult = await fetch(bookstoreApiUrl, {
+    async deleteBook(bookId: string): Promise<number> {
+        const deleteResult = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
             method: "DELETE",
-            body: JSON.stringify(bookId),
             headers: {
                 "Authorization": this.authentication.jwToken!
             }
         });
        const deleteResultJson = await deleteResult.json()
-       return deleteResultJson.id;
+       return deleteResultJson.$metadata.httpStatusCode;
     }
 
     isAuthorized() {

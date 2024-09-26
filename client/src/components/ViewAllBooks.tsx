@@ -16,6 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 
+
 type ViewAllBooksProps = {
     database: Database;
 }
@@ -29,6 +30,14 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         setBooks(allBooks);
     }
     
+    const deleteBook = async (bookId: string) => {
+        const statusCode = await database.deleteBook(bookId);
+        if (statusCode === 200) {
+          const updatedBookList = books?.filter(book => book.id !== bookId);
+          setBooks(updatedBookList);
+        };
+    }
+
     useEffect(() => {
         getAllBooks();
     }, []);
@@ -101,7 +110,9 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
                       </StyledTableCell>
                       <StyledTableCell align='center'>
                       <Button
-                          
+                          onClick={ () => {
+                            deleteBook(book.id!) 
+                          }}
                         >
                           <IconButton aria-label="delete" size="large">
                           <DeleteIcon />
