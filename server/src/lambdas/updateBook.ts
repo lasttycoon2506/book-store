@@ -19,12 +19,12 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
                 id: marshall(event.queryStringParameters["id"])
             },
             ExpressionAttributeNames: {
-                "#T": titleKey,
-                "#A": authorKey,
-                "#PG": pagesKey,
-                "#G": genreKey,
-                "#PR": priceKey,
-                "#S": stockKey
+                "#T": 'title',
+                "#A": 'author',
+                "#PG": 'pages',
+                "#G": 'genre',
+                "#PR": 'price',
+                "#S": 'stock'
             },
             ExpressionAttributeValues: {
                 ':t': marshall(titleValue),
