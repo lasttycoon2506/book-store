@@ -87,16 +87,16 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
             return <NavLink to={"/login"}> Must Login First</NavLink>
         }
         return (
-          <div style={{ height: 300, width: '100%' }}>
-        <DataGrid 
-          rows={rows} 
-          columns={columns}
-          processRowUpdate={(updatedRow, originalRow) => {
-            saveUpdatedCellToDb(updatedRow);
-            return updatedRow;
-          }}
-          onProcessRowUpdateError={updateErrMsg}
-          />
+          <div style={{ height: 500, width: '100%' }}>
+            <DataGrid 
+              rows={rows} 
+              columns={columns}
+              processRowUpdate={(updatedRow, originalRow) => {
+                saveUpdatedCellToDb(updatedRow);
+                return updatedRow;
+              }}
+              onProcessRowUpdateError={updateErrMsg}
+              />
         </div>
         )
     };
