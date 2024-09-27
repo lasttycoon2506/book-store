@@ -16,6 +16,7 @@ type ViewAllBooksProps = {
 
 export default function ViewAllBooks({database}: ViewAllBooksProps){
     const [books, setBooks] = useState<BookModel[]>();
+    const [loading, setLoading] = useState<boolean>(true);
 
     const deleteBook = async (id: GridRowId) => {
       const statusCode = await database.deleteBook(id.toString());
@@ -30,6 +31,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     useEffect(() => {
       const getAllBooks = async () => { 
         const books = await database.getAllBooks();
+        setLoading(false);
         setBooks(books);
       }
         getAllBooks();
@@ -101,6 +103,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         return (
           <div style={{ height: 500, width: '100%' }}>
             <DataGrid 
+              loading={loading}
               rows={rows} 
               columns={columns}
               processRowUpdate={(updatedRow, originalRow) => {
