@@ -29,8 +29,14 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     //     }
     // };
 
-    const deleteBook = (id: GridRowId) => () => {
-      setBooks(books?.filter((book) => book.id !== id));
+    const deleteBook = async (id: GridRowId) => {
+      const statusCode = await database.deleteBook(id.toString());
+      if (statusCode === 200) {
+        setBooks(books?.filter((book) => book.id !== id));
+      }
+      else {
+        console.error(`Unable to delete Book status code: ${statusCode}`)
+      }
     };
 
     useEffect(() => {
@@ -92,7 +98,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
             <GridActionsCellItem
               icon={<DeleteIcon />}
               label="Delete"
-              onClick={deleteBook(id)}
+              onClick={() => deleteBook(id)}
               color="inherit"
             />,
           ];
