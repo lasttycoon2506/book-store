@@ -6,6 +6,8 @@ import type {} from '@mui/x-data-grid/themeAugmentation';
 import { GridRowsProp, GridValidRowModel } from "@mui/x-data-grid/models/gridRows";
 import { GridColDef, GridValueSetter } from "@mui/x-data-grid/models/colDef/gridColDef";
 import { DataGrid } from "@mui/x-data-grid/DataGrid/DataGrid";
+import { GridActionsCellItem } from "@mui/x-data-grid/components/cell/GridActionsCellItem";
+import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 
 
 type ViewAllBooksProps = {
@@ -80,6 +82,18 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       { field: 'genre', headerName: 'Genre', width: 150, editable: true, valueSetter: setUpdatedGenre},
       { field: 'price', headerName: 'Price', width: 150, editable: true, valueSetter: setUpdatedPrice},
       { field: 'stock', headerName: 'Stock', width: 150, editable: true, valueSetter: setUpdatedStock},
+      {  field: 'actions', type: 'actions', headerName: '', width: 100, cellClassName: 'actions',
+        getActions: ({ id }) => {
+          return [
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              onClick={handleDeleteClick(id)}
+              color="inherit"
+            />,
+          ];
+        },
+      },
     ];
 
     function loadAllBooks() {
