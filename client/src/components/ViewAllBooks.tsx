@@ -61,7 +61,14 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     };
 
     const saveUpdatedCellToDb = async (updatedRow: any) => {
-      const updatedResponse = await database.editBook(updatedRow);
+      const statusCode = await database.editBook(updatedRow);
+      if (statusCode !== 200) {
+        console.error("updated from DB failed");
+      }
+    }
+
+    function updateErrMsg() {
+      console.error("update failed")
     }
 
     const rows: GridRowsProp = books!;
@@ -88,6 +95,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
           processRowUpdate={(updatedRow, originalRow) => {
             saveUpdatedCellToDb(updatedRow);
           }}
+          onProcessRowUpdateError={updateErrMsg}
           />
         </div>
         )
