@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Database } from "../services/Database"
-import type { Book as BookModel} from "../models/model";
+import type { Book, Book as BookModel} from "../models/model";
 import { NavLink, useNavigate } from "react-router-dom";
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import { GridRowsProp, GridValidRowModel } from "@mui/x-data-grid/models/gridRows";
@@ -93,6 +93,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
           columns={columns}
           processRowUpdate={(updatedRow, originalRow) => {
             saveUpdatedCellToDb(updatedRow);
+            return updatedRow;
           }}
           onProcessRowUpdateError={updateErrMsg}
           />
