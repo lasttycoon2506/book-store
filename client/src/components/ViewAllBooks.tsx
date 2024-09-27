@@ -3,7 +3,7 @@ import { Database } from "../services/Database"
 import type { Book, Book as BookModel} from "../models/model";
 import { NavLink, useNavigate } from "react-router-dom";
 import type {} from '@mui/x-data-grid/themeAugmentation';
-import { GridRowsProp, GridValidRowModel } from "@mui/x-data-grid/models/gridRows";
+import { GridRowId, GridRowsProp, GridValidRowModel } from "@mui/x-data-grid/models/gridRows";
 import { GridColDef, GridValueSetter } from "@mui/x-data-grid/models/colDef/gridColDef";
 import { DataGrid } from "@mui/x-data-grid/DataGrid/DataGrid";
 import { GridActionsCellItem } from "@mui/x-data-grid/components/cell/GridActionsCellItem";
@@ -18,15 +18,19 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     const [books, setBooks] = useState<BookModel[]>();
     const navigate = useNavigate();
     
-    const deleteBook = async (bookId: string) => {
-        const statusCode = await database.deleteBook(bookId);
-        if (statusCode === 200) {
-          const updatedBookList = books?.filter(book => book.id !== bookId);
-          setBooks(updatedBookList);
-        }
-        else {
-          console.error(`Unable to delete Book status code: ${statusCode}`)
-        }
+    // const deleteBook = async (bookId: string) => {
+    //     const statusCode = await database.deleteBook(bookId);
+    //     if (statusCode === 200) {
+    //       const updatedBookList = books?.filter(book => book.id !== bookId);
+    //       setBooks(updatedBookList);
+    //     }
+    //     else {
+    //       console.error(`Unable to delete Book status code: ${statusCode}`)
+    //     }
+    // };
+
+    const deleteBook = (id: GridRowId) => () => {
+      setBooks(books?.filter((book) => book.id !== id));
     };
 
     useEffect(() => {
@@ -88,7 +92,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
             <GridActionsCellItem
               icon={<DeleteIcon />}
               label="Delete"
-              onClick={handleDeleteClick(id)}
+              onClick={deleteBook(id)}
               color="inherit"
             />,
           ];
