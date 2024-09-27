@@ -5,19 +5,12 @@ import { APIGatewayEvent, APIGatewayProxyResult } from "aws-lambda";
 
 export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClient): Promise<APIGatewayProxyResult> {
     const parsedBody = JSON.parse(event.body);
-    const bodyKeys = Object.keys(parsedBody);
-    const titleKey = bodyKeys[0];
-    const titleValue = bodyKeys[0];
-    const authorKey = bodyKeys[1];
-    const authorValue = bodyKeys[1];
-    const pagesKey = bodyKeys[2];
-    const pagesValue = bodyKeys[2];
-    const genreKey = bodyKeys[3];
-    const genreValue = bodyKeys[3];
-    const priceKey = bodyKeys[4];
-    const priceValue = bodyKeys[4];
-    const stockKey = bodyKeys[5];
-    const stockValue = bodyKeys[5];
+    const titleValue = parsedBody['title'];
+    const authorValue = parsedBody['author'];
+    const pagesValue = parsedBody['pages'];
+    const genreValue = parsedBody['genre'];
+    const priceValue = parsedBody['price'];
+    const stockValue = parsedBody['stock'];
     
 	
     try {
