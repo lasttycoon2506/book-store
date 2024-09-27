@@ -36,7 +36,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     }, []);
       
     const setUpdatedTitle: GridValueSetter<GridValidRowModel> = (value, row) => {
-      const [title] = value;
+      const title = value;
       return { ...row, title };
     };
     const setUpdatedAuthor: GridValueSetter<GridValidRowModel> = (value, row) => {
@@ -44,19 +44,19 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       return { ...row, author };
     };
     const setUpdatedPgs: GridValueSetter<GridValidRowModel> = (value, row) => {
-      const [pages] = value;
+      const pages = value;
       return { ...row, pages };
     };
     const setUpdatedGenre: GridValueSetter<GridValidRowModel> = (value, row) => {
-      const [genre] = value;
+      const genre = value;
       return { ...row, genre };
     };
     const setUpdatedPrice: GridValueSetter<GridValidRowModel> = (value, row) => {
-      const [price] = value;
+      const price = value;
       return { ...row, price };
     };
     const setUpdatedStock: GridValueSetter<GridValidRowModel> = (value, row) => {
-      const [stock] = value;
+      const stock = value;
       return { ...row, stock };
     };
 
