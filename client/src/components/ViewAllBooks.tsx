@@ -66,11 +66,11 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
 
     const columns: GridColDef[] = [
       { field: 'title', headerName: 'Title', width: 150, editable: true, valueSetter: setUpdatedTitle},
-      { field: 'author', headerName: 'Author', width: 150, editable: true},
-      { field: 'pages', headerName: 'Pages', width: 150, editable: true},
-      { field: 'genre', headerName: 'Genre', width: 150, editable: true},
-      { field: 'price', headerName: 'Price', width: 150, editable: true},
-      { field: 'stock', headerName: 'Stock', width: 150, editable: true},
+      { field: 'author', headerName: 'Author', width: 150, editable: true, valueSetter: setUpdatedAuthor},
+      { field: 'pages', headerName: 'Pages', width: 150, editable: true, valueSetter: setUpdatedPgs},
+      { field: 'genre', headerName: 'Genre', width: 150, editable: true, valueSetter: setUpdatedGenre},
+      { field: 'price', headerName: 'Price', width: 150, editable: true, valueSetter: setUpdatedPrice},
+      { field: 'stock', headerName: 'Stock', width: 150, editable: true, valueSetter: setUpdatedStock},
     ];
       
 
