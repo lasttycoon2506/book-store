@@ -28,12 +28,13 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       }
     };
 
+    const getAllBooks = async () => { 
+      const books = await database.getAllBooks();
+      setLoading(false);
+      setBooks(books);
+    }
+    
     useEffect(() => {
-      const getAllBooks = async () => { 
-        const books = await database.getAllBooks();
-        setLoading(false);
-        setBooks(books);
-      }
         getAllBooks();
     }, []);
       
