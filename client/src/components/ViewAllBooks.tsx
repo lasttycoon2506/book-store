@@ -40,7 +40,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       return { ...row, title };
     };
     const setUpdatedAuthor: GridValueSetter<GridValidRowModel> = (value, row) => {
-      const [author] = value;
+      const author = value;
       return { ...row, author };
     };
     const setUpdatedPgs: GridValueSetter<GridValidRowModel> = (value, row) => {
@@ -60,9 +60,11 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       return { ...row, stock };
     };
 
-    const rows: GridRowsProp = 
-      books!
-    ;
+    const saveUpdatedCellToDb = async (updatedRow: any) => {
+      const updatedResponse = await database.editBook(updatedRow);
+    }
+
+    const rows: GridRowsProp = books!;
 
     const columns: GridColDef[] = [
       { field: 'title', headerName: 'Title', width: 150, editable: true, valueSetter: setUpdatedTitle},
@@ -83,10 +85,9 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
         <DataGrid 
           rows={rows} 
           columns={columns}
-          processRowUpdate={(updatedRow, originalRow) =>
-            mySaveOnServerFunction(updatedRow);
-          }
-          onProcessRowUpdateError={handleProcessRowUpdateError} 
+          processRowUpdate={(updatedRow, originalRow) => {
+            saveUpdatedCellToDb(updatedRow);
+          }}
           />
         </div>
         )
