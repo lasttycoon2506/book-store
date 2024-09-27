@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Database } from "../services/Database"
 import type { Book, Book as BookModel} from "../models/model";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import type {} from '@mui/x-data-grid/themeAugmentation';
 import { GridRowId, GridRowsProp, GridValidRowModel } from "@mui/x-data-grid/models/gridRows";
 import { GridColDef, GridValueSetter } from "@mui/x-data-grid/models/colDef/gridColDef";
@@ -16,18 +16,6 @@ type ViewAllBooksProps = {
 
 export default function ViewAllBooks({database}: ViewAllBooksProps){
     const [books, setBooks] = useState<BookModel[]>();
-    const navigate = useNavigate();
-    
-    // const deleteBook = async (bookId: string) => {
-    //     const statusCode = await database.deleteBook(bookId);
-    //     if (statusCode === 200) {
-    //       const updatedBookList = books?.filter(book => book.id !== bookId);
-    //       setBooks(updatedBookList);
-    //     }
-    //     else {
-    //       console.error(`Unable to delete Book status code: ${statusCode}`)
-    //     }
-    // };
 
     const deleteBook = async (id: GridRowId) => {
       const statusCode = await database.deleteBook(id.toString());
