@@ -81,7 +81,6 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       { field: 'price', headerName: 'Price', width: 150, editable: true, valueSetter: setUpdatedPrice},
       { field: 'stock', headerName: 'Stock', width: 150, editable: true, valueSetter: setUpdatedStock},
     ];
-      
 
     function loadAllBooks() {
         if (!database.isAuthorized()) {

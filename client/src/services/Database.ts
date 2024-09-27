@@ -36,7 +36,7 @@ export class Database {
 
     async editBook(book: Book): Promise<number> {
         const editResponse = await fetch(`${bookstoreApiUrl}?id=${book.id}`, {
-            method: "EDIT",
+            method: "PUT",
             body: JSON.stringify(book),
             headers: {
                 "Authorization": this.authentication.jwToken!
