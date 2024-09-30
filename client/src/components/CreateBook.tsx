@@ -3,6 +3,7 @@ import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
 import { Book } from "../models/model";
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
 type CreateBookProps = {
     database: Database;
@@ -52,7 +53,13 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             return <NavLink to={"/login"}> Must Login First</NavLink>
         }
         return (
-            <form onSubmit={(e) => submit(e)}>
+            <Box
+                component="form"
+                sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+                noValidate
+                autoComplete="off"
+                onSubmit={(e) => submit(e)}
+            >
                 <TextField
                     value={title} label="Title" variant="outlined"
                     onChange={(e) => setTitle(e.target.value)}
@@ -78,7 +85,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                     onChange={(e) => setStock(Number(e.target.value))}
                 />
                 <input type="submit" value="create book"/>
-            </form>
+            </Box>
         )
     }
 
