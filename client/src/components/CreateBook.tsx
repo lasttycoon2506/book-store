@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
 import { Book } from "../models/model";
@@ -117,13 +117,12 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
    function resetFields(): void {
         setTitle("");
         setAuthor("");
-        setPages(0);
+        setPages(undefined);
         setGenre("");
-        setPrice(0);
-        setStock(0);
+        setPrice(undefined);
+        setStock(undefined);
    }
     
-   
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
