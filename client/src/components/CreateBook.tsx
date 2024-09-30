@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
 import { Book } from "../models/model";
@@ -18,9 +18,11 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     const [price, setPrice] = useState<number>();
     const [stock, setStock] = useState<number>();
     const [createResult, setCreateResult] = useState<string>("");
+    const [errorTitle, setErrorTitle] = useState<boolean>(false);
 
     const submit = async(event:SyntheticEvent): Promise<void> => {
         event.preventDefault();
+        isEmpty()
         if (title && author && pages && genre && price && stock) {
             const book: Book = {
                 title: title,
@@ -46,6 +48,13 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         }
         else {
             setCreateResult("Missing Field(s)!");
+        }
+    }
+
+    function isEmpty(inputVal: string | number | undefined): boolean | undefined {
+        if (!inputVal) {
+            setError(true);
+            return;
         }
     }
 
@@ -83,8 +92,8 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 />
                 <br />
                 <TextField
-                    value={price} label="Price" variant="outlined" type="number"
-                    onChange={(e) => setPrice(Number(e.target.value))}
+                    value={price} label="Price" variant="outlined" type="number" error={error} 
+                    onChange={(e) => setPrice(Number(e.target.value))} 
                 />
                 <br />
                 <TextField
