@@ -19,10 +19,16 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     const [stock, setStock] = useState<number>();
     const [createResult, setCreateResult] = useState<string>("");
     const [errorTitle, setErrorTitle] = useState<boolean>(false);
+    const [errorAuthor, setErrorAuthor] = useState<boolean>(false);
+    const [errorPages, setErrorPages] = useState<boolean>(false);
+    const [errorGenre, setErrorGenre] = useState<boolean>(false);
+    const [errorPrice, setErrorPrice] = useState<boolean>(false);
+    const [errorStock, setErrorStock] = useState<boolean>(false);
+    
 
     const submit = async(event:SyntheticEvent): Promise<void> => {
         event.preventDefault();
-        isEmpty()
+        isEmpty(title, author, pages, genre, price, stock)
         if (title && author && pages && genre && price && stock) {
             const book: Book = {
                 title: title,
