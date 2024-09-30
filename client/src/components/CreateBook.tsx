@@ -1,10 +1,11 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
 import { Book } from "../models/model";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
 
 type CreateBookProps = {
     database: Database;
@@ -17,7 +18,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     const [genre, setGenre] = useState<string>("");
     const [price, setPrice] = useState<number>();
     const [stock, setStock] = useState<number>();
-    const [createResult, setCreateResult] = useState<string>("");
+    const [successAlert, setSuccessAlert] = useState<boolean>(false);
     const [errorTitle, setErrorTitle] = useState<boolean>(false);
     const [errorAuthor, setErrorAuthor] = useState<boolean>(false);
     const [errorPages, setErrorPages] = useState<boolean>(false);
@@ -45,7 +46,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             }
             const id = await database.createBook(book);
             if (id) {
-            setCreateResult(`${title} by ${author} created`);
+            setSuccessAlert(true);
             setTitle("");
             setAuthor("");
             setPages(0);
@@ -56,9 +57,6 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             else {
                 console.error("Unable to create book!")
             }
-        }
-        else {
-            setCreateResult("Missing Field(s)!");
         }
     }
 
@@ -116,6 +114,12 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         }
         return;
     }
+
+   
+            // <Alert severity="success" onClose={() => {}}>
+            //     This Alert displays the default close icon.
+            // </Alert>
+       
    
 
     function renderForm(): JSX.Element {
@@ -130,6 +134,9 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 autoComplete="off"
                 onSubmit={(e) => submit(e)}
             >
+                <div>
+                    { successAlert? <Alert severity="success" onClose={() => {}}> Added Book! </Alert>: <></> }
+                </div>
                 <br />
                 <TextField
                     value={title} label="Title" variant="outlined" error={errorTitle}
@@ -171,7 +178,6 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     return (
         <div>
             {renderForm()}
-            {createResult} 
         </div>
     );
 }
