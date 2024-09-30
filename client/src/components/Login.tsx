@@ -3,6 +3,7 @@ import { Authentication } from "../services/Authentication";
 import { Navigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 type LoginProps = {
     authentication: Authentication;
@@ -46,6 +47,13 @@ export default function Login({authentication, setUserNameCallBack}: LoginProps)
         <div role="main">
           {loginSuccess && <Navigate to="/profile" replace={true} />}
           <h2>Please login</h2>
+          <Box
+                component="form"
+                sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+                noValidate
+                autoComplete="off"
+                onSubmit={(e) => submit(e)}
+          >
             <TextField
                     value={userName} label="User Name" variant="outlined" 
                     onChange={(e) => setUserName(e.target.value)} 
@@ -59,6 +67,7 @@ export default function Login({authentication, setUserNameCallBack}: LoginProps)
               <Button variant="contained" size="large" type="submit" >
                   Login
               </Button>
+          </Box>
           <br />
           {showLoginResult()}
         </div>
