@@ -28,7 +28,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
 
     const submit = async(event:SyntheticEvent): Promise<void> => {
         event.preventDefault();
-        isEmpty(title, author, pages, genre, price, stock)
+        isEmpty(title, author, pages!, genre, price!, stock!)
         if (title && author && pages && genre && price && stock) {
             const book: Book = {
                 title: title,
@@ -57,11 +57,26 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         }
     }
 
-    function isEmpty(inputVal: string | number | undefined): boolean | undefined {
-        if (!inputVal) {
-            setError(true);
-            return;
+    function isEmpty(title: string, author: string, pages: number, genre: string, price: number, stock: number): void {
+        if (!title) {
+            setErrorTitle(true);
         }
+        else if (!author) {
+            setErrorAuthor(true);
+        }
+        else if (!pages) {
+            setErrorPages(true);
+        }
+        else if (!genre) {
+            setErrorGenre(true);
+        }
+        else if (!price) {
+            setErrorPrice(true);
+        }
+        else if (!stock) {
+            setErrorStock(true);
+        }
+        return;
     }
 
     function renderForm(): JSX.Element {
@@ -98,7 +113,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 />
                 <br />
                 <TextField
-                    value={price} label="Price" variant="outlined" type="number" error={error} 
+                    value={price} label="Price" variant="outlined" type="number"
                     onChange={(e) => setPrice(Number(e.target.value))} 
                 />
                 <br />
