@@ -77,12 +77,12 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
     const rows: GridRowsProp = books!;
 
     const columns: GridColDef[] = [
-      { field: 'title', headerName: 'Title', width: 150, editable: true, valueSetter: setUpdatedTitle},
-      { field: 'author', headerName: 'Author', width: 150, editable: true, valueSetter: setUpdatedAuthor},
-      { field: 'pages', headerName: 'Pages', width: 150, editable: true, valueSetter: setUpdatedPgs},
-      { field: 'genre', headerName: 'Genre', width: 150, editable: true, valueSetter: setUpdatedGenre},
-      { field: 'price', headerName: 'Price', width: 150, editable: true, valueSetter: setUpdatedPrice},
-      { field: 'stock', headerName: 'Stock', width: 150, editable: true, valueSetter: setUpdatedStock},
+      { field: 'title', headerName: 'Title', width: 150, editable: true, description: 'double-click to edit Title', valueSetter: setUpdatedTitle},
+      { field: 'author', headerName: 'Author', width: 150, editable: true, description: 'double-click to edit Author', valueSetter: setUpdatedAuthor},
+      { field: 'pages', headerName: 'Pages', width: 150, editable: true, description: 'double-click to edit Pgs', valueSetter: setUpdatedPgs},
+      { field: 'genre', headerName: 'Genre', width: 150, editable: true, description: 'double-click to edit Genre', valueSetter: setUpdatedGenre},
+      { field: 'price', headerName: 'Price', width: 150, editable: true, description: 'double-click to edit Price', valueSetter: setUpdatedPrice},
+      { field: 'stock', headerName: 'Stock', width: 150, editable: true, description: 'double-click to edit Stock', valueSetter: setUpdatedStock},
       {  field: 'actions', type: 'actions', headerName: '', width: 100, cellClassName: 'actions',
         getActions: ({ id }) => {
           return [
