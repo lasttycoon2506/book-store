@@ -28,7 +28,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
 
     const submit = async(event:SyntheticEvent): Promise<void> => {
         event.preventDefault();
-        isEmpty(title, author, pages!, genre, price!, stock!)
+        isEmpty(title);
         if (title && author && pages && genre && price && stock) {
             const book: Book = {
                 title: title,
@@ -57,24 +57,26 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         }
     }
 
-    function isEmpty(title: string, author: string, pages: number, genre: string, price: number, stock: number): void {
-        if (!title) {
-            setErrorTitle(true);
-        }
-        else if (!author) {
-            setErrorAuthor(true);
-        }
-        else if (!pages) {
-            setErrorPages(true);
-        }
-        else if (!genre) {
-            setErrorGenre(true);
-        }
-        else if (!price) {
-            setErrorPrice(true);
-        }
-        else if (!stock) {
-            setErrorStock(true);
+    function isEmpty(inputField: string | number): void {
+        if (!inputField) {
+            if (inputField === title) {
+                setErrorTitle(true);
+            }
+            else if (inputField === author) {
+                setErrorAuthor(true);
+            }
+            else if (inputField === pages) {
+                setErrorPages(true);
+            }
+            else if (inputField === genre) {
+                setErrorGenre(true);
+            }
+            else if (inputField === price) {
+                setErrorPrice(true);
+            }
+            else if (inputField === stock) {
+                setErrorStock(true);
+            }
         }
         return;
     }
