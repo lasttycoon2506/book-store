@@ -6,6 +6,9 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from '@mui/icons-material/Close';
+import Collapse from "@mui/material/Collapse";
 
 type CreateBookProps = {
     database: Database;
@@ -18,7 +21,8 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     const [genre, setGenre] = useState<string>("");
     const [price, setPrice] = useState<number>();
     const [stock, setStock] = useState<number>();
-    const [successAlert, setSuccessAlert] = useState<boolean>(false);
+    const [alert, setAlert] = useState<boolean>(false);
+    const [alertOpen, setAlertOpen] = useState<boolean>(true);
     const [errorTitle, setErrorTitle] = useState<boolean>(false);
     const [errorAuthor, setErrorAuthor] = useState<boolean>(false);
     const [errorPages, setErrorPages] = useState<boolean>(false);
@@ -46,7 +50,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             }
             const id = await database.createBook(book);
             if (id) {
-            setSuccessAlert(true);
+            setAlert(true);
             resetFields();
             }
             else {
@@ -134,7 +138,21 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 onSubmit={(e) => submit(e)}
             >
                 <div>
-                    { successAlert? <Alert severity="success" onClose={() => {}}> Added Book! </Alert>: <></> }
+                    { alert? <Collapse in={alertOpen}> <Alert action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setAlertOpen(false);
+                            }}
+                            >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    >
+                    Book Added!
+                    </Alert></Collapse>: <></> }
                 </div>
                 <br />
                 <TextField
