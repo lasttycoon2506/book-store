@@ -93,32 +93,32 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             >
                 <br />
                 <TextField
-                    value={title} label="Title" variant="outlined"
+                    value={title} label="Title" variant="outlined" error={errorTitle}
                     onChange={(e) => setTitle(e.target.value)}
                 />
                 <br />
                 <TextField
-                    value={author} label="Author" variant="outlined"
+                    value={author} label="Author" variant="outlined" error={errorAuthor}
                     onChange={(e) => setAuthor(e.target.value)}
                 />
                 <br />
                 <TextField
-                    value={pages} label="Pgs" variant="outlined" type="number"
+                    value={pages} label="Pgs" variant="outlined" type="number" error={errorPages}
                     onChange={(e) => setPages(Number(e.target.value))}
                 />
                 <br />
                 <TextField
-                    value={genre} label="Genre" variant="outlined"
+                    value={genre} label="Genre" variant="outlined" error={errorGenre}
                     onChange={(e) => setGenre(e.target.value)}
                 />
                 <br />
                 <TextField
-                    value={price} label="Price" variant="outlined" type="number"
+                    value={price} label="Price" variant="outlined" type="number" error={errorPrice}
                     onChange={(e) => setPrice(Number(e.target.value))} 
                 />
                 <br />
                 <TextField
-                    value={stock} label="Stock" variant="outlined" type="number"
+                    value={stock} label="Stock" variant="outlined" type="number" error={errorStock}
                     onChange={(e) => setStock(Number(e.target.value))}
                 />
                 <br />
