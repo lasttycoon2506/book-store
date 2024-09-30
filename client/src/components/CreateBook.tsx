@@ -28,7 +28,12 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
 
     const submit = async(event:SyntheticEvent): Promise<void> => {
         event.preventDefault();
-        isEmpty(title);
+        isTitleEmpty(title);
+        isAuthorEmpty(author);
+        isPagesEmpty(pages!);
+        isGenreEmpty(genre);
+        isPriceEmpty(price!);
+        isStockEmpty(stock!);
         if (title && author && pages && genre && price && stock) {
             const book: Book = {
                 title: title,
@@ -57,29 +62,61 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         }
     }
 
-    function isEmpty(inputField: string | number): void {
-        if (!inputField) {
-            if (inputField === title) {
-                setErrorTitle(true);
+    function isTitleEmpty(title: string): void {
+        if (!title) {
+            setErrorTitle(true);
             }
-            else if (inputField === author) {
-                setErrorAuthor(true);
-            }
-            else if (inputField === pages) {
-                setErrorPages(true);
-            }
-            else if (inputField === genre) {
-                setErrorGenre(true);
-            }
-            else if (inputField === price) {
-                setErrorPrice(true);
-            }
-            else if (inputField === stock) {
-                setErrorStock(true);
-            }
+        else {
+            setErrorTitle(false);
         }
         return;
     }
+    function isAuthorEmpty(author: string): void {
+        if (!author) {
+            setErrorAuthor(true);
+            }
+        else {
+            setErrorAuthor(false);
+        }
+        return;
+    }
+    function isPagesEmpty(pages: number): void {
+        if (!pages) {
+            setErrorPages(true);
+            }
+        else {
+            setErrorPages(false);
+        }
+        return;
+    }
+    function isGenreEmpty(genre: string): void {
+        if (!genre) {
+            setErrorGenre(true);
+            }
+        else {
+            setErrorGenre(false);
+        }
+        return;
+    }
+    function isPriceEmpty(price: number): void {
+        if (!price) {
+            setErrorPrice(true);
+            }
+        else {
+            setErrorPrice(false);
+        }
+        return;
+    }
+    function isStockEmpty(stock: number): void {
+        if (!stock) {
+            setErrorStock(true);
+            }
+        else {
+            setErrorStock(false);
+        }
+        return;
+    }
+   
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
