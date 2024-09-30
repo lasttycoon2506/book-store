@@ -47,12 +47,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
             const id = await database.createBook(book);
             if (id) {
             setSuccessAlert(true);
-            setTitle("");
-            setAuthor("");
-            setPages(0);
-            setGenre("");
-            setPrice(0);
-            setStock(0);
+            resetFields();
             }
             else {
                 console.error("Unable to create book!")
@@ -115,11 +110,15 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         return;
     }
 
-   
-            // <Alert severity="success" onClose={() => {}}>
-            //     This Alert displays the default close icon.
-            // </Alert>
-       
+   function resetFields(): void {
+        setTitle("");
+        setAuthor("");
+        setPages(0);
+        setGenre("");
+        setPrice(0);
+        setStock(0);
+   }
+    
    
 
     function renderForm(): JSX.Element {
