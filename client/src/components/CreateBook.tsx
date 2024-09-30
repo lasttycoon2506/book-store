@@ -54,23 +54,29 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         return (
             <form onSubmit={(e) => submit(e)}>
                 <TextField
-                    value={title}
-                    required
-                    id="outlined-required"
-                    label="Required"
-                    variant="outlined"
+                    value={title} label="Title" variant="outlined"
                     onChange={(e) => setTitle(e.target.value)}
-                    />
-                <label> author </label>
-                <input value={author} onChange={(e) => setAuthor(e.target.value)} /> <br/>
-                <label> pages </label>
-                <input type="number" value={pages} onChange={(e) => setPages(Number(e.target.value))} /> <br/>
-                <label> genre </label>
-                <input value={genre} onChange={(e) => setGenre(e.target.value)} /> <br/>
-                <label> price </label>
-                <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} /> <br/>
-                <label> stock </label>
-                <input type="number" value={stock} onChange={(e) => setStock(Number(e.target.value))} /> <br/>
+                />
+                <TextField
+                    value={author} label="Author" variant="outlined"
+                    onChange={(e) => setAuthor(e.target.value)}
+                />
+                <TextField
+                    value={pages} label="Pgs" variant="outlined" type="number"
+                    onChange={(e) => setPages(Number(e.target.value))}
+                />
+                <TextField
+                    value={genre} label="Genre" variant="outlined"
+                    onChange={(e) => setGenre(e.target.value)}
+                />
+                <TextField
+                    value={price} label="Price" variant="outlined" type="number"
+                    onChange={(e) => setPrice(Number(e.target.value))}
+                />
+                <TextField
+                    value={stock} label="Stock" variant="outlined" type="number"
+                    onChange={(e) => setStock(Number(e.target.value))}
+                />
                 <input type="submit" value="create book"/>
             </form>
         )
