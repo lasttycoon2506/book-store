@@ -1,6 +1,8 @@
 import { SyntheticEvent, useState } from "react";
 import { Authentication } from "../services/Authentication";
 import { Navigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 type LoginProps = {
     authentication: Authentication;
@@ -44,22 +46,19 @@ export default function Login({authentication, setUserNameCallBack}: LoginProps)
         <div role="main">
           {loginSuccess && <Navigate to="/profile" replace={true} />}
           <h2>Please login</h2>
-          <form onSubmit={(e) => submit(e)}>
-            <label>User name</label>
-            <input
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-            <br />
-            <label>Password</label>
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-            />
-            <br />
-            <input type="submit" value="Login" />
-          </form>
+            <TextField
+                    value={userName} label="User Name" variant="outlined" 
+                    onChange={(e) => setUserName(e.target.value)} 
+              />
+              <br />
+              <TextField
+                  value={password} label="Password" variant="outlined"
+                  onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <Button variant="contained" size="large" type="submit" >
+                  Login
+              </Button>
           <br />
           {showLoginResult()}
         </div>

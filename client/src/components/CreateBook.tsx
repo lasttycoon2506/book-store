@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
 import { Book } from "../models/model";
