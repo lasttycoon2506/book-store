@@ -2,6 +2,7 @@ import { SyntheticEvent, useState } from "react";
 import { Database } from "../services/Database";
 import { NavLink } from "react-router-dom";
 import { Book } from "../models/model";
+import TextField from "@mui/material/TextField";
 
 type CreateBookProps = {
     database: Database;
@@ -52,8 +53,14 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
         }
         return (
             <form onSubmit={(e) => submit(e)}>
-                <label> title </label>
-                <input value={title} onChange={(e) => setTitle(e.target.value)} /> <br/>
+                <TextField
+                    value={title}
+                    required
+                    id="outlined-required"
+                    label="Required"
+                    variant="outlined"
+                    onChange={(e) => setTitle(e.target.value)}
+                    />
                 <label> author </label>
                 <input value={author} onChange={(e) => setAuthor(e.target.value)} /> <br/>
                 <label> pages </label>
