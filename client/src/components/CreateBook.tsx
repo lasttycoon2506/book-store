@@ -61,30 +61,37 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                 autoComplete="off"
                 onSubmit={(e) => submit(e)}
             >
+                <br />
                 <TextField
                     value={title} label="Title" variant="outlined"
                     onChange={(e) => setTitle(e.target.value)}
                 />
+                <br />
                 <TextField
                     value={author} label="Author" variant="outlined"
                     onChange={(e) => setAuthor(e.target.value)}
                 />
+                <br />
                 <TextField
                     value={pages} label="Pgs" variant="outlined" type="number"
                     onChange={(e) => setPages(Number(e.target.value))}
                 />
+                <br />
                 <TextField
                     value={genre} label="Genre" variant="outlined"
                     onChange={(e) => setGenre(e.target.value)}
                 />
+                <br />
                 <TextField
                     value={price} label="Price" variant="outlined" type="number"
                     onChange={(e) => setPrice(Number(e.target.value))}
                 />
+                <br />
                 <TextField
                     value={stock} label="Stock" variant="outlined" type="number"
                     onChange={(e) => setStock(Number(e.target.value))}
                 />
+                <br />
                 <Button variant="contained" size="large" type="submit" >
                     Add Book
                 </Button>
