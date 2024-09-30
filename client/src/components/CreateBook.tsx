@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { Book } from "../models/model";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 type CreateBookProps = {
     database: Database;
@@ -84,7 +85,9 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                     value={stock} label="Stock" variant="outlined" type="number"
                     onChange={(e) => setStock(Number(e.target.value))}
                 />
-                <input type="submit" value="create book"/>
+                <Button variant="contained" size="large" type="submit" >
+                    Add Book
+                </Button>
             </Box>
         )
     }
