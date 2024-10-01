@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import AdbIcon from '@mui/icons-material/Adb';
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import { Authentication } from "../services/Authentication";
 
@@ -80,7 +80,7 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              {userName? <AccountCircle fontSize="large"/>: <></>}
+              {userName? <AccountCircle fontSize="large"/>: <NavLink to={"/login"}> Login </NavLink>}
               </IconButton>
             </Tooltip>
             <Menu
@@ -99,7 +99,7 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem key={logout} onClick={handleLogout}>
+                <MenuItem onClick={handleLogout}>
                   Logout 
                 </MenuItem>
             </Menu>
