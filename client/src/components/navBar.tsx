@@ -14,14 +14,16 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import { Authentication } from "../services/Authentication";
 
 
 type NavBarProps = {
     userName: string | undefined;
+    authentication: Authentication;
 };
 
 const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book'];
-const settings: string = 'Logout';
+const logout: string = 'Logout';
 
 export default function NavBar({ userName } : NavBarProps): JSX.Element {
 
@@ -51,6 +53,11 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = () => {
+    setAnchorElUser(null);
+  };
+
 
   return (
     <AppBar position="static">
@@ -91,11 +98,10 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={logout} onClick={handleLogout}>
                   <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                 </MenuItem>
-              ))}
+              
             </Menu>
           </Box>
         </Toolbar>

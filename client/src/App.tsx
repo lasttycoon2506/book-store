@@ -31,7 +31,7 @@ function App() {
     {
       element: (
         <>
-          <NavBar userName={userName}/> 
+          <NavBar userName={userName} authentication={authentication}/> 
           <Outlet />
         </>
       ),
