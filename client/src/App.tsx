@@ -19,6 +19,7 @@ function App() {
   authentication.getCurUser().then(user => {
         if (user.username) {
           setUserName(user.username);
+          authentication.setCurrentUser(user);
         }
     })
     .catch(err => {
