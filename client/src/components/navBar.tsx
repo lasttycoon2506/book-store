@@ -21,7 +21,7 @@ type NavBarProps = {
 };
 
 const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book'];
-const settings: string[] = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings: string = 'Logout';
 
 export default function NavBar({ userName } : NavBarProps): JSX.Element {
 
@@ -62,7 +62,7 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
               <Button
                 key={page}
                 onClick={handleNavPg}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, mx: 3, color: 'white', display: 'block', fontSize: 'large' }}
                 size='large'
               >
                 {page}
