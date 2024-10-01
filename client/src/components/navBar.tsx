@@ -20,17 +20,12 @@ type NavBarProps = {
 };
 
 const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book'];
-const logout: string = 'Logout';
 
 export default function NavBar({ userName, authentication } : NavBarProps): JSX.Element {
-
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     if (userName) {
         setAnchorElUser(event.currentTarget);
@@ -38,7 +33,6 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
   };
 
   const handleNavPg = (pageObj: any)  => {
-    setAnchorElNav(null);
     let navPg = pageObj.currentTarget.innerText.toLowerCase();
     if (navPg === 'home') {
         navPg = ''
