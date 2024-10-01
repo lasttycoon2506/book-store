@@ -1,6 +1,6 @@
 import { Amplify } from "aws-amplify";
 import { AuthenticationStack } from "../../../server/outputs.json"
-import { AuthUser, fetchAuthSession, getCurrentUser, signIn, SignInOutput } from "@aws-amplify/auth";
+import { AuthUser, fetchAuthSession, getCurrentUser, signIn, SignInOutput, signOut } from "@aws-amplify/auth";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
 
@@ -63,6 +63,15 @@ export class Authentication {
         catch (error) {
             console.log(error)
             return undefined;
+        }
+    }
+
+    public async logout() {
+        try {
+            signOut()
+        }
+        catch (error) {
+            console.error('error signing out')
         }
     }
 
