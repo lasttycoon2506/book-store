@@ -56,6 +56,7 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
 
   const handleLogout = () => {
     setAnchorElUser(null);
+    authentication.logout();
   };
 
 
@@ -99,9 +100,8 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
               onClose={handleCloseUserMenu}
             >
                 <MenuItem key={logout} onClick={handleLogout}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                  Logout 
                 </MenuItem>
-              
             </Menu>
           </Box>
         </Toolbar>
