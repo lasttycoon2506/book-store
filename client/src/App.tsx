@@ -20,6 +20,7 @@ function App() {
         if (user.username) {
           setUserName(user.username);
           authentication.setCurrentUser(user);
+          authentication.setSessionToken();
         }
     })
     .catch(err => {

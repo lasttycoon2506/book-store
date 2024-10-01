@@ -71,11 +71,15 @@ export class Authentication {
         this.jwToken = session.tokens?.idToken?.toString();
     }
 
+    public setSessionToken(): void {
+        this.getSessionToken();
+    }
+
     public getUserName(): string {
         return this.userName;
     };
 
-    public async getTempCredentials(): Promise<Object> {
+    private async getTempCredentials(): Promise<Object> {
         if (!this.tempCredentials) {
             this.tempCredentials = await this.genTempCredentials();
         }
