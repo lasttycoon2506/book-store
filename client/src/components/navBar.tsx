@@ -38,10 +38,10 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
   const handleNavPg = (pageObj: any)  => {
     setAnchorElNav(null);
     let navPg = pageObj.currentTarget.innerText.toLowerCase();
-    if (navPg === 'Home') {
+    if (navPg === 'home') {
         navPg = ''
     }
-    else if (navPg === 'Add Book') {
+    else if (navPg === 'add book') {
         navPg = 'createBook'
     }
     navigate(`/${navPg}`);
