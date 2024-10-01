@@ -32,7 +32,9 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+    if (userName) {
+        setAnchorElUser(event.currentTarget);
+    }
   };
 
   const handleNavPg = (pageObj: any)  => {
