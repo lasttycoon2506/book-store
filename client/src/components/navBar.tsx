@@ -72,7 +72,7 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              {userName? <AccountCircle />: <></>}
+              {userName? <AccountCircle fontSize="large"/>: <></>}
               </IconButton>
             </Tooltip>
             <Menu
