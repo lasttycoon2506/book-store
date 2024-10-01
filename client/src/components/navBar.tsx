@@ -12,19 +12,21 @@ import Container from "@mui/material/Container";
 import AdbIcon from '@mui/icons-material/Adb';
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
+import { useNavigate } from "react-router-dom";
 
 
 type NavBarProps = {
     userName: string | undefined;
 };
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book'];
+const settings: string[] = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function NavBar({ userName } : NavBarProps): JSX.Element {
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -33,8 +35,10 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (page: any) => {
     setAnchorElNav(null);
+    console.log(page)
+    navigate(`/${page}`);
   };
 
   const handleCloseUserMenu = () => {
@@ -92,7 +96,7 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
                   <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                 </MenuItem>
               ))}
