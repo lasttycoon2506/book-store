@@ -12,9 +12,19 @@ import ViewAllBooks from './components/ViewAllBooks'
 const authentication = new Authentication(); 
 const database = new Database(authentication);
 
-function App(): JSX.Element {
+
+function App() {
   const [userName, setUserName] = useState<string | undefined>(undefined)
   
+  authentication.getCurUser().then(user => {
+        if (user.username) {
+          setUserName(user.username);
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    });
+
   const router = createBrowserRouter([
     {
       element: (

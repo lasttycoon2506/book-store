@@ -22,10 +22,13 @@ export class Authentication {
     public jwToken: string | undefined;
     private tempCredentials: Object | undefined;
 
-    
+    async getCurUser(): Promise<AuthUser> {
+        const user1 = await getCurrentUser();
+        return user1;
+    }
     async login(userName: string, password: string): Promise<Object | undefined> {
         try {
-            const user = await getCurrentUser();
+            const user = await this.getCurUser();
             if (user) {
                 if (userName !== user.username) {
                     return false;
