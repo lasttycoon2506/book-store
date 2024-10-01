@@ -33,32 +33,21 @@ export class Authentication {
 
     async login(userName: string, password: string): Promise<Object | undefined> {
         try {
-            const user = await this.getCurUser();
-            if (user) {
-                if (userName !== user.username) {
-                    return false;
+            const signInResult: SignInOutput = await signIn({
+                username: userName,
+                password: password,
+                options: {
+                    authFlowType: "USER_PASSWORD_AUTH"
                 }
-                this.user = user;
-                this.userName = user.username;
+            });
+            this.user = signInResult;
+            if (this.user) {
+                this.userName = userName;
                 await this.getSessionToken();
                 return this.user;
             }
-            else {
-                const signInResult: SignInOutput = await signIn({
-                    username: userName,
-                    password: password,
-                    options: {
-                        authFlowType: "USER_PASSWORD_AUTH"
-                    }
-                });
-                this.user = signInResult;
-                if (this.user) {
-                    this.userName = userName;
-                    await this.getSessionToken();
-                    return this.user;
-                }
-                return false;
-           }
+            return false;
+           
         }
         catch (error) {
             console.log(error)
