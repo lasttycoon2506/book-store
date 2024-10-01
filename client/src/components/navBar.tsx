@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -35,10 +35,16 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (page: any) => {
+  const handleNavPg = (pageObj: any)  => {
     setAnchorElNav(null);
-    console.log(page)
-    navigate(`/${page}`);
+    let navPg = pageObj.currentTarget.innerText.toLowerCase();
+    if (navPg === 'Home') {
+        navPg = ''
+    }
+    else if (navPg === 'Add Book') {
+        navPg = 'createBook'
+    }
+    navigate(`/${navPg}`);
   };
 
   const handleCloseUserMenu = () => {
@@ -92,11 +98,11 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
                 horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+              onClose={handleNavPg}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                <MenuItem key={page} onClick={() => handleNavPg(page)}>
                   <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                 </MenuItem>
               ))}
@@ -125,7 +131,7 @@ export default function NavBar({ userName } : NavBarProps): JSX.Element {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={handleNavPg}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
