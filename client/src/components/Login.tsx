@@ -54,7 +54,7 @@ export default function Login({authentication}: LoginProps): JSX.Element {
               />
               <br />
               <TextField
-                  value={password} label="Password" variant="outlined"
+                  value={password} label="Password" variant="outlined" type="password"
                   onChange={(e) => setPassword(e.target.value)}
               />
               <br />
