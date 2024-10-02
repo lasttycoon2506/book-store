@@ -78,6 +78,10 @@ export class Authentication {
         return this.userName;
     };
 
+    private setUserName(userName: string): void {
+        this.userName = userName;
+    };
+
     private async getTempCredentials(): Promise<Object> {
         if (!this.tempCredentials) {
             this.tempCredentials = await this.genTempCredentials();
