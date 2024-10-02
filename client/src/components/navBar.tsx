@@ -24,7 +24,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [userName, setUserName] = useState<string>(authentication.getUserName());
   const navigate = useNavigate();
- 
+  
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     if (userName) {
@@ -43,9 +43,6 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     navigate(`/${navPg}`);
   };
   
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   const handleLogout = () => {
     setAnchorElUser(null);
@@ -54,14 +51,13 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     navigate(`/`);
   };
 
-  const updateUserName = () => {
-    setUserName(authentication.getUserName());
-  }
-
-  useEffect(() => {
-    updateUserName()
-  }, []);
-
+  // const updateUserName = async () => { 
+  //   setUserName(authentication.getUserName());
+  // }
+  
+  // useEffect(() => {
+  //     updateUserName();
+  // }, [userName]);
 
   return (
     <AppBar position="static">
@@ -100,7 +96,6 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
                 <MenuItem onClick={handleLogout}>
                   Logout 
