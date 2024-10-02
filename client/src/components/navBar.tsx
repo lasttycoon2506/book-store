@@ -24,7 +24,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [userName, setUserName] = useState<string>(authentication.getUserName());
   const navigate = useNavigate();
-
+ 
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     if (userName) {
@@ -50,10 +50,9 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
   const handleLogout = () => {
     setAnchorElUser(null);
     authentication.logout();
-   
+    setUserName('');
   };
 
-    
 
 
   return (

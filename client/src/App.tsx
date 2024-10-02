@@ -12,17 +12,22 @@ import ViewAllBooks from './components/ViewAllBooks'
 const authentication = new Authentication(); 
 const database = new Database(authentication);
 
+function setCurrUser() {
+    authentication.getCurUser().then(user => {
+    if (user.username) {
+      authentication.setCurrentUser(user);
+      authentication.setUserName(user.username);
+      authentication.setSessionToken();
+
+    }
+  })
+  .catch(err => {
+    console.log(err)
+  });
+}
 
 function App() {
-  authentication.getCurUser().then(user => {
-        if (user.username) {
-          authentication.setCurrentUser(user);
-          authentication.setSessionToken();
-        }
-    })
-    .catch(err => {
-        console.log(err)
-    });
+  setCurrUser();
 
   const router = createBrowserRouter([
     {
