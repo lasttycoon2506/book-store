@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -51,13 +51,6 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     navigate(`/`);
   };
 
-  // const updateUserName = async () => { 
-  //   setUserName(authentication.getUserName());
-  // }
-  
-  // useEffect(() => {
-  //     updateUserName();
-  // }, [userName]);
 
   return (
     <AppBar position="static">
