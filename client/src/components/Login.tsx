@@ -15,11 +15,16 @@ export default function Login({authentication}: LoginProps): JSX.Element {
     const [errorMsg, setErrorMsg] = useState<string>("");
     const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
 
+    function refreshPage() {
+        window.location.reload();
+      }
+
     const submit = async (event: SyntheticEvent): Promise<void> => {
         event.preventDefault();
         if (userName && password) {
             const loginResult = await authentication.login(userName, password);
             if (loginResult) {
+                refreshPage();
                 setLoginSuccess(true);
             }
             else {
