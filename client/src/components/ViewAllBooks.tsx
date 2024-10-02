@@ -99,7 +99,12 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
 
     function loadAllBooks() {
         if (!database.isAuthorized()) {
-            return <NavLink to={"/login"}> Must Login First</NavLink>
+          return (
+            <>
+            <br />
+            <NavLink to={"/login"}> Must Login First</NavLink>
+            </>
+          )
         }
         return (
           <div style={{ height: 500, width: '100%' }}>

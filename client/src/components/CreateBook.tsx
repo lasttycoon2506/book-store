@@ -126,7 +126,12 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
-            return <NavLink to={"/login"}> Must Login First</NavLink>
+            return (
+                <>
+                <br />
+                <NavLink to={"/login"}> Must Login First</NavLink>
+                </>
+            )
         }
         return (
             <Box
