@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { Authentication } from "../services/Authentication";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -13,7 +13,7 @@ export default function Login({authentication}: LoginProps): JSX.Element {
     const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errorMsg, setErrorMsg] = useState<string>("");
-    const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     function refreshPage() {
         window.location.reload();
@@ -24,7 +24,7 @@ export default function Login({authentication}: LoginProps): JSX.Element {
         if (userName && password) {
             const loginResult = await authentication.login(userName, password);
             if (loginResult) {
-                setLoginSuccess(true);
+                navigate('/profile');
                 refreshPage();
             }
             else {
@@ -44,7 +44,6 @@ export default function Login({authentication}: LoginProps): JSX.Element {
 
     return (
         <div role="main">
-          {loginSuccess && <Navigate to="/profile" replace={true} />}
           <h2>Please login</h2>
           <Box
                 component="form"

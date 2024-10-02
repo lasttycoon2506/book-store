@@ -49,7 +49,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     setAnchorElUser(null);
     authentication.logout();
     setUserName('');
-    navigate(`/`);
+    navigate('/');
   };
 
 
