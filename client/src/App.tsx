@@ -1,4 +1,3 @@
-import { createContext, useState } from 'react'
 import './App.css'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import NavBar from './components/NavBar'
@@ -11,7 +10,6 @@ import ViewAllBooks from './components/ViewAllBooks'
 
 const authentication = new Authentication(); 
 const database = new Database(authentication);
-
 
 
   authentication.getCurUser().then(user => {
