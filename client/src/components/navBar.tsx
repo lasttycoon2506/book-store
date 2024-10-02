@@ -15,17 +15,17 @@ import { Authentication } from "../services/Authentication";
 
 
 type NavBarProps = {
-    userName: string | undefined;
     authentication: Authentication;
 };
 
 const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book'];
 
-export default function NavBar({ userName, authentication } : NavBarProps): JSX.Element {
+export default function NavBar({ authentication } : NavBarProps): JSX.Element {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [userName, setUserName] = useState<string>(authentication.getUserName());
   const navigate = useNavigate();
 
-  
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     if (userName) {
         setAnchorElUser(event.currentTarget);
@@ -50,11 +50,10 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
   const handleLogout = () => {
     setAnchorElUser(null);
     authentication.logout();
-    navigate(`/`);
+   
   };
 
-    useEffect(() => {
-  }, []);
+    
 
 
   return (

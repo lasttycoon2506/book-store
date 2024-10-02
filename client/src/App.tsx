@@ -14,11 +14,8 @@ const database = new Database(authentication);
 
 
 function App() {
-  const [userName, setUserName] = useState<string | undefined>(undefined)
-  
   authentication.getCurUser().then(user => {
         if (user.username) {
-          setUserName(user.username);
           authentication.setCurrentUser(user);
           authentication.setSessionToken();
         }
@@ -31,7 +28,7 @@ function App() {
     {
       element: (
         <>
-          <NavBar userName={userName} authentication={authentication}/> 
+          <NavBar authentication={authentication}/> 
           <Outlet />
         </>
       ),
@@ -42,7 +39,7 @@ function App() {
         },
         {
           path:"/login",
-          element: <Login authentication={authentication} setUserNameCallBack={setUserName}/>
+          element: <Login authentication={authentication} />
         },
         {
           path:"/profile",

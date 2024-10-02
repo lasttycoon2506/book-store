@@ -59,6 +59,7 @@ export class Authentication {
         try {
             await signOut()
             this.setCurrentUser(undefined)
+            this.setUserName('');
         }
         catch (error) {
             console.error('error signing out')
