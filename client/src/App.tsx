@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 import './App.css'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import NavBar from './components/NavBar'
@@ -13,26 +13,32 @@ const authentication = new Authentication();
 const database = new Database(authentication);
 
 
-    authentication.getCurUser().then(user => {
-      if (user.username) {
-        authentication.setCurrentUser(user);
-        authentication.setUserName(user.username);
-        authentication.setSessionToken();
 
-      }
-    })
-    .catch(err => {
-      console.log(err)
-  });
+  authentication.getCurUser().then(user => {
+    if (user) {
+      authentication.setCurrentUser(user);
+      authentication.setUserName(user.username);
+      authentication.setSessionToken();
+      return user;
+    }
+    return undefined;
+  })
+  .catch(err => {
+    console.log(err)
+});
+
 
 
 function App() {
+  
+  
   const router = createBrowserRouter([
     {
       element: (
         <>
-          <NavBar authentication={authentication}/> 
+            <NavBar authentication={authentication}/> 
           <Outlet />
+        
         </>
       ),
       children: [

@@ -25,6 +25,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
   const [userName, setUserName] = useState<string>(authentication.getUserName());
   const navigate = useNavigate();
   
+  
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     if (userName) {

@@ -107,7 +107,7 @@ export class Authentication {
         return credentials;
     }
 
-    isAuthorized() {
+    public isAuthorized() {
         if (this.user) {
             return true;
         }
