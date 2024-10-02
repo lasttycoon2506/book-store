@@ -27,7 +27,7 @@ export class Authentication {
         return user1;
     }
 
-    public setCurrentUser(currentUser: AuthUser): void {
+    public setCurrentUser(currentUser: AuthUser | undefined): void {
         this.user = currentUser;
     }
 
@@ -57,7 +57,8 @@ export class Authentication {
 
     public async logout() {
         try {
-            signOut()
+            await signOut()
+            this.setCurrentUser(undefined)
         }
         catch (error) {
             console.error('error signing out')

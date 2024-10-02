@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -50,7 +50,11 @@ export default function NavBar({ userName, authentication } : NavBarProps): JSX.
   const handleLogout = () => {
     setAnchorElUser(null);
     authentication.logout();
+    navigate(`/`);
   };
+
+    useEffect(() => {
+  }, []);
 
 
   return (
