@@ -79,7 +79,7 @@ export class Authentication {
         return this.userName;
     };
 
-    private setUserName(userName: string): void {
+    public setUserName(userName: string): void {
         this.userName = userName;
     };
 

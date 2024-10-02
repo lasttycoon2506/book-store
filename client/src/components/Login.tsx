@@ -7,10 +7,9 @@ import Box from "@mui/material/Box";
 
 type LoginProps = {
     authentication: Authentication;
-    setUserNameCallBack: (userName: string) => void;
 }
 
-export default function Login({authentication, setUserNameCallBack}: LoginProps): JSX.Element {
+export default function Login({authentication}: LoginProps): JSX.Element {
     const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errorMsg, setErrorMsg] = useState<string>("");
@@ -20,16 +19,11 @@ export default function Login({authentication, setUserNameCallBack}: LoginProps)
         event.preventDefault();
         if (userName && password) {
             const loginResult = await authentication.login(userName, password);
-            const userNameCallBack = authentication.getUserName();
-            if (userNameCallBack) {
-              setUserNameCallBack(userNameCallBack);
-              setLoginSuccess(true);
-            }
             if (loginResult) {
                 setLoginSuccess(true);
             }
             else {
-                setErrorMsg('invalid creds.');
+                setErrorMsg('Invalid creds.');
             }
         }
         else {

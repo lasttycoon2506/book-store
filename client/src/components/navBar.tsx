@@ -20,7 +20,7 @@ type NavBarProps = {
 
 const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book'];
 
-export default function NavBar({ authentication } : NavBarProps): JSX.Element {
+export default function NavBar({authentication} : NavBarProps): JSX.Element {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [userName, setUserName] = useState<string>(authentication.getUserName());
   const navigate = useNavigate();
