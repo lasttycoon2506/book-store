@@ -42,7 +42,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     }
     navigate(`/${navPg}`);
   };
-
+  
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -51,8 +51,16 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     setAnchorElUser(null);
     authentication.logout();
     setUserName('');
+    navigate(`/`);
   };
 
+  const updateUserName = () => {
+    setUserName(authentication.getUserName());
+  }
+
+  useEffect(() => {
+    updateUserName()
+  }, []);
 
 
   return (
