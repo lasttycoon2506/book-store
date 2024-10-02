@@ -112,7 +112,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
               loading={loading}
               rows={rows} 
               columns={columns}
-              processRowUpdate={(updatedRow, originalRow) => {
+              processRowUpdate={(updatedRow) => {
                 saveUpdatedCellToDb(updatedRow);
                 return updatedRow;
               }}
