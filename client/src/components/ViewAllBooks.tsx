@@ -36,7 +36,8 @@ export default function ViewAllBooks({database}: ViewAllBooksProps): JSX.Element
     
     useEffect(() => {
         getAllBooks();
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [books]);
       
     const setUpdatedTitle: GridValueSetter<GridValidRowModel> = (value, row) => {
       const title = value;
