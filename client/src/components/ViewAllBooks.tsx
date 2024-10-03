@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Database } from '../services/Database'
-import type { Book, Book as BookModel } from '../models/model'
+import type { Book } from '../models/model'
 import { NavLink } from 'react-router-dom'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 import {
@@ -23,7 +23,7 @@ type ViewAllBooksProps = {
 export default function ViewAllBooks({
     database,
 }: ViewAllBooksProps): JSX.Element {
-    const [books, setBooks] = useState<BookModel[]>()
+    const [books, setBooks] = useState<Book[]>()
     const [loading, setLoading] = useState<boolean>(true)
 
     const deleteBook = async (id: GridRowId): Promise<void> => {
