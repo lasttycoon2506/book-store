@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { Authentication } from "../services/Authentication";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";

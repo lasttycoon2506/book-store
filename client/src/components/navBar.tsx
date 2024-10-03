@@ -33,6 +33,10 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     }
   };
 
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   const handleNavPg = (pageObj: any)  => {
     let navPg = pageObj.currentTarget.innerText.toLowerCase();
     if (navPg === 'home') {
@@ -48,7 +52,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
   const handleLogout = () => {
     setAnchorElUser(null);
     authentication.logout();
-    setUserName('');
+    setUserName("");
     navigate('/');
   };
 
@@ -70,9 +74,9 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box >
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu}>
               {userName? <AccountCircle fontSize="large"/>: <NavLink to={"/login"}> Login </NavLink>}
               </IconButton>
             </Tooltip>
@@ -90,6 +94,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
             >
                 <MenuItem onClick={handleLogout}>
                   Logout 
