@@ -7,66 +7,62 @@ import CreateBook from './components/CreateBook'
 import { Database } from './services/Database'
 import ViewAllBooks from './components/ViewAllBooks'
 
+const authentication = new Authentication()
+const database = new Database(authentication)
 
-const authentication = new Authentication(); 
-const database = new Database(authentication);
-
-
-  authentication.getCurUser().then(user => {
-    if (user) {
-      authentication.setCurrentUser(user);
-      authentication.setUserName(user.username);
-      authentication.setSessionToken();
-      return user;
-    }
-    return undefined;
-  })
-  .catch(err => {
-    console.log(err)
-});
-
-
+authentication
+    .getCurUser()
+    .then((user) => {
+        if (user) {
+            authentication.setCurrentUser(user)
+            authentication.setUserName(user.username)
+            authentication.setSessionToken()
+            return user
+        }
+        return undefined
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 
 function App(): JSX.Element {
-  const router = createBrowserRouter([
-    {
-      element: (
-        <>
-            <NavBar authentication={authentication}/> 
-          <Outlet />
-        
-        </>
-      ),
-      children: [
+    const router = createBrowserRouter([
         {
-          path:"/",
-          element: <div> welcome home </div>
+            element: (
+                <>
+                    <NavBar authentication={authentication} />
+                    <Outlet />
+                </>
+            ),
+            children: [
+                {
+                    path: '/',
+                    element: <div> welcome home </div>,
+                },
+                {
+                    path: '/login',
+                    element: <Login authentication={authentication} />,
+                },
+                {
+                    path: '/profile',
+                    element: <div> profile pg </div>,
+                },
+                {
+                    path: '/books',
+                    element: <ViewAllBooks database={database} />,
+                },
+                {
+                    path: '/createBook',
+                    element: <CreateBook database={database} />,
+                },
+            ],
         },
-        {
-          path:"/login",
-          element: <Login authentication={authentication} />
-        },
-        {
-          path:"/profile",
-          element: <div> profile pg </div>
-        },
-        {
-          path:"/books",
-          element: <ViewAllBooks database={database}/>
-        },
-        {
-          path:"/createBook",
-          element: <CreateBook database={database}/>
-        },
-      ]
-    }
-  ])
-  return (
-    <div className="wrapper">
-      <RouterProvider router={router}/>
-    </div>
-  )
-
+    ])
+    return (
+        <div className="wrapper">
+            <RouterProvider router={router} />
+        </div>
+    )
 }
 
 export default App

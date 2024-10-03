@@ -1,63 +1,63 @@
-import { Authentication } from "./Authentication";
-import { ApiStack } from "../../../server/outputs.json"
-import { Book } from "../models/model";
+import { Authentication } from './Authentication'
+import { ApiStack } from '../../../server/outputs.json'
+import { Book } from '../models/model'
 
-const bookstoreApiUrl = ApiStack.booksApiEndpoint04E49D0B + 'books';
+const bookstoreApiUrl = ApiStack.booksApiEndpoint04E49D0B + 'books'
 
 export class Database {
-    private authentication: Authentication;
+    private authentication: Authentication
 
-    constructor(authentication: Authentication){
-        this.authentication = authentication;
+    constructor(authentication: Authentication) {
+        this.authentication = authentication
     }
 
     async getAllBooks(): Promise<Book[]> {
         const getAllBooksResponse = await fetch(bookstoreApiUrl, {
-            method: "GET",
+            method: 'GET',
             headers: {
-                "Authorization": this.authentication.jwToken!
-            }
-        });
-       const allBooks = await getAllBooksResponse.json()
-       return allBooks;
+                Authorization: this.authentication.jwToken!,
+            },
+        })
+        const allBooks = await getAllBooksResponse.json()
+        return allBooks
     }
-    
+
     async createBook(book: Book): Promise<string> {
         const postResponse = await fetch(bookstoreApiUrl, {
-            method: "POST",
+            method: 'POST',
             body: JSON.stringify(book),
             headers: {
-                "Authorization": this.authentication.jwToken!
-            }
-        });
-       const postResponseJson = await postResponse.json()
-       return postResponseJson.id;
+                Authorization: this.authentication.jwToken!,
+            },
+        })
+        const postResponseJson = await postResponse.json()
+        return postResponseJson.id
     }
 
     async editBook(book: Book): Promise<number> {
         const editResponse = await fetch(`${bookstoreApiUrl}?id=${book.id}`, {
-            method: "PUT",
+            method: 'PUT',
             body: JSON.stringify(book),
             headers: {
-                "Authorization": this.authentication.jwToken!
-            }
-        });
-       const editResponseJson = await editResponse.json()
-       return editResponseJson.$metadata.httpStatusCode;
+                Authorization: this.authentication.jwToken!,
+            },
+        })
+        const editResponseJson = await editResponse.json()
+        return editResponseJson.$metadata.httpStatusCode
     }
 
     async deleteBook(bookId: string): Promise<number> {
         const deleteResponse = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
-            method: "DELETE",
+            method: 'DELETE',
             headers: {
-                "Authorization": this.authentication.jwToken!
-            }
-        });
-       const deleteResponseJson = await deleteResponse.json()
-       return deleteResponseJson.$metadata.httpStatusCode;
+                Authorization: this.authentication.jwToken!,
+            },
+        })
+        const deleteResponseJson = await deleteResponse.json()
+        return deleteResponseJson.$metadata.httpStatusCode
     }
 
     public isAuthorized(): boolean {
-        return this.authentication.isAuthorized();
+        return this.authentication.isAuthorized()
     }
 }
