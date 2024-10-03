@@ -1,49 +1,49 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { getBook } from "./getBook";
-import { getAllBooks } from "./getAllBooks";
-import { postBook } from "./postBook";
-import { deleteBook } from "./deleteBook";
-import { updateBook } from "./updateBook";
-import { addCorsHeader } from "../utils/corsHeader";
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { getBook } from './getBook'
+import { getAllBooks } from './getAllBooks'
+import { postBook } from './postBook'
+import { deleteBook } from './deleteBook'
+import { updateBook } from './updateBook'
+import { addCorsHeader } from '../utils/corsHeader'
 
 const dbClient = new DynamoDBClient({})
 
-async function handler(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
-    let response: APIGatewayProxyResult;
+async function handler(
+    event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+    let response: APIGatewayProxyResult
 
     switch (event.httpMethod) {
-        case "GET": {
+        case 'GET': {
             if (event.queryStringParameters) {
-                const getResponse = await getBook(event, dbClient);
-                response = getResponse;
+                const getResponse = await getBook(event, dbClient)
+                response = getResponse
+            } else {
+                const getAllResponse = await getAllBooks(dbClient)
+                response = getAllResponse
             }
-            else {
-                const getAllResponse = await getAllBooks(dbClient);
-                response = getAllResponse;
-            }
-            break;
+            break
         }
-        case "POST": {
-            const postResponse = await postBook(event, dbClient);
-            response = postResponse;
-            break;
+        case 'POST': {
+            const postResponse = await postBook(event, dbClient)
+            response = postResponse
+            break
         }
-        case "PUT": {
+        case 'PUT': {
             const putResponse = await updateBook(event, dbClient)
-            response = putResponse;
-            break;
+            response = putResponse
+            break
         }
-        case "DELETE": {
+        case 'DELETE': {
             const deleteResponse = await deleteBook(event, dbClient)
-            response = deleteResponse;
-            break;
+            response = deleteResponse
+            break
         }
     }
 
-    addCorsHeader(response);
-    return response;
+    addCorsHeader(response)
+    return response
 }
 
-export {handler};
-
+export { handler }
