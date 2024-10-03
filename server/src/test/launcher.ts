@@ -10,7 +10,7 @@ handler({httpMethod: 'PUT',
     },
     body: JSON.stringify({
             title: "gg",
-            author:"fitzy",
+            author:"f",
             pages: "25",
             genre: "lit",
             price:"6.99",

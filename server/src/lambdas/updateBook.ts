@@ -44,7 +44,6 @@ export async function updateBook(event: APIGatewayEvent, dbClient: DynamoDBClien
         }
     }
     catch (error) {
-        console.log(error)
         return {
             statusCode: 400,
             body: error.message
