@@ -58,7 +58,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
 
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ bgcolor: "green" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LibraryBooksIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
