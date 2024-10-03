@@ -37,8 +37,8 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
     setAnchorElUser(null);
   };
 
-  const handleNavPg = (pageObj: any): void => {
-    let navPg = pageObj.currentTarget.innerText.toLowerCase();
+  const handleNavPg = (event: React.MouseEvent<HTMLElement>): void => {
+    let navPg = event.currentTarget.innerText.toLowerCase();
     if (navPg === 'home') {
         navPg = ''
     }
