@@ -27,17 +27,17 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
   
   
 
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>): void => {
     if (userName) {
         setAnchorElUser(event.currentTarget);
     }
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (): void => {
     setAnchorElUser(null);
   };
 
-  const handleNavPg = (pageObj: any)  => {
+  const handleNavPg = (pageObj: any): void => {
     let navPg = pageObj.currentTarget.innerText.toLowerCase();
     if (navPg === 'home') {
         navPg = ''
@@ -49,7 +49,7 @@ export default function NavBar({authentication} : NavBarProps): JSX.Element {
   };
   
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     setAnchorElUser(null);
     authentication.logout();
     setUserName("");

@@ -3,6 +3,7 @@ import { AuthenticationStack } from "../../../server/outputs.json"
 import { AuthUser, fetchAuthSession, getCurrentUser, signIn, SignInOutput, signOut } from "@aws-amplify/auth";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
+import { AwsCredentialIdentity } from "@aws-sdk/types";
 
 const awsRegion = "us-east-1";
 
@@ -31,7 +32,7 @@ export class Authentication {
         this.user = currentUser;
     }
 
-    async login(userName: string, password: string): Promise<Object | undefined> {
+    async login(userName: string, password: string): Promise<SignInOutput | boolean | undefined> {
         try {
             const signInResult: SignInOutput = await signIn({
                 username: userName,
@@ -55,7 +56,7 @@ export class Authentication {
         }
     }
 
-    public async logout() {
+    public async logout(): Promise<void> {
         try {
             await signOut()
             this.setCurrentUser(undefined)
@@ -90,7 +91,7 @@ export class Authentication {
         return this.tempCredentials;
     }
 
-    private async genTempCredentials() {
+    private async genTempCredentials(): Promise<AwsCredentialIdentity> {
         const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`;
         const cognitoIdentity = new CognitoIdentityClient({
             credentials: fromCognitoIdentityPool({
@@ -107,7 +108,7 @@ export class Authentication {
         return credentials;
     }
 
-    public isAuthorized() {
+    public isAuthorized(): boolean {
         if (this.user) {
             return true;
         }

@@ -27,9 +27,7 @@ const database = new Database(authentication);
 
 
 
-function App() {
-  
-  
+function App(): JSX.Element {
   const router = createBrowserRouter([
     {
       element: (

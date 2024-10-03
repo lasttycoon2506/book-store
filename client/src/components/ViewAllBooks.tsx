@@ -14,11 +14,11 @@ type ViewAllBooksProps = {
     database: Database;
 }
 
-export default function ViewAllBooks({database}: ViewAllBooksProps){
+export default function ViewAllBooks({database}: ViewAllBooksProps): JSX.Element {
     const [books, setBooks] = useState<BookModel[]>();
     const [loading, setLoading] = useState<boolean>(true);
 
-    const deleteBook = async (id: GridRowId) => {
+    const deleteBook = async (id: GridRowId): Promise<void> => {
       const statusCode = await database.deleteBook(id.toString());
       if (statusCode === 200) {
         setBooks(books?.filter((book) => book.id !== id));
@@ -28,7 +28,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       }
     };
 
-    const getAllBooks = async () => { 
+    const getAllBooks = async (): Promise<void> => { 
       const books = await database.getAllBooks();
       setLoading(false);
       setBooks(books);
@@ -63,14 +63,14 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       return { ...row, stock };
     };
 
-    const saveUpdatedCellToDb = async (updatedRow: Book) => {
+    const saveUpdatedCellToDb = async (updatedRow: Book): Promise<void> => {
       const statusCode = await database.editBook(updatedRow);
       if (statusCode !== 200) {
         console.error("updated from DB failed");
       }
     }
 
-    function updateErrMsg() {
+    function updateErrMsg(): void {
       console.error("update FE failed")
     }
 
@@ -97,7 +97,7 @@ export default function ViewAllBooks({database}: ViewAllBooksProps){
       },
     ];
 
-    function loadAllBooks() {
+    function loadAllBooks(): JSX.Element {
         if (!database.isAuthorized()) {
           return (
             <>

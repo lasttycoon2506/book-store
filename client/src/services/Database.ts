@@ -57,7 +57,7 @@ export class Database {
        return deleteResponseJson.$metadata.httpStatusCode;
     }
 
-    isAuthorized() {
+    public isAuthorized(): boolean {
         return this.authentication.isAuthorized();
     }
 }

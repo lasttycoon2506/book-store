@@ -15,7 +15,7 @@ export default function Login({authentication}: LoginProps): JSX.Element {
     const [errorMsg, setErrorMsg] = useState<string>("");
     const navigate = useNavigate();
 
-    function refreshPage() {
+    function refreshPage(): void {
         window.location.reload();
       }
 
