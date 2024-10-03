@@ -63,7 +63,7 @@ export class Authentication {
             this.setUserName('');
         }
         catch (error) {
-            console.error('error signing out')
+            console.error(`error signing out: ${error}`)
         }
     }
 
