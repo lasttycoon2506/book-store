@@ -157,7 +157,6 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                         <></>
                     )}
                 </div>
-                <br />
                 <TextField
                     value={title}
                     label="Title"
