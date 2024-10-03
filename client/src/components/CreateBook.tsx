@@ -180,7 +180,14 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                     variant="outlined"
                     type="number"
                     error={errorPages}
-                    onChange={(e) => setPages(Number(e.target.value))}
+                    onChange={(e) => {
+                        const regex = /^[0-9\b]+$/;
+                        const value = e.target.value;
+                        if (value === '' || regex.test(value)) {
+                            setPages(Number(value))
+                        }
+                    }
+                       }
                 />
                 <br />
                 <TextField
