@@ -84,7 +84,7 @@ export class Authentication {
         this.userName = userName;
     };
 
-    private async getTempCredentials(): Promise<Object> {
+    private async getTempCredentials(): Promise<AwsCredentialIdentity> {
         if (!this.tempCredentials) {
             this.tempCredentials = await this.genTempCredentials();
         }
