@@ -178,12 +178,11 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                     value={pages}
                     label="Pgs"
                     variant="outlined"
-                    type="number"
                     error={errorPages}
+                    type="number"
                     onChange={(e) => {
-                        const regex = /^[0-9\b]+$/
                         const value = e.target.value
-                        if (value === '' || regex.test(value)) {
+                        if (value === '' || value.match(/^[0-9]*$/)) {
                             setPages(Number(value))
                         }
                     }}
@@ -213,10 +212,9 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                     type="number"
                     error={errorStock}
                     onChange={(e) => {
-                        const regex = /^[0-9\b]+$/
                         const value = e.target.value
-                        if (value === '' || regex.test(value)) {
-                            setStock(Number(value))
+                        if (value === '' || value.match(/^[0-9]*$/)) {
+                            setPages(Number(value))
                         }
                     }}
                 />
