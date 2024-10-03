@@ -21,7 +21,7 @@ export class Authentication {
     private user: SignInOutput | AuthUser | undefined;
     private userName: string = "";
     public jwToken: string | undefined;
-    private tempCredentials: Object | undefined;
+    private tempCredentials: AwsCredentialIdentity | undefined;
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser();
