@@ -106,6 +106,7 @@ export default function ViewAllBooks({
             width: 150,
             editable: true,
             description: 'double-click to edit Title',
+            headerAlign: 'center',
             valueSetter: setUpdatedTitle,
         },
         {
@@ -114,6 +115,7 @@ export default function ViewAllBooks({
             width: 150,
             editable: true,
             description: 'double-click to edit Author',
+            headerAlign: 'center',
             valueSetter: setUpdatedAuthor,
         },
         {
@@ -122,6 +124,7 @@ export default function ViewAllBooks({
             width: 150,
             editable: true,
             description: 'double-click to edit Pgs',
+            headerAlign: 'center',
             valueSetter: setUpdatedPgs,
         },
         {
@@ -130,6 +133,7 @@ export default function ViewAllBooks({
             width: 150,
             editable: true,
             description: 'double-click to edit Genre',
+            headerAlign: 'center',
             valueSetter: setUpdatedGenre,
         },
         {
@@ -138,6 +142,7 @@ export default function ViewAllBooks({
             width: 150,
             editable: true,
             description: 'double-click to edit Price',
+            headerAlign: 'center',
             valueSetter: setUpdatedPrice,
         },
         {
@@ -146,6 +151,7 @@ export default function ViewAllBooks({
             width: 150,
             editable: true,
             description: 'double-click to edit Stock',
+            headerAlign: 'center',
             valueSetter: setUpdatedStock,
         },
         {
