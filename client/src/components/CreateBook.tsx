@@ -109,10 +109,10 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
     function resetFields(): void {
         setTitle('')
         setAuthor('')
-        setPages(undefined)
+        setPages(0)
         setGenre('')
-        setPrice(undefined)
-        setStock(undefined)
+        setPrice(0)
+        setStock(0)
     }
 
     function renderForm(): JSX.Element {
