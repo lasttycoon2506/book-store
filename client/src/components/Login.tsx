@@ -24,7 +24,7 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         if (userName && password) {
             const loginResult = await authentication.login(userName, password)
             if (loginResult) {
-                navigate('/profile')
+                navigate('/')
                 refreshPage()
             } else {
                 setErrorMsg('Invalid creds.')
