@@ -108,7 +108,6 @@ export default function ViewAllBooks({
             description: 'double-click to edit Title',
             headerAlign: 'center',
             valueSetter: setUpdatedTitle,
-            headerClassName: 'super-app-theme--header',
         },
         {
             field: 'author',
@@ -189,7 +188,6 @@ export default function ViewAllBooks({
                     sx={{
                         '.MuiDataGrid-columnHeaderTitle': { 
                            fontWeight: 'bold',
-                        //    overflow: 'visible !important'
                         }
                       }}
                     loading={loading}
