@@ -186,10 +186,10 @@ export default function ViewAllBooks({
             <div style={{ height: 500, width: '100%' }}>
                 <DataGrid
                     sx={{
-                        '.MuiDataGrid-columnHeaderTitle': { 
-                           fontWeight: 'bold',
-                        }
-                      }}
+                        '.MuiDataGrid-columnHeaderTitle': {
+                            fontWeight: 'bold',
+                        },
+                    }}
                     loading={loading}
                     rows={rows}
                     columns={columns}
