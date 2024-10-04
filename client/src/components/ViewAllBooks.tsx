@@ -103,16 +103,17 @@ export default function ViewAllBooks({
         {
             field: 'title',
             headerName: 'Title',
-            width: 150,
+            width: 200,
             editable: true,
             description: 'double-click to edit Title',
             headerAlign: 'center',
             valueSetter: setUpdatedTitle,
+            headerClassName: 'super-app-theme--header',
         },
         {
             field: 'author',
             headerName: 'Author',
-            width: 150,
+            width: 200,
             editable: true,
             description: 'double-click to edit Author',
             headerAlign: 'center',
@@ -130,7 +131,7 @@ export default function ViewAllBooks({
         {
             field: 'genre',
             headerName: 'Genre',
-            width: 150,
+            width: 200,
             editable: true,
             description: 'double-click to edit Genre',
             headerAlign: 'center',
@@ -185,6 +186,12 @@ export default function ViewAllBooks({
         return (
             <div style={{ height: 500, width: '100%' }}>
                 <DataGrid
+                    sx={{
+                        '.MuiDataGrid-columnHeaderTitle': { 
+                           fontWeight: 'bold',
+                        //    overflow: 'visible !important'
+                        }
+                      }}
                     loading={loading}
                     rows={rows}
                     columns={columns}

@@ -68,3 +68,9 @@ button:focus-visible {
         background-color: #b90c0c;
     }
 }
+
+.super-app-theme--header {
+    
+    font-weight: bold;
+    
+}
