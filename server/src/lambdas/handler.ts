@@ -27,13 +27,12 @@ async function handler(
             break
         }
         case 'POST': {
-            if (event.body.includes("userName")) {
+            if (event.body.includes('userName')) {
                 const postUserResponse = await addUser(event)
-                response = postUserResponse;
-            }
-            else {
-            const postResponse = await postBook(event, dbClient)
-            response = postResponse
+                response = postUserResponse
+            } else {
+                const postResponse = await postBook(event, dbClient)
+                response = postResponse
             }
             break
         }

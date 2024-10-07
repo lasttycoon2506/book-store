@@ -4,7 +4,7 @@ import {
     AdminCreateUserCommandOutput,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
-import { APIGatewayProxyEvent } from 'aws-lambda/trigger/api-gateway-proxy'
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda/trigger/api-gateway-proxy'
 
 const config = {
     region: 'us-east-1',
@@ -14,7 +14,7 @@ const client = new CognitoIdentityProviderClient(config)
 
 export async function addUser(
     event: APIGatewayProxyEvent
-): Promise<AdminCreateUserCommandOutput> {
+): Promise<APIGatewayProxyResult> {
     const parsedBody = JSON.parse(event.body)
     const userName = parsedBody['userName']
     const passWord = parsedBody['password']
@@ -36,5 +36,8 @@ export async function addUser(
     }
     const command = new AdminCreateUserCommand(input)
     const response = await client.send(command)
-    return response
+    return {
+      statusCode: 201,
+      body: JSON.stringify(response)
+    }
 }
