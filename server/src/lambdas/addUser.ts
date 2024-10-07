@@ -1,5 +1,5 @@
 import { CognitoIdentityProviderClient, AdminCreateUserCommand } from "@aws-sdk/client-cognito-identity-provider";
-
+import { AuthenticationStack } from "../../outputs.json";
 
 type User = {
     userName: string;
@@ -7,13 +7,29 @@ type User = {
 }
 
 const config = {
-    region: 'us-east-1'
+    region: "us-east-1"
 }
 
 const client = new CognitoIdentityProviderClient(config);
 
 export function addUser(user: User): Promise<unknown> {
-    return
+    const input = { 
+        UserPoolId: `${AuthenticationStack.BookstoreUserPoolId}`, 
+        Username: `${user.userName}`, 
+        UserAttributes: [ 
+          { 
+            Name: "STRING_VALUE", 
+            Value: "STRING_VALUE",
+          },
+        ],
+        ValidationData: [
+          {
+            Name: "STRING_VALUE", 
+            Value: "STRING_VALUE",
+          },
+        ]
+      };
+      return
 }
 
 
