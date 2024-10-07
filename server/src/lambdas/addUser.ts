@@ -12,7 +12,7 @@ const config = {
 
 const client = new CognitoIdentityProviderClient(config);
 
-export function addUser(user: User): Promise<unknown> {
+export async function addUser(user: User): Promise<unknown> {
     const input = { 
         UserPoolId: `${AuthenticationStack.BookstoreUserPoolId}`, 
         Username: `${user.userName}`, 
@@ -29,7 +29,9 @@ export function addUser(user: User): Promise<unknown> {
           },
         ]
       };
-      return
+      const command = new AdminCreateUserCommand(input);
+const response = await client.send(command);
+return response;
 }
 
 
