@@ -7,12 +7,12 @@ export async function updateBook(
     dbClient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
     const parsedBody = JSON.parse(event.body)
-    const titleValue = parsedBody['title']
-    const authorValue = parsedBody['author']
-    const pagesValue = parsedBody['pages']
-    const genreValue = parsedBody['genre']
-    const priceValue = parsedBody['price']
-    const stockValue = parsedBody['stock']
+    const title = parsedBody['title']
+    const author = parsedBody['author']
+    const pages = parsedBody['pages']
+    const genre = parsedBody['genre']
+    const price = parsedBody['price']
+    const stock = parsedBody['stock']
 
     try {
         const response = await dbClient.send(
@@ -29,12 +29,12 @@ export async function updateBook(
                     '#S': 'stock',
                 },
                 ExpressionAttributeValues: {
-                    ':t': marshall(titleValue),
-                    ':a': marshall(authorValue),
-                    ':pg': marshall(pagesValue),
-                    ':g': marshall(genreValue),
-                    ':pr': marshall(priceValue),
-                    ':s': marshall(stockValue),
+                    ':t': marshall(title),
+                    ':a': marshall(author),
+                    ':pg': marshall(pages),
+                    ':g': marshall(genre),
+                    ':pr': marshall(price),
+                    ':s': marshall(stock),
                 },
                 TableName: process.env.TABLE_NAME,
                 UpdateExpression:
