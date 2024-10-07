@@ -21,16 +21,22 @@ export async function addUser(
     try {
         const parsedBody = JSON.parse(event.body)
         const userName = parsedBody['userName']
-        const passWord = parsedBody['password']
+        const name = parsedBody['name']
+        const email = parsedBody['email']
+
         const input = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
             Username: userName,
-            // UserAttributes: [
-            //     {
-            //         Name: 'userName',
-            //         Value: userName,
-            //     },
-            // ],
+            UserAttributes: [
+                {
+                    Name: 'name',
+                    Value: name,
+                },
+                {
+                  Name: 'email',
+                  Value: email,
+              },
+            ],
         }
         const command = new AdminCreateUserCommand(input)
         const response = await client.send(command)
@@ -41,7 +47,7 @@ export async function addUser(
     } catch (error) {
         console.error(error)
         return {
-            statusCode: error.statusCode,
+            statusCode: 400,
             body: error.message,
         }
     }

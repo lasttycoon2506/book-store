@@ -6,6 +6,6 @@ process.env.TABLE_NAME = "book-table";
 
 handler({httpMethod: 'POST',
     body: JSON.stringify({
-            userName: "toodles"
+            userName: "bobby"
             })
 } as any).then(result => console.log(result));
