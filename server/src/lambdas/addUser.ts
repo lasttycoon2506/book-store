@@ -1,4 +1,4 @@
-import { CognitoIdentityProviderClient, AdminCreateUserCommand } from "@aws-sdk/client-cognito-identity-provider";
+import { CognitoIdentityProviderClient, AdminCreateUserCommand, AdminCreateUserCommandOutput } from "@aws-sdk/client-cognito-identity-provider";
 import { AuthenticationStack } from "../../outputs.json";
 
 type User = {
@@ -12,7 +12,7 @@ const config = {
 
 const client = new CognitoIdentityProviderClient(config);
 
-export async function addUser(user: User): Promise<unknown> {
+export async function addUser(user: User): Promise<AdminCreateUserCommandOutput> {
     const input = { 
         UserPoolId: `${AuthenticationStack.BookstoreUserPoolId}`, 
         Username: `${user.userName}`, 
