@@ -2,6 +2,7 @@ import {
     CognitoIdentityProviderClient,
     AdminCreateUserCommand,
     AdminCreateUserCommandOutput,
+    AdminAddUserToGroupCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
 import {
@@ -40,9 +41,16 @@ export async function addUser(
         }
         const command = new AdminCreateUserCommand(input)
         const response = await client.send(command)
+  const input2 = { 
+  UserPoolId: AuthenticationStack.BookstoreUserPoolId,
+  Username: userName, 
+  GroupName: "admins", 
+};
+const command2 = new AdminAddUserToGroupCommand(input2);
+const response2 = await client.send(command2);
         return {
             statusCode: 201,
-            body: JSON.stringify(response),
+            body: JSON.stringify(response2),
         }
     } catch (error) {
         console.error(error)
