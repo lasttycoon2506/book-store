@@ -4,7 +4,7 @@ process.env.AWS_REGION = "us-east-1";
 process.env.TABLE_NAME = "book-table";
 
 
-handler({httpMethod: 'PUT',
+handler({httpMethod: 'POST',
     queryStringParameters: {
         id: '74011270-06a2-4da1-a944-06d7a3b79d73'
     },

@@ -4,11 +4,7 @@ import {
     AdminCreateUserCommandOutput,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
-
-type User = {
-    userName: string
-    passWord: string
-}
+import { APIGatewayProxyEvent } from 'aws-lambda/trigger/api-gateway-proxy'
 
 const config = {
     region: 'us-east-1',
@@ -17,11 +13,14 @@ const config = {
 const client = new CognitoIdentityProviderClient(config)
 
 export async function addUser(
-    user: User
+    event: APIGatewayProxyEvent
 ): Promise<AdminCreateUserCommandOutput> {
+    const parsedBody = JSON.parse(event.body)
+    const userName = parsedBody['userName']
+    const passWord = parsedBody['password']
     const input = {
         UserPoolId: `${AuthenticationStack.BookstoreUserPoolId}`,
-        Username: `${user.userName}`,
+        Username: `${userName}`,
         UserAttributes: [
             {
                 Name: 'STRING_VALUE',

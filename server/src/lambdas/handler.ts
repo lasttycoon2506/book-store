@@ -6,6 +6,7 @@ import { postBook } from './postBook'
 import { deleteBook } from './deleteBook'
 import { updateBook } from './updateBook'
 import { addCorsHeader } from '../utils/corsHeader'
+import { addUser } from './addUser'
 
 const dbClient = new DynamoDBClient({})
 
@@ -26,8 +27,14 @@ async function handler(
             break
         }
         case 'POST': {
+            if (event.body.includes("userName")) {
+                const postUserResponse = await addUser(event)
+                response = postUserResponse;
+            }
+            else {
             const postResponse = await postBook(event, dbClient)
             response = postResponse
+            }
             break
         }
         case 'PUT': {
