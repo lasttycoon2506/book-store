@@ -23,20 +23,14 @@ export async function addUser(
         const userName = parsedBody['userName']
         const passWord = parsedBody['password']
         const input = {
-            UserPoolId: `${AuthenticationStack.BookstoreUserPoolId}`,
-            Username: `${userName}`,
-            UserAttributes: [
-                {
-                    Name: 'STRING_VALUE',
-                    Value: 'STRING_VALUE',
-                },
-            ],
-            ValidationData: [
-                {
-                    Name: 'STRING_VALUE',
-                    Value: 'STRING_VALUE',
-                },
-            ],
+            UserPoolId: AuthenticationStack.BookstoreUserPoolId,
+            Username: userName,
+            // UserAttributes: [
+            //     {
+            //         Name: 'userName',
+            //         Value: userName,
+            //     },
+            // ],
         }
         const command = new AdminCreateUserCommand(input)
         const response = await client.send(command)

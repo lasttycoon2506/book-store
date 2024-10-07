@@ -31,8 +31,8 @@ async function handler(
                 const postUserResponse = await addUser(event)
                 response = postUserResponse
             } else {
-                const postResponse = await postBook(event, dbClient)
-                response = postResponse
+                const postBookResponse = await postBook(event, dbClient)
+                response = postBookResponse
             }
             break
         }
