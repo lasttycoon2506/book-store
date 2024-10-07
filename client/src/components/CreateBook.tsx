@@ -213,7 +213,7 @@ export default function CreateBook({ database }: CreateBookProps): JSX.Element {
                     onChange={(e) => {
                         const value = e.target.value
                         if (value === '' || value.match(/^[0-9]*$/)) {
-                            setPages(Number(value))
+                            setStock(Number(value))
                         }
                     }}
                 />
