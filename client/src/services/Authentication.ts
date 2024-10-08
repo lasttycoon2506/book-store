@@ -11,6 +11,7 @@ import {
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
+import { User } from '../models/User'
 
 const awsRegion = 'us-east-1'
 
@@ -41,7 +42,7 @@ export class Authentication {
 
     async login(
         userName: string,
-        password: string,
+        password: string
     ): Promise<SignInOutput | boolean | undefined> {
         try {
             const signInResult: SignInOutput = await signIn({
@@ -51,9 +52,6 @@ export class Authentication {
                     authFlowType: 'USER_PASSWORD_AUTH',
                 },
             })
-            if (signInResult.isSignedIn === false){
-                this.newUserAuthenticate();
-            }
             this.user = signInResult
             if (this.user) {
                 this.userName = userName
@@ -117,17 +115,6 @@ export class Authentication {
     //     const credentials = await cognitoIdentity.config.credentials()
     //     return credentials
     // }
-
-    private newUserAuthenticate(userAttributes) {
-       
-            delete userAttributes.email_verified;
-        
-            delete userAttributes.phone_number_verified;
-        
-            // Get these details and call
-            this.user.completeNewPasswordChallenge(newPassword, userAttributes, this);
-        
-    }
 
     public isAuthorized(): boolean {
         if (this.user) {
