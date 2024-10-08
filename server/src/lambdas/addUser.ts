@@ -1,6 +1,7 @@
 import {
     CognitoIdentityProviderClient,
     AdminCreateUserCommand,
+    AdminSetUserPasswordCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
 import {
@@ -25,7 +26,7 @@ export async function addUser(
         const email = parsedBody['email']
         const phoneNumber = parsedBody['phoneNumber']
 
-        const input = {
+        const newUserInput = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
             Username: userName,
             TemporaryPassword: password,
@@ -44,14 +45,22 @@ export async function addUser(
                 },
             ],
             DesiredDeliveryMediums: ['SMS' as const],
-            MessageAction: "SUPPRESS" as const,
+            MessageAction: 'SUPPRESS' as const,
         }
-        const command = new AdminCreateUserCommand(input)
-        const response = await client.send(command)
+        const createUser = new AdminCreateUserCommand(newUserInput)
+        const newUserResponse = await client.send(createUser)
+        const setUserPwInput = {
+            UserPoolId: AuthenticationStack.BookstoreUserPoolId,
+            Username: userName,
+            Password: password,
+            Permanent: true,
+        }
+        const setUserPw = new AdminSetUserPasswordCommand(setUserPwInput)
+        const setUserPwResponse = await client.send(setUserPw)
 
         return {
             statusCode: 201,
-            body: JSON.stringify(response),
+            body: JSON.stringify(setUserPwResponse),
         }
     } catch (error) {
         console.error(error)
