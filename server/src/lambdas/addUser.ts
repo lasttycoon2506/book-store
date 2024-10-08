@@ -1,8 +1,6 @@
 import {
     CognitoIdentityProviderClient,
     AdminCreateUserCommand,
-    AdminCreateUserCommandOutput,
-    AdminAddUserToGroupCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
 import {
@@ -24,6 +22,7 @@ export async function addUser(
         const userName = parsedBody['userName']
         const name = parsedBody['name']
         const email = parsedBody['email']
+        const phoneNumber = parsedBody['phoneNumber']
 
         const input = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
@@ -36,6 +35,10 @@ export async function addUser(
                 {
                     Name: 'email',
                     Value: email,
+                },
+                {
+                    Name: 'phone_number',
+                    Value: phoneNumber,
                 },
             ],
         }
