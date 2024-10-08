@@ -20,7 +20,7 @@ export async function addUser(
     try {
         const parsedBody = JSON.parse(event.body)
         const userName = parsedBody['userName']
-        const passWord = parsedBody['passWord']
+        const password = parsedBody['password']
         const name = parsedBody['name']
         const email = parsedBody['email']
         const phoneNumber = parsedBody['phoneNumber']
@@ -28,7 +28,7 @@ export async function addUser(
         const input = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
             Username: userName,
-            TemporaryPassword: passWord,
+            TemporaryPassword: password,
             UserAttributes: [
                 {
                     Name: 'name',

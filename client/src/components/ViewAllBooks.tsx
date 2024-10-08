@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Database } from '../services/Database'
-import type { Book } from '../models/model'
+import type { Book } from '../models/Book'
 import { NavLink } from 'react-router-dom'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 import {

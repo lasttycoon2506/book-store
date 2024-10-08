@@ -41,7 +41,7 @@ export class Authentication {
 
     async login(
         userName: string,
-        password: string
+        password: string,
     ): Promise<SignInOutput | boolean | undefined> {
         try {
             const signInResult: SignInOutput = await signIn({
@@ -94,32 +94,39 @@ export class Authentication {
         this.userName = userName
     }
 
-    private async getTempCredentials(): Promise<AwsCredentialIdentity> {
-        if (!this.tempCredentials) {
-            this.tempCredentials = await this.genTempCredentials()
-        }
-        return this.tempCredentials
-    }
+    // private async getTempCredentials(): Promise<AwsCredentialIdentity> {
+    //     if (!this.tempCredentials) {
+    //         this.tempCredentials = await this.genTempCredentials()
+    //     }
+    //     return this.tempCredentials
+    // }
 
-    private async genTempCredentials(): Promise<AwsCredentialIdentity> {
-        const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`
-        const cognitoIdentity = new CognitoIdentityClient({
-            credentials: fromCognitoIdentityPool({
-                clientConfig: {
-                    region: awsRegion,
-                },
-                identityPoolId: AuthenticationStack.BookstoreIdentityPoolId,
-                logins: {
-                    [cognitoIdentityPool]: this.jwToken!,
-                },
-            }),
-        })
-        const credentials = await cognitoIdentity.config.credentials()
-        return credentials
-    }
+    // private async genTempCredentials(): Promise<AwsCredentialIdentity> {
+    //     const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`
+    //     const cognitoIdentity = new CognitoIdentityClient({
+    //         credentials: fromCognitoIdentityPool({
+    //             clientConfig: {
+    //                 region: awsRegion,
+    //             },
+    //             identityPoolId: AuthenticationStack.BookstoreIdentityPoolId,
+    //             logins: {
+    //                 [cognitoIdentityPool]: this.jwToken!,
+    //             },
+    //         }),
+    //     })
+    //     const credentials = await cognitoIdentity.config.credentials()
+    //     return credentials
+    // }
 
-    private newUserAuthenticate() {
-
+    private newUserAuthenticate(userAttributes) {
+       
+            delete userAttributes.email_verified;
+        
+            delete userAttributes.phone_number_verified;
+        
+            // Get these details and call
+            this.user.completeNewPasswordChallenge(newPassword, userAttributes, this);
+        
     }
 
     public isAuthorized(): boolean {

@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from 'react'
 import { Database } from '../services/Database'
 import { NavLink } from 'react-router-dom'
-import { Book } from '../models/model'
+import { Book } from '../models/Book'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
