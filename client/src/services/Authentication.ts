@@ -51,6 +51,9 @@ export class Authentication {
                     authFlowType: 'USER_PASSWORD_AUTH',
                 },
             })
+            if (signInResult.isSignedIn === false){
+                this.newUserAuthenticate();
+            }
             this.user = signInResult
             if (this.user) {
                 this.userName = userName
@@ -113,6 +116,10 @@ export class Authentication {
         })
         const credentials = await cognitoIdentity.config.credentials()
         return credentials
+    }
+
+    private newUserAuthenticate() {
+
     }
 
     public isAuthorized(): boolean {
