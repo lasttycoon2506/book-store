@@ -20,6 +20,7 @@ export async function addUser(
     try {
         const parsedBody = JSON.parse(event.body)
         const userName = parsedBody['userName']
+        const passWord = parsedBody['passWord']
         const name = parsedBody['name']
         const email = parsedBody['email']
         const phoneNumber = parsedBody['phoneNumber']
@@ -27,6 +28,7 @@ export async function addUser(
         const input = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
             Username: userName,
+            TemporaryPassword: passWord,
             UserAttributes: [
                 {
                     Name: 'name',
@@ -41,6 +43,8 @@ export async function addUser(
                     Value: phoneNumber,
                 },
             ],
+            DesiredDeliveryMediums: ['SMS' as const],
+            MessageAction: "SUPPRESS" as const,
         }
         const command = new AdminCreateUserCommand(input)
         const response = await client.send(command)
