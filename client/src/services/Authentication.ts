@@ -8,12 +8,19 @@ import {
     SignInOutput,
     signOut,
 } from '@aws-amplify/auth'
+import {
+    CognitoIdentityProviderClient,
+    GetUserCommand,
+} from '@aws-sdk/client-cognito-identity-provider' // ES Modules import
+
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
 import { User } from '../models/User'
 
-const awsRegion = 'us-east-1'
+const config = {
+    region: 'us-east-1',
+}
 
 Amplify.configure({
     Auth: {
@@ -30,6 +37,7 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
+    private cognitoClient = new CognitoIdentityProviderClient(config)
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -56,6 +64,13 @@ export class Authentication {
             if (this.user) {
                 this.userName = userName
                 await this.getSessionToken()
+                const input = {
+                    // GetUserRequest
+                    AccessToken: this.jwToken, // required
+                }
+                const command = new GetUserCommand(input)
+                const response = await this.cognitoClient.send(command)
+                console.log(response)
                 return this.user
             }
             return false
