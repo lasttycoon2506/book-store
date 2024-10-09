@@ -17,7 +17,9 @@ import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
 import { User } from '../models/User'
+import { LicenseManagerClient } from '@aws-sdk/client-license-manager'
 
+const awsRegion: string = 'us-east-1';
 const config = {
     region: 'us-east-1',
 }
@@ -38,6 +40,7 @@ export class Authentication {
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
     private cognitoClient = new CognitoIdentityProviderClient(config)
+    const client = new LicenseManagerClient(config);
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -47,7 +50,7 @@ export class Authentication {
     public setCurrentUser(currentUser: AuthUser | undefined): void {
         this.user = currentUser
     }
-
+    
     async login(
         userName: string,
         password: string
@@ -130,6 +133,18 @@ export class Authentication {
     //     const credentials = await cognitoIdentity.config.credentials()
     //     return credentials
     // }
+
+    function tester() {
+        const client = new LicenseManagerClient(config);
+        const input = { // GetAccessTokenRequest
+        Token: "STRING_VALUE", // required
+        TokenProperties: [ // MaxSize3StringList
+            "STRING_VALUE",
+        ],
+        };
+        const command = new GetAccessTokenCommand(input);
+        const response = await client.send(command);
+    }
 
     public isAuthorized(): boolean {
         if (this.user) {
