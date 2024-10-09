@@ -10,14 +10,15 @@ import {
 } from '@aws-amplify/auth'
 import {
     CognitoIdentityProviderClient,
+    DescribeUserPoolClientCommand,
     GetUserCommand,
-} from '@aws-sdk/client-cognito-identity-provider' // ES Modules import
+} from '@aws-sdk/client-cognito-identity-provider' 
 
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
 import { User } from '../models/User'
-import { LicenseManagerClient } from '@aws-sdk/client-license-manager'
+
 
 const awsRegion: string = 'us-east-1';
 const config = {
@@ -39,12 +40,13 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    private cognitoClient = new CognitoIdentityProviderClient(config)
-    const client = new LicenseManagerClient(config);
+    private cognitoClient = new CognitoIdentityProviderClient(Amplify.getConfig)
+    
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
         return user1
+        
     }
 
     public setCurrentUser(currentUser: AuthUser | undefined): void {
@@ -67,13 +69,21 @@ export class Authentication {
             if (this.user) {
                 this.userName = userName
                 await this.getSessionToken()
-                const input = {
-                    // GetUserRequest
-                    AccessToken: this.jwToken, // required
-                }
-                const command = new GetUserCommand(input)
-                const response = await this.cognitoClient.send(command)
-                console.log(response)
+                // const input = {
+                //     // GetUserRequest
+                //     AccessToken: this.jwToken, // required
+                // }
+                // const command = new GetUserCommand(input)
+                // const response = await this.cognitoClient.send(command)
+                // console.log(response)
+                const input = { // DescribeUserPoolClientRequest
+                    UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
+                    ClientId: AuthenticationStack.BookstoreUserPoolClientId, // required
+                   
+                  };
+                  const command = new DescribeUserPoolClientCommand(input);
+                  const response = await this.cognitoClient.send(command);
+                  console.log(response)
                 return this.user
             }
             return false
@@ -134,17 +144,7 @@ export class Authentication {
     //     return credentials
     // }
 
-    function tester() {
-        const client = new LicenseManagerClient(config);
-        const input = { // GetAccessTokenRequest
-        Token: "STRING_VALUE", // required
-        TokenProperties: [ // MaxSize3StringList
-            "STRING_VALUE",
-        ],
-        };
-        const command = new GetAccessTokenCommand(input);
-        const response = await client.send(command);
-    }
+   
 
     public isAuthorized(): boolean {
         if (this.user) {
