@@ -12,6 +12,7 @@ import {
     CognitoIdentityProviderClient,
     DescribeUserPoolClientCommand,
     GetUserCommand,
+    ListUsersCommand,
 } from '@aws-sdk/client-cognito-identity-provider' 
 
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
@@ -40,7 +41,7 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    private cognitoClient = new CognitoIdentityProviderClient(Amplify.getConfig)
+    
     
 
     public async getCurUser(): Promise<AuthUser> {
@@ -76,14 +77,7 @@ export class Authentication {
                 // const command = new GetUserCommand(input)
                 // const response = await this.cognitoClient.send(command)
                 // console.log(response)
-                const input = { // DescribeUserPoolClientRequest
-                    UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
-                    ClientId: AuthenticationStack.BookstoreUserPoolClientId, // required
-                   
-                  };
-                  const command = new DescribeUserPoolClientCommand(input);
-                  const response = await this.cognitoClient.send(command);
-                  console.log(response)
+                await this.tester()
                 return this.user
             }
             return false
@@ -120,30 +114,47 @@ export class Authentication {
         this.userName = userName
     }
 
-    // private async getTempCredentials(): Promise<AwsCredentialIdentity> {
-    //     if (!this.tempCredentials) {
-    //         this.tempCredentials = await this.genTempCredentials()
-    //     }
-    //     return this.tempCredentials
-    // }
+    private async getTempCredentials(): Promise<AwsCredentialIdentity> {
+        if (!this.tempCredentials) {
+            this.tempCredentials = await this.genTempCredentials()
+        }
+        return this.tempCredentials
+    }
 
-    // private async genTempCredentials(): Promise<AwsCredentialIdentity> {
-    //     const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`
-    //     const cognitoIdentity = new CognitoIdentityClient({
-    //         credentials: fromCognitoIdentityPool({
-    //             clientConfig: {
-    //                 region: awsRegion,
-    //             },
-    //             identityPoolId: AuthenticationStack.BookstoreIdentityPoolId,
-    //             logins: {
-    //                 [cognitoIdentityPool]: this.jwToken!,
-    //             },
-    //         }),
-    //     })
-    //     const credentials = await cognitoIdentity.config.credentials()
-    //     return credentials
-    // }
+    private async genTempCredentials(): Promise<AwsCredentialIdentity> {
+        const cognitoIdentityPool = `cognito-idp.${awsRegion}.amazonaws.com/${AuthenticationStack.BookstoreUserPoolId}`
+        const cognitoIdentity = new CognitoIdentityClient({
+            credentials: fromCognitoIdentityPool({
+                clientConfig: {
+                    region: awsRegion,
+                },
+                identityPoolId: AuthenticationStack.BookstoreIdentityPoolId,
+                logins: {
+                    [cognitoIdentityPool]: this.jwToken!,
+                },
+            }),
+        })
+        const credentials = await cognitoIdentity.config.credentials()
+        return credentials
+    }
 
+    private async tester() {
+        const tempCreds = await this.genTempCredentials()
+        const cognitoClient = new CognitoIdentityProviderClient({ region: 'us-east-1', credentials: tempCreds})
+        const input = { // ListUsersRequest
+            UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
+            // AttributesToGet: [ // SearchedAttributeNamesListType
+            //   "STRING_VALUE",
+            // ],
+            // Limit: Number("int"),
+            // PaginationToken: "STRING_VALUE",
+            // Filter: "STRING_VALUE",
+          };
+          const command = new ListUsersCommand(input);
+          const response = await cognitoClient.send(command);
+          console.log(response)
+          const tt = 4;
+    }
    
 
     public isAuthorized(): boolean {
