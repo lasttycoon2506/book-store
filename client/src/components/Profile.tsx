@@ -15,9 +15,9 @@ type profileProps = {
 }
 
 export default function Profile({userProfile}: profileProps) {
-    const [name, setName] = useState(userProfile.name)
-    const [email, setEmail] = useState(userProfile.email)
-    const [phone, setPhone] = useState(userProfile.phone)
+    const [name, setName] = useState<string>(userProfile.name)
+    const [email, setEmail] = useState<string>(userProfile.email)
+    const [phone, setPhone] = useState<string>(userProfile.phone)
 
     return (
         <Box display="flex" alignItems="center" justifyContent="center">
