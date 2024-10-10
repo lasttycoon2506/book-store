@@ -62,7 +62,7 @@ export class Authentication {
             if (this.user) {
                 this.userName = userName
                 await this.getSessionToken()
-                await this.tester()
+                await this.getUserInfo()
                 return this.user
             }
             return false
@@ -123,7 +123,7 @@ export class Authentication {
         return credentials
     }
 
-    private async tester() {
+    private async getUserInfo() {
         const tempCreds = await this.getTempCredentials()
         const cognitoClient = new CognitoIdentityProviderClient({
             region: 'us-east-1',
@@ -134,12 +134,10 @@ export class Authentication {
         }
         const command = new ListUsersCommand(input)
         const response = await cognitoClient.send(command)
-
         response.Users?.forEach((element) => {
             if (element.Username === this.userName && element.Attributes) {
                 element.Attributes.forEach((element) => {
                     if (element.Name === 'email') {
-                        console.log(element.Value)
                         this.userProfile.email = element.Value!
                     }
                     if (element.Name === 'phone_number') {
