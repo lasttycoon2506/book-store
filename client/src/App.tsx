@@ -11,6 +11,7 @@ import Profile from './components/Profile'
 const authentication = new Authentication()
 const database = new Database(authentication)
 
+//gets initial logged-in user (if-any)
 authentication
     .getCurUser()
     .then((user) => {
@@ -46,7 +47,7 @@ function App(): JSX.Element {
                 },
                 {
                     path: '/profile',
-                    element: <Profile authentication={authentication}/>,
+                    element: <Profile authentication={authentication} />,
                 },
                 {
                     path: '/books',

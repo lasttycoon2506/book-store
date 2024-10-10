@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { User } from '../models/User'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
@@ -19,6 +19,12 @@ export default function Profile({authentication}: profileProps) {
     const [name, setName] = useState<string>(authentication.getUserProfile().name)
     const [email, setEmail] = useState<string>(authentication.getUserProfile().email)
     const [phone, setPhone] = useState<string>(authentication.getUserProfile().phone)
+
+   
+    let tt = authentication.getUserProfile()
+    console.log(tt)
+
+    
 
     return (
         <Box display="flex" alignItems="center" justifyContent="center">
