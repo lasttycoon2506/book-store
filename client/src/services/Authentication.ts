@@ -35,9 +35,7 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    private userProfile: User = {name: '', email: '', phone: ''}
-    
-    
+    private userProfile: User = { name: '', email: '', phone: '' }
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -132,27 +130,27 @@ export class Authentication {
             credentials: tempCreds,
         })
         const input = {
-            UserPoolId: AuthenticationStack.BookstoreUserPoolId, 
+            UserPoolId: AuthenticationStack.BookstoreUserPoolId,
         }
         const command = new ListUsersCommand(input)
         const response = await cognitoClient.send(command)
-       
-            response.Users?.forEach((element) => {
-                if (element.Username === this.userName && element.Attributes) {
-                    element.Attributes.forEach(element => {
-                        if (element.Name === 'email') {
-                            console.log(element.Value)
-                            this.userProfile.email = element.Value!
-                        }
-                        if (element.Name === 'phone_number') {
-                            this.userProfile.phone = element.Value!
-                        }
-                        if (element.Name === 'name') {
-                            this.userProfile.name = element.Value!
-                        }
-                    })
-                }
-            })
+
+        response.Users?.forEach((element) => {
+            if (element.Username === this.userName && element.Attributes) {
+                element.Attributes.forEach((element) => {
+                    if (element.Name === 'email') {
+                        console.log(element.Value)
+                        this.userProfile.email = element.Value!
+                    }
+                    if (element.Name === 'phone_number') {
+                        this.userProfile.phone = element.Value!
+                    }
+                    if (element.Name === 'name') {
+                        this.userProfile.name = element.Value!
+                    }
+                })
+            }
+        })
     }
 
     public isAuthorized(): boolean {
