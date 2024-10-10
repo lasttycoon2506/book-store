@@ -40,6 +40,7 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
+    private userProfile: User | undefined
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -152,12 +153,21 @@ export class Authentication {
         }
         const command = new ListUsersCommand(input)
         const response = await cognitoClient.send(command)
-      
+       
             response.Users?.forEach((element) => {
                 if (element.Username === this.userName && element.Attributes) {
-                    element.Attributes.forEach(
-                        element => console.log(element.Value)
-                    )
+                    element.Attributes.forEach(element => {
+                        if (element.Name === 'email') {
+                            this.user.email = element.Value
+                        }
+                        if (element.Name === 'phone_number') {
+                            phone_number = element.Value!
+                        }
+                        if (element.Name === 'name') {
+                            name = element.Value!
+                        }
+                    })
+                    console.log(phone_number, name, email)
                 }
             })
         
