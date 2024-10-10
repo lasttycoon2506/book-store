@@ -154,7 +154,7 @@ export class Authentication extends Stack {
                     's3:PutObjectAcl',
                     'cognito-idp:ListUsers',
                 ],
-                resources: [booksBucket.bucketArn + '/*'],
+                resources: [booksBucket.bucketArn + '/*', this.userPool.userPoolArn],
             })
         )
     }
