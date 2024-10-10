@@ -6,6 +6,7 @@ import { Authentication } from './services/Authentication'
 import CreateBook from './components/CreateBook'
 import { Database } from './services/Database'
 import ViewAllBooks from './components/ViewAllBooks'
+import Profile from './components/Profile'
 
 const authentication = new Authentication()
 const database = new Database(authentication)
@@ -45,7 +46,7 @@ function App(): JSX.Element {
                 },
                 {
                     path: '/profile',
-                    element: <div> profile pg </div>,
+                    element: <Profile userProfile={authentication.userProfile}/>,
                 },
                 {
                     path: '/books',
