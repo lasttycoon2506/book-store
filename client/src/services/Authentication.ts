@@ -13,15 +13,14 @@ import {
     DescribeUserPoolClientCommand,
     GetUserCommand,
     ListUsersCommand,
-} from '@aws-sdk/client-cognito-identity-provider' 
+} from '@aws-sdk/client-cognito-identity-provider'
 
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
 import { User } from '../models/User'
 
-
-const awsRegion: string = 'us-east-1';
+const awsRegion: string = 'us-east-1'
 const config = {
     region: 'us-east-1',
 }
@@ -41,19 +40,16 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    
-    
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
         return user1
-        
     }
 
     public setCurrentUser(currentUser: AuthUser | undefined): void {
         this.user = currentUser
     }
-    
+
     async login(
         userName: string,
         password: string
@@ -139,9 +135,13 @@ export class Authentication {
     }
 
     private async tester() {
-        const tempCreds = await this.genTempCredentials()
-        const cognitoClient = new CognitoIdentityProviderClient({ region: 'us-east-1', credentials: tempCreds})
-        const input = { // ListUsersRequest
+        const tempCreds = await this.getTempCredentials()
+        const cognitoClient = new CognitoIdentityProviderClient({
+            region: 'us-east-1',
+            credentials: tempCreds,
+        })
+        const input = {
+            // ListUsersRequest
             UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
             // AttributesToGet: [ // SearchedAttributeNamesListType
             //   "STRING_VALUE",
@@ -149,13 +149,20 @@ export class Authentication {
             // Limit: Number("int"),
             // PaginationToken: "STRING_VALUE",
             // Filter: "STRING_VALUE",
-          };
-          const command = new ListUsersCommand(input);
-          const response = await cognitoClient.send(command);
-          console.log(response)
-          const tt = 4;
+        }
+        const command = new ListUsersCommand(input)
+        const response = await cognitoClient.send(command)
+      
+            response.Users?.forEach((element) => {
+                if (element.Username === this.userName && element.Attributes) {
+                    element.Attributes.forEach(
+                        element => console.log(element.Value)
+                    )
+                }
+            })
+        
+        const tt = 4
     }
-   
 
     public isAuthorized(): boolean {
         if (this.user) {
