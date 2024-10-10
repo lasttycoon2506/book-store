@@ -7,6 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import PhoneIcon from '@mui/icons-material/Phone'
 import DraftsIcon from '@mui/icons-material/Drafts'
+import FaceIcon from '@mui/icons-material/Face'
 import ListItemText from '@mui/material/ListItemText'
 
 type profileProps = {
@@ -23,20 +24,22 @@ export default function Profile(userProfile: profileProps) {
             <nav aria-label="main mailbox folders">
                 <List>
                     <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <PhoneIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Inbox" />
-                        </ListItemButton>
+                        <ListItemIcon>
+                            <FaceIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Name" />
                     </ListItem>
                     <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <DraftsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Drafts" />
-                        </ListItemButton>
+                        <ListItemIcon>
+                            <PhoneIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Phone" />
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemIcon>
+                            <DraftsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Email" />
                     </ListItem>
                 </List>
             </nav>
