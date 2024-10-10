@@ -10,8 +10,6 @@ import {
 } from '@aws-amplify/auth'
 import {
     CognitoIdentityProviderClient,
-    DescribeUserPoolClientCommand,
-    GetUserCommand,
     ListUsersCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 
@@ -21,9 +19,6 @@ import { AwsCredentialIdentity } from '@aws-sdk/types'
 import { User } from '../models/User'
 
 const awsRegion: string = 'us-east-1'
-const config = {
-    region: 'us-east-1',
-}
 
 Amplify.configure({
     Auth: {
@@ -69,13 +64,6 @@ export class Authentication {
             if (this.user) {
                 this.userName = userName
                 await this.getSessionToken()
-                // const input = {
-                //     // GetUserRequest
-                //     AccessToken: this.jwToken, // required
-                // }
-                // const command = new GetUserCommand(input)
-                // const response = await this.cognitoClient.send(command)
-                // console.log(response)
                 await this.tester()
                 return this.user
             }
@@ -144,14 +132,7 @@ export class Authentication {
             credentials: tempCreds,
         })
         const input = {
-            // ListUsersRequest
-            UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
-            // AttributesToGet: [ // SearchedAttributeNamesListType
-            //   "STRING_VALUE",
-            // ],
-            // Limit: Number("int"),
-            // PaginationToken: "STRING_VALUE",
-            // Filter: "STRING_VALUE",
+            UserPoolId: AuthenticationStack.BookstoreUserPoolId, 
         }
         const command = new ListUsersCommand(input)
         const response = await cognitoClient.send(command)
@@ -172,8 +153,6 @@ export class Authentication {
                     })
                 }
             })
-        
-        const tt = 4
     }
 
     public isAuthorized(): boolean {
