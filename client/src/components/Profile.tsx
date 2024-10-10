@@ -14,31 +14,31 @@ type profileProps = {
     userProfile: User
 }
 
-export default function Profile(userProfile: profileProps) {
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [phone, setPhone] = useState()
+export default function Profile({userProfile}: profileProps) {
+    const [name, setName] = useState(userProfile.name)
+    const [email, setEmail] = useState(userProfile.email)
+    const [phone, setPhone] = useState(userProfile.phone)
 
     return (
         <Box display="flex" alignItems="center" justifyContent="center">
             <List>
-                <ListItem disablePadding>
+                <ListItem>
                     <ListItemIcon>
                         <FaceIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Name" />
+                    <ListItemText primary={name} />
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemIcon>
                         <PhoneIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Phone" />
+                    <ListItemText primary={phone} />
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemIcon>
                         <DraftsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Email" />
+                    <ListItemText primary={email} />
                 </ListItem>
             </List>
         </Box>
