@@ -15,16 +15,16 @@ type profileProps = {
     authentication: Authentication
 }
 
-export default function Profile({authentication}: profileProps) {
-    const [name, setName] = useState<string>(authentication.getUserProfile().name)
-    const [email, setEmail] = useState<string>(authentication.getUserProfile().email)
-    const [phone, setPhone] = useState<string>(authentication.getUserProfile().phone)
-
-   
-    let tt = authentication.getUserProfile()
-    console.log(tt)
-
-    
+export default function Profile({ authentication }: profileProps) {
+    const [name, setName] = useState<string>(
+        authentication.getUserProfile().name
+    )
+    const [email, setEmail] = useState<string>(
+        authentication.getUserProfile().email
+    )
+    const [phone, setPhone] = useState<string>(
+        authentication.getUserProfile().phone
+    )
 
     return (
         <Box display="flex" alignItems="center" justifyContent="center">
