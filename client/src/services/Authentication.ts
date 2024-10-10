@@ -40,7 +40,9 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    private userProfile: User | undefined
+    private userProfile: User = {name: '', email: '', phone: ''}
+    
+    
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -158,16 +160,16 @@ export class Authentication {
                 if (element.Username === this.userName && element.Attributes) {
                     element.Attributes.forEach(element => {
                         if (element.Name === 'email') {
-                            this.user.email = element.Value
+                            console.log(element.Value)
+                            this.userProfile.email = element.Value!
                         }
                         if (element.Name === 'phone_number') {
-                            phone_number = element.Value!
+                            this.userProfile.phone = element.Value!
                         }
                         if (element.Name === 'name') {
-                            name = element.Value!
+                            this.userProfile.name = element.Value!
                         }
                     })
-                    console.log(phone_number, name, email)
                 }
             })
         
