@@ -20,29 +20,27 @@ export default function Profile(userProfile: profileProps) {
     const [phone, setPhone] = useState()
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            <nav aria-label="main mailbox folders">
-                <List>
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                            <FaceIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Name" />
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                            <PhoneIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Phone" />
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                            <DraftsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Email" />
-                    </ListItem>
-                </List>
-            </nav>
+        <Box display="flex" alignItems="center" justifyContent="center">
+            <List>
+                <ListItem disablePadding>
+                    <ListItemIcon>
+                        <FaceIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Name" />
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemIcon>
+                        <PhoneIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Phone" />
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemIcon>
+                        <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Email" />
+                </ListItem>
+            </List>
         </Box>
     )
 }
