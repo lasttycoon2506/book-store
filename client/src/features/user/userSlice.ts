@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../app/store'
+import { User } from '../../models/User'
 
-// Define a type for the slice state
-interface CounterState {
-  value: number
+
+interface UserState {
+  value: User
 }
 
-// Define the initial state using that type
-const initialState: CounterState = {
-  value: 0,
+
+const initialState: UserState = {
+  value: {userName: '', name: '', email: '', phone: ''}
 }
 
 export const counterSlice = createSlice({
