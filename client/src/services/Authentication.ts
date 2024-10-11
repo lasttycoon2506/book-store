@@ -49,7 +49,7 @@ export class Authentication {
     async login(
         userName: string,
         password: string
-    ): Promise<Object | boolean | undefined> {
+    ): Promise<SignInOutput | boolean | undefined> {
         try {
             const signInResult: SignInOutput = await signIn({
                 username: userName,
@@ -64,7 +64,7 @@ export class Authentication {
                 await this.getSessionToken()
                 await this.getUserInfo()
                 this.userProfile.userName = userName
-                return { user: this.user, userProfile: this.userProfile }
+                return this.user
             }
             return false
         } catch (error) {
