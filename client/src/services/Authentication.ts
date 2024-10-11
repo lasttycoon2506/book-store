@@ -16,7 +16,7 @@ import {
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
-import { User } from '../models/User'
+import { UserProfile } from '../models/UserProfile'
 
 const awsRegion: string = 'us-east-1'
 
@@ -35,7 +35,7 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    private userProfile: User = {userName: '', name: '', email: '', phone: '' }
+    private userProfile: UserProfile = {userName: '', name: '', email: '', phone: '' }
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -49,7 +49,7 @@ export class Authentication {
     async login(
         userName: string,
         password: string
-    ): Promise<SignInOutput | boolean | undefined> {
+    ): Promise<Object | boolean | undefined> {
         try {
             const signInResult: SignInOutput = await signIn({
                 username: userName,
@@ -64,7 +64,7 @@ export class Authentication {
                 await this.getSessionToken()
                 await this.getUserInfo()
                 this.userProfile.userName = userName
-                return this.user
+                return { user: this.user, userProfile: this.userProfile }
             }
             return false
         } catch (error) {

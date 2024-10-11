@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { User } from '../models/User'
+import { User } from '../models/UserProfile'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
