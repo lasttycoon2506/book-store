@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
+import { useAppDispatch } from '../app/hooks'
 
 type LoginProps = {
     authentication: Authentication
@@ -14,6 +15,7 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
     const [password, setPassword] = useState<string>('')
     const [errorMsg, setErrorMsg] = useState<string>('')
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     function refreshPage(): void {
         window.location.reload()
@@ -24,7 +26,7 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         if (userName && password) {
             const loginResult = await authentication.login(userName, password)
             if (loginResult) {
-                authentication.getUserProfile()
+                const tt = authentication.getUserProfile()
                 navigate('/')
                 refreshPage()
             } else {

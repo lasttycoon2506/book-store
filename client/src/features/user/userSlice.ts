@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../app/store'
-import { User } from '../../models/UserProfile'
+import { UserProfile } from '../../models/UserProfile'
 
 
-interface UserState {
-  value: User
+interface UserProfileState {
+  value: UserProfile
 }
 
 
-const initialState: UserState = {
+const initialState: UserProfileState = {
   value: {userName: '', name: '', email: '', phone: ''}
 }
 
-export const userSlice = createSlice({
-  name: 'user',
+export const userProfileSlice = createSlice({
+  name: 'userProfile',
   initialState,
   reducers: {
-    increment: (state) => {
+    save: (state) => {
       state.value 
     },
     decrement: (state) => {
@@ -29,9 +29,9 @@ export const userSlice = createSlice({
   },
 })
 
-export const { increment, decrement, incrementByAmount } = userSlice.actions
+export const { increment, decrement, incrementByAmount } = userProfileSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectUser = (state: RootState) => state.user.value
+export const selectUser = (state: RootState) => state.userProfile.value
 
-export default userSlice.reducer
+export default userProfileSlice.reducer
