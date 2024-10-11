@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import { useAppDispatch } from '../app/hooks'
+import { save } from '../features/user/userSlice'
 
 type LoginProps = {
     authentication: Authentication
@@ -26,7 +27,8 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         if (userName && password) {
             const loginResult = await authentication.login(userName, password)
             if (loginResult) {
-                const tt = authentication.getUserProfile()
+                const userProfile = authentication.getUserProfile()
+                dispatch(save(userProfile))
                 navigate('/')
                 refreshPage()
             } else {

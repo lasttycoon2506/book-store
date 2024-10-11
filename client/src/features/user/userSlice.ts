@@ -23,6 +23,6 @@ export const userProfileSlice = createSlice({
 export const { save } = userProfileSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectUser = (state: RootState) => state.userProfile.value
+export const selectUserProfile = (state: RootState) => state.userProfile.value
 
 export default userProfileSlice.reducer

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { User } from '../models/UserProfile'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -10,6 +9,7 @@ import DraftsIcon from '@mui/icons-material/Drafts'
 import FaceIcon from '@mui/icons-material/Face'
 import ListItemText from '@mui/material/ListItemText'
 import { Authentication } from '../services/Authentication'
+import { useAppSelector } from '../app/hooks'
 
 type profileProps = {
     authentication: Authentication
@@ -25,6 +25,9 @@ export default function Profile({ authentication }: profileProps) {
     const [phone, setPhone] = useState<string>(
         authentication.getUserProfile().phone
     )
+    const userProfile = useAppSelector((state) => state.userProfile.value)
+    console.log(userProfile)
+    const tt = 4
 
     return (
         <Box display="flex" alignItems="center" justifyContent="center">
