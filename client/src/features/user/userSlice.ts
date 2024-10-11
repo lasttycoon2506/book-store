@@ -12,27 +12,26 @@ const initialState: UserState = {
   value: {userName: '', name: '', email: '', phone: ''}
 }
 
-export const counterSlice = createSlice({
-  name: 'counter',
-  // `createSlice` will infer the state type from the `initialState` argument
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
+    save: (state) => {
+    //   state.value += 1
     },
     decrement: (state) => {
-      state.value -= 1
+    //   state.value -= 1
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
+    //   state.value += action.payload
     },
   },
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+// export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.counter.value
+export const selectUser = (state: RootState) => state.user.value
 
-export default counterSlice.reducer
+export default userSlice.reducer
