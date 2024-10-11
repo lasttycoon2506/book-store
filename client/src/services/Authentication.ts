@@ -35,7 +35,7 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    private userProfile: User = { name: '', email: '', phone: '' }
+    private userProfile: User = {userName: '', name: '', email: '', phone: '' }
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -63,6 +63,7 @@ export class Authentication {
                 this.userName = userName
                 await this.getSessionToken()
                 await this.getUserInfo()
+                this.userProfile.userName = userName
                 return this.user
             }
             return false
