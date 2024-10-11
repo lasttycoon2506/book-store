@@ -15,14 +15,20 @@ export const userProfileSlice = createSlice({
     initialState,
     reducers: {
         save: (state, action: PayloadAction<UserProfile>) => {
-            state.value = action.payload
+            state.value.userName = action.payload.userName
+            state.value.name = action.payload.name
+            state.value.email = action.payload.email
+            state.value.phone = action.payload.phone
         },
     },
+    selectors: {
+        selectUserProfile: userProfile => userProfile.value,
+      },
 })
 
 export const { save } = userProfileSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectUserProfile = (state: RootState) => state.userProfile.value
+export const selectUserProfile = userProfileSlice.selectors
 
 export default userProfileSlice.reducer
