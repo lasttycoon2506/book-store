@@ -10,10 +10,15 @@ import FaceIcon from '@mui/icons-material/Face'
 import ListItemText from '@mui/material/ListItemText'
 import { Authentication } from '../services/Authentication'
 import { useAppSelector } from '../app/hooks'
+import { selectUserProfile } from '../features/user/userSlice'
+import Login from './Login'
 
 type profileProps = {
     authentication: Authentication
 }
+
+import { fetchUserAttributes } from 'aws-amplify/auth';
+
 
 export default function Profile({ authentication }: profileProps) {
     const [name, setName] = useState<string>(
@@ -25,11 +30,20 @@ export default function Profile({ authentication }: profileProps) {
     const [phone, setPhone] = useState<string>(
         authentication.getUserProfile().phone
     )
-    const userProfile = useAppSelector((state) => state.userProfile.value)
-    console.log(userProfile)
-    const tt = 4
+    // const tt = useAppSelector(selectUserProfile)
+
+    async function tester() {
+        const tt = await fetchUserAttributes();
+        setName(tt.name!)
+    }
+
+    useEffect(() => {
+        tester()
+        
+    }, [])
 
     return (
+        <div>
         <Box display="flex" alignItems="center" justifyContent="center">
             <List>
                 <ListItem>
@@ -52,5 +66,6 @@ export default function Profile({ authentication }: profileProps) {
                 </ListItem>
             </List>
         </Box>
+        </div>
     )
 }

@@ -3,8 +3,9 @@ import { userProfileSlice } from '../features/user/userSlice'
 
 export const store = configureStore({
     reducer: {
-        userProfile: userProfileSlice.reducer,
-    },
+        userProfile: userProfileSlice.reducer
+    }
+    
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
