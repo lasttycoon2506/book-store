@@ -8,12 +8,9 @@ import {
     SignInOutput,
     signOut,
 } from '@aws-amplify/auth'
-
-
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
-
 
 const awsRegion: string = 'us-east-1'
 
@@ -118,13 +115,10 @@ export class Authentication {
         return credentials
     }
 
-
-
     public isAuthorized(): boolean {
         if (this.user) {
             return true
         }
         return false
     }
-
 }
