@@ -14,7 +14,7 @@ type CreateBookProps = {
     database: Database
 }
 
-export default function CreateBook({ database }: CreateBookProps): JSX.Element {
+export default function AddBook({ database }: CreateBookProps): JSX.Element {
     const [title, setTitle] = useState<string>('')
     const [author, setAuthor] = useState<string>('')
     const [pages, setPages] = useState<number>()

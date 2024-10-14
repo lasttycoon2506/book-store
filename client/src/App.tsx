@@ -3,10 +3,10 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Login from './components/Login'
 import { Authentication } from './services/Authentication'
-import CreateBook from './components/CreateBook'
 import { Database } from './services/Database'
 import ViewAllBooks from './components/ViewAllBooks'
 import Profile from './components/Profile'
+import AddBook from './components/AddBook'
 
 const authentication = new Authentication()
 const database = new Database(authentication)
@@ -55,7 +55,7 @@ function App(): JSX.Element {
                 },
                 {
                     path: '/createBook',
-                    element: <CreateBook database={database} />,
+                    element: <AddBook database={database} />,
                 },
             ],
         },
