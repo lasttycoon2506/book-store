@@ -18,12 +18,8 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
     const [password, setPassword] = useState<string>('')
     const [errorMsg, setErrorMsg] = useState<string>('')
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
-    // const tt = useAppSelector(selectUserProfile)
     
-    
-    
-    
+ 
     
 
     function refreshPage(): void {
@@ -35,8 +31,6 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         if (userName && password) {
             const loginResult = await authentication.login(userName, password)
             if (loginResult) {
-                const userProfile = authentication.getUserProfile()
-                dispatch(save(userProfile))
             
                 navigate('/')
                 refreshPage()
