@@ -47,7 +47,7 @@ function App(): JSX.Element {
                 },
                 {
                     path: '/profile',
-                    element: <Profile authentication={authentication} />,
+                    element: <Profile />,
                 },
                 {
                     path: '/books',
