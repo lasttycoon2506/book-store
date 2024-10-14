@@ -8,15 +8,12 @@ import {
     SignInOutput,
     signOut,
 } from '@aws-amplify/auth'
-import {
-    CognitoIdentityProviderClient,
-    ListUsersCommand,
-} from '@aws-sdk/client-cognito-identity-provider'
+
 
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity'
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-providers'
 import { AwsCredentialIdentity } from '@aws-sdk/types'
-import { UserProfile } from '../models/UserProfile'
+
 
 const awsRegion: string = 'us-east-1'
 
