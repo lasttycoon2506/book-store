@@ -2,7 +2,6 @@ import {
     CognitoIdentityProviderClient,
     AdminCreateUserCommand,
     AdminSetUserPasswordCommand,
-    AdminAddUserToGroupCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
 import {
@@ -58,15 +57,6 @@ export async function addUser(
         }
         const setUserPw = new AdminSetUserPasswordCommand(setUserPwInput)
         const setUserPwResponse = await client.send(setUserPw)
-        
-const client3 = new CognitoIdentityProviderClient(config);
-const input3 = { // AdminAddUserToGroupRequest
-  UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
-  Username: userName, // required
-  GroupName: "authenticated", // required
-};
-const command3 = new AdminAddUserToGroupCommand(input3);
-const response = await client.send(command3);
 
         return {
             statusCode: 201,
