@@ -40,7 +40,7 @@ export default function Profile({ authentication }: profileProps) {
 
     useEffect(() => {
         getUserAttributes()
-    }, [])
+    }, [name, email, phone])
 
     return (
         <div>
