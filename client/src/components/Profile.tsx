@@ -22,13 +22,13 @@ import { fetchUserAttributes } from 'aws-amplify/auth';
 
 export default function Profile({ authentication }: profileProps) {
     const [name, setName] = useState<string>(
-        authentication.getUserProfile().name
+        
     )
     const [email, setEmail] = useState<string>(
-        authentication.getUserProfile().email
+     
     )
     const [phone, setPhone] = useState<string>(
-        authentication.getUserProfile().phone
+    
     )
 
     async function getUserAttributes() {
