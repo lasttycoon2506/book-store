@@ -30,16 +30,16 @@ export default function Profile({ authentication }: profileProps) {
     const [phone, setPhone] = useState<string>(
         authentication.getUserProfile().phone
     )
-    // const tt = useAppSelector(selectUserProfile)
 
-    async function tester() {
-        const tt = await fetchUserAttributes();
-        setName(tt.name!)
+    async function getUserAttributes() {
+        const userAttributes = await fetchUserAttributes();
+        setName(userAttributes.name!)
+        setEmail(userAttributes.email!)
+        setPhone(userAttributes.phone_number!)
     }
 
     useEffect(() => {
-        tester()
-        
+        getUserAttributes()
     }, [])
 
     return (
