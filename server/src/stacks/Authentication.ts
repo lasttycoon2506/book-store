@@ -150,8 +150,6 @@ export class Authentication extends Stack {
             new PolicyStatement({
                 effect: Effect.ALLOW,
                 actions: [
-                    's3:PutObject',
-                    's3:PutObjectAcl',
                     'cognito-idp:ListUsers',
                 ],
                 resources: [booksBucket.bucketArn + '/*', this.userPool.userPoolArn],
