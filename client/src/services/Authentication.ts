@@ -35,7 +35,6 @@ export class Authentication {
     private userName: string = ''
     public jwToken: string | undefined
     private tempCredentials: AwsCredentialIdentity | undefined
-    private userProfile: UserProfile = {userName: '', name: '', email: '', phone: '' }
 
     public async getCurUser(): Promise<AuthUser> {
         const user1 = await getCurrentUser()
@@ -62,8 +61,6 @@ export class Authentication {
             if (this.user) {
                 this.userName = userName
                 await this.getSessionToken()
-                await this.getUserInfo()
-                this.userProfile.userName = userName
                 return this.user
             }
             return false
@@ -124,33 +121,7 @@ export class Authentication {
         return credentials
     }
 
-    private async getUserInfo() {
-        const tempCreds = await this.getTempCredentials()
-        const cognitoClient = new CognitoIdentityProviderClient({
-            region: 'us-east-1',
-            credentials: tempCreds,
-        })
-        const input = {
-            UserPoolId: AuthenticationStack.BookstoreUserPoolId,
-        }
-        const command = new ListUsersCommand(input)
-        const response = await cognitoClient.send(command)
-        response.Users?.forEach((element) => {
-            if (element.Username === this.userName && element.Attributes) {
-                element.Attributes.forEach((element) => {
-                    if (element.Name === 'email') {
-                        this.userProfile.email = element.Value!
-                    }
-                    if (element.Name === 'phone_number') {
-                        this.userProfile.phone = element.Value!
-                    }
-                    if (element.Name === 'name') {
-                        this.userProfile.name = element.Value!
-                    }
-                })
-            }
-        })
-    }
+
 
     public isAuthorized(): boolean {
         if (this.user) {
@@ -159,7 +130,4 @@ export class Authentication {
         return false
     }
 
-    public getUserProfile() {
-        return this.userProfile
-    }
 }
