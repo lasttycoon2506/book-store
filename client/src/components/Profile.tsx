@@ -17,22 +17,15 @@ type profileProps = {
     authentication: Authentication
 }
 
-import { fetchUserAttributes } from 'aws-amplify/auth';
-
+import { fetchUserAttributes } from 'aws-amplify/auth'
 
 export default function Profile({ authentication }: profileProps) {
-    const [name, setName] = useState<string>(
-        
-    )
-    const [email, setEmail] = useState<string>(
-     
-    )
-    const [phone, setPhone] = useState<string>(
-    
-    )
+    const [name, setName] = useState<string>()
+    const [email, setEmail] = useState<string>()
+    const [phone, setPhone] = useState<string>()
 
     async function getUserAttributes() {
-        const userAttributes = await fetchUserAttributes();
+        const userAttributes = await fetchUserAttributes()
         setName(userAttributes.name!)
         setEmail(userAttributes.email!)
         setPhone(userAttributes.phone_number!)
@@ -44,28 +37,28 @@ export default function Profile({ authentication }: profileProps) {
 
     return (
         <div>
-        <Box display="flex" alignItems="center" justifyContent="center">
-            <List>
-                <ListItem>
-                    <ListItemIcon>
-                        <FaceIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={name} />
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemIcon>
-                        <PhoneIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={phone} />
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemIcon>
-                        <DraftsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={email} />
-                </ListItem>
-            </List>
-        </Box>
+            <Box display="flex" alignItems="center" justifyContent="center">
+                <List>
+                    <ListItem>
+                        <ListItemIcon>
+                            <FaceIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={name} />
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemIcon>
+                            <PhoneIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={phone} />
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemIcon>
+                            <DraftsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={email} />
+                    </ListItem>
+                </List>
+            </Box>
         </div>
     )
 }
