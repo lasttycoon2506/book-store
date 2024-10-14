@@ -2,6 +2,7 @@ import {
     CognitoIdentityProviderClient,
     AdminCreateUserCommand,
     AdminSetUserPasswordCommand,
+    AdminAddUserToGroupCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
 import {
@@ -13,7 +14,7 @@ const config = {
     region: 'us-east-1',
 }
 
-const client = new CognitoIdentityProviderClient(config)
+const cognitoClient = new CognitoIdentityProviderClient(config)
 
 export async function addUser(
     event: APIGatewayProxyEvent
@@ -48,7 +49,7 @@ export async function addUser(
             MessageAction: 'SUPPRESS' as const,
         }
         const createUser = new AdminCreateUserCommand(newUserInput)
-        const newUserResponse = await client.send(createUser)
+        const newUserResponse = await cognitoClient.send(createUser)
         const setUserPwInput = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
             Username: userName,
@@ -56,7 +57,15 @@ export async function addUser(
             Permanent: true,
         }
         const setUserPw = new AdminSetUserPasswordCommand(setUserPwInput)
-        const setUserPwResponse = await client.send(setUserPw)
+        const setUserPwResponse = await cognitoClient.send(setUserPw)
+       
+const input3 = { // AdminAddUserToGroupRequest
+  UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
+  Username: userName, // required
+  GroupName: "admins", // required
+};
+const command3 = new AdminAddUserToGroupCommand(input3);
+const response = await cognitoClient.send(command3);
 
         return {
             statusCode: 201,
