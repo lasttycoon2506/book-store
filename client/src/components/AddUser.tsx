@@ -7,6 +7,10 @@ export default function AddUser() {
     const [userName, setUserName] = useState<string>()
     const [password, setPassword] = useState<string>()
 
+    function submit() {
+        //backend code here
+    }
+
     return (
         <div role="main">
             <Box
@@ -32,7 +36,7 @@ export default function AddUser() {
                 />
                 <br />
                 <Button variant="contained" size="large" type="submit">
-                    Login
+                    Create
                 </Button>
             </Box>
             <br />
