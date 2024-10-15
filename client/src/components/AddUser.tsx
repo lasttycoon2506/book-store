@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { SyntheticEvent, useState } from "react";
 import { Database } from "../services/Database";
+import { User } from "../models/User";
 
 type AddUserProps = {
     database: Database
@@ -17,7 +18,8 @@ export default function AddUser({database}: AddUserProps) {
  
 
     function submit(event: SyntheticEvent) {
-        database
+        const user: User = {userName: userName!, password: password!, name: name!, email: email!, phone: phone!}
+        database.addUser(user)
     }
 
     return (
