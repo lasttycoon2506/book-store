@@ -1,6 +1,7 @@
 import { Authentication } from './Authentication'
 import { ApiStack } from '../../../server/outputs.json'
 import { Book } from '../models/Book'
+import { User } from '../models/User'
 
 const bookstoreApiUrl = ApiStack.booksApiEndpoint04E49D0B + 'books'
 
@@ -47,6 +48,17 @@ export class Database {
     }
 
     async deleteBook(bookId: string): Promise<number> {
+        const deleteResponse = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: this.authentication.jwToken!,
+            },
+        })
+        const deleteResponseJson = await deleteResponse.json()
+        return deleteResponseJson.$metadata.httpStatusCode
+    }
+
+    async addUser(user: User): Promise<number> {
         const deleteResponse = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
             method: 'DELETE',
             headers: {
