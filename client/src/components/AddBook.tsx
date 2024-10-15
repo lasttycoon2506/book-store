@@ -17,10 +17,10 @@ type AddBookProps = {
 export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [title, setTitle] = useState<string>('')
     const [author, setAuthor] = useState<string>('')
-    const [pages, setPages] = useState<number>()
+    const [pages, setPages] = useState<number>(0)
     const [genre, setGenre] = useState<string>('')
-    const [price, setPrice] = useState<number>()
-    const [stock, setStock] = useState<number>()
+    const [price, setPrice] = useState<number>(0)
+    const [stock, setStock] = useState<number>(0)
     const [alert, setAlert] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
     const [errorTitle, setErrorTitle] = useState<boolean>(false)

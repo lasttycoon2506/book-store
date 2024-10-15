@@ -15,11 +15,11 @@ type AddUserProps = {
 }
 
 export default function AddUser({ database }: AddUserProps) {
-    const [userName, setUserName] = useState<string>()
-    const [password, setPassword] = useState<string>()
-    const [name, setName] = useState<string>()
-    const [email, setEmail] = useState<string>()
-    const [phone, setPhone] = useState<string>()
+    const [userName, setUserName] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [phone, setPhone] = useState<string>('')
     const [alert, setAlert] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
 
@@ -90,6 +90,7 @@ export default function AddUser({ database }: AddUserProps) {
                             <></>
                         )}
                     </div>
+                    <br />
                     <TextField
                         value={userName}
                         label="User Name"
