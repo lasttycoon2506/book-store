@@ -36,6 +36,15 @@ export default function AddUser({ database }: AddUserProps) {
         }
     }
 
+    function resetFields(): void {
+        setUserName('')
+        setPassword('')
+        setName('')
+        setEmail('')
+        setPhone('')
+        
+    }
+
     return (
         <div role="main">
             <Box
