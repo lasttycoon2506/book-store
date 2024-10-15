@@ -46,7 +46,9 @@ export default function ViewAllBooks({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [books])
 
-    const setUpdatedTitle: GridValueSetter<GridValidRowModel> = (value, row
+    const setUpdatedTitle: GridValueSetter<GridValidRowModel> = (
+        value,
+        row
     ) => {
         const title = value
         return { ...row, title }
@@ -165,7 +167,7 @@ export default function ViewAllBooks({
         },
     ]
 
-    function loadAllBooks(): JSX.Element {
+    function renderAllBooks(): JSX.Element {
         if (!database.isAuthorized()) {
             return (
                 <>
@@ -195,5 +197,5 @@ export default function ViewAllBooks({
         )
     }
 
-    return loadAllBooks()
+    return renderAllBooks()
 }

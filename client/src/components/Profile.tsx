@@ -24,34 +24,36 @@ export default function Profile() {
     useEffect(() => {
         getUserAttributes()
     }, [name, email, phone])
-
-    return (
-        <div>
-            <Box display="flex" alignItems="center" justifyContent="center">
-                <List>
-                    <br />
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                            <FaceIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={name} />
-                    </ListItem>
-                    <br />
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                            <PhoneIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={phone} />
-                    </ListItem>
-                    <br />
-                    <ListItem disablePadding>
-                        <ListItemIcon>
-                            <DraftsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={email} />
-                    </ListItem>
-                </List>
-            </Box>
-        </div>
-    )
+    function renderProfile(): JSX.Element {
+        return (
+            <div>
+                <Box display="flex" alignItems="center" justifyContent="center">
+                    <List>
+                        <br />
+                        <ListItem disablePadding>
+                            <ListItemIcon>
+                                <FaceIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={name} />
+                        </ListItem>
+                        <br />
+                        <ListItem disablePadding>
+                            <ListItemIcon>
+                                <PhoneIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={phone} />
+                        </ListItem>
+                        <br />
+                        <ListItem disablePadding>
+                            <ListItemIcon>
+                                <DraftsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={email} />
+                        </ListItem>
+                    </List>
+                </Box>
+            </div>
+        )
+    }
+    return renderProfile()
 }

@@ -225,5 +225,5 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         )
     }
 
-    return <div>{renderForm()}</div>
+    return renderForm()
 }

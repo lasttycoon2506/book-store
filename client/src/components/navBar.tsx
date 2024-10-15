@@ -42,8 +42,7 @@ export default function NavBar({ authentication }: NavBarProps): JSX.Element {
             navPg = ''
         } else if (navPg === 'ADD BOOK') {
             navPg = 'addBook'
-        }
-        else if (navPg === 'ADD USER') {
+        } else if (navPg === 'ADD USER') {
             navPg = 'addUser'
         }
         navigate(`/${navPg}`)
@@ -55,68 +54,72 @@ export default function NavBar({ authentication }: NavBarProps): JSX.Element {
         setUserName('')
         navigate('/')
     }
-
-    return (
-        <AppBar position="static" sx={{ bgcolor: 'green' }}>
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <LibraryBooksIcon
-                        sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
-                    />
-                    <Box
-                        sx={{
-                            flexGrow: 1,
-                            display: { xs: 'none', md: 'flex' },
-                        }}
-                    >
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleNavPg}
-                                sx={{
-                                    my: 2,
-                                    mx: 3,
-                                    color: 'white',
-                                    display: 'block',
-                                    fontSize: 'large',
-                                }}
-                                size="large"
-                            >
-                                {page}
-                            </Button>
-                        ))}
-                    </Box>
-                    <Box>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu}>
-                                {userName ? (
-                                    <AccountCircle fontSize="large" />
-                                ) : (
-                                    <NavLink to={'/login'}> Login </NavLink>
-                                )}
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
+    function renderNavBar(): JSX.Element {
+        return (
+            <AppBar position="static" sx={{ bgcolor: 'green' }}>
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters>
+                        <LibraryBooksIcon
+                            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+                        />
+                        <Box
+                            sx={{
+                                flexGrow: 1,
+                                display: { xs: 'none', md: 'flex' },
                             }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
                         >
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                        </Menu>
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
-    )
+                            {pages.map((page) => (
+                                <Button
+                                    key={page}
+                                    onClick={handleNavPg}
+                                    sx={{
+                                        my: 2,
+                                        mx: 3,
+                                        color: 'white',
+                                        display: 'block',
+                                        fontSize: 'large',
+                                    }}
+                                    size="large"
+                                >
+                                    {page}
+                                </Button>
+                            ))}
+                        </Box>
+                        <Box>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu}>
+                                    {userName ? (
+                                        <AccountCircle fontSize="large" />
+                                    ) : (
+                                        <NavLink to={'/login'}> Login </NavLink>
+                                    )}
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                <MenuItem onClick={handleLogout}>
+                                    Logout
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                    </Toolbar>
+                </Container>
+            </AppBar>
+        )
+    }
+    return renderNavBar()
 }

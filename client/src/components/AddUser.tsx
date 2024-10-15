@@ -135,5 +135,5 @@ export default function AddUser({ database }: AddUserProps) {
             </div>
         )
     }
-    return <>{renderForm()}</>
+    return renderForm()
 }

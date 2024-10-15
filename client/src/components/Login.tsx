@@ -40,37 +40,40 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         }
     }
 
-    return (
-        <div role="main">
-            <h2>Please login</h2>
-            <Box
-                component="form"
-                sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-                noValidate
-                autoComplete="off"
-                onSubmit={(e) => submit(e)}
-            >
-                <TextField
-                    value={userName}
-                    label="User Name"
-                    variant="outlined"
-                    onChange={(e) => setUserName(e.target.value)}
-                />
+    function renderForm(): JSX.Element {
+        return (
+            <div role="main">
+                <h2>Please login</h2>
+                <Box
+                    component="form"
+                    sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+                    noValidate
+                    autoComplete="off"
+                    onSubmit={(e) => submit(e)}
+                >
+                    <TextField
+                        value={userName}
+                        label="User Name"
+                        variant="outlined"
+                        onChange={(e) => setUserName(e.target.value)}
+                    />
+                    <br />
+                    <TextField
+                        value={password}
+                        label="Password"
+                        variant="outlined"
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <br />
+                    <Button variant="contained" size="large" type="submit">
+                        Login
+                    </Button>
+                </Box>
                 <br />
-                <TextField
-                    value={password}
-                    label="Password"
-                    variant="outlined"
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <br />
-                <Button variant="contained" size="large" type="submit">
-                    Login
-                </Button>
-            </Box>
-            <br />
-            {showLoginResult()}
-        </div>
-    )
+                {showLoginResult()}
+            </div>
+        )
+    }
+    return renderForm()
 }
