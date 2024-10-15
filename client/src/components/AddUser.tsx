@@ -11,6 +11,10 @@ type AddUserProps = {
 export default function AddUser({database}: AddUserProps) {
     const [userName, setUserName] = useState<string>()
     const [password, setPassword] = useState<string>()
+    const [name, setName] = useState<string>()
+    const [email, setEmail] = useState<string>()
+    const [phone, setPhone] = useState<string>()
+ 
 
     function submit(event: SyntheticEvent) {
         database
