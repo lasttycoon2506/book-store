@@ -1,31 +1,34 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import { SyntheticEvent, useState } from "react";
-import { Database } from "../services/Database";
-import { User } from "../models/User";
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import { SyntheticEvent, useState } from 'react'
+import { Database } from '../services/Database'
+import { User } from '../models/User'
 
 type AddUserProps = {
     database: Database
 }
 
-export default function AddUser({database}: AddUserProps) {
+export default function AddUser({ database }: AddUserProps) {
     const [userName, setUserName] = useState<string>()
     const [password, setPassword] = useState<string>()
     const [name, setName] = useState<string>()
     const [email, setEmail] = useState<string>()
     const [phone, setPhone] = useState<string>()
- 
 
     async function submit(event: SyntheticEvent): Promise<void> {
         if (userName && password && name && email && phone) {
             try {
-        const user: User = {userName: userName, password: password, name: name, email: email, phone: phone}
-        const addUserResponse = await database.addUser(user)
-
-            }
-            catch (error) {
-            console.error(error)
+                const user: User = {
+                    userName: userName,
+                    password: password,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                }
+                const addUserResponse = await database.addUser(user)
+            } catch (error) {
+                console.error(error)
             }
         }
     }
