@@ -10,11 +10,11 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
 
-type CreateBookProps = {
+type AddBookProps = {
     database: Database
 }
 
-export default function AddBook({ database }: CreateBookProps): JSX.Element {
+export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [title, setTitle] = useState<string>('')
     const [author, setAuthor] = useState<string>('')
     const [pages, setPages] = useState<number>()

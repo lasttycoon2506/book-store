@@ -1,14 +1,18 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
+import { Database } from "../services/Database";
 
+type AddUserProps = {
+    database: Database
+}
 export default function AddUser() {
     const [userName, setUserName] = useState<string>()
     const [password, setPassword] = useState<string>()
 
-    function submit(event: any) {
-        //backend code here
+    function submit(event: SyntheticEvent) {
+        
     }
 
     return (
