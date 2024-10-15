@@ -14,7 +14,7 @@ export default function Profile() {
     const [email, setEmail] = useState<string>()
     const [phone, setPhone] = useState<string>()
 
-    async function getUserAttributes() {
+    async function getUserAttributes(): Promise<void> {
         const userAttributes = await fetchUserAttributes()
         setName(userAttributes.name!)
         setEmail(userAttributes.email!)
