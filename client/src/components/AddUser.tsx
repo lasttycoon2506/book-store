@@ -8,6 +8,7 @@ import Collapse from '@mui/material/Collapse'
 import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
+import { NavLink } from 'react-router-dom'
 
 type AddUserProps = {
     database: Database
@@ -48,7 +49,15 @@ export default function AddUser({ database }: AddUserProps) {
         setPhone('')
         
     }
-
+    function renderForm(): JSX.Element {
+    if (!database.isAuthorized()) {
+        return (
+            <>
+                <br />
+                <NavLink to={'/login'}> Must Login First</NavLink>
+            </>
+        )
+    }
     return (
         <div role="main">
             <Box
@@ -129,4 +138,10 @@ export default function AddUser({ database }: AddUserProps) {
             <br />
         </div>
     )
+}
+return (
+    <>
+        {renderForm()}
+    </>
+)
 }
