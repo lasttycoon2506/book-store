@@ -23,7 +23,7 @@ export class Database {
         return allBooks
     }
 
-    async addBook(book: Book): Promise<string> {
+    async addBook(book: Book): Promise<number> {
         const postResponse = await fetch(bookstoreApiUrl, {
             method: 'POST',
             body: JSON.stringify(book),
@@ -59,14 +59,15 @@ export class Database {
     }
 
     async addUser(user: User): Promise<number> {
-        const deleteResponse = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
-            method: 'DELETE',
+        const postResponse = await fetch(bookstoreApiUrl, {
+            method: 'POST',
+            body: JSON.stringify(book),
             headers: {
                 Authorization: this.authentication.jwToken!,
             },
         })
-        const deleteResponseJson = await deleteResponse.json()
-        return deleteResponseJson.$metadata.httpStatusCode
+        const postResponseJson = await postResponse.json()
+        return postResponseJson.id
     }
 
     public isAuthorized(): boolean {
