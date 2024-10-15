@@ -9,7 +9,7 @@ handler({httpMethod: 'POST',
             userName: "tester",
             name: 'jibby',
             email: 'chacha@gma',
-            phoneNumber:'+3853545847',
+            phone:'+3853545847',
             password: 'testeR123!'
             })
 } as any).then(result => console.log(result));

@@ -6,13 +6,13 @@ export async function updateBook(
     event: APIGatewayEvent,
     dbClient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
-    const parsedBody = JSON.parse(event.body)
-    const title = parsedBody['title']
-    const author = parsedBody['author']
-    const pages = parsedBody['pages']
-    const genre = parsedBody['genre']
-    const price = parsedBody['price']
-    const stock = parsedBody['stock']
+    const book = JSON.parse(event.body)
+    const title = book['title']
+    const author = book['author']
+    const pages = book['pages']
+    const genre = book['genre']
+    const price = book['price']
+    const stock = book['stock']
 
     try {
         const response = await dbClient.send(
