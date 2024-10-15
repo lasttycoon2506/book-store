@@ -17,7 +17,7 @@ type NavBarProps = {
     authentication: Authentication
 }
 
-const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book']
+const pages: string[] = ['Home', 'Profile', 'Books', 'Add Book', 'Add User']
 
 export default function NavBar({ authentication }: NavBarProps): JSX.Element {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
@@ -37,11 +37,14 @@ export default function NavBar({ authentication }: NavBarProps): JSX.Element {
     }
 
     function handleNavPg(event: React.MouseEvent<HTMLElement>): void {
-        let navPg = event.currentTarget.innerText.toLowerCase()
-        if (navPg === 'home') {
+        let navPg = event.currentTarget.innerText
+        if (navPg === 'HOME') {
             navPg = ''
-        } else if (navPg === 'add book') {
+        } else if (navPg === 'ADD BOOK') {
             navPg = 'addBook'
+        }
+        else if (navPg === 'ADD USER') {
+            navPg = 'addUser'
         }
         navigate(`/${navPg}`)
     }
