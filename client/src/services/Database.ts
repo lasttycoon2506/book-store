@@ -61,7 +61,7 @@ export class Database {
     async addUser(user: User): Promise<number> {
         const postResponse = await fetch(bookstoreApiUrl, {
             method: 'POST',
-            body: JSON.stringify(book),
+            body: JSON.stringify(user),
             headers: {
                 Authorization: this.authentication.jwToken!,
             },
