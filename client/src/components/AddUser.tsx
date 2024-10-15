@@ -4,6 +4,10 @@ import TextField from '@mui/material/TextField'
 import { SyntheticEvent, useState } from 'react'
 import { Database } from '../services/Database'
 import { User } from '../models/User'
+import Collapse from '@mui/material/Collapse'
+import Alert from '@mui/material/Alert'
+import IconButton from '@mui/material/IconButton'
+import CloseIcon from '@mui/icons-material/Close'
 
 type AddUserProps = {
     database: Database
@@ -54,6 +58,31 @@ export default function AddUser({ database }: AddUserProps) {
                 autoComplete="off"
                 onSubmit={(e) => submit(e)}
             >
+                <div>
+                    {alert ? (
+                        <Collapse in={alertOpen}>
+                            {' '}
+                            <Alert
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setAlertOpen(false)
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                            >
+                                User Created!
+                            </Alert>
+                        </Collapse>
+                    ) : (
+                        <></>
+                    )}
+                </div>
                 <TextField
                     value={userName}
                     label="User Name"
