@@ -59,7 +59,7 @@ function App(): JSX.Element {
                     element: <AddBook database={database} />,
                 },
                 {
-                    path: '/addUserk',
+                    path: '/addUser',
                     element: <AddUser database={database} />,
                 },
             ],
