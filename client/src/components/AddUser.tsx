@@ -40,6 +40,30 @@ export default function AddUser({database}: AddUserProps) {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <br />
+                <br />
+                <TextField
+                    value={name}
+                    label="Name"
+                    variant="outlined"
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <br />
+                <br />
+                <TextField
+                    value={email}
+                    label="Email"
+                    variant="outlined"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <br />
+                <br />
+                <TextField
+                    value={phone}
+                    label="Phone"
+                    variant="outlined"
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                <br />
                 <Button variant="contained" size="large" type="submit">
                     Create
                 </Button>
