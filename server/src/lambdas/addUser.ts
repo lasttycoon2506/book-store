@@ -75,7 +75,7 @@ export async function addUser(
         console.error(error)
         return {
             statusCode: 400,
-            body: error.message,
+            body: error,
         }
     }
 }

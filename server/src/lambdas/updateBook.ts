@@ -49,7 +49,7 @@ export async function updateBook(
     } catch (error) {
         return {
             statusCode: 400,
-            body: error.message,
+            body: error,
         }
     }
 }
