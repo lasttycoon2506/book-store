@@ -47,8 +47,8 @@ export class Database {
         return editResponseJson.$metadata.httpStatusCode
     }
 
-    async deleteBook(bookId: string): Promise<number> {
-        const deleteResponse = await fetch(`${bookstoreApiUrl}?id=${bookId}`, {
+    async deleteBook(id: string): Promise<number> {
+        const deleteResponse = await fetch(`${bookstoreApiUrl}?id=${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: this.authentication.jwToken!,

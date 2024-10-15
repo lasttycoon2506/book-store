@@ -24,6 +24,7 @@ export default function AddUser({ database }: AddUserProps) {
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
 
     async function submit(event: SyntheticEvent): Promise<void> {
+        event.preventDefault()
         if (userName && password && name && email && phone) {
             const user: User = {
                 userName: userName,
