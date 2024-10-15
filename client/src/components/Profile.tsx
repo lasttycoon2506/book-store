@@ -29,18 +29,21 @@ export default function Profile() {
         <div>
             <Box display="flex" alignItems="center" justifyContent="center">
                 <List>
-                    <ListItem>
+                    <br />
+                    <ListItem disablePadding>
                         <ListItemIcon>
                             <FaceIcon />
                         </ListItemIcon>
                         <ListItemText primary={name} />
                     </ListItem>
+                    <br />
                     <ListItem disablePadding>
                         <ListItemIcon>
                             <PhoneIcon />
                         </ListItemIcon>
                         <ListItemText primary={phone} />
                     </ListItem>
+                    <br />
                     <ListItem disablePadding>
                         <ListItemIcon>
                             <DraftsIcon />
