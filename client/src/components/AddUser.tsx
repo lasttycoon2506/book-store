@@ -15,10 +15,11 @@ export default function AddUser({ database }: AddUserProps) {
     const [name, setName] = useState<string>()
     const [email, setEmail] = useState<string>()
     const [phone, setPhone] = useState<string>()
+    const [alert, setAlert] = useState<boolean>(false)
+    const [alertOpen, setAlertOpen] = useState<boolean>(true)
 
     async function submit(event: SyntheticEvent): Promise<void> {
         if (userName && password && name && email && phone) {
-            try {
                 const user: User = {
                     userName: userName,
                     password: password,
@@ -27,9 +28,11 @@ export default function AddUser({ database }: AddUserProps) {
                     phone: phone,
                 }
                 const addUserResponse = await database.addUser(user)
-            } catch (error) {
-                console.error(error)
-            }
+                if (addUserResponse === 201) {
+                    setAlert(true)
+                    resetFields()
+                }
+
         }
     }
 
