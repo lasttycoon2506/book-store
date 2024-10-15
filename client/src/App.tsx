@@ -54,7 +54,7 @@ function App(): JSX.Element {
                     element: <ViewAllBooks database={database} />,
                 },
                 {
-                    path: '/createBook',
+                    path: '/addBook',
                     element: <AddBook database={database} />,
                 },
             ],

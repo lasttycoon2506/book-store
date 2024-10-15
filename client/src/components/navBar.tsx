@@ -41,7 +41,7 @@ export default function NavBar({ authentication }: NavBarProps): JSX.Element {
         if (navPg === 'home') {
             navPg = ''
         } else if (navPg === 'add book') {
-            navPg = 'createBook'
+            navPg = 'addBook'
         }
         navigate(`/${navPg}`)
     }
