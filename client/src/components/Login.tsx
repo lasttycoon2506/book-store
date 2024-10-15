@@ -23,12 +23,13 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         event.preventDefault()
         if (userName && password) {
             const loginResult = await authentication.login(userName, password)
-            if (loginResult) {
+            if (typeof loginResult === 'string') {
+                setErrorMsg(`${loginResult}`)
+            }
+            else if (loginResult) {
                 navigate('/')
                 refreshPage()
-            } else {
-                setErrorMsg('Invalid creds.')
-            }
+            } 
         } else {
             setErrorMsg('username & pw required')
         }
