@@ -17,9 +17,17 @@ export default function AddUser({database}: AddUserProps) {
     const [phone, setPhone] = useState<string>()
  
 
-    function submit(event: SyntheticEvent) {
-        const user: User = {userName: userName!, password: password!, name: name!, email: email!, phone: phone!}
-        database.addUser(user)
+    async function submit(event: SyntheticEvent): Promise<void> {
+        if (userName && password && name && email && phone) {
+            try {
+        const user: User = {userName: userName, password: password, name: name, email: email, phone: phone}
+        const addUserResponse = await database.addUser(user)
+
+            }
+            catch (error) {
+            console.error(error)
+            }
+        }
     }
 
     return (
