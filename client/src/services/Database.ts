@@ -22,7 +22,7 @@ export class Database {
         return allBooks
     }
 
-    async createBook(book: Book): Promise<string> {
+    async addBook(book: Book): Promise<string> {
         const postResponse = await fetch(bookstoreApiUrl, {
             method: 'POST',
             body: JSON.stringify(book),

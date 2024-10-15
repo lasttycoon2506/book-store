@@ -47,7 +47,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 price: price,
                 stock: stock,
             }
-            const id = await database.createBook(book)
+            const id = await database.addBook(book)
             if (id) {
                 setAlert(true)
                 resetFields()

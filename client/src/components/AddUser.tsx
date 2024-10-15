@@ -7,12 +7,13 @@ import { Database } from "../services/Database";
 type AddUserProps = {
     database: Database
 }
-export default function AddUser() {
+
+export default function AddUser({database}: AddUserProps) {
     const [userName, setUserName] = useState<string>()
     const [password, setPassword] = useState<string>()
 
     function submit(event: SyntheticEvent) {
-        
+        database
     }
 
     return (
