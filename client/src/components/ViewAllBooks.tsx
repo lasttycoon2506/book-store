@@ -26,7 +26,7 @@ export default function ViewAllBooks({
     const [books, setBooks] = useState<Book[]>()
     const [loading, setLoading] = useState<boolean>(true)
 
-    const deleteBook = async (id: GridRowId): Promise<void> => {
+    async function deleteBook(id: GridRowId): Promise<void> {
         const statusCode = await database.deleteBook(id.toString())
         if (statusCode === 200) {
             setBooks(books?.filter((book) => book.id !== id))
@@ -35,7 +35,7 @@ export default function ViewAllBooks({
         }
     }
 
-    const getAllBooks = async (): Promise<void> => {
+    async function getAllBooks(): Promise<void> {
         const books = await database.getAllBooks()
         setLoading(false)
         setBooks(books)
@@ -46,9 +46,7 @@ export default function ViewAllBooks({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [books])
 
-    const setUpdatedTitle: GridValueSetter<GridValidRowModel> = (
-        value,
-        row
+    const setUpdatedTitle: GridValueSetter<GridValidRowModel> = (value, row
     ) => {
         const title = value
         return { ...row, title }
@@ -86,7 +84,7 @@ export default function ViewAllBooks({
         return { ...row, stock }
     }
 
-    const saveUpdatedCellToDb = async (updatedRow: Book): Promise<void> => {
+    async function saveUpdatedCellToDb(updatedRow: Book): Promise<void> {
         const statusCode = await database.editBook(updatedRow)
         if (statusCode !== 200) {
             console.error('updated from DB failed')

@@ -26,17 +26,17 @@ export default function NavBar({ authentication }: NavBarProps): JSX.Element {
     )
     const navigate = useNavigate()
 
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>): void => {
+    function handleOpenUserMenu(event: React.MouseEvent<HTMLElement>): void {
         if (userName) {
             setAnchorElUser(event.currentTarget)
         }
     }
 
-    const handleCloseUserMenu = (): void => {
+    function handleCloseUserMenu(): void {
         setAnchorElUser(null)
     }
 
-    const handleNavPg = (event: React.MouseEvent<HTMLElement>): void => {
+    function handleNavPg(event: React.MouseEvent<HTMLElement>): void {
         let navPg = event.currentTarget.innerText.toLowerCase()
         if (navPg === 'home') {
             navPg = ''
@@ -46,7 +46,7 @@ export default function NavBar({ authentication }: NavBarProps): JSX.Element {
         navigate(`/${navPg}`)
     }
 
-    const handleLogout = (): void => {
+    function handleLogout(): void {
         setAnchorElUser(null)
         authentication.logout()
         setUserName('')

@@ -30,7 +30,7 @@ export default function AddBook({ database }: CreateBookProps): JSX.Element {
     const [errorPrice, setErrorPrice] = useState<boolean>(false)
     const [errorStock, setErrorStock] = useState<boolean>(false)
 
-    const submit = async (event: SyntheticEvent): Promise<void> => {
+    async function submit(event: SyntheticEvent): Promise<void> {
         event.preventDefault()
         isTitleEmpty(title)
         isAuthorEmpty(author)

@@ -7,7 +7,7 @@ export default function AddUser() {
     const [userName, setUserName] = useState<string>()
     const [password, setPassword] = useState<string>()
 
-    function submit() {
+    function submit(event: any) {
         //backend code here
     }
 

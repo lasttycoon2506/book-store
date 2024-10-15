@@ -19,7 +19,7 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         window.location.reload()
     }
 
-    const submit = async (event: SyntheticEvent): Promise<void> => {
+    async function submit(event: SyntheticEvent): Promise<void> {
         event.preventDefault()
         if (userName && password) {
             const loginResult = await authentication.login(userName, password)
