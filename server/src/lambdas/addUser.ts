@@ -20,12 +20,12 @@ export async function addUser(
     event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> {
     try {
-        const parsedBody = JSON.parse(event.body)
-        const userName = parsedBody['userName']
-        const password = parsedBody['password']
-        const name = parsedBody['name']
-        const email = parsedBody['email']
-        const phoneNumber = parsedBody['phoneNumber']
+        const user = JSON.parse(event.body)
+        const userName = user['userName']
+        const password = user['password']
+        const name = user['name']
+        const email = user['email']
+        const phoneNumber = user['phone']
 
         const newUserInput = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
@@ -59,13 +59,13 @@ export async function addUser(
         const setUserPw = new AdminSetUserPasswordCommand(setUserPwInput)
         const setUserPwResponse = await cognitoClient.send(setUserPw)
        
-const input3 = { // AdminAddUserToGroupRequest
-  UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
-  Username: userName, // required
-  GroupName: "admins", // required
-};
-const command3 = new AdminAddUserToGroupCommand(input3);
-const response = await cognitoClient.send(command3);
+// const input3 = { // AdminAddUserToGroupRequest
+//   UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
+//   Username: userName, // required
+//   GroupName: "admins", // required
+// };
+// const command3 = new AdminAddUserToGroupCommand(input3);
+// const response = await cognitoClient.send(command3);
 
         return {
             statusCode: 201,
