@@ -7,6 +7,7 @@ import { Database } from './services/Database'
 import ViewAllBooks from './components/ViewAllBooks'
 import Profile from './components/Profile'
 import AddBook from './components/AddBook'
+import AddUser from './components/AddUser'
 
 const authentication = new Authentication()
 const database = new Database(authentication)
@@ -56,6 +57,10 @@ function App(): JSX.Element {
                 {
                     path: '/addBook',
                     element: <AddBook database={database} />,
+                },
+                {
+                    path: '/addUserk',
+                    element: <AddUser database={database} />,
                 },
             ],
         },
