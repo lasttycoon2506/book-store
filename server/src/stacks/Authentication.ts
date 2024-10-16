@@ -155,15 +155,6 @@ export class Authentication extends Stack {
                 resources: [booksBucket.bucketArn + '/*', this.userPool.userPoolArn],
             })
         )
-        this.authenticatedRole.addToPolicy(
-            new PolicyStatement({
-                effect: Effect.ALLOW,
-                actions: [
-                    'cognito-idp:ListUsers',
-                ],
-                resources: [booksBucket.bucketArn + '/*', this.userPool.userPoolArn],
-            })
-        )
     }
     private attachRoles() {
         new CfnIdentityPoolRoleAttachment(this, 'AttachRoles', {
