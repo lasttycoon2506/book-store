@@ -25,7 +25,6 @@ export class Data extends Stack {
                         HttpMethods.PUT,
                     ],
                     allowedOrigins: ['*'],
-                    allowedHeaders: ['*'],
                 },
             ],
             objectOwnership: ObjectOwnership.OBJECT_WRITER,

@@ -69,7 +69,7 @@ export async function addUser(
 
         return {
             statusCode: 201,
-            body: JSON.stringify(setUserPwResponse),
+            body: JSON.stringify(newUserResponse),
         }
     } catch (error) {
         console.error(error)

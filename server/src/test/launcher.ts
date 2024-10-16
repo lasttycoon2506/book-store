@@ -15,13 +15,13 @@ handler({httpMethod: 'POST',
 } as any).then(result => console.log(result));
 
 
-// handler({httpMethod: 'POST',
-//     body: JSON.stringify({
-//             title: "tester4",
-//             author: 'jibby',
-//             pages: '8',
-//             genre:'lit',
-//             price: '56',
-//             stock: '3'
-//             })
-// } as any).then(result => console.log(result));
+handler({httpMethod: 'POST',
+    body: JSON.stringify({
+            title: "tester4",
+            author: 'jibby',
+            pages: '8',
+            genre:'lit',
+            price: '56',
+            stock: '3'
+            })
+} as any).then(result => console.log(result));
