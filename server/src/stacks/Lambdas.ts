@@ -31,14 +31,17 @@ export class Lambdas extends Stack {
         booksLambda.addToRolePolicy(
             new PolicyStatement({
                 effect: Effect.ALLOW,
-                resources: [props.booksTable.tableArn, AuthenticationStack.ExportsOutputFnGetAttBookstoreUserPool751DBDD9Arn9ED2C3EE],
+                resources: [
+                    props.booksTable.tableArn,
+                    AuthenticationStack.ExportsOutputFnGetAttBookstoreUserPool751DBDD9Arn9ED2C3EE,
+                ],
                 actions: [
                     'dynamodb:PutItem',
                     'dynamodb:Scan',
                     'dynamodb:GetItem',
                     'dynamodb:UpdateItem',
                     'dynamodb:DeleteItem',
-                    'cognito-idp:AdminCreateUser'
+                    'cognito-idp:AdminCreateUser',
                 ],
             })
         )
