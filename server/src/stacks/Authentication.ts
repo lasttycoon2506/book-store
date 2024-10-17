@@ -151,12 +151,16 @@ export class Authentication extends Stack {
                 effect: Effect.ALLOW,
                 actions: [
                     'cognito-idp:ListUsers',
-                    'cognito-idp:AdminCreateUser'
+                    'cognito-idp:AdminCreateUser',
                 ],
-                resources: [booksBucket.bucketArn + '/*', this.userPool.userPoolArn],
+                resources: [
+                    booksBucket.bucketArn + '/*',
+                    this.userPool.userPoolArn,
+                ],
             })
         )
     }
+
     private attachRoles() {
         new CfnIdentityPoolRoleAttachment(this, 'AttachRoles', {
             identityPoolId: this.identityPool.ref,
