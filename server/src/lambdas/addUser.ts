@@ -68,8 +68,8 @@ export async function addUser(
 // const response = await cognitoClient.send(command3);
 
         return {
-            statusCode: 201,
-            body: JSON.stringify(newUserResponse),
+            statusCode: 200,
+            body: JSON.stringify(newUserResponse.$metadata.httpStatusCode),
         }
     } catch (error) {
         console.error(error)

@@ -146,11 +146,12 @@ export class Authentication extends Stack {
                 'sts:AssumeRoleWithWebIdentity'
             ),
         })
-        this.adminRole.addToPolicy(
+        this.authenticatedRole.addToPolicy(
             new PolicyStatement({
                 effect: Effect.ALLOW,
                 actions: [
                     'cognito-idp:ListUsers',
+                    'cognito-idp:AdminCreateUser'
                 ],
                 resources: [booksBucket.bucketArn + '/*', this.userPool.userPoolArn],
             })
