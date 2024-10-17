@@ -6,6 +6,7 @@ import { ITable } from 'aws-cdk-lib/aws-dynamodb'
 import { Runtime } from 'aws-cdk-lib/aws-lambda'
 import { join } from 'path'
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam'
+import { AuthenticationStack } from '../../outputs.json'
 
 interface booksTableProps extends StackProps {
     booksTable: ITable
@@ -30,13 +31,14 @@ export class Lambdas extends Stack {
         booksLambda.addToRolePolicy(
             new PolicyStatement({
                 effect: Effect.ALLOW,
-                resources: [props.booksTable.tableArn],
+                resources: [props.booksTable.tableArn, AuthenticationStack.ExportsOutputFnGetAttBookstoreUserPool751DBDD9Arn9ED2C3EE],
                 actions: [
                     'dynamodb:PutItem',
                     'dynamodb:Scan',
                     'dynamodb:GetItem',
                     'dynamodb:UpdateItem',
                     'dynamodb:DeleteItem',
+                    'cognito-idp:AdminCreateUser'
                 ],
             })
         )
