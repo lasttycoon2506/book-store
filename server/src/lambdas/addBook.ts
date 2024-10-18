@@ -28,15 +28,14 @@ export async function addBook(
             price: book.price,
             stock: book.stock,
         })
-
         if (!result.success) {
             return {
                 statusCode: 400,
                 body: JSON.stringify(result.error.issues),
             }
         }
-        result.data.id = genRandomUUID()
 
+        result.data.id = genRandomUUID()
         const response = await dbclient.send(
             new PutItemCommand({
                 TableName: process.env.TABLE_NAME,

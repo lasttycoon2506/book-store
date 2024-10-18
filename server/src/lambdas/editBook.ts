@@ -1,6 +1,10 @@
 import { DynamoDBClient, UpdateItemCommand } from '@aws-sdk/client-dynamodb'
 import { marshall } from '@aws-sdk/util-dynamodb'
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { Book as BookModel } from '../models/Book'
+import { z } from 'zod'
+
+type Book = z.infer<typeof BookModel>
 
 export async function editBook(
     event: APIGatewayEvent,
@@ -12,14 +16,6 @@ export async function editBook(
             body: JSON.stringify('body missing'),
         }
     }
-    const book = JSON.parse(event.body)
-    const title = book['title']
-    const author = book['author']
-    const pages = book['pages']
-    const genre = book['genre']
-    const price = book['price']
-    const stock = book['stock']
-
     if (
         !event.queryStringParameters ||
         !('id' in event.queryStringParameters)
@@ -31,6 +27,22 @@ export async function editBook(
     }
 
     try {
+        const book: Book = JSON.parse(event.body)
+        const result = BookModel.safeParse({
+            title: book.title,
+            author: book.author,
+            pages: book.pages,
+            genre: book.genre,
+            price: book.price,
+            stock: book.stock,
+        })
+        if (!result.success) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify(result.error.issues),
+            }
+        }
+
         const response = await dbClient.send(
             new UpdateItemCommand({
                 Key: {
@@ -45,12 +57,12 @@ export async function editBook(
                     '#S': 'stock',
                 },
                 ExpressionAttributeValues: {
-                    ':t': marshall(title),
-                    ':a': marshall(author),
-                    ':pg': marshall(pages),
-                    ':g': marshall(genre),
-                    ':pr': marshall(price),
-                    ':s': marshall(stock),
+                    ':t': marshall(result.data.title),
+                    ':a': marshall(result.data.author),
+                    ':pg': marshall(result.data.pages),
+                    ':g': marshall(result.data.genre),
+                    ':pr': marshall(result.data.price),
+                    ':s': marshall(result.data.stock),
                 },
                 TableName: process.env.TABLE_NAME,
                 UpdateExpression:
