@@ -8,21 +8,34 @@ import {
     APIGatewayProxyEvent,
     APIGatewayProxyResult,
 } from 'aws-lambda/trigger/api-gateway-proxy'
-import { User } from '../models/User.ts'
+import { User as UserModel } from '../models/User.ts'
+import { z } from 'zod'
 
 const config = {
     region: 'us-east-1',
 }
 
 const cognitoClient = new CognitoIdentityProviderClient(config)
+type User = z.infer<typeof UserModel>
 
 export async function addUser(
     event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> {
-    User
     try {
-        
-        const user = JSON.parse(event.body)
+        if (!event.body) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify(' body is null'),
+            }
+        }
+        const user: User = JSON.parse(event.body)
+        UserModel.safeParse({
+            username: user.userName,
+            password: user.password,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+        })
         const userName = user['userName']
         const password = user['password']
         const name = user['name']
@@ -60,14 +73,14 @@ export async function addUser(
         }
         const setUserPw = new AdminSetUserPasswordCommand(setUserPwInput)
         const setUserPwResponse = await cognitoClient.send(setUserPw)
-       
-// const input3 = { // AdminAddUserToGroupRequest
-//   UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
-//   Username: userName, // required
-//   GroupName: "admins", // required
-// };
-// const command3 = new AdminAddUserToGroupCommand(input3);
-// const response = await cognitoClient.send(command3);
+
+        // const input3 = { // AdminAddUserToGroupRequest
+        //   UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
+        //   Username: userName, // required
+        //   GroupName: "admins", // required
+        // };
+        // const command3 = new AdminAddUserToGroupCommand(input3);
+        // const response = await cognitoClient.send(command3);
 
         return {
             statusCode: 201,
@@ -76,7 +89,7 @@ export async function addUser(
     } catch (error) {
         return {
             statusCode: 400,
-            body: JSON.stringify(error.message),
+            body: JSON.stringify((error as Error).message),
         }
     }
 }
