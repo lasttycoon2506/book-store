@@ -27,7 +27,12 @@ async function handler(
             break
         }
         case 'POST': {
-            if (event.body.includes('userName')) {
+            if (!event.body) {
+                response = {
+                    statusCode: 400,
+                    body: JSON.stringify('body missing'),
+                }
+            } else if (event.body.includes('userName')) {
                 const postUserResponse = await addUser(event)
                 response = postUserResponse
             } else {
@@ -48,8 +53,8 @@ async function handler(
         }
     }
 
-    addCorsHeader(response)
-    return response
+    addCorsHeader(response!)
+    return response!
 }
 
 export { handler }

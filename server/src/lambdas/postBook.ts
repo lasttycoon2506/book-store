@@ -7,6 +7,12 @@ export async function postBook(
     event: APIGatewayProxyEvent,
     dbclient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
+    if (!event.body) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify('body missing'),
+        }
+    }
     try {
         const book = JSON.parse(event.body)
         book.id = genRandomUUID()
@@ -24,7 +30,7 @@ export async function postBook(
     } catch (error) {
         return {
             statusCode: 400,
-            body: JSON.stringify(error.message),
+            body: JSON.stringify((error as Error).message),
         }
     }
 }

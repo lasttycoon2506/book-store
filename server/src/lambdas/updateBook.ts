@@ -6,6 +6,12 @@ export async function updateBook(
     event: APIGatewayEvent,
     dbClient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
+    if (!event.body) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify('body missing'),
+        }
+    }
     const book = JSON.parse(event.body)
     const title = book['title']
     const author = book['author']
@@ -13,6 +19,16 @@ export async function updateBook(
     const genre = book['genre']
     const price = book['price']
     const stock = book['stock']
+
+    if (
+        !event.queryStringParameters ||
+        !('id' in event.queryStringParameters)
+    ) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify('id or body missing'),
+        }
+    }
 
     try {
         const response = await dbClient.send(
@@ -49,7 +65,7 @@ export async function updateBook(
     } catch (error) {
         return {
             statusCode: 400,
-            body: JSON.stringify(error.message),
+            body: JSON.stringify((error as Error).message),
         }
     }
 }
