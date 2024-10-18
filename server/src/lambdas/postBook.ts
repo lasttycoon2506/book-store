@@ -25,7 +25,7 @@ export async function postBook(
         console.error(error)
         return {
             statusCode: 400,
-            body: error,
+            body: JSON.stringify(error.message),
         }
     }
 }

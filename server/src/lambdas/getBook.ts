@@ -33,7 +33,7 @@ export async function getBook(
             console.log(error)
             return {
                 statusCode: 400,
-                body: error,
+                body: JSON.stringify(error.message),
             }
         }
     } else {

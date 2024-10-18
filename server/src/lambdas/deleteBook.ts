@@ -26,7 +26,7 @@ export async function deleteBook(
         console.log(error)
         return {
             statusCode: 400,
-            body: error,
+            body: JSON.stringify(error.message),
         }
     }
 }
