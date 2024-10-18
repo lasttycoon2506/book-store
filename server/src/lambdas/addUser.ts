@@ -29,19 +29,25 @@ export async function addUser(
             }
         }
         const user: User = JSON.parse(event.body)
-        const parsedUser = UserModel.safeParse({
+        const result = UserModel.safeParse({
             userName: user.userName,
             password: user.password,
             name: user.name,
             email: user.email,
             phone: user.phone,
         })
-        
-        const userName = parsedUser.data?.userName
-        const password = parsedUser.data?.password
-        const name = parsedUser.data?.name
-        const email = parsedUser.data?.email
-        const phone = parsedUser.data?.phone
+        if (!result.success) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify(result.error.issues),
+            }
+        }
+
+        const userName = result.data?.userName
+        const password = result.data?.password
+        const name = result.data?.name
+        const email = result.data?.email
+        const phone = result.data?.phone
 
         const newUserInput = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
