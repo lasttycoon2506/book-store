@@ -4,7 +4,7 @@ import { getBook } from './getBook'
 import { getAllBooks } from './getAllBooks'
 import { addBook } from './addBook'
 import { deleteBook } from './deleteBook'
-import { updateBook } from './updateBook'
+import { editBook } from './editBook'
 import { addCorsHeader } from '../utils/corsHeader'
 import { addUser } from './addUser'
 
@@ -42,7 +42,7 @@ async function handler(
             break
         }
         case 'PUT': {
-            const putResponse = await updateBook(event, dbClient)
+            const putResponse = await editBook(event, dbClient)
             response = putResponse
             break
         }

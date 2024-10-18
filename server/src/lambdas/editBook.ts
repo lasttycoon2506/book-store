@@ -2,7 +2,7 @@ import { DynamoDBClient, UpdateItemCommand } from '@aws-sdk/client-dynamodb'
 import { marshall } from '@aws-sdk/util-dynamodb'
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda'
 
-export async function updateBook(
+export async function editBook(
     event: APIGatewayEvent,
     dbClient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
