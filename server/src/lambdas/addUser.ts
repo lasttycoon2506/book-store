@@ -72,7 +72,6 @@ export async function addUser(
             body: JSON.stringify(newUserResponse),
         }
     } catch (error) {
-        console.error(error)
         return {
             statusCode: 400,
             body: JSON.stringify(error.message),

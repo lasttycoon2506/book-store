@@ -17,7 +17,6 @@ export async function getAllBooks(
         )
         return { statusCode: 200, body: JSON.stringify(allBooksUnmarshalled) }
     } catch (error) {
-        console.log(error)
         return {
             statusCode: 400,
             body: JSON.stringify(error.message),

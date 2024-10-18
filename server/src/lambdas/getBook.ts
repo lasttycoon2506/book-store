@@ -30,7 +30,6 @@ export async function getBook(
                 }
             }
         } catch (error) {
-            console.log(error)
             return {
                 statusCode: 400,
                 body: JSON.stringify(error.message),

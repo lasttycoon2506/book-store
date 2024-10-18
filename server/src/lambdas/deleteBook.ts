@@ -23,7 +23,6 @@ export async function deleteBook(
             body: JSON.stringify(response),
         }
     } catch (error) {
-        console.log(error)
         return {
             statusCode: 400,
             body: JSON.stringify(error.message),
