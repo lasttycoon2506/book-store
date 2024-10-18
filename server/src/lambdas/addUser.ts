@@ -2,7 +2,6 @@ import {
     CognitoIdentityProviderClient,
     AdminCreateUserCommand,
     AdminSetUserPasswordCommand,
-    AdminAddUserToGroupCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { AuthenticationStack } from '../../outputs.json'
 import {
