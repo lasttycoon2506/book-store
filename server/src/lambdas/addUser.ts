@@ -29,18 +29,19 @@ export async function addUser(
             }
         }
         const user: User = JSON.parse(event.body)
-        UserModel.safeParse({
-            username: user.userName,
+        const parsedUser = UserModel.safeParse({
+            userName: user.userName,
             password: user.password,
             name: user.name,
             email: user.email,
             phone: user.phone,
         })
-        const userName = user['userName']
-        const password = user['password']
-        const name = user['name']
-        const email = user['email']
-        const phoneNumber = user['phone']
+        
+        const userName = parsedUser.data?.userName
+        const password = parsedUser.data?.password
+        const name = parsedUser.data?.name
+        const email = parsedUser.data?.email
+        const phone = parsedUser.data?.phone
 
         const newUserInput = {
             UserPoolId: AuthenticationStack.BookstoreUserPoolId,
@@ -57,7 +58,7 @@ export async function addUser(
                 },
                 {
                     Name: 'phone_number',
-                    Value: phoneNumber,
+                    Value: phone,
                 },
             ],
             DesiredDeliveryMediums: ['SMS' as const],

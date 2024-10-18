@@ -15,6 +15,6 @@ const authenticationStack = new Authentication(app, 'AuthenticationStack', {
 })
 new Api(app, 'ApiStack', {
     booksLambdaIntegration: lambdaStack.booksLambdaIntegration,
-    userPool: authenticationStack.userPool,
+    userPool: authenticationStack.userPool!,
 })
 new Ui(app, 'UiStack')
