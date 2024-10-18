@@ -17,7 +17,7 @@ interface ApiStackProps extends StackProps {
 }
 
 export class Api extends Stack {
-    constructor(scope: Construct, id: string, props?: ApiStackProps) {
+    constructor(scope: Construct, id: string, props: ApiStackProps) {
         super(scope, id, props)
 
         const api = new RestApi(this, 'booksApi')
