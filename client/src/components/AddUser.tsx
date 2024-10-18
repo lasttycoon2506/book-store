@@ -53,7 +53,7 @@ export default function AddUser({ database }: AddUserProps) {
             return (
                 <>
                     <br />
-                    <NavLink to={'/login'}> Must Login First</NavLink>
+                    <NavLink to={'/login'}> Must Login First </NavLink>
                 </>
             )
         }

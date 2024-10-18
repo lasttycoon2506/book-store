@@ -47,8 +47,8 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 price: price,
                 stock: stock,
             }
-            const id = await database.addBook(book)
-            if (id) {
+            const addBookResponse = await database.addBook(book)
+            if (addBookResponse) {
                 setAlert(true)
                 resetFields()
             } else {

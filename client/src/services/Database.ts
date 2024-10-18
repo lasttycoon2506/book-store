@@ -32,7 +32,7 @@ export class Database {
             },
         })
         const postResponseJson = await postResponse.json()
-        return postResponseJson.id
+        return postResponseJson
     }
 
     async editBook(book: Book): Promise<number> {
@@ -67,7 +67,7 @@ export class Database {
             },
         })
         const postResponseJson = await postResponse.json()
-        return postResponseJson.id
+        return postResponseJson
     }
 
     public isAuthorized(): boolean {

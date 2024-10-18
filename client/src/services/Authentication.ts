@@ -59,7 +59,6 @@ export class Authentication {
             }
             return false
         } catch (error) {
-            console.log(error)
             if (error instanceof Error) {
                 return error.message
             }
