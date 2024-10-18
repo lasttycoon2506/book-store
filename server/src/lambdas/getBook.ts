@@ -6,39 +6,41 @@ export async function getBook(
     event: APIGatewayProxyEvent,
     dbclient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
-    if ('id' in event.queryStringParameters) {
-        const docClient = DynamoDBDocumentClient.from(dbclient)
-
-        try {
-            const book = await docClient.send(
-                new GetCommand({
-                    TableName: process.env.TABLE_NAME,
-                    Key: {
-                        id: event.queryStringParameters['id'],
-                    },
-                })
-            )
-            if (book.Item) {
-                return {
-                    statusCode: 200,
-                    body: JSON.stringify(book),
-                }
-            } else {
-                return {
-                    statusCode: 401,
-                    body: 'book doesnt exist!',
-                }
-            }
-        } catch (error) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify(error.message),
-            }
-        }
-    } else {
+    if (
+        !event.queryStringParameters ||
+        !('id' in event.queryStringParameters)
+    ) {
         return {
             statusCode: 400,
-            body: 'id missing',
+            body: JSON.stringify('missing id or body'),
+        }
+    }
+    const docClient = DynamoDBDocumentClient.from(dbclient)
+
+    try {
+        const book = await docClient.send(
+            new GetCommand({
+                TableName: process.env.TABLE_NAME,
+                Key: {
+                    id: event.queryStringParameters['id'],
+                },
+            })
+        )
+        if (book.Item) {
+            return {
+                statusCode: 200,
+                body: JSON.stringify(book),
+            }
+        } else {
+            return {
+                statusCode: 401,
+                body: 'book doesnt exist!',
+            }
+        }
+    } catch (error) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify((error as Error).message),
         }
     }
 }

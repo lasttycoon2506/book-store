@@ -7,7 +7,12 @@ export async function deleteBook(
     dbclient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
     const docClient = DynamoDBDocumentClient.from(dbclient)
-
+    if (!event.queryStringParameters || !('id' in event.queryStringParameters)) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify('missing id or body'),
+        }
+    }
     try {
         const response = await docClient.send(
             new DeleteCommand({
@@ -25,7 +30,7 @@ export async function deleteBook(
     } catch (error) {
         return {
             statusCode: 400,
-            body: JSON.stringify(error.message),
+            body: JSON.stringify((error as Error).message),
         }
     }
 }

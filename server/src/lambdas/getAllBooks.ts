@@ -12,14 +12,14 @@ export async function getAllBooks(
             })
         )
 
-        const allBooksUnmarshalled = allBooks.Items.map((item) =>
+        const allBooksUnmarshalled = allBooks.Items!.map((item) =>
             unmarshall(item)
         )
         return { statusCode: 200, body: JSON.stringify(allBooksUnmarshalled) }
     } catch (error) {
         return {
             statusCode: 400,
-            body: JSON.stringify(error.message),
+            body: JSON.stringify((error as Error).message),
         }
     }
 }
