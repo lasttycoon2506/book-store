@@ -7,7 +7,7 @@ import { Book as BookModel } from '../models/Book'
 
 type Book = z.infer<typeof BookModel>
 
-export async function postBook(
+export async function addBook(
     event: APIGatewayProxyEvent,
     dbclient: DynamoDBClient
 ): Promise<APIGatewayProxyResult> {
@@ -37,7 +37,7 @@ export async function postBook(
         }
         result.data.id = genRandomUUID()
 
-        await dbclient.send(
+        const response = await dbclient.send(
             new PutItemCommand({
                 TableName: process.env.TABLE_NAME,
                 Item: marshall(result.data),
@@ -45,7 +45,7 @@ export async function postBook(
         )
         return {
             statusCode: 201,
-            body: JSON.stringify({ id: result.data.id }),
+            body: JSON.stringify(response),
         }
     } catch (error) {
         return {

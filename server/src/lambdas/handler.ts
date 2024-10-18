@@ -2,7 +2,7 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { getBook } from './getBook'
 import { getAllBooks } from './getAllBooks'
-import { postBook } from './postBook'
+import { addBook } from './addBook'
 import { deleteBook } from './deleteBook'
 import { updateBook } from './updateBook'
 import { addCorsHeader } from '../utils/corsHeader'
@@ -36,7 +36,7 @@ async function handler(
                 const postUserResponse = await addUser(event)
                 response = postUserResponse
             } else {
-                const postBookResponse = await postBook(event, dbClient)
+                const postBookResponse = await addBook(event, dbClient)
                 response = postBookResponse
             }
             break
