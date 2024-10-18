@@ -19,12 +19,12 @@ interface AuthStackProps extends StackProps {
     booksBucket: IBucket
 }
 export class Authentication extends Stack {
-    public userPool: UserPool
-    private userPoolClient: UserPoolClient
-    private identityPool: CfnIdentityPool
-    private authenticatedRole: Role
-    private unAuthenticatedRole: Role
-    private adminRole: Role
+    public userPool?: UserPool 
+    private userPoolClient?: UserPoolClient 
+    private identityPool?: CfnIdentityPool 
+    private authenticatedRole?: Role 
+    private unAuthenticatedRole?: Role 
+    private adminRole?: Role
 
     constructor(scope: Construct, id: string, props?: AuthStackProps) {
         super(scope, id, props)
