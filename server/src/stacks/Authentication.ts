@@ -149,10 +149,7 @@ export class Authentication extends Stack {
         this.authenticatedRole.addToPolicy(
             new PolicyStatement({
                 effect: Effect.ALLOW,
-                actions: [
-                    'cognito-idp:ListUsers',
-                    'cognito-idp:AdminCreateUser',
-                ],
+                actions: ['cognito-idp:ListUsers'],
                 resources: [
                     booksBucket.bucketArn + '/*',
                     this.userPool.userPoolArn,
