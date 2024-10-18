@@ -42,6 +42,7 @@ export class Lambdas extends Stack {
                     'dynamodb:UpdateItem',
                     'dynamodb:DeleteItem',
                     'cognito-idp:AdminCreateUser',
+                    'cognito-idp:AdminSetUserPassword'
                 ],
             })
         )
