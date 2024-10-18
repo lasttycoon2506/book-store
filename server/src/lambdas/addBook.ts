@@ -35,17 +35,17 @@ export async function postBook(
                 body: JSON.stringify(result.error.issues),
             }
         }
-        book.id = genRandomUUID()
+        result.data.id = genRandomUUID()
 
         await dbclient.send(
             new PutItemCommand({
                 TableName: process.env.TABLE_NAME,
-                Item: marshall(book),
+                Item: marshall(result.data),
             })
         )
         return {
             statusCode: 201,
-            body: JSON.stringify({ id: book.id }),
+            body: JSON.stringify({ id: result.data.id }),
         }
     } catch (error) {
         return {
