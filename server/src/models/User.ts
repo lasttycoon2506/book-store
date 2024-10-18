@@ -1,16 +1,9 @@
 import { z } from 'zod'
 
 export const User = z.object({
-    userName: z.string(),
-    password: z.string(),
-    name: z.string(),
-    email: z.string(),
-    phone: z.string(),
+    userName: z.string().min(5),
+    password: z.string().min(8),
+    name: z.string().min(1),
+    email: z.string().email(),
+    phone: z.string().min(10),
 })
-
-// User.parse({ username: 'Ludwig' })
-
-// extract the inferred type
-// type User = z.infer<typeof User>
-
-// { username: string }
