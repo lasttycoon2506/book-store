@@ -23,13 +23,13 @@ export async function deleteBook(
             .object({
                 id: z.string(),
             })
-            .safeParse({ name: id })
+            .safeParse({ id: id })
 
         const response = await docClient.send(
             new DeleteCommand({
                 TableName: process.env.TABLE_NAME,
                 Key: {
-                    id: event.queryStringParameters['id'],
+                    id: result.data!.id,
                 },
             })
         )

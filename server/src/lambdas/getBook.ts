@@ -1,6 +1,7 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb'
+import { z } from 'zod'
 
 export async function getBook(
     event: APIGatewayProxyEvent,
@@ -18,11 +19,18 @@ export async function getBook(
     const docClient = DynamoDBDocumentClient.from(dbclient)
 
     try {
+        const id: string = event.queryStringParameters['id']!
+        const result = z
+            .object({
+                id: z.string(),
+            })
+            .safeParse({ id: id })
+
         const book = await docClient.send(
             new GetCommand({
                 TableName: process.env.TABLE_NAME,
                 Key: {
-                    id: event.queryStringParameters['id'],
+                    id: result.data!.id,
                 },
             })
         )
