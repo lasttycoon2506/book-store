@@ -22,7 +22,7 @@ handler({httpMethod: 'POST',
     body: JSON.stringify({
             title: 'chubby',
             author: 'jibby',
-            pages: 4,
+            pages: 8,
             genre:'lit',
             price: 56,
             stock: 3
