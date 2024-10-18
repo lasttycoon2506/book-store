@@ -26,7 +26,7 @@ export class Authentication extends Stack {
     private unAuthenticatedRole?: Role 
     private adminRole?: Role
 
-    constructor(scope: Construct, id: string, props?: AuthStackProps) {
+    constructor(scope: Construct, id: string, props: AuthStackProps) {
         super(scope, id, props)
 
         this.createUserPool()
@@ -51,7 +51,7 @@ export class Authentication extends Stack {
     }
 
     private createUserPoolClient() {
-        this.userPoolClient = this.userPool.addClient(
+        this.userPoolClient = this.userPool!.addClient(
             'BookstoreUserPoolClient',
             {
                 authFlows: {
@@ -69,9 +69,9 @@ export class Authentication extends Stack {
 
     private createAdminGroup() {
         new CfnUserPoolGroup(this, 'BookstoreAdmins', {
-            userPoolId: this.userPool.userPoolId,
+            userPoolId: this.userPool!.userPoolId,
             groupName: 'admins',
-            roleArn: this.adminRole.roleArn,
+            roleArn: this.adminRole!.roleArn,
         })
     }
 
@@ -80,8 +80,8 @@ export class Authentication extends Stack {
             allowUnauthenticatedIdentities: true,
             cognitoIdentityProviders: [
                 {
-                    clientId: this.userPoolClient.userPoolClientId,
-                    providerName: this.userPool.userPoolProviderName,
+                    clientId: this.userPoolClient!.userPoolClientId,
+                    providerName: this.userPool!.userPoolProviderName,
                 },
             ],
         })
@@ -100,7 +100,7 @@ export class Authentication extends Stack {
                     {
                         StringEquals: {
                             'cognito-identity.amazonaws.com:aud':
-                                this.identityPool.ref,
+                                this.identityPool!.ref,
                         },
                         'ForAnyValue:StringLike': {
                             'cognito-identity.amazonaws.com:amr':
@@ -120,7 +120,7 @@ export class Authentication extends Stack {
                     {
                         StringEquals: {
                             'cognito-identity.amazonaws.com:aud':
-                                this.identityPool.ref,
+                                this.identityPool!.ref,
                         },
                         'ForAnyValue:StringLike': {
                             'cognito-identity.amazonaws.com:amr':
@@ -137,7 +137,7 @@ export class Authentication extends Stack {
                 {
                     StringEquals: {
                         'cognito-identity.amazonaws.com:aud':
-                            this.identityPool.ref,
+                            this.identityPool!.ref,
                     },
                     'ForAnyValue:StringLike': {
                         'cognito-identity.amazonaws.com:amr': 'authenticated',
@@ -152,7 +152,7 @@ export class Authentication extends Stack {
                 actions: ['cognito-idp:ListUsers'],
                 resources: [
                     booksBucket.bucketArn + '/*',
-                    this.userPool.userPoolArn,
+                    this.userPool!.userPoolArn,
                 ],
             })
         )
@@ -160,16 +160,16 @@ export class Authentication extends Stack {
 
     private attachRoles() {
         new CfnIdentityPoolRoleAttachment(this, 'AttachRoles', {
-            identityPoolId: this.identityPool.ref,
+            identityPoolId: this.identityPool!.ref,
             roles: {
-                authenticated: this.authenticatedRole.roleArn,
-                unauthenticated: this.unAuthenticatedRole.roleArn,
+                authenticated: this.authenticatedRole!.roleArn,
+                unauthenticated: this.unAuthenticatedRole!.roleArn,
             },
             roleMappings: {
                 adminsMapping: {
                     type: 'Token',
                     ambiguousRoleResolution: 'AuthenticatedRole',
-                    identityProvider: `cognito-idp.${this.region}.amazonaws.com/${this.userPool.userPoolId}:${this.userPoolClient.userPoolClientId}`,
+                    identityProvider: `cognito-idp.${this.region}.amazonaws.com/${this.userPool!.userPoolId}:${this.userPoolClient!.userPoolClientId}`,
                 },
             },
         })
