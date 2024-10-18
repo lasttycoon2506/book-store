@@ -8,6 +8,7 @@ import {
     APIGatewayProxyEvent,
     APIGatewayProxyResult,
 } from 'aws-lambda/trigger/api-gateway-proxy'
+import { User } from '../models/User.ts'
 
 const config = {
     region: 'us-east-1',
@@ -18,7 +19,9 @@ const cognitoClient = new CognitoIdentityProviderClient(config)
 export async function addUser(
     event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> {
+    User
     try {
+        
         const user = JSON.parse(event.body)
         const userName = user['userName']
         const password = user['password']
