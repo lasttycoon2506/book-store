@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const User = z.object({
+export const Book = z.object({
     title: z.string().min(1),
     author: z.string().min(1),
     pages: z.number().int().nonnegative(),

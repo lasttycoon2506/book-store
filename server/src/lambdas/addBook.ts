@@ -2,6 +2,10 @@ import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
 import { marshall } from '@aws-sdk/util-dynamodb'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { genRandomUUID } from '../utils/uuid'
+import { z } from 'zod'
+import { Book as BookModel } from '../models/Book'
+
+type Book = z.infer<typeof BookModel>
 
 export async function postBook(
     event: APIGatewayProxyEvent,
@@ -13,8 +17,24 @@ export async function postBook(
             body: JSON.stringify('body missing'),
         }
     }
+
     try {
-        const book = JSON.parse(event.body)
+        const book: Book = JSON.parse(event.body)
+        const result = BookModel.safeParse({
+            title: book.title,
+            author: book.author,
+            pages: book.pages,
+            genre: book.genre,
+            price: book.price,
+            stock: book.stock,
+        })
+
+        if (!result.success) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify(result.error.issues),
+            }
+        }
         book.id = genRandomUUID()
 
         await dbclient.send(
