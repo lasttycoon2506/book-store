@@ -76,22 +76,9 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     //     return
     // }
 
-    // function inputValidation(data: Book) {
-    //     const result = BookZod.safeParse({
-    //         title: data.title,
-    //         author: data.author,
-    //         pages: data.pages,
-    //         genre: data.genre,
-    //         price: data.price,
-    //         stock: data.stock,
-    //     })
-    //     if (!result.success) {
-    //         return {
-    //             statusCode: 400,
-    //             body: JSON.stringify(result.error.issues),
-    //         }
-    //     }
-    // }
+    function inputValidation(data: Book) {
+        console.log(data)
+    }
     function isAuthorEmpty(author: string): void {
         if (!author) {
             setErrorAuthor(true)
@@ -160,8 +147,8 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 // noValidate
                 autoComplete="off"
                 onSubmit={handleSubmit((data: FieldValues) => {
-                    // inputValidation(data as Book)
-                    console.log(data)
+                    inputValidation(data as Book)
+                    
                 })
                 }
             >

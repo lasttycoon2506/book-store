@@ -3,28 +3,28 @@ import { z } from 'zod'
 export const BookSchema = z
     .object({
         id: z.string().uuid().optional(),
-        title: z.string({required_error: 'Title is required',}),
-        author: z.string(),
+        title: z.string().min(1, { message: "Missing title" }),
+        author: z.string().min(1, { message: "Missing author" }),
         pages: z.coerce
             .number({
                 required_error: 'Pages is required',
                 invalid_type_error: 'Pages must be an integer > 0',
             })
             .int()
-            .positive(),
-        genre: z.string(),
+            .positive().gte(1, { message: "Missing pages" }),
+        genre: z.string().min(1, { message: "Missing genre" }),
         price: z.coerce
             .number({
                 required_error: 'Price is required',
                 invalid_type_error: 'Price must be a number > 0',
             })
-            .nonnegative(),
+            .nonnegative().gte(1, { message: "Missing price" }),
         stock: z.coerce
             .number({
                 required_error: 'Stock is required',
                 invalid_type_error: 'Stock must be an integer >= 0',
             })
             .int()
-            .nonnegative(),
+            .nonnegative().gte(1, { message: "Missing stock" }),
     })
-    .required()
+    
