@@ -11,7 +11,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
 import { Field, FieldValues, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Book as BookZod } from '../zod/Book'
+import { Book as ZodBookSchema } from '../zod/Book'
 
 type AddBookProps = {
     database: Database
@@ -32,7 +32,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [errorGenre, setErrorGenre] = useState<boolean>(false)
     const [errorPrice, setErrorPrice] = useState<boolean>(false)
     const [errorStock, setErrorStock] = useState<boolean>(false)
-    const { register, handleSubmit, formState: {errors} } = useForm()
+    const { register, handleSubmit, formState: {errors} } = useForm({resolver: ZodBookSchema})
 
     // async function handleSubmits(event: SyntheticEvent): Promise<void> {
     //     event.preventDefault()
@@ -71,7 +71,20 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     // }
 
     function inputValidation(data: Book) {
-        BookZod
+        const result = BookZod.safeParse({
+            title: data.title,
+            author: data.author,
+            pages: data.pages,
+            genre: data.genre,
+            price: data.price,
+            stock: data.stock,
+        })
+        if (!result.success) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify(result.error.issues),
+            }
+        }
     }
     function isAuthorEmpty(author: string): void {
         if (!author) {
