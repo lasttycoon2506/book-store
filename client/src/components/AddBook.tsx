@@ -10,6 +10,8 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
 import { Field, FieldValues, useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Book as BookZod } from '../zod/Book'
 
 type AddBookProps = {
     database: Database
@@ -69,7 +71,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     // }
 
     function inputValidation(data: Book) {
-        
+        BookZod
     }
     function isAuthorEmpty(author: string): void {
         if (!author) {
