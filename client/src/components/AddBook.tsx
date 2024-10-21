@@ -11,7 +11,15 @@ import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
 import { Field, FieldValues, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Book as ZodBookSchema } from '../zod/Book'
+import {
+    Unstable_NumberInput as BaseNumberInput,
+    NumberInputProps,
+    numberInputClasses,
+  } from '@mui/base/Unstable_NumberInput';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { BookSchema } from '../zod/schemas/Book'
+import React from 'react'
+
 
 type AddBookProps = {
     database: Database
@@ -32,7 +40,33 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [errorGenre, setErrorGenre] = useState<boolean>(false)
     const [errorPrice, setErrorPrice] = useState<boolean>(false)
     const [errorStock, setErrorStock] = useState<boolean>(false)
-    const { register, handleSubmit, formState: {errors} } = useForm({resolver: ZodBookSchema})
+    const { register, handleSubmit, formState: {errors} } = useForm({resolver: zodResolver(BookSchema)})
+
+    const NumberInput = React.forwardRef(function CustomNumberInput(
+        props: NumberInputProps,
+        ref: React.ForwardedRef<HTMLDivElement>,
+      ) {
+        return (
+          <BaseNumberInput
+            slots={{
+              root: StyledInputRoot,
+              input: StyledInputElement,
+              incrementButton: StyledButton,
+              decrementButton: StyledButton,
+            }}
+            slotProps={{
+              incrementButton: {
+                children: '▴',
+              },
+              decrementButton: {
+                children: '▾',
+              },
+            }}
+            {...props}
+            ref={ref}
+          />
+        );
+      });
 
     // async function handleSubmits(event: SyntheticEvent): Promise<void> {
     //     event.preventDefault()
@@ -70,22 +104,22 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     //     return
     // }
 
-    function inputValidation(data: Book) {
-        const result = BookZod.safeParse({
-            title: data.title,
-            author: data.author,
-            pages: data.pages,
-            genre: data.genre,
-            price: data.price,
-            stock: data.stock,
-        })
-        if (!result.success) {
-            return {
-                statusCode: 400,
-                body: JSON.stringify(result.error.issues),
-            }
-        }
-    }
+    // function inputValidation(data: Book) {
+    //     const result = BookZod.safeParse({
+    //         title: data.title,
+    //         author: data.author,
+    //         pages: data.pages,
+    //         genre: data.genre,
+    //         price: data.price,
+    //         stock: data.stock,
+    //     })
+    //     if (!result.success) {
+    //         return {
+    //             statusCode: 400,
+    //             body: JSON.stringify(result.error.issues),
+    //         }
+    //     }
+    // }
     function isAuthorEmpty(author: string): void {
         if (!author) {
             setErrorAuthor(true)
@@ -152,7 +186,8 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 // noValidate
                 autoComplete="off"
                 onSubmit={handleSubmit((data: FieldValues) => {
-                    inputValidation(data as Book)
+                    // inputValidation(data as Book)
+                    console.log(data)
                 })
                 }
             >
@@ -214,12 +249,12 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 <p>{(errors['author']?.message) ? (String(errors['author']?.message)) : (
                         <></>
                     )}</p>
-                <TextField
+                <NumberInput
                     // value={pages}
                     // label="Pgs"
                     // variant="outlined"
                     // error={errorPages}
-                    // type="number"
+                    type="number"
                     // onChange={(e) => {
                     //     const value = e.target.value
                     //     if (value === '' || value.match(/^[0-9]*$/)) {
@@ -254,7 +289,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     // value={price}
                     // label="Price"
                     // variant="outlined"
-                    // type="number"
+                    type="number"
                     // error={errorPrice}
                     // onChange={(e) => setPrice(Number(e.target.value))}
                     {...register('price', {
@@ -270,7 +305,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     // value={stock}
                     // label="Stock"
                     // variant="outlined"
-                    // type="number"
+                    type="number"
                     // error={errorStock}
                     // onChange={(e) => {
                     //     const value = e.target.value
