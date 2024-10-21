@@ -11,11 +11,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
 import { Field, FieldValues, useForm } from 'react-hook-form'
 import { z } from 'zod'
-import {
-    Unstable_NumberInput as BaseNumberInput,
-    NumberInputProps,
-    numberInputClasses,
-  } from '@mui/base/Unstable_NumberInput';
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
 import React from 'react'
@@ -42,31 +38,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [errorStock, setErrorStock] = useState<boolean>(false)
     const { register, handleSubmit, formState: {errors} } = useForm({resolver: zodResolver(BookSchema)})
 
-    const NumberInput = React.forwardRef(function CustomNumberInput(
-        props: NumberInputProps,
-        ref: React.ForwardedRef<HTMLDivElement>,
-      ) {
-        return (
-          <BaseNumberInput
-            slots={{
-              root: StyledInputRoot,
-              input: StyledInputElement,
-              incrementButton: StyledButton,
-              decrementButton: StyledButton,
-            }}
-            slotProps={{
-              incrementButton: {
-                children: '▴',
-              },
-              decrementButton: {
-                children: '▾',
-              },
-            }}
-            {...props}
-            ref={ref}
-          />
-        );
-      });
+   
 
     // async function handleSubmits(event: SyntheticEvent): Promise<void> {
     //     event.preventDefault()
