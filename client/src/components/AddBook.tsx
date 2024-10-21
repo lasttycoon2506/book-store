@@ -9,6 +9,7 @@ import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
+import { useForm } from 'react-hook-form'
 
 type AddBookProps = {
     database: Database
@@ -29,6 +30,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [errorGenre, setErrorGenre] = useState<boolean>(false)
     const [errorPrice, setErrorPrice] = useState<boolean>(false)
     const [errorStock, setErrorStock] = useState<boolean>(false)
+    const { register } = useForm()
 
     async function submit(event: SyntheticEvent): Promise<void> {
         event.preventDefault()
@@ -158,64 +160,94 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     )}
                 </div>
                 <TextField
-                    value={title}
-                    label="Title"
-                    variant="outlined"
-                    error={errorTitle}
-                    onChange={(e) => setTitle(e.target.value)}
+                    // value={title}
+                    // label="Title"
+                    // variant="outlined"
+                    // error={errorTitle}
+                    // onChange={(e) => setTitle(e.target.value)}
+                    {...register('title', {
+                        required: 'Title required',
+                        minLength: { value: 1, message: 'min. length 1' },
+                    })}
+                    placeholder="Title"
                 />
                 <br />
                 <TextField
-                    value={author}
-                    label="Author"
-                    variant="outlined"
-                    error={errorAuthor}
-                    onChange={(e) => setAuthor(e.target.value)}
+                    // value={author}
+                    // label="Author"
+                    // variant="outlined"
+                    // error={errorAuthor}
+                    // onChange={(e) => setAuthor(e.target.value)}
+                    {...register('author', {
+                        required: 'Author required',
+                        minLength: { value: 1, message: 'min. length 1' },
+                    })}
+                    placeholder="Author"
                 />
                 <br />
                 <TextField
-                    value={pages}
-                    label="Pgs"
-                    variant="outlined"
-                    error={errorPages}
-                    type="number"
-                    onChange={(e) => {
-                        const value = e.target.value
-                        if (value === '' || value.match(/^[0-9]*$/)) {
-                            setPages(Number(value))
-                        }
-                    }}
+                    // value={pages}
+                    // label="Pgs"
+                    // variant="outlined"
+                    // error={errorPages}
+                    // type="number"
+                    // onChange={(e) => {
+                    //     const value = e.target.value
+                    //     if (value === '' || value.match(/^[0-9]*$/)) {
+                    //         setPages(Number(value))
+                    //     }
+                    // }}
+                    {...register('pages', {
+                        required: 'Pages required',
+                        minLength: { value: 1, message: 'min. length 1' },
+                    })}
+                    placeholder="Pages"
                 />
                 <br />
                 <TextField
-                    value={genre}
-                    label="Genre"
-                    variant="outlined"
-                    error={errorGenre}
-                    onChange={(e) => setGenre(e.target.value)}
+                    // value={genre}
+                    // label="Genre"
+                    // variant="outlined"
+                    // error={errorGenre}
+                    // onChange={(e) => setGenre(e.target.value)}
+                    {...register('genre', {
+                        required: 'Genre required',
+                        minLength: { value: 1, message: 'min. length 1' },
+                    })}
+                    placeholder="Genre"
                 />
                 <br />
                 <TextField
-                    value={price}
-                    label="Price"
-                    variant="outlined"
-                    type="number"
-                    error={errorPrice}
-                    onChange={(e) => setPrice(Number(e.target.value))}
+                    // value={price}
+                    // label="Price"
+                    // variant="outlined"
+                    // type="number"
+                    // error={errorPrice}
+                    // onChange={(e) => setPrice(Number(e.target.value))}
+                    {...register('price', {
+                        required: 'Price required',
+                        minLength: { value: 1, message: 'min. length 1' },
+                    })}
+                    placeholder="Price"
                 />
                 <br />
                 <TextField
-                    value={stock}
-                    label="Stock"
-                    variant="outlined"
-                    type="number"
-                    error={errorStock}
-                    onChange={(e) => {
-                        const value = e.target.value
-                        if (value === '' || value.match(/^[0-9]*$/)) {
-                            setStock(Number(value))
-                        }
-                    }}
+                    // value={stock}
+                    // label="Stock"
+                    // variant="outlined"
+                    // type="number"
+                    // error={errorStock}
+                    // onChange={(e) => {
+                    //     const value = e.target.value
+                    //     if (value === '' || value.match(/^[0-9]*$/)) {
+                    //         setStock(Number(value))
+                    //     }
+                    // }}
+                    {...register('stock', {
+                        required: 'Stock required',
+                        minLength: { value: 1, message: 'min. length 1' },
+                    })}
+                    placeholder="Stock"
                 />
                 <br />
                 <Button variant="contained" size="large" type="submit">
