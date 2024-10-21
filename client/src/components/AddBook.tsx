@@ -16,7 +16,7 @@ type AddBookProps = {
 }
 
 export default function AddBook({ database }: AddBookProps): JSX.Element {
-    const [title, setTitle] = useState<string>('')
+    // const [title, setTitle] = useState<string>('')
     const [author, setAuthor] = useState<string>('')
     const [pages, setPages] = useState<number>(0)
     const [genre, setGenre] = useState<string>('')
@@ -24,49 +24,49 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [stock, setStock] = useState<number>(0)
     const [alert, setAlert] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
-    const [errorTitle, setErrorTitle] = useState<boolean>(false)
+    // const [errorTitle, setErrorTitle] = useState<boolean>(false)
     const [errorAuthor, setErrorAuthor] = useState<boolean>(false)
     const [errorPages, setErrorPages] = useState<boolean>(false)
     const [errorGenre, setErrorGenre] = useState<boolean>(false)
     const [errorPrice, setErrorPrice] = useState<boolean>(false)
     const [errorStock, setErrorStock] = useState<boolean>(false)
-    const { register } = useForm()
+    const { register, handleSubmit, formState: {errors} } = useForm()
 
-    async function submit(event: SyntheticEvent): Promise<void> {
-        event.preventDefault()
-        isTitleEmpty(title)
-        isAuthorEmpty(author)
-        isPagesEmpty(pages!)
-        isGenreEmpty(genre)
-        isPriceEmpty(price!)
-        isStockEmpty(stock!)
-        if (title && author && pages && genre && price && stock) {
-            const book: Book = {
-                title: title,
-                author: author,
-                pages: pages,
-                genre: genre,
-                price: price,
-                stock: stock,
-            }
-            const addBookResponse = await database.addBook(book)
-            if (addBookResponse) {
-                setAlert(true)
-                resetFields()
-            } else {
-                console.error('Unable to create book!')
-            }
-        }
-    }
+    // async function handleSubmits(event: SyntheticEvent): Promise<void> {
+    //     event.preventDefault()
+    //     isTitleEmpty(title)
+    //     isAuthorEmpty(author)
+    //     isPagesEmpty(pages!)
+    //     isGenreEmpty(genre)
+    //     isPriceEmpty(price!)
+    //     isStockEmpty(stock!)
+    //     if (title && author && pages && genre && price && stock) {
+    //         const book: Book = {
+    //             title: title,
+    //             author: author,
+    //             pages: pages,
+    //             genre: genre,
+    //             price: price,
+    //             stock: stock,
+    //         }
+    //         const addBookResponse = await database.addBook(book)
+    //         if (addBookResponse) {
+    //             setAlert(true)
+    //             resetFields()
+    //         } else {
+    //             console.error('Unable to create book!')
+    //         }
+    //     }
+    // }
 
-    function isTitleEmpty(title: string): void {
-        if (!title) {
-            setErrorTitle(true)
-        } else {
-            setErrorTitle(false)
-        }
-        return
-    }
+    // function isTitleEmpty(title: string): void {
+    //     if (!title) {
+    //         setErrorTitle(true)
+    //     } else {
+    //         setErrorTitle(false)
+    //     }
+    //     return
+    // }
     function isAuthorEmpty(author: string): void {
         if (!author) {
             setErrorAuthor(true)
@@ -109,7 +109,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     }
 
     function resetFields(): void {
-        setTitle('')
+        // setTitle('')
         setAuthor('')
         setPages(0)
         setGenre('')
@@ -127,13 +127,19 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
             )
         }
         return (
-            <Box
-                component="form"
-                sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-                noValidate
-                autoComplete="off"
-                onSubmit={(e) => submit(e)}
-            >
+            // <Box
+            //     component="form"
+            //     // sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+            //     // noValidate
+            //     autoComplete="off"
+            //     onSubmit={handleSubmit((data) => {
+            //         console.log(data)
+            //     })
+            //     }
+            // >
+            <form onSubmit={handleSubmit((data) => {
+                console.log(data)
+            })}>
                 <div>
                     {alert ? (
                         <Collapse in={alertOpen}>
@@ -171,7 +177,9 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     })}
                     placeholder="Title"
                 />
-                <br />
+                <p>{(errors['title']?.message) ? (String(errors['title']?.message)) : (
+                        <></>
+                    )}</p>
                 <TextField
                     // value={author}
                     // label="Author"
@@ -184,7 +192,9 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     })}
                     placeholder="Author"
                 />
-                <br />
+                <p>{(errors['author']?.message) ? (String(errors['author']?.message)) : (
+                        <></>
+                    )}</p>
                 <TextField
                     // value={pages}
                     // label="Pgs"
@@ -203,7 +213,9 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     })}
                     placeholder="Pages"
                 />
-                <br />
+                <p>{(errors['pages']?.message) ? (String(errors['pages']?.message)) : (
+                        <></>
+                    )}</p>
                 <TextField
                     // value={genre}
                     // label="Genre"
@@ -216,7 +228,9 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     })}
                     placeholder="Genre"
                 />
-                <br />
+                <p>{(errors['genre']?.message) ? (String(errors['genre']?.message)) : (
+                        <></>
+                    )}</p>
                 <TextField
                     // value={price}
                     // label="Price"
@@ -230,7 +244,9 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     })}
                     placeholder="Price"
                 />
-                <br />
+               <p>{(errors['price']?.message) ? (String(errors['price']?.message)) : (
+                        <></>
+                    )}</p>
                 <TextField
                     // value={stock}
                     // label="Stock"
@@ -249,11 +265,13 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     })}
                     placeholder="Stock"
                 />
-                <br />
+                <p>{(errors['stock']?.message) ? (String(errors['stock']?.message)) : (
+                        <></>
+                    )}</p>
                 <Button variant="contained" size="large" type="submit">
                     Add Book
                 </Button>
-            </Box>
+            </form>
         )
     }
 
