@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react'
+import { useState } from 'react'
 import { Database } from '../services/Database'
 import { NavLink } from 'react-router-dom'
 import { Book } from '../models/Book'
@@ -9,12 +9,10 @@ import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
-import { Field, FieldValues, useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { FieldValues, useForm } from 'react-hook-form'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
-import React from 'react'
 
 type AddBookProps = {
     database: Database
