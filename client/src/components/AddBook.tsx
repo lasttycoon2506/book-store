@@ -75,7 +75,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     )}
                 </div>
                 <TextField {...register('title')} placeholder="Title" />
-                <p>
+                <p className="error">
                     {errors['title']?.message ? (
                         String(errors['title']?.message)
                     ) : (
@@ -83,7 +83,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     )}
                 </p>
                 <TextField {...register('author')} placeholder="Author" />
-                <p>
+                <p className="error">
                     {errors['author']?.message ? (
                         String(errors['author']?.message)
                     ) : (
@@ -95,7 +95,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     {...register('pages')}
                     placeholder="Pages"
                 />
-                <p>
+                <p className="error">
                     {errors['pages']?.message ? (
                         String(errors['pages']?.message)
                     ) : (
@@ -103,7 +103,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     )}
                 </p>
                 <TextField {...register('genre')} placeholder="Genre" />
-                <p>
+                <p className="error">
                     {errors['genre']?.message ? (
                         String(errors['genre']?.message)
                     ) : (
@@ -115,7 +115,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     {...register('price')}
                     placeholder="Price"
                 />
-                <p>
+                <p className="error">
                     {errors['price']?.message ? (
                         String(errors['price']?.message)
                     ) : (
@@ -127,7 +127,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     {...register('stock')}
                     placeholder="Stock"
                 />
-                <p>
+                <p className="error">
                     {errors['stock']?.message ? (
                         String(errors['stock']?.message)
                     ) : (
