@@ -9,7 +9,7 @@ import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
-import { useForm } from 'react-hook-form'
+import { Field, FieldValues, useForm } from 'react-hook-form'
 
 type AddBookProps = {
     database: Database
@@ -67,6 +67,10 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     //     }
     //     return
     // }
+
+    function inputValidation(data: Book) {
+        
+    }
     function isAuthorEmpty(author: string): void {
         if (!author) {
             setErrorAuthor(true)
@@ -127,19 +131,19 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
             )
         }
         return (
-            // <Box
-            //     component="form"
-            //     // sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-            //     // noValidate
-            //     autoComplete="off"
-            //     onSubmit={handleSubmit((data) => {
-            //         console.log(data)
-            //     })
-            //     }
-            // >
-            <form onSubmit={handleSubmit((data) => {
+            <Box
+                component="form"
+                // sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+                // noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit((data: FieldValues) => {
+                    inputValidation(data as Book)
+                })
+                }
+            >
+             {/* <form onSubmit={handleSubmit((data) => {
                 console.log(data)
-            })}>
+            })}> */}
                 <div>
                     {alert ? (
                         <Collapse in={alertOpen}>
@@ -271,7 +275,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 <Button variant="contained" size="large" type="submit">
                     Add Book
                 </Button>
-            </form>
+            </Box>
         )
     }
 
