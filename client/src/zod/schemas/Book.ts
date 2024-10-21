@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const BookSchema = z
     .object({
         id: z.string().uuid().optional(),
-        title: z.string(),
+        title: z.string({required_error: 'Title is required',}),
         author: z.string(),
         pages: z.coerce
             .number({

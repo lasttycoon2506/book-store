@@ -142,6 +142,8 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         setStock(0)
     }
 
+    
+
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
             return (
@@ -163,9 +165,6 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 })
                 }
             >
-             {/* <form onSubmit={handleSubmit((data) => {
-                console.log(data)
-            })}> */}
                 <div>
                     {alert ? (
                         <Collapse in={alertOpen}>
@@ -198,7 +197,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     // error={errorTitle}
                     // onChange={(e) => setTitle(e.target.value)}
                     {...register('title', {
-                        required: 'Title required',
+                        required: true,
                         minLength: { value: 1, message: 'min. length 1' },
                     })}
                     placeholder="Title"
@@ -226,6 +225,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     // label="Pgs"
                     // variant="outlined"
                     // error={errorPages}
+                    type="number"
                     // onChange={(e) => {
                     //     const value = e.target.value
                     //     if (value === '' || value.match(/^[0-9]*$/)) {
