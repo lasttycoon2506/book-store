@@ -4,8 +4,8 @@ export const BookSchema = z.object({
     id: z.string().uuid().optional(),
     title: z.string(),
     author: z.string(),
-    pages: z.number().int().nonnegative(),
+    pages: z.coerce.number().int().nonnegative(),
     genre: z.string(),
-    price: z.number().nonnegative(),
-    stock: z.number().int().nonnegative(),
+    price: z.coerce.number().nonnegative(),
+    stock: z.coerce.number().int().nonnegative(),
 }).required()
