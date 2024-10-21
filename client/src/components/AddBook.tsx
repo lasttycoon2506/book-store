@@ -249,12 +249,11 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 <p>{(errors['author']?.message) ? (String(errors['author']?.message)) : (
                         <></>
                     )}</p>
-                <NumberInput
+                <TextField
                     // value={pages}
                     // label="Pgs"
                     // variant="outlined"
                     // error={errorPages}
-                    type="number"
                     // onChange={(e) => {
                     //     const value = e.target.value
                     //     if (value === '' || value.match(/^[0-9]*$/)) {
