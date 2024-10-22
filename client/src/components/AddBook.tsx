@@ -46,13 +46,17 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
             )
         }
         return (
-            <Box
-                component="form"
-                autoComplete="off"
-                onSubmit={handleSubmit((data: FieldValues) => {
-                    submit(data as Book)
-                })}
-            >
+            // <Box
+            //     component="form"
+            //     autoComplete="off"
+            //     // sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+            //     onSubmit={handleSubmit((data: FieldValues) => {
+            //         submit(data as Book)
+            //     })}
+            // >
+            <form onSubmit={handleSubmit((data: FieldValues) => {
+                         submit(data as Book)
+                    })}>
                 <div>
                     {alert ? (
                         <Collapse in={alertOpen}>
@@ -79,69 +83,69 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     )}
                 </div>
                 <TextField {...register('title')} placeholder="Title" />
-                <p className="error">
+                <div className="error">
                     {errors['title']?.message ? (
                         String(errors['title']?.message)
                     ) : (
                         <></>
                     )}
-                </p>
+                </div>
                 <TextField {...register('author')} placeholder="Author" />
-                <p className="error">
+                <div className="error">
                     {errors['author']?.message ? (
                         String(errors['author']?.message)
                     ) : (
                         <></>
                     )}
-                </p>
+                </div>
                 <TextField
                     type="number"
                     {...register('pages')}
                     placeholder="Pages"
                 />
-                <p className="error">
+                <div className="error">
                     {errors['pages']?.message ? (
                         String(errors['pages']?.message)
                     ) : (
                         <></>
                     )}
-                </p>
+                </div>
                 <TextField {...register('genre')} placeholder="Genre" />
-                <p className="error">
+                <div className="error">
                     {errors['genre']?.message ? (
                         String(errors['genre']?.message)
                     ) : (
                         <></>
                     )}
-                </p>
+                </div>
                 <TextField
-                    type="number"
+                   
                     {...register('price')}
                     placeholder="Price"
                 />
-                <p className="error">
+                <div className="error">
                     {errors['price']?.message ? (
                         String(errors['price']?.message)
                     ) : (
                         <></>
                     )}
-                </p>
+                </div>
                 <TextField
                     type="number"
                     {...register('stock')}
                     placeholder="Stock"
                 />
-                <p className="error">
+                <div className="error">
                     {errors['stock']?.message ? (
                         String(errors['stock']?.message)
                     ) : (
                         <></>
                     )}
-                </p>
+                </div>
                 <Button variant="contained" size="large" type="submit">
                     Add Book
                 </Button>
-            </Box>
+            </form>
         )
     }
 

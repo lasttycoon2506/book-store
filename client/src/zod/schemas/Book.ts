@@ -18,11 +18,9 @@ export const BookSchema = z.object({
             required_error: 'Price is required',
             invalid_type_error: 'Price must be a number > 0',
         })
-        .nonnegative()
+        .positive()
         .gte(1, { message: 'Missing price' })
-        .refine((x) => x * 100 - Math.trunc(x * 100) < Number.EPSILON, {
-            message: 'Max of two decimals',
-        }),
+        ,
 
     stock: z.coerce
         .number({
