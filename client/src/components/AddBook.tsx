@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Database } from '../services/Database'
 import { NavLink } from 'react-router-dom'
-import { Book } from '../models/Book'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -13,10 +12,12 @@ import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
 import { Grid2 } from '@mui/material'
+import { z } from 'zod'
 
 type AddBookProps = {
     database: Database
 }
+type Book = z.infer<typeof BookSchema>
 
 export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
