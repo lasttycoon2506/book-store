@@ -67,7 +67,7 @@ export class Database {
             },
         })
         const postResponseJson = await postResponse.json()
-        return postResponseJson
+        return postResponseJson.$metadata.httpStatusCode
     }
 
     public isAuthorized(): boolean {

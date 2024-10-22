@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Database } from '../services/Database'
 import { NavLink } from 'react-router-dom'
 import { Book } from '../models/Book'
@@ -19,22 +19,35 @@ type AddBookProps = {
 }
 
 export default function AddBook({ database }: AddBookProps): JSX.Element {
-    const [alert, setAlert] = useState<boolean>(false)
+    const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
+
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm({ resolver: zodResolver(BookSchema) })
 
     async function submit(data: Book): Promise<void> {
         const addBookResponse = await database.addBook(data)
         if (addBookResponse) {
-            setAlert(true)
+            setSubmitSuccess(true)
         } else {
             console.error('Unable to create book!')
         }
     }
+
+    useEffect(() => {
+        reset({
+            title: '',
+            author: '',
+            pages: '',
+            genre: '',
+            price: '',
+            stock: '',
+        })
+    }, [submitSuccess])
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
@@ -55,7 +68,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 })}
             >
                 <div>
-                    {alert ? (
+                    {submitSuccess ? (
                         <Collapse in={alertOpen}>
                             {' '}
                             <Alert

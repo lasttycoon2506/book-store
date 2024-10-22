@@ -33,8 +33,8 @@ export default function AddUser({ database }: AddUserProps) {
                 email: email,
                 phone: phone,
             }
-            const addUserResponse = await database.addUser(user)
-            if (addUserResponse === 201) {
+            const response = await database.addUser(user)
+            if (response === 200) {
                 setAlert(true)
                 resetFields()
             }
