@@ -20,7 +20,9 @@ export const BookSchema = z.object({
         })
         .positive()
         .gte(1, { message: 'Missing price' })
-        ,
+        .refine((x) => x * 100 - Math.trunc(x * 100) < Number.EPSILON, {
+            message: 'Max of two decimals',
+        }),
 
     stock: z.coerce
         .number({
