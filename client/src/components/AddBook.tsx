@@ -12,8 +12,6 @@ import Collapse from '@mui/material/Collapse'
 import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
-import { z } from 'zod'
-import Grid from '@mui/material/Grid'
 import { Grid2 } from '@mui/material'
 
 type AddBookProps = {
@@ -83,11 +81,11 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 </div>
                 <Grid2
                     container
-                    spacing={10}
-                    mt={4}
+                    spacing={8}
+                    mt={6}
                     sx={{ justifyContent: 'center' }}
                 >
-                    <Grid2 size={6}>
+                    <Grid2 size={5}>
                         <TextField
                             {...register('title')}
                             placeholder="Title"
@@ -101,7 +99,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </span>
                     </Grid2>
-                    <Grid2 size={6}>
+                    <Grid2 size={5}>
                         <TextField
                             {...register('author')}
                             placeholder="Author"
@@ -115,7 +113,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </span>
                     </Grid2>
-                    <Grid2 size={6}>
+                    <Grid2 size={5}>
                         <TextField
                             type="number"
                             {...register('pages')}
@@ -130,7 +128,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={6}>
+                    <Grid2 size={5}>
                         <TextField
                             {...register('genre')}
                             placeholder="Genre"
@@ -144,7 +142,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={6}>
+                    <Grid2 size={5}>
                         <TextField
                             {...register('price')}
                             placeholder="Price"
@@ -158,7 +156,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={6}>
+                    <Grid2 size={5}>
                         <TextField
                             type="number"
                             {...register('stock')}
@@ -173,9 +171,11 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Button variant="contained" size="large" type="submit">
-                        Add Book
-                    </Button>
+                    <Grid2 size={5}>
+                        <Button variant="contained" size="large" type="submit">
+                            Add Book
+                        </Button>
+                    </Grid2>
                 </Grid2>
             </Box>
         )
