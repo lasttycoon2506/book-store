@@ -10,6 +10,6 @@ export const UserSchema = z.object({
         .min(8, { message: 'PW must be at least 8 chars. long' })
         .regex(pwRegex, {message: 'PW must be at least 8 chars long... etc'}),
     name: z.string().min(1, { message: 'Missing name' }),
-    email: z.string().min(1, { message: 'Missing email' }),
-    phone: z.string().min(1, { message: 'Missing phone' }),
+    email: z.string().min(1, { message: 'Missing email' }).email(),
+    phone: z.string().min(1, { message: 'Missing phone' }).length(10),
 })
