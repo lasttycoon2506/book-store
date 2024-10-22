@@ -10,7 +10,6 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Collapse from '@mui/material/Collapse'
 import { FieldValues, useForm } from 'react-hook-form'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
 
@@ -21,15 +20,28 @@ type AddBookProps = {
 export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [alert, setAlert] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
-
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({ resolver: zodResolver(BookSchema) })
 
-    function inputValidation(data: Book) {
-        console.log(data)
+    async function submit(data: Book) {
+        if (
+            data.title &&
+            data.author &&
+            data.pages &&
+            data.genre &&
+            data.price &&
+            data.stock
+        ) {
+            const addBookResponse = await database.addBook(data)
+            if (addBookResponse) {
+                setAlert(true)
+            } else {
+                console.error('Unable to create book!')
+            }
+        }
     }
 
     function renderForm(): JSX.Element {
@@ -46,7 +58,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                 component="form"
                 autoComplete="off"
                 onSubmit={handleSubmit((data: FieldValues) => {
-                    inputValidation(data as Book)
+                    submit(data as Book)
                 })}
             >
                 <div>
