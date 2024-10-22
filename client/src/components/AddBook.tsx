@@ -27,20 +27,11 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     } = useForm({ resolver: zodResolver(BookSchema) })
 
     async function submit(data: Book) {
-        if (
-            data.title &&
-            data.author &&
-            data.pages &&
-            data.genre &&
-            data.price &&
-            data.stock
-        ) {
-            const addBookResponse = await database.addBook(data)
-            if (addBookResponse) {
-                setAlert(true)
-            } else {
-                console.error('Unable to create book!')
-            }
+        const addBookResponse = await database.addBook(data)
+        if (addBookResponse) {
+            setAlert(true)
+        } else {
+            console.error('Unable to create book!')
         }
     }
 
