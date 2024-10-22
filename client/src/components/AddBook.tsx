@@ -90,6 +90,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             {...register('title')}
                             placeholder="Title"
                             fullWidth
+                            variant="filled"
                         />
                         <span className="error">
                             {errors['title']?.message ? (
@@ -104,6 +105,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             {...register('author')}
                             placeholder="Author"
                             fullWidth
+                            variant="filled"
                         />
                         <span className="error">
                             {errors['author']?.message ? (
@@ -119,6 +121,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             {...register('pages')}
                             placeholder="Pages"
                             fullWidth
+                            variant="filled"
                         />
                         <div className="error">
                             {errors['pages']?.message ? (
@@ -133,6 +136,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             {...register('genre')}
                             placeholder="Genre"
                             fullWidth
+                            variant="filled"
                         />
                         <div className="error">
                             {errors['genre']?.message ? (
@@ -147,6 +151,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             {...register('price')}
                             placeholder="Price"
                             fullWidth
+                            variant="filled"
                         />
                         <div className="error">
                             {errors['price']?.message ? (
@@ -162,6 +167,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             {...register('stock')}
                             placeholder="Stock"
                             fullWidth
+                            variant="filled"
                         />
                         <div className="error">
                             {errors['stock']?.message ? (
