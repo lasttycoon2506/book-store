@@ -1,141 +1,187 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import { SyntheticEvent, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Database } from '../services/Database'
-import { User } from '../models/User'
 import Collapse from '@mui/material/Collapse'
 import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import { NavLink } from 'react-router-dom'
+import { UserSchema } from '../zod/schemas/User'
+import { z } from 'zod'
+import { FieldValues, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Grid2 from '@mui/material/Grid2'
 
 type AddUserProps = {
     database: Database
 }
+type User = z.infer<typeof UserSchema>
 
-export default function AddUser({ database }: AddUserProps) {
-    const [userName, setUserName] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [name, setName] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [phone, setPhone] = useState<string>('')
-    const [alert, setAlert] = useState<boolean>(false)
+export default function AddBook({ database }: AddUserProps): JSX.Element {
+    const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
 
-    async function submit(event: SyntheticEvent): Promise<void> {
-        event.preventDefault()
-        if (userName && password && name && email && phone) {
-            const user: User = {
-                userName: userName,
-                password: password,
-                name: name,
-                email: email,
-                phone: phone,
-            }
-            const response = await database.addUser(user)
-            if (response === 200) {
-                setAlert(true)
-                resetFields()
-            }
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm({ resolver: zodResolver(UserSchema) })
+
+    async function submit(data: User): Promise<void> {
+        const response = await database.addUser(data)
+        if (response === 200) {
+            setSubmitSuccess(true)
+        } else {
+            console.error('Unable to create User!')
         }
     }
 
-    function resetFields(): void {
-        setUserName('')
-        setPassword('')
-        setName('')
-        setEmail('')
-        setPhone('')
-    }
+    useEffect(() => {
+        reset({
+            userName: '',
+            name: '',
+            email: '',
+            phone: '',
+        })
+    }, [submitSuccess])
+
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
             return (
                 <>
                     <br />
-                    <NavLink to={'/login'}> Must Login First </NavLink>
+                    <NavLink to={'/login'}> Must Login First</NavLink>
                 </>
             )
         }
         return (
-            <div role="main">
-                <Box
-                    component="form"
-                    sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-                    noValidate
-                    autoComplete="off"
-                    onSubmit={(e) => submit(e)}
+            <Box
+                component="form"
+                autoComplete="off"
+                sx={{ flexGrow: 1 }}
+                onSubmit={handleSubmit((data: FieldValues) => {
+                    submit(data as User)
+                })}
+            >
+                <div>
+                    {submitSuccess ? (
+                        <Collapse in={alertOpen}>
+                            {' '}
+                            <Alert
+                                action={
+                                    <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setAlertOpen(false)
+                                        }}
+                                    >
+                                        <CloseIcon fontSize="inherit" />
+                                    </IconButton>
+                                }
+                            >
+                                User Added!
+                            </Alert>
+                        </Collapse>
+                    ) : (
+                        <></>
+                    )}
+                </div>
+                <Grid2
+                    container
+                    spacing={8}
+                    mt={6}
+                    sx={{ justifyContent: 'center' }}
                 >
-                    <div>
-                        {alert ? (
-                            <Collapse in={alertOpen}>
-                                {' '}
-                                <Alert
-                                    action={
-                                        <IconButton
-                                            aria-label="close"
-                                            color="inherit"
-                                            size="small"
-                                            onClick={() => {
-                                                setAlertOpen(false)
-                                            }}
-                                        >
-                                            <CloseIcon fontSize="inherit" />
-                                        </IconButton>
-                                    }
-                                >
-                                    User Created!
-                                </Alert>
-                            </Collapse>
-                        ) : (
-                            <></>
-                        )}
-                    </div>
-                    <br />
-                    <TextField
-                        value={userName}
-                        label="User Name"
-                        variant="outlined"
-                        onChange={(e) => setUserName(e.target.value)}
-                    />
-                    <br />
-                    <TextField
-                        value={password}
-                        label="Password"
-                        variant="outlined"
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <br />
-                    <TextField
-                        value={name}
-                        label="Name"
-                        variant="outlined"
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <br />
-                    <TextField
-                        value={email}
-                        label="Email"
-                        variant="outlined"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <br />
-                    <TextField
-                        value={phone}
-                        label="Phone"
-                        variant="outlined"
-                        onChange={(e) => setPhone(e.target.value)}
-                    />
-                    <br />
-                    <br />
-                    <Button variant="contained" size="large" type="submit">
-                        Create
-                    </Button>
-                </Box>
-                <br />
-            </div>
+                    <Grid2 size={5}>
+                        <TextField
+                            {...register('userName')}
+                            placeholder="Username"
+                            fullWidth
+                            variant="filled"
+                        />
+                        <span className="error">
+                            {errors['userName']?.message ? (
+                                String(errors['userName']?.message)
+                            ) : (
+                                <></>
+                            )}
+                        </span>
+                    </Grid2>
+                    <Grid2 size={5}>
+                        <TextField
+                            {...register('password')}
+                            placeholder="Password"
+                            fullWidth
+                            variant="filled"
+                        />
+                        <span className="error">
+                            {errors['password']?.message ? (
+                                String(errors['password']?.message)
+                            ) : (
+                                <></>
+                            )}
+                        </span>
+                    </Grid2>
+                    <Grid2 size={5}>
+                        <TextField
+                            type="number"
+                            {...register('name')}
+                            placeholder="Name"
+                            fullWidth
+                            variant="filled"
+                        />
+                        <div className="error">
+                            {errors['name']?.message ? (
+                                String(errors['name']?.message)
+                            ) : (
+                                <></>
+                            )}
+                        </div>
+                    </Grid2>
+                    <Grid2 size={5}>
+                        <TextField
+                            {...register('email')}
+                            placeholder="Email"
+                            fullWidth
+                            variant="filled"
+                        />
+                        <div className="error">
+                            {errors['email']?.message ? (
+                                String(errors['email']?.message)
+                            ) : (
+                                <></>
+                            )}
+                        </div>
+                    </Grid2>
+                    <Grid2 size={5}>
+                        <TextField
+                            {...register('phone')}
+                            placeholder="Phone"
+                            fullWidth
+                            variant="filled"
+                        />
+                        <div className="error">
+                            {errors['phone']?.message ? (
+                                String(errors['phone']?.message)
+                            ) : (
+                                <></>
+                            )}
+                        </div>
+                    </Grid2>
+                    <Grid2 size={5}>
+                        <Button variant="contained" size="large" type="submit">
+                            Add Book
+                        </Button>
+                    </Grid2>
+                </Grid2>
+            </Box>
         )
     }
+
     return renderForm()
 }
