@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Database } from '../services/Database'
-import type { Book } from '../models/Book'
 import { NavLink } from 'react-router-dom'
 import type {} from '@mui/x-data-grid/themeAugmentation'
 import {
@@ -15,10 +14,13 @@ import {
 import { DataGrid } from '@mui/x-data-grid/DataGrid/DataGrid'
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell/GridActionsCellItem'
 import DeleteIcon from '@mui/icons-material/DeleteOutlined'
+import { z } from 'zod'
+import { BookSchema } from '../zod/schemas/Book'
 
 type ViewAllBooksProps = {
     database: Database
 }
+type Book = z.infer<typeof BookSchema>
 
 export default function ViewAllBooks({
     database,

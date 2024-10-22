@@ -1,9 +1,12 @@
 import { Authentication } from './Authentication'
 import { ApiStack } from '../../../server/outputs.json'
-import { Book } from '../models/Book'
-import { User } from '../models/User'
+import { z } from 'zod'
+import { BookSchema } from '../zod/schemas/Book'
+import { UserSchema } from '../zod/schemas/User'
 
 const bookstoreApiUrl = ApiStack.booksApiEndpoint04E49D0B + 'books'
+type Book = z.infer<typeof BookSchema>
+type User = z.infer<typeof UserSchema>
 
 export class Database {
     private authentication: Authentication
