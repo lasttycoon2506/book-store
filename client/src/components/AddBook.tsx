@@ -62,8 +62,6 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         return (
             <Box
                 component="form"
-                autoComplete="off"
-                sx={{ flexGrow: 1 }}
                 onSubmit={handleSubmit((data: FieldValues) => {
                     submit(data as Book)
                 })}
