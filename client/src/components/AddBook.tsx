@@ -12,6 +12,7 @@ import Collapse from '@mui/material/Collapse'
 import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
+import { z } from 'zod'
 
 type AddBookProps = {
     database: Database
@@ -26,7 +27,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         formState: { errors },
     } = useForm({ resolver: zodResolver(BookSchema) })
 
-    async function submit(data: Book) {
+    async function submit(data: Book): Promise<void> {
         const addBookResponse = await database.addBook(data)
         if (addBookResponse) {
             setAlert(true)

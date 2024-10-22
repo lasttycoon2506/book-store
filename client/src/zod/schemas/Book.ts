@@ -19,7 +19,11 @@ export const BookSchema = z.object({
             invalid_type_error: 'Price must be a number > 0',
         })
         .nonnegative()
-        .gte(1, { message: 'Missing price' }),
+        .gte(1, { message: 'Missing price' })
+        .refine((x) => x * 100 - Math.trunc(x * 100) < Number.EPSILON, {
+            message: 'Max of two decimals',
+        }),
+
     stock: z.coerce
         .number({
             required_error: 'Stock is required',
@@ -29,3 +33,6 @@ export const BookSchema = z.object({
         .nonnegative()
         .gte(1, { message: 'Missing stock' }),
 })
+// z.number()
+//   .refine(x => x * 100 - Math.trunc(x * 100)< Number.EPSILON)
+//   .parse(0.1 + 0.1  + 0.1)
