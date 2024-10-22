@@ -81,9 +81,18 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                         <></>
                     )}
                 </div>
-                <Grid2 container spacing={2} mt={4}>
-                <Grid2 size={6}>
-                        <TextField {...register('title')} placeholder="Title" fullWidth/>
+                <Grid2
+                    container
+                    spacing={10}
+                    mt={4}
+                    sx={{ justifyContent: 'center' }}
+                >
+                    <Grid2 size={6}>
+                        <TextField
+                            {...register('title')}
+                            placeholder="Title"
+                            fullWidth
+                        />
                         <span className="error">
                             {errors['title']?.message ? (
                                 String(errors['title']?.message)
@@ -106,11 +115,12 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </span>
                     </Grid2>
-                    <Grid2 size={4}>
+                    <Grid2 size={6}>
                         <TextField
                             type="number"
                             {...register('pages')}
                             placeholder="Pages"
+                            fullWidth
                         />
                         <div className="error">
                             {errors['pages']?.message ? (
@@ -120,8 +130,12 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={4}>
-                        <TextField {...register('genre')} placeholder="Genre" />
+                    <Grid2 size={6}>
+                        <TextField
+                            {...register('genre')}
+                            placeholder="Genre"
+                            fullWidth
+                        />
                         <div className="error">
                             {errors['genre']?.message ? (
                                 String(errors['genre']?.message)
@@ -130,8 +144,12 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={4}>
-                        <TextField {...register('price')} placeholder="Price" />
+                    <Grid2 size={6}>
+                        <TextField
+                            {...register('price')}
+                            placeholder="Price"
+                            fullWidth
+                        />
                         <div className="error">
                             {errors['price']?.message ? (
                                 String(errors['price']?.message)
@@ -140,11 +158,12 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={4}>
+                    <Grid2 size={6}>
                         <TextField
                             type="number"
                             {...register('stock')}
                             placeholder="Stock"
+                            fullWidth
                         />
                         <div className="error">
                             {errors['stock']?.message ? (
