@@ -32,7 +32,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
 
     async function submit(data: Book): Promise<void> {
         const response = await database.addBook(data)
-        if (response) {
+        if (response === 200) {
             setSubmitSuccess(true)
         } else {
             console.error('Unable to create book!')

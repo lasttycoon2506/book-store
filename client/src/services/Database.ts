@@ -35,7 +35,7 @@ export class Database {
             },
         })
         const postResponseJson = await postResponse.json()
-        return postResponseJson
+        return postResponseJson.$metadata.httpStatusCode
     }
 
     async editBook(book: Book): Promise<number> {
