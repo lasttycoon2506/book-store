@@ -171,7 +171,7 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={{ xs: 'grow', md: 10 }}>
                         <Button variant="contained" size="large" type="submit">
                             Add Book
                         </Button>
