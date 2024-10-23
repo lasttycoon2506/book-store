@@ -54,7 +54,6 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
         phone: '',
         numberformat: '1320',
     })
-
     const {
         register,
         handleSubmit,
@@ -63,6 +62,7 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
     } = useForm({ resolver: zodResolver(UserSchema) })
 
     async function submit(data: User): Promise<void> {
+        data.phone = data.phone.replace(/[^\d]/g, '')
         const response = await database.addUser(data)
         if (response === 200) {
             setSubmitSuccess(true)
