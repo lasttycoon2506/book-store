@@ -203,7 +203,6 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                                 name="phone"
                                 placeholder="Phone"
                                 variant="filled"
-                                value={values.phone}
                                 onChange={handleChange}
                                 InputProps={{
                                     inputComponent: TextMaskCustom as any,
