@@ -61,12 +61,13 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
 
     async function submit(data: User): Promise<void> {
         data.phone = data.phone.replace(/[^\d]/g, '')
-        data.phone = "+" + data.phone
+        data.phone = '+' + data.phone
         const response = await database.addUser(data)
-        if (response === 200) {
+        if (response.status === 200 || response.status === 201) {
             setSubmitSuccess(true)
         } else {
-            console.error('Unable to create User!')
+            const errMsg = await response.json()
+            console.error(errMsg)
         }
     }
 

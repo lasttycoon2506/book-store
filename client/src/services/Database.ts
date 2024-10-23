@@ -61,7 +61,7 @@ export class Database {
         return deleteResponseJson.$metadata.httpStatusCode
     }
 
-    async addUser(user: User): Promise<number> {
+    async addUser(user: User): Promise<Response> {
         const postResponse = await fetch(bookstoreApiUrl, {
             method: 'POST',
             body: JSON.stringify(user),
@@ -69,8 +69,7 @@ export class Database {
                 Authorization: this.authentication.jwToken!,
             },
         })
-        const postResponseJson = await postResponse.json()
-        return postResponseJson.$metadata.httpStatusCode
+        return postResponse
     }
 
     public isAuthorized(): boolean {
