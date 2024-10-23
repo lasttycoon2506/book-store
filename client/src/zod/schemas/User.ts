@@ -14,5 +14,5 @@ export const UserSchema = z.object({
         }),
     name: z.string().min(1, { message: 'Missing name' }),
     email: z.string().min(1, { message: 'Missing email' }).email({message: 'Invalid email'}),
-    phone: z.string().min(1, { message: 'Missing phone' }).length(10),
+    phone: z.string().min(1, { message: 'Missing phone' }).length(10, {message: "Phone must be 10 digits"}),
 })
