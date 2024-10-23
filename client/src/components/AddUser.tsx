@@ -48,6 +48,24 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
         })
     }, [submitSuccess])
 
+    const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
+        function TextMaskCustom(props, ref) {
+          const { onChange, ...other } = props;
+          return (
+            <IMaskInput
+              {...other}
+              mask="(#00) 000-0000"
+              definitions={{
+                '#': /[1-9]/,
+              }}
+              inputRef={ref}
+              onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+              overwrite
+            />
+          );
+        },
+      );
+
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
             return (
@@ -162,6 +180,7 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
                             placeholder="Phone"
                             fullWidth
                             variant="filled"
+                            type="number"
                         />
                         <div className="error">
                             {errors['phone']?.message ? (
