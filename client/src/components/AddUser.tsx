@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import { forwardRef, useEffect, useState } from 'react'
+import { ChangeEvent, forwardRef, useEffect, useState } from 'react'
 import { Database } from '../services/Database'
 import Collapse from '@mui/material/Collapse'
 import Alert from '@mui/material/Alert'
@@ -15,6 +15,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Grid2 from '@mui/material/Grid2'
 import { IMaskInput } from 'react-imask'
 import React from 'react'
+import FormControl from '@mui/material/FormControl'
+import Input from '@mui/material/Input'
 
 type AddUserProps = {
     database: Database
@@ -48,10 +50,10 @@ const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
 export default function AddBook({ database }: AddUserProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
-    const [values, setValues] = React.useState({
-        textmask: '(100) 000-0000',
+    const [values, setValues] = useState({
+        phone: '(100) 000-0000',
         numberformat: '1320',
-      });
+    })
 
     const {
         register,
@@ -78,14 +80,12 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
         })
     }, [submitSuccess])
 
-    
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValues({
-          ...values,
-          [event.target.name]: event.target.value,
-        });
-      };
+            ...values,
+            [event.target.name]: event.target.value,
+        })
+    }
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
@@ -196,25 +196,23 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
                         </div>
                     </Grid2>
                     <Grid2 size={5}>
-                        <TextField
-                            {...register('phone')}
-                            placeholder="Phone"
-                            fullWidth
-                            variant="filled"
-                            type="number"
-                            value={values.textmask}
-                            onChange={handleChange}
-                            name="textmask"
-                            id="formatted-text-mask-input"
-                            inputComponent={TextMaskCustom as any}
-                        />
-                        <div className="error">
-                            {errors['phone']?.message ? (
-                                String(errors['phone']?.message)
-                            ) : (
-                                <></>
-                            )}
-                        </div>
+                        <FormControl variant="standard">
+                            <Input
+                                fullWidth
+                                name="phone"
+                                placeholder="Phone"
+                                value={values.phone}
+                                onChange={handleChange}
+                                inputComponent={TextMaskCustom as any}
+                            />
+                            <div className="error">
+                                {errors['phone']?.message ? (
+                                    String(errors['phone']?.message)
+                                ) : (
+                                    <></>
+                                )}
+                            </div>
+                        </FormControl>
                     </Grid2>
                     <Grid2 size={{ xs: 'grow', md: 10 }}>
                         <Button variant="contained" size="large" type="submit">
