@@ -61,6 +61,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
 
     async function submit(data: User): Promise<void> {
         data.phone = data.phone.replace(/[^\d]/g, '')
+        data.phone = "+" + data.phone
         const response = await database.addUser(data)
         if (response === 200) {
             setSubmitSuccess(true)
