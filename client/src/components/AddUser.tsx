@@ -33,7 +33,7 @@ const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
         return (
             <IMaskInput
                 {...other}
-                mask="(#00) 000-0000"
+                mask="(000) 000-0000"
                 definitions={{
                     '#': /[1-9]/,
                 }}
@@ -51,7 +51,7 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
     const [values, setValues] = useState({
-        phone: '(100) 000-0000',
+        phone: '',
         numberformat: '1320',
     })
 
