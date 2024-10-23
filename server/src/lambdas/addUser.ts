@@ -29,8 +29,6 @@ export async function addUser(
             }
         }
         const user: User = JSON.parse(event.body)
-        //dynamo reqs. phone w/ + prefixed
-        user.phone = "+" + user.phone
         const result = UserModel.safeParse({
             userName: user.userName,
             password: user.password,
