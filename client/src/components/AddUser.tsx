@@ -198,7 +198,7 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
                     <Grid2 size={5}>
                         <FormControl variant="standard">
                             <TextField
-                             {...register('phone')}
+                                {...register('phone')}
                                 fullWidth
                                 name="phone"
                                 placeholder="Phone"
