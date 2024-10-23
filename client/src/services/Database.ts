@@ -26,7 +26,7 @@ export class Database {
         return allBooks
     }
 
-    async addBook(book: Book): Promise<number> {
+    async addBook(book: Book): Promise<Response> {
         const postResponse = await fetch(bookstoreApiUrl, {
             method: 'POST',
             body: JSON.stringify(book),
@@ -34,8 +34,7 @@ export class Database {
                 Authorization: this.authentication.jwToken!,
             },
         })
-        const postResponseJson = await postResponse.json()
-        return postResponseJson.$metadata.httpStatusCode
+        return postResponse
     }
 
     async editBook(book: Book): Promise<number> {
