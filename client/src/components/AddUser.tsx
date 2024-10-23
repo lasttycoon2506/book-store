@@ -25,6 +25,26 @@ type CustomProps = {
     name: string
 }
 
+const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
+    function TextMaskCustom(props, ref) {
+        const { onChange, ...other } = props
+        return (
+            <IMaskInput
+                {...other}
+                mask="(#00) 000-0000"
+                definitions={{
+                    '#': /[1-9]/,
+                }}
+                inputRef={ref}
+                onAccept={(value: any) =>
+                    onChange({ target: { name: props.name, value } })
+                }
+                overwrite
+            />
+        )
+    }
+)
+
 export default function AddBook({ database }: AddUserProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
@@ -58,25 +78,14 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
         })
     }, [submitSuccess])
 
-    const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
-        function TextMaskCustom(props, ref) {
-            const { onChange, ...other } = props
-            return (
-                <IMaskInput
-                    {...other}
-                    mask="(#00) 000-0000"
-                    definitions={{
-                        '#': /[1-9]/,
-                    }}
-                    inputRef={ref}
-                    onAccept={(value: any) =>
-                        onChange({ target: { name: props.name, value } })
-                    }
-                    overwrite
-                />
-            )
-        }
-    )
+    
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValues({
+          ...values,
+          [event.target.name]: event.target.value,
+        });
+      };
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
