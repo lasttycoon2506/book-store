@@ -14,9 +14,7 @@ import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Grid2 from '@mui/material/Grid2'
 import { IMaskInput } from 'react-imask'
-import React from 'react'
 import FormControl from '@mui/material/FormControl'
-import Input from '@mui/material/Input'
 
 type AddUserProps = {
     database: Database
@@ -47,7 +45,7 @@ const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
     }
 )
 
-export default function AddBook({ database }: AddUserProps): JSX.Element {
+export default function AddUser({ database }: AddUserProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
     const [values, setValues] = useState({
