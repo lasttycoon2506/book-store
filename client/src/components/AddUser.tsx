@@ -197,13 +197,17 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
                     </Grid2>
                     <Grid2 size={5}>
                         <FormControl variant="standard">
-                            <Input
+                            <TextField
+                             {...register('phone')}
                                 fullWidth
                                 name="phone"
                                 placeholder="Phone"
+                                variant="filled"
                                 value={values.phone}
                                 onChange={handleChange}
-                                inputComponent={TextMaskCustom as any}
+                                InputProps={{
+                                    inputComponent: TextMaskCustom as any,
+                                }}
                             />
                             <div className="error">
                                 {errors['phone']?.message ? (
