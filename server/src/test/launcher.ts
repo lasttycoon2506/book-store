@@ -4,27 +4,27 @@ process.env.AWS_REGION = "us-east-1";
 process.env.TABLE_NAME = "book-table";
 
 
-// handler({httpMethod: 'POST',
-//     body: JSON.stringify({
-//             userName: 'sghsh',
-//             name: 'jibby',
-//             email: '',
-//             phone:'+3853545847',
-//             password: 'testeR123!'
-//             })
-// } as any).then(result => console.log(result));
+handler({httpMethod: 'POST',
+    body: JSON.stringify({
+            userName: 'sghsh',
+            name: 'jibby',
+            email: 'hkjh@gmail.com',
+            phone:'3853545847',
+            password: 'testeR123!'
+            })
+} as any).then(result => console.log(result));
 
 // handler({httpMethod: 'GET',
 //     queryStringParameters: {id: 'dgd'}
 // } as any).then(result => console.log(result));
 
-handler({httpMethod: 'POST',
-    body: JSON.stringify({
-            title: 'chubby',
-            author: 'jibby',
-            pages: 8,
-            genre:'lit',
-            price: 56,
-            stock: 3
-            })
-} as any).then(result => console.log(result));
+// handler({httpMethod: 'POST',
+//     body: JSON.stringify({
+//             title: 'chubby',
+//             author: 'jibby',
+//             pages: 8,
+//             genre:'lit',
+//             price: 56,
+//             stock: 3
+//             })
+// } as any).then(result => console.log(result));

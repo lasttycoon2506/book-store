@@ -5,5 +5,5 @@ export const User = z.object({
     password: z.string().min(8),
     name: z.string().min(1),
     email: z.string().email(),
-    phone: z.string().min(10),
+    phone: z.string().min(11),
 })
