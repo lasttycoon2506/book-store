@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import { useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { Database } from '../services/Database'
 import Collapse from '@mui/material/Collapse'
 import Alert from '@mui/material/Alert'
@@ -13,15 +13,25 @@ import { z } from 'zod'
 import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Grid2 from '@mui/material/Grid2'
+import { IMaskInput } from 'react-imask'
+import React from 'react'
 
 type AddUserProps = {
     database: Database
 }
 type User = z.infer<typeof UserSchema>
+type CustomProps = {
+    onChange: (event: { target: { name: string; value: string } }) => void
+    name: string
+}
 
 export default function AddBook({ database }: AddUserProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
+    const [values, setValues] = React.useState({
+        textmask: '(100) 000-0000',
+        numberformat: '1320',
+      });
 
     const {
         register,
@@ -48,23 +58,25 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
         })
     }, [submitSuccess])
 
-    const TextMaskCustom = React.forwardRef<HTMLInputElement, CustomProps>(
+    const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
         function TextMaskCustom(props, ref) {
-          const { onChange, ...other } = props;
-          return (
-            <IMaskInput
-              {...other}
-              mask="(#00) 000-0000"
-              definitions={{
-                '#': /[1-9]/,
-              }}
-              inputRef={ref}
-              onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
-              overwrite
-            />
-          );
-        },
-      );
+            const { onChange, ...other } = props
+            return (
+                <IMaskInput
+                    {...other}
+                    mask="(#00) 000-0000"
+                    definitions={{
+                        '#': /[1-9]/,
+                    }}
+                    inputRef={ref}
+                    onAccept={(value: any) =>
+                        onChange({ target: { name: props.name, value } })
+                    }
+                    overwrite
+                />
+            )
+        }
+    )
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
@@ -181,6 +193,11 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
                             fullWidth
                             variant="filled"
                             type="number"
+                            value={values.textmask}
+                            onChange={handleChange}
+                            name="textmask"
+                            id="formatted-text-mask-input"
+                            inputComponent={TextMaskCustom as any}
                         />
                         <div className="error">
                             {errors['phone']?.message ? (
