@@ -116,6 +116,7 @@ export default function AddBook({ database }: AddUserProps): JSX.Element {
                             placeholder="Password"
                             fullWidth
                             variant="filled"
+                            type="password"
                         />
                         <span className="error">
                             {errors['password']?.message ? (
