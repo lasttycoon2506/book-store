@@ -107,6 +107,8 @@ export default function ViewAllBooks({
             headerName: 'Title',
             headerAlign: 'center',
             width: 225,
+            headerClassName: 'tester',
+
             editable: true,
             description: 'double-click to edit Title',
             valueSetter: setUpdatedTitle,
@@ -116,6 +118,8 @@ export default function ViewAllBooks({
             headerName: 'Author',
             headerAlign: 'center',
             width: 225,
+            headerClassName: 'tester',
+
             editable: true,
             description: 'double-click to edit Author',
             valueSetter: setUpdatedAuthor,
@@ -125,6 +129,8 @@ export default function ViewAllBooks({
             headerName: 'Pages',
             headerAlign: 'center',
             width: 150,
+            headerClassName: 'tester',
+
             editable: true,
             description: 'double-click to edit Pgs',
             valueSetter: setUpdatedPgs,
@@ -133,6 +139,8 @@ export default function ViewAllBooks({
             field: 'genre',
             headerName: 'Genre',
             width: 200,
+            headerClassName: 'tester',
+
             headerAlign: 'center',
             editable: true,
             description: 'double-click to edit Genre',
@@ -142,6 +150,8 @@ export default function ViewAllBooks({
             field: 'price',
             headerName: 'Price',
             width: 140,
+            headerClassName: 'tester',
+
             editable: true,
             description: 'double-click to edit Price',
             headerAlign: 'center',
@@ -160,7 +170,7 @@ export default function ViewAllBooks({
         {
             field: 'actions',
             type: 'actions',
-            headerName: '',
+            headerClassName: 'tester',
             width: 100,
             cellClassName: 'actions',
             getActions: ({ id }) => {
