@@ -6,6 +6,6 @@ export const Book = z.object({
     author: z.string().min(1),
     pages: z.number().int().positive(),
     genre: z.string().min(1),
-    price: z.number().nonnegative(),
+    price: z.string(),
     stock: z.number().int().nonnegative(),
 })
