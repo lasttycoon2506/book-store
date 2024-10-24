@@ -22,7 +22,9 @@ export default function Profile() {
             setName(userAttributes.name!)
             setEmail(userAttributes.email!)
             setPhone(userAttributes.phone_number!)
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             console.error(error)
         }
     }
