@@ -151,6 +151,12 @@ export default function ViewAllBooks({
             description: 'double-click to edit Price',
             headerAlign: 'center',
             valueSetter: setUpdatedPrice,
+            valueFormatter: (price?: string) => {
+                if (price === null) {
+                    return ''
+                }
+                return '$' + price
+            },
         },
         {
             field: 'stock',
