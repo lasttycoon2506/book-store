@@ -33,11 +33,9 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     } = useForm({ resolver: zodResolver(BookSchema) })
 
     async function submit(data: Book): Promise<void> {
-        if (Number.isInteger(data.price)) {
-            const priceTrailingZeros = parseFloat(String(data.price)).toFixed(2)
-            // @ts-ignore 
-            data.price = priceTrailingZeros
-        }
+        const priceTrailingZeros = data.price.toFixed(2)
+        // @ts-ignore
+        data.price = priceTrailingZeros
         const response = await database.addBook(data)
         if (response.status === 200 || response.status === 201) {
             setSubmitSuccess(true)
