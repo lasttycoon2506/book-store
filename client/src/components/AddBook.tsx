@@ -25,7 +25,6 @@ type Book = z.infer<typeof BookSchema>
 export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const [alertOpen, setAlertOpen] = useState<boolean>(true)
-
     const {
         register,
         handleSubmit,

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
+import { useForm } from 'react-hook-form'
 
 type LoginProps = {
     authentication: Authentication
@@ -12,8 +13,12 @@ type LoginProps = {
 export default function Login({ authentication }: LoginProps): JSX.Element {
     const [userName, setUserName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const [errorMsg, setErrorMsg] = useState<string>('')
     const navigate = useNavigate()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
 
     function refreshPage(): void {
         window.location.reload()
@@ -23,21 +28,10 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         event.preventDefault()
         if (userName && password) {
             const loginResult = await authentication.login(userName, password)
-            if (typeof loginResult === 'string') {
-                setErrorMsg(`${loginResult}`)
-            }
-            else if (loginResult) {
+            if (loginResult) {
                 navigate('/')
                 refreshPage()
-            } 
-        } else {
-            setErrorMsg('username & pw required')
-        }
-    }
-
-    function showLoginResult(): JSX.Element | undefined {
-        if (errorMsg) {
-            return <label> {errorMsg} </label>
+            }
         }
     }
 
@@ -53,26 +47,35 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
                     onSubmit={(e) => submit(e)}
                 >
                     <TextField
-                        value={userName}
-                        label="User Name"
-                        variant="outlined"
-                        onChange={(e) => setUserName(e.target.value)}
-                    />
-                    <br />
+                       {...register('userName')}
+                       placeholder="Username"
+                       fullWidth
+                       variant="filled"
+                   />
+                   <span className="error">
+                       {errors['userName']?.message ? (
+                           String(errors['userName']?.message)
+                       ) : (
+                           <></>
+                       )}
+                   </span>
                     <TextField
-                        value={password}
-                        label="Password"
-                        variant="outlined"
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <br />
+                       {...register('password')}
+                       placeholder="Password"
+                       fullWidth
+                       variant="filled"
+                   />
+                   <span className="error">
+                       {errors['password']?.message ? (
+                           String(errors['password']?.message)
+                       ) : (
+                           <></>
+                       )}
+                   </span>
                     <Button variant="contained" size="large" type="submit">
                         Login
                     </Button>
                 </Box>
-                <br />
-                {showLoginResult()}
             </div>
         )
     }
