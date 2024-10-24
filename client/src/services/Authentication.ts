@@ -42,7 +42,7 @@ export class Authentication {
     async login(
         userName: string,
         password: string
-    ): Promise<SignInOutput | boolean | undefined | string> {
+    ): Promise<SignInOutput | boolean | undefined | Error> {
         try {
             const signInResult: SignInOutput = await signIn({
                 username: userName,
@@ -60,7 +60,7 @@ export class Authentication {
             return false
         } catch (error) {
             if (error instanceof Error) {
-                return error.message
+                return error
             }
             return undefined
         }

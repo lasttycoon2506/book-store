@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react'
+import { useState } from 'react'
 import { Authentication } from '../services/Authentication'
 import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
@@ -11,8 +11,7 @@ type LoginProps = {
 }
 
 export default function Login({ authentication }: LoginProps): JSX.Element {
-    const [userName, setUserName] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
+    const [loginSuccessMsg, setLoginSuccessMsg] = useState<string>('')
     const navigate = useNavigate()
     const {
         register,
@@ -25,8 +24,13 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
     }
 
     async function submit(data: FieldValues): Promise<void> {
-        const loginResult = await authentication.login(userName, password)
-        if (loginResult) {
+        const loginResult = await authentication.login(
+            data.userName,
+            data.password
+        )
+        if (loginResult instanceof Error) {
+            setLoginSuccessMsg(loginResult.message)
+        } else if (loginResult) {
             navigate('/')
             refreshPage()
         }
