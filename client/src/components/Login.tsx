@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 
 type LoginProps = {
     authentication: Authentication
@@ -24,14 +24,11 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
         window.location.reload()
     }
 
-    async function submit(event: SyntheticEvent): Promise<void> {
-        event.preventDefault()
-        if (userName && password) {
-            const loginResult = await authentication.login(userName, password)
-            if (loginResult) {
-                navigate('/')
-                refreshPage()
-            }
+    async function submit(data: FieldValues): Promise<void> {
+        const loginResult = await authentication.login(userName, password)
+        if (loginResult) {
+            navigate('/')
+            refreshPage()
         }
     }
 
@@ -44,34 +41,40 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
                     sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
                     noValidate
                     autoComplete="off"
-                    onSubmit={(e) => submit(e)}
+                    onSubmit={handleSubmit((data: FieldValues) => {
+                        submit(data)
+                    })}
                 >
                     <TextField
-                       {...register('userName')}
-                       placeholder="Username"
-                       fullWidth
-                       variant="filled"
-                   />
-                   <span className="error">
-                       {errors['userName']?.message ? (
-                           String(errors['userName']?.message)
-                       ) : (
-                           <></>
-                       )}
-                   </span>
+                        {...register('userName', {
+                            required: 'Username is required',
+                        })}
+                        placeholder="Username"
+                        fullWidth
+                        variant="filled"
+                    />
+                    <span className="error">
+                        {errors['userName']?.message ? (
+                            String(errors['userName']?.message)
+                        ) : (
+                            <></>
+                        )}
+                    </span>
                     <TextField
-                       {...register('password')}
-                       placeholder="Password"
-                       fullWidth
-                       variant="filled"
-                   />
-                   <span className="error">
-                       {errors['password']?.message ? (
-                           String(errors['password']?.message)
-                       ) : (
-                           <></>
-                       )}
-                   </span>
+                        {...register('password', {
+                            required: 'Password is required',
+                        })}
+                        placeholder="Password"
+                        fullWidth
+                        variant="filled"
+                    />
+                    <span className="error">
+                        {errors['password']?.message ? (
+                            String(errors['password']?.message)
+                        ) : (
+                            <></>
+                        )}
+                    </span>
                     <Button variant="contained" size="large" type="submit">
                         Login
                     </Button>
