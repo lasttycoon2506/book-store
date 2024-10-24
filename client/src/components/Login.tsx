@@ -87,6 +87,7 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
                         Login
                     </Button>
                 </Box>
+                <p className="error"> {loginSuccessMsg} </p>
             </div>
         )
     }
