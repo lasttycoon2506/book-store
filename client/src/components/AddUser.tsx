@@ -216,7 +216,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                             </div>
                         </FormControl>
                     </Grid2>
-                    <Grid2 size={{ xs: 'grow', md: 10 }}>
+                    <Grid2 size={{ md: 10 }}>
                         <Button variant="contained" size="large" type="submit">
                             Add User
                         </Button>

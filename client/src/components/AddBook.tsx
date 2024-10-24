@@ -163,7 +163,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <FormControl fullWidth  variant="filled">
+                    <FormControl sx={{ m: 1 }} variant="filled">
                         <FilledInput
                             {...register('price')}
                             placeholder="Price"
@@ -181,7 +181,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </FormControl>
-                    <Grid2 size={5}>
+                    <FormControl sx={{ m: 1 }} variant="filled">
                         <TextField
                             type="number"
                             {...register('stock')}
@@ -196,8 +196,8 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                                 <></>
                             )}
                         </div>
-                    </Grid2>
-                    <Grid2 size={5}>
+                    </FormControl>
+                    <Grid2 size={{ md: 10 }}>
                         <Button variant="contained" size="large" type="submit">
                             Add Book
                         </Button>
