@@ -131,6 +131,9 @@ export default function ViewAllBooks({
             editable: true,
             description: 'double-click to edit Pgs',
             valueSetter: setUpdatedPgs,
+            valueFormatter: (pages: number) => {
+                return new Intl.NumberFormat().format(pages)
+            },
         },
         {
             field: 'genre',
@@ -151,10 +154,7 @@ export default function ViewAllBooks({
             description: 'double-click to edit Price',
             headerAlign: 'center',
             valueSetter: setUpdatedPrice,
-            valueFormatter: (price?: string) => {
-                if (price === null) {
-                    return ''
-                }
+            valueFormatter: (price: string) => {
                 return '$' + price
             },
         },
@@ -167,6 +167,9 @@ export default function ViewAllBooks({
             editable: true,
             description: 'double-click to edit Stock',
             valueSetter: setUpdatedStock,
+            valueFormatter: (stock: number) => {
+                return new Intl.NumberFormat().format(stock)
+            },
         },
         {
             field: 'actions',
