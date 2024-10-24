@@ -74,6 +74,7 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
                             placeholder="Password"
                             fullWidth
                             variant="outlined"
+                            type="password"
                         />
                         <p className="error">
                             {errors['password']?.message ? (
