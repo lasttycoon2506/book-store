@@ -166,7 +166,7 @@ export default function ViewAllBooks({
             field: 'actions',
             type: 'actions',
             headerClassName: 'data-grid-header',
-            width: 100,
+            width: 110,
             cellClassName: 'actions',
             getActions: ({ id }) => {
                 return [
