@@ -49,36 +49,40 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
                         submit(data)
                     })}
                 >
-                    <TextField
-                        {...register('userName', {
-                            required: 'Username is required',
-                        })}
-                        placeholder="Username"
-                        fullWidth
-                        variant="filled"
-                    />
-                    <span className="error">
-                        {errors['userName']?.message ? (
-                            String(errors['userName']?.message)
-                        ) : (
-                            <></>
-                        )}
-                    </span>
-                    <TextField
-                        {...register('password', {
-                            required: 'Password is required',
-                        })}
-                        placeholder="Password"
-                        fullWidth
-                        variant="filled"
-                    />
-                    <span className="error">
-                        {errors['password']?.message ? (
-                            String(errors['password']?.message)
-                        ) : (
-                            <></>
-                        )}
-                    </span>
+                    <p>
+                        <TextField
+                            {...register('userName', {
+                                required: 'Username is required',
+                            })}
+                            placeholder="Username"
+                            fullWidth
+                            variant="outlined"
+                        />
+                        <span className="error">
+                            {errors['userName']?.message ? (
+                                String(errors['userName']?.message)
+                            ) : (
+                                <></>
+                            )}
+                        </span>
+                    </p>
+                    <p>
+                        <TextField
+                            {...register('password', {
+                                required: 'Password is required',
+                            })}
+                            placeholder="Password"
+                            fullWidth
+                            variant="outlined"
+                        />
+                        <span className="error">
+                            {errors['password']?.message ? (
+                                String(errors['password']?.message)
+                            ) : (
+                                <></>
+                            )}
+                        </span>
+                    </p>
                     <Button variant="contained" size="large" type="submit">
                         Login
                     </Button>
