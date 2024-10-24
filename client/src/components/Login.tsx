@@ -58,13 +58,13 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
                             fullWidth
                             variant="outlined"
                         />
-                        <span className="error">
+                        <p className="error">
                             {errors['userName']?.message ? (
                                 String(errors['userName']?.message)
                             ) : (
                                 <></>
                             )}
-                        </span>
+                        </p>
                     </p>
                     <p>
                         <TextField
@@ -75,13 +75,13 @@ export default function Login({ authentication }: LoginProps): JSX.Element {
                             fullWidth
                             variant="outlined"
                         />
-                        <span className="error">
+                        <p className="error">
                             {errors['password']?.message ? (
                                 String(errors['password']?.message)
                             ) : (
                                 <></>
                             )}
-                        </span>
+                        </p>
                     </p>
                     <Button variant="contained" size="large" type="submit">
                         Login
