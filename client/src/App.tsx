@@ -4,7 +4,7 @@ import NavBar from './components/NavBar'
 import Login from './components/Login'
 import { Authentication } from './services/Authentication'
 import { Database } from './services/Database'
-import ViewAllBooks from './components/ViewAllBooks'
+import ViewBooks from './components/ViewBooks'
 import Profile from './components/Profile'
 import AddBook from './components/AddBook'
 import AddUser from './components/AddUser'
@@ -52,7 +52,7 @@ function App(): JSX.Element {
                 },
                 {
                     path: '/books',
-                    element: <ViewAllBooks database={database} />,
+                    element: <ViewBooks database={database} />,
                 },
                 {
                     path: '/addBook',
