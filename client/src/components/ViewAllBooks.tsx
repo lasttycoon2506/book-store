@@ -105,6 +105,7 @@ export default function ViewAllBooks({
         {
             field: 'title',
             headerName: 'Title',
+            headerAlign: 'center',
             width: 225,
             editable: true,
             description: 'double-click to edit Title',
@@ -113,6 +114,7 @@ export default function ViewAllBooks({
         {
             field: 'author',
             headerName: 'Author',
+            headerAlign: 'center',
             width: 225,
             editable: true,
             description: 'double-click to edit Author',
@@ -121,6 +123,7 @@ export default function ViewAllBooks({
         {
             field: 'pages',
             headerName: 'Pages',
+            headerAlign: 'center',
             width: 150,
             editable: true,
             description: 'double-click to edit Pgs',
@@ -130,6 +133,7 @@ export default function ViewAllBooks({
             field: 'genre',
             headerName: 'Genre',
             width: 200,
+            headerAlign: 'center',
             editable: true,
             description: 'double-click to edit Genre',
             valueSetter: setUpdatedGenre,
@@ -140,12 +144,15 @@ export default function ViewAllBooks({
             width: 140,
             editable: true,
             description: 'double-click to edit Price',
+            headerAlign: 'center',
             valueSetter: setUpdatedPrice,
         },
         {
             field: 'stock',
             headerName: 'Stock',
             width: 140,
+            headerClassName: 'tester',
+            headerAlign: 'center',
             editable: true,
             description: 'double-click to edit Stock',
             valueSetter: setUpdatedStock,
