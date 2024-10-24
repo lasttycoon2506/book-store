@@ -80,7 +80,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
         })
     }, [submitSuccess])
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValues({
             ...values,
             [event.target.name]: event.target.value,
@@ -200,10 +200,9 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                             <TextField
                                 {...register('phone')}
                                 fullWidth
-                                name="phone"
                                 placeholder="Phone"
                                 variant="filled"
-                                onChange={handleChange}
+                                onChange={onChange}
                                 InputProps={{
                                     inputComponent: TextMaskCustom as any,
                                 }}

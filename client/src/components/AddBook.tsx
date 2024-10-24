@@ -13,6 +13,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
 import { z } from 'zod'
 import Grid2 from '@mui/material/Grid2'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import FilledInput from '@mui/material/FilledInput'
+import InputAdornment from '@mui/material/InputAdornment'
+import FormControl from '@mui/material/FormControl'
 
 type AddBookProps = {
     database: Database
@@ -159,12 +163,15 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={5}>
-                        <TextField
+                    <FormControl fullWidth  variant="filled">
+                        <FilledInput
                             {...register('price')}
                             placeholder="Price"
-                            fullWidth
-                            variant="filled"
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    $
+                                </InputAdornment>
+                            }
                         />
                         <div className="error">
                             {errors['price']?.message ? (
@@ -173,7 +180,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                                 <></>
                             )}
                         </div>
-                    </Grid2>
+                    </FormControl>
                     <Grid2 size={5}>
                         <TextField
                             type="number"
