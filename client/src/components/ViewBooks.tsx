@@ -154,8 +154,14 @@ export default function ViewAllBooks({
             description: 'double-click to edit Price',
             headerAlign: 'center',
             valueSetter: setUpdatedPrice,
-            valueFormatter: (price: string) => {
-                return '$' + price
+            valueFormatter: (price: number) => {
+                let priceWithCommas = new Intl.NumberFormat().format(price)
+                if (priceWithCommas.search(/(\.[0-9])$/) !== -1) {
+                    priceWithCommas += '0'
+                } else if (priceWithCommas.search(/^([0-9])+$/) !== -1) {
+                    priceWithCommas += '.00'
+                }
+                return '$' + priceWithCommas
             },
         },
         {
