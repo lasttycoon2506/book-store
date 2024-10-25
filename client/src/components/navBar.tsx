@@ -56,7 +56,7 @@ export default function NavBar({ authentication }: NavBarProps): JSX.Element {
     }
     function renderNavBar(): JSX.Element {
         return (
-            <AppBar position="static" sx={{ bgcolor: 'green' }}>
+            <AppBar position="static" sx={{ bgcolor: 'orange' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <LibraryBooksIcon
