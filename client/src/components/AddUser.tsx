@@ -107,7 +107,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                     {submitSuccess ? (
                         <Collapse in={alertOpen}>
                             {' '}
-                            <Alert
+                            <Alert variant="filled"
                                 action={
                                     <IconButton
                                         aria-label="close"
