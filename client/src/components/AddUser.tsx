@@ -92,7 +92,10 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
             return (
                 <>
                     <br />
-                    <NavLink to={'/login'}> Must Login First</NavLink>
+                    <NavLink to={'/login'} className="error">
+                        {' '}
+                        Must Login First
+                    </NavLink>
                 </>
             )
         }
@@ -126,11 +129,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                         <></>
                     )}
                 </div>
-                <Grid2
-                    container
-                    spacing={5}
-                    sx={{ justifyContent: 'center' }}
-                >
+                <Grid2 container spacing={5} sx={{ justifyContent: 'center' }}>
                     <Grid2 size={4.5} mt={5}>
                         <TextField
                             {...register('userName')}

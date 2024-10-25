@@ -15,6 +15,7 @@ import Grid2 from '@mui/material/Grid2'
 import FilledInput from '@mui/material/FilledInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
+import { Grid } from '@mui/material'
 
 type AddBookProps = {
     database: Database
@@ -57,7 +58,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
             return (
                 <>
                     <br />
-                    <NavLink to={'/login'}> Must Login First</NavLink>
+                    <NavLink to={'/login'} className='error'> Must Login First</NavLink>
                 </>
             )
         }
@@ -153,7 +154,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <FormControl sx={{ m: 1 }} variant="filled">
+                    <FormControl variant="filled">
                         <FilledInput
                             {...register('price')}
                             placeholder="Price"
@@ -171,7 +172,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </FormControl>
-                    <FormControl sx={{ m: 1 }} variant="filled">
+                    <FormControl variant="filled">
                         <TextField
                             type="number"
                             {...register('stock')}
