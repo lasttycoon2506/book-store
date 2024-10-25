@@ -3,7 +3,6 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import { ChangeEvent, forwardRef, useEffect, useState } from 'react'
 import { Database } from '../services/Database'
-import Collapse from '@mui/material/Collapse'
 import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
@@ -47,7 +46,6 @@ const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
 
 export default function AddUser({ database }: AddUserProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
-    const [alertOpen, setAlertOpen] = useState<boolean>(true)
     const [values, setValues] = useState({
         phone: '',
         numberformat: '1320',
@@ -106,26 +104,23 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
             >
                 <div>
                     {submitSuccess ? (
-                        <Collapse in={alertOpen}>
-                            {' '}
-                            <Alert
-                                variant="filled"
-                                action={
-                                    <IconButton
-                                        aria-label="close"
-                                        color="inherit"
-                                        size="small"
-                                        onClick={() => {
-                                            setAlertOpen(false)
-                                        }}
-                                    >
-                                        <CloseIcon fontSize="inherit" />
-                                    </IconButton>
-                                }
-                            >
-                                User Added!
-                            </Alert>
-                        </Collapse>
+                        <Alert
+                            variant="filled"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setSubmitSuccess(false)
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                        >
+                            User Added!
+                        </Alert>
                     ) : (
                         <></>
                     )}
