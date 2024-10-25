@@ -74,6 +74,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
     useEffect(() => {
         reset({
             userName: '',
+            password: '',
             name: '',
             email: '',
             phone: '',
