@@ -78,7 +78,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     onClose={handleClose}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
-                    <Alert
+                    <Alert variant="filled"
                         action={
                             <IconButton
                                 aria-label="close"
