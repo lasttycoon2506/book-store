@@ -42,10 +42,14 @@
 }
 
 .error {
-  color: red;
+    color: red;
 }
 
 .data-grid-header {
     color: white;
-    background-color: black
+    background-color: black;
+}
+
+.profile {
+    color: black;
 }

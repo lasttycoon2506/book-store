@@ -40,7 +40,7 @@ export default function Profile() {
         return (
             <div>
                 <Box display="flex" alignItems="center" justifyContent="center">
-                    <List>
+                    <List className='profile'>
                         <br />
                         <ListItem disablePadding>
                             <ListItemIcon>
