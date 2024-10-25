@@ -201,7 +201,10 @@ export default function ViewAllBooks({
             return (
                 <>
                     <br />
-                    <NavLink to={'/login'}> Must Login First</NavLink>
+                    <NavLink to={'/login'} className="error">
+                        {' '}
+                        Must Login First
+                    </NavLink>
                 </>
             )
         }

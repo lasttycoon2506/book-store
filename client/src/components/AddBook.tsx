@@ -15,7 +15,6 @@ import Grid2 from '@mui/material/Grid2'
 import FilledInput from '@mui/material/FilledInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
-import { Grid } from '@mui/material'
 
 type AddBookProps = {
     database: Database
