@@ -63,6 +63,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
         const response = await database.addUser(data)
         if (response.status === 200 || response.status === 201) {
             setSubmitSuccess(true)
+            setTimeout(() => setSubmitSuccess(false), 10000)
         } else {
             const errMsg = await response.json()
             console.error(errMsg)

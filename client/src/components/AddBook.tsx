@@ -34,7 +34,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         const response = await database.addBook(data)
         if (response.status === 200 || response.status === 201) {
             setSubmitSuccess(true)
-            setTimeout(handleClose, 5000)
+            setTimeout(() => setSubmitSuccess(false), 5000)
         } else {
             const errMsg = await response.json()
             console.error(errMsg)
@@ -51,10 +51,6 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
             stock: '',
         })
     }, [submitSuccess])
-
-    function handleClose(): void {
-        setSubmitSuccess(false)
-    }
 
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
