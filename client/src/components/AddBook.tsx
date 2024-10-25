@@ -91,13 +91,8 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                         <></>
                     )}
                 </div>
-                <Grid2
-                    container
-                    spacing={8}
-                    mt={6}
-                    sx={{ justifyContent: 'center' }}
-                >
-                    <Grid2 size={5}>
+                <Grid2 container spacing={5} sx={{ justifyContent: 'center' }}>
+                    <Grid2 size={4.5} mt={5}>
                         <TextField
                             {...register('title')}
                             placeholder="Title"
@@ -112,7 +107,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </span>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5} mt={5}>
                         <TextField
                             {...register('author')}
                             placeholder="Author"
@@ -127,7 +122,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </span>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5} ml={8}>
                         <TextField
                             type="number"
                             {...register('pages')}
@@ -143,7 +138,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5} mr={8}>
                         <TextField
                             {...register('genre')}
                             placeholder="Genre"
