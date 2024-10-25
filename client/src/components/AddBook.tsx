@@ -7,7 +7,6 @@ import Button from '@mui/material/Button'
 import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
-import Collapse from '@mui/material/Collapse'
 import { FieldValues, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BookSchema } from '../zod/schemas/Book'
@@ -25,7 +24,6 @@ type Book = z.infer<typeof BookSchema>
 
 export default function AddBook({ database }: AddBookProps): JSX.Element {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
-    const [alertOpen, setAlertOpen] = useState<boolean>(true)
     const {
         register,
         handleSubmit,
@@ -37,7 +35,6 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         const response = await database.addBook(data)
         if (response.status === 200 || response.status === 201) {
             setSubmitSuccess(true)
-            setAlertOpen(true)
         } else {
             const errMsg = await response.json()
             console.error(errMsg)
@@ -56,7 +53,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
     }, [submitSuccess])
 
     function handleClose(): void {
-        setSubmitSuccess(true)
+        setSubmitSuccess(false)
     }
 
     function renderForm(): JSX.Element {
@@ -77,7 +74,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
             >
                 <Snackbar
                     open={submitSuccess}
-                    autoHideDuration={6000}
+                    autoHideDuration={4000}
                     onClose={handleClose}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
