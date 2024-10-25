@@ -16,6 +16,7 @@ import Grid2 from '@mui/material/Grid2'
 import FilledInput from '@mui/material/FilledInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
+import Snackbar from '@mui/material/Snackbar'
 
 type AddBookProps = {
     database: Database
@@ -36,6 +37,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         const response = await database.addBook(data)
         if (response.status === 200 || response.status === 201) {
             setSubmitSuccess(true)
+            setAlertOpen(true)
         } else {
             const errMsg = await response.json()
             console.error(errMsg)
@@ -53,6 +55,10 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         })
     }, [submitSuccess])
 
+    function handleClose(): void {
+        setSubmitSuccess(true)
+    }
+
     function renderForm(): JSX.Element {
         if (!database.isAuthorized()) {
             return (
@@ -69,31 +75,27 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     submit(data as Book)
                 })}
             >
-                <div>
-                    {submitSuccess ? (
-                        <Collapse in={alertOpen}>
-                            {' '}
-                            <Alert
-                                action={
-                                    <IconButton
-                                        aria-label="close"
-                                        color="inherit"
-                                        size="small"
-                                        onClick={() => {
-                                            setAlertOpen(false)
-                                        }}
-                                    >
-                                        <CloseIcon fontSize="inherit" />
-                                    </IconButton>
-                                }
+                <Snackbar
+                    open={submitSuccess}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Alert
+                        action={
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                size="small"
+                                onClick={handleClose}
                             >
-                                Book Added!
-                            </Alert>
-                        </Collapse>
-                    ) : (
-                        <></>
-                    )}
-                </div>
+                                <CloseIcon fontSize="inherit" />
+                            </IconButton>
+                        }
+                    >
+                        Book Added!
+                    </Alert>
+                </Snackbar>
                 <Grid2
                     container
                     spacing={8}
