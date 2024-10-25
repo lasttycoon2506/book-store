@@ -15,7 +15,6 @@ import Grid2 from '@mui/material/Grid2'
 import FilledInput from '@mui/material/FilledInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControl from '@mui/material/FormControl'
-import Snackbar from '@mui/material/Snackbar'
 
 type AddBookProps = {
     database: Database
@@ -35,6 +34,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
         const response = await database.addBook(data)
         if (response.status === 200 || response.status === 201) {
             setSubmitSuccess(true)
+            setTimeout(handleClose, 5000)
         } else {
             const errMsg = await response.json()
             console.error(errMsg)
@@ -72,27 +72,29 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
                     submit(data as Book)
                 })}
             >
-                <Snackbar
-                    open={submitSuccess}
-                    autoHideDuration={4000}
-                    onClose={handleClose}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                >
-                    <Alert variant="filled"
-                        action={
-                            <IconButton
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                onClick={handleClose}
-                            >
-                                <CloseIcon fontSize="inherit" />
-                            </IconButton>
-                        }
-                    >
-                        Book Added!
-                    </Alert>
-                </Snackbar>
+                <div>
+                    {submitSuccess ? (
+                        <Alert
+                            variant="filled"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setSubmitSuccess(false)
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                        >
+                            Book Added!
+                        </Alert>
+                    ) : (
+                        <></>
+                    )}
+                </div>
                 <Grid2
                     container
                     spacing={8}
