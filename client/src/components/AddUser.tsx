@@ -128,11 +128,10 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                 </div>
                 <Grid2
                     container
-                    spacing={8}
-                    mt={6}
+                    spacing={5}
                     sx={{ justifyContent: 'center' }}
                 >
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5} mt={5}>
                         <TextField
                             {...register('userName')}
                             placeholder="Username"
@@ -147,7 +146,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                             )}
                         </span>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5} mt={5}>
                         <TextField
                             {...register('password')}
                             placeholder="Password"
@@ -163,7 +162,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                             )}
                         </span>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5}>
                         <TextField
                             {...register('name')}
                             placeholder="Name"
@@ -178,7 +177,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5}>
                         <TextField
                             {...register('email')}
                             placeholder="Email"
@@ -193,7 +192,7 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                             )}
                         </div>
                     </Grid2>
-                    <Grid2 size={5}>
+                    <Grid2 size={4.5}>
                         <FormControl variant="standard">
                             <TextField
                                 {...register('phone')}
