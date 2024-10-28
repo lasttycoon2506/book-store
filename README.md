@@ -3,8 +3,8 @@ Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-se
 # Overview
 -AWS Lambda/Dynamo DB Bookstore App using Typescript
 
--Creation of new users (employees) and books
--Login/logout for user
+-Creation of new users (employees) and books \n
+-Login/logout for user \n
 -Full edit/delete of books
 
 ## Requirements
