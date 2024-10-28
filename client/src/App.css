@@ -5,10 +5,6 @@
     text-align: center;
 }
 
-.home {
-    font-size: 50px;
-}
-
 .logo {
     height: 6em;
     padding: 1.5em;
@@ -56,6 +52,9 @@
 
 .profile {
     color: black;
+    font-weight: bold;
 }
 
-
+.home {
+    font-size: 50px;
+}

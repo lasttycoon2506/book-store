@@ -19,9 +19,10 @@ export default function Profile() {
     async function getUserAttributes(): Promise<void> {
         try {
             const userAttributes = await fetchUserAttributes()
+            const phoneSliced = userAttributes.phone_number?.slice(1)
             setName(userAttributes.name!)
             setEmail(userAttributes.email!)
-            setPhone(userAttributes.phone_number!)
+            setPhone(phoneSliced)
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -40,7 +41,7 @@ export default function Profile() {
         return (
             <div>
                 <Box display="flex" alignItems="center" justifyContent="center">
-                    <List className='profile'>
+                    <List className="profile">
                         <br />
                         <ListItem disablePadding>
                             <ListItemIcon>
