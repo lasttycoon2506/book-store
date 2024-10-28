@@ -8,6 +8,7 @@ import ViewBooks from './components/ViewBooks'
 import Profile from './components/Profile'
 import AddBook from './components/AddBook'
 import AddUser from './components/AddUser'
+import Home from './components/Home'
 
 const authentication = new Authentication()
 const database = new Database(authentication)
@@ -40,7 +41,7 @@ function App(): JSX.Element {
             children: [
                 {
                     path: '/',
-                    element: <div> welcome home </div>,
+                    element: <Home/>,
                 },
                 {
                     path: '/login',
