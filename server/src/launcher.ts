@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { App } from 'aws-cdk-lib'
 import { Data } from './stacks/Data'
 import { Lambdas } from './stacks/Lambdas'

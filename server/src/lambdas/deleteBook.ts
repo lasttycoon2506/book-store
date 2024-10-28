@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
 import { DeleteCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb'
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda'

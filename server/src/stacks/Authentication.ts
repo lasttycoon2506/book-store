@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
 import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib'
 import {
     CfnIdentityPool,
@@ -19,11 +20,11 @@ interface AuthStackProps extends StackProps {
     booksBucket: IBucket
 }
 export class Authentication extends Stack {
-    public userPool?: UserPool 
-    private userPoolClient?: UserPoolClient 
-    private identityPool?: CfnIdentityPool 
-    private authenticatedRole?: Role 
-    private unAuthenticatedRole?: Role 
+    public userPool?: UserPool
+    private userPoolClient?: UserPoolClient
+    private identityPool?: CfnIdentityPool
+    private authenticatedRole?: Role
+    private unAuthenticatedRole?: Role
     private adminRole?: Role
 
     constructor(scope: Construct, id: string, props: AuthStackProps) {
@@ -169,7 +170,11 @@ export class Authentication extends Stack {
                 adminsMapping: {
                     type: 'Token',
                     ambiguousRoleResolution: 'AuthenticatedRole',
-                    identityProvider: `cognito-idp.${this.region}.amazonaws.com/${this.userPool!.userPoolId}:${this.userPoolClient!.userPoolClientId}`,
+                    identityProvider: `cognito-idp.${
+                        this.region
+                    }.amazonaws.com/${this.userPool!.userPoolId}:${
+                        this.userPoolClient!.userPoolClientId
+                    }`,
                 },
             },
         })

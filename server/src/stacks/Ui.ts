@@ -2,11 +2,8 @@ import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib'
 import {
     AccessLevel,
     Distribution,
-    OriginAccessIdentity,
 } from 'aws-cdk-lib/aws-cloudfront'
 import {
-    HttpOrigin,
-    OriginGroup,
     S3BucketOrigin,
 } from 'aws-cdk-lib/aws-cloudfront-origins'
 import { Bucket } from 'aws-cdk-lib/aws-s3'

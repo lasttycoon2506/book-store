@@ -79,7 +79,7 @@ export async function addUser(
             Permanent: true,
         }
         const setUserPw = new AdminSetUserPasswordCommand(setUserPwInput)
-        const setUserPwResponse = await cognitoClient.send(setUserPw)
+        await cognitoClient.send(setUserPw)
 
         return {
             statusCode: 201,
