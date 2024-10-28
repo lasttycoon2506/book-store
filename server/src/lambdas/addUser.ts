@@ -81,14 +81,6 @@ export async function addUser(
         const setUserPw = new AdminSetUserPasswordCommand(setUserPwInput)
         const setUserPwResponse = await cognitoClient.send(setUserPw)
 
-        // const input3 = { // AdminAddUserToGroupRequest
-        //   UserPoolId: AuthenticationStack.BookstoreUserPoolId, // required
-        //   Username: userName, // required
-        //   GroupName: "admins", // required
-        // };
-        // const command3 = new AdminAddUserToGroupCommand(input3);
-        // const response = await cognitoClient.send(command3);
-
         return {
             statusCode: 201,
             body: JSON.stringify(newUserResponse),
