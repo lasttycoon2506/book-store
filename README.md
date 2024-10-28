@@ -1,7 +1,7 @@
 Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-serverless-react/) as a foundational guide
 
 # Overview
--AWS Lambda/Dynamo DB Bookstore App using Typescript
+**-AWS Lambda/Dynamo DB Bookstore App using Typescript**
 
 -Creation of new users (employees) and books  
 -Login/logout for user  
