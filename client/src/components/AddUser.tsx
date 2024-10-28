@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Grid2 from '@mui/material/Grid2'
 import { IMaskInput } from 'react-imask'
 import FormControl from '@mui/material/FormControl'
+import { InputBaseComponentProps } from '@mui/material/InputBase'
 
 type AddUserProps = {
     database: Database
@@ -35,7 +36,7 @@ const TextMaskCustom = forwardRef<HTMLInputElement, CustomProps>(
                     '#': /[1-9]/,
                 }}
                 inputRef={ref}
-                onAccept={(value: any) =>
+                onAccept={(value: string) =>
                     onChange({ target: { name: props.name, value } })
                 }
                 overwrite
@@ -78,9 +79,10 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
             email: '',
             phone: '',
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [submitSuccess])
 
-    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
         setValues({
             ...values,
             [event.target.name]: event.target.value,
@@ -200,7 +202,8 @@ export default function AddUser({ database }: AddUserProps): JSX.Element {
                                 variant="filled"
                                 onChange={onChange}
                                 InputProps={{
-                                    inputComponent: TextMaskCustom as any,
+                                    inputComponent:
+                                        TextMaskCustom as unknown as React.ElementType<InputBaseComponentProps>,
                                 }}
                             />
                             <div className="error">

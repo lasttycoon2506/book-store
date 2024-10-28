@@ -50,6 +50,7 @@ export default function AddBook({ database }: AddBookProps): JSX.Element {
             price: '',
             stock: '',
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [submitSuccess])
 
     function renderForm(): JSX.Element {
