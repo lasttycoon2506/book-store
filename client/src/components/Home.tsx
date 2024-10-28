@@ -1,5 +1,7 @@
 export default function Home() {
     return (
-        <header className="home"> TESTING </header>
+        <p>
+            <header className="home"> Welcome To Bookies! </header>
+        </p>
     )
 }
