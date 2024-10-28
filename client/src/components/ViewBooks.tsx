@@ -63,7 +63,7 @@ export default function ViewAllBooks({
         return { ...row, author }
     }
     const setUpdatedPgs: GridValueSetter<GridValidRowModel> = (value, row) => {
-        const pages = value
+        const pages = Number(value)
         return { ...row, pages }
     }
     const setUpdatedGenre: GridValueSetter<GridValidRowModel> = (
@@ -77,14 +77,14 @@ export default function ViewAllBooks({
         value,
         row
     ) => {
-        const price = value
+        const price = Number(value)
         return { ...row, price }
     }
     const setUpdatedStock: GridValueSetter<GridValidRowModel> = (
         value,
         row
     ) => {
-        const stock = value
+        const stock = Number(value)
         return { ...row, stock }
     }
 
