@@ -1,5 +1,9 @@
 import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib'
-import { Distribution, OriginAccessIdentity } from 'aws-cdk-lib/aws-cloudfront'
+import {
+    AccessLevel,
+    Distribution,
+    OriginAccessIdentity,
+} from 'aws-cdk-lib/aws-cloudfront'
 import {
     HttpOrigin,
     OriginGroup,
@@ -22,6 +26,7 @@ export class Ui extends Stack {
         const uiPath = join(__dirname, '..', '..', '..', 'client', 'dist')
         if (!existsSync(uiPath)) {
             console.warn('ui path dne')
+            return
         }
 
         new BucketDeployment(this, 'BookstoreDeployment', {
@@ -29,23 +34,20 @@ export class Ui extends Stack {
             destinationBucket: deploymentBucket,
         })
 
-        const originIdentity = new OriginAccessIdentity(
-            this,
-            'OriginAccessIdentity'
+        const s3origin = S3BucketOrigin.withOriginAccessControl(
+            deploymentBucket,
+            {
+                originAccessLevels: [AccessLevel.READ],
+            }
         )
-        deploymentBucket.grantRead(originIdentity)
 
         const distribution = new Distribution(this, 'BookstoreDistribution', {
+            defaultRootObject: 'index.html',
             defaultBehavior: {
-                origin: new OriginGroup({
-                    primaryOrigin:
-                        S3BucketOrigin.withOriginAccessControl(
-                            deploymentBucket
-                        ),
-                    fallbackOrigin: new HttpOrigin('www.example.com'),
-                }),
+                origin: s3origin,
             },
         })
+
         new CfnOutput(this, 'BookstoreUrl', {
             value: distribution.distributionDomainName,
         })
