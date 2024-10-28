@@ -9,6 +9,9 @@ export default defineConfig({
         // necessary for segment analytics lib to work
         global: {},
     },
+    build: {
+        emptyOutDir: true,
+      },
     resolve: {
         alias: {
             './runtimeConfig': './runtimeConfig.browser',
