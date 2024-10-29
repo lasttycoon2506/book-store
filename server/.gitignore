@@ -1,4 +1,3 @@
 /node_modules
 cdk.out
 outputs.json
-src/test/launcher.ts
