@@ -6,5 +6,5 @@ export function addCorsHeader(res: APIGatewayProxyResult): void {
     }
 
     res.headers['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-    res.headers['Access-Control-Allow-Methods'] = '*'
+    res.headers['Access-Control-Allow-Methods'] = ''
 }
