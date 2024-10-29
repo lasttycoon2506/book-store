@@ -13,8 +13,7 @@ Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-se
 -install amazon SDK 
 
 ## Home
-![Screenshot 2024-10-28 143840](https://github.com/user-attachments/assets/9325b1b9-9ddb-493b-bd2b-6b9a158b03db)
-
+![Screenshot 2024-10-29 123025](https://github.com/user-attachments/assets/62f5d8f6-6105-404a-8ca6-63ca8d9f9e9c)
 ## Login
 ![Screenshot 2024-10-28 145136](https://github.com/user-attachments/assets/51c82b5a-4607-49f1-a70d-dfbbc6c4740e)
 #### Successful Login
