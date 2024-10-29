@@ -19,15 +19,27 @@ export default function Profile() {
     async function getUserAttributes(): Promise<void> {
         try {
             const userAttributes = await fetchUserAttributes()
-            const phoneSliced = userAttributes.phone_number?.slice(1)
             setName(userAttributes.name!)
             setEmail(userAttributes.email!)
-            setPhone(phoneSliced)
+            setPhone(formatPhone(userAttributes.phone_number!))
             setLoading(false)
         } catch (error) {
             setLoading(false)
             console.error(error)
         }
+    }
+
+    function formatPhone(phone: string): string {
+        //amz returns phone w/ + prefixed
+        const phoneRemovedPlus = phone.slice(1)
+        const phoneFormatted =
+            '(' +
+            phoneRemovedPlus.slice(0, 3) +
+            ') ' +
+            phoneRemovedPlus.slice(3, 6) +
+            '-' +
+            phoneRemovedPlus.slice(6)
+        return phoneFormatted
     }
 
     useEffect(() => {
