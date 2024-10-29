@@ -19,11 +19,11 @@ Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-se
 #### Successful Login
 ![Screenshot 2024-10-29 123205](https://github.com/user-attachments/assets/e4bf95f3-2175-4100-8605-8216f832e5fe)
 ## Add User
-![Screenshot 2024-10-28 145255](https://github.com/user-attachments/assets/206ee710-0bac-4f79-974c-e31db5e83f70)
+![Screenshot 2024-10-29 123307](https://github.com/user-attachments/assets/8cfd0b80-5965-403c-be49-dfe6260aed8e)
 #### User Successfully Added
 ![Screenshot 2024-10-28 145419](https://github.com/user-attachments/assets/7471e947-f25d-466c-a63e-39e57f3e76a2)
 ## Add Book
-![Screenshot 2024-10-28 145507](https://github.com/user-attachments/assets/42074b6d-8ab1-4a02-929b-205730a0209b)
+![Screenshot 2024-10-29 123347](https://github.com/user-attachments/assets/084c4bde-1ef9-4ec4-99fa-471db1fc9b8c)
 #### Book Successfully Added
 ![Screenshot 2024-10-28 145603](https://github.com/user-attachments/assets/bdbdbc35-3db3-4a84-9364-2bd36beb50df)
 ## View Books
