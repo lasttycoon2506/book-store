@@ -16,7 +16,8 @@ Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-se
 
 ## Login
 ![Screenshot 2024-10-28 145136](https://github.com/user-attachments/assets/51c82b5a-4607-49f1-a70d-dfbbc6c4740e)
-
+### Successful Login
+![Screenshot 2024-10-29 113222](https://github.com/user-attachments/assets/e05c277c-fc16-4334-9973-266db1cc7f75)
 ## Add User
 ![Screenshot 2024-10-28 145255](https://github.com/user-attachments/assets/206ee710-0bac-4f79-974c-e31db5e83f70)
 ### User Successfully Added
@@ -26,7 +27,18 @@ Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-se
 ### Book Successfully Added
 ![Screenshot 2024-10-28 145603](https://github.com/user-attachments/assets/bdbdbc35-3db3-4a84-9364-2bd36beb50df)
 ## View Books
-![Screenshot 2024-10-28 145805](https://github.com/user-attachments/assets/1ebed8cf-5e47-453b-84c9-08c1d0f451ae)
+![Screenshot 2024-10-29 113645](https://github.com/user-attachments/assets/dfc35d92-07ea-4b52-8394-1a42781d7301)
+### Edit Book
+![Screenshot 2024-10-29 113820](https://github.com/user-attachments/assets/2d610bd5-ffd5-440f-a634-49f18f943601)
+![Screenshot 2024-10-29 114021](https://github.com/user-attachments/assets/b5c0e600-3efa-4b0d-ba0d-712f935802e1)
+## Delete Book
+![Screenshot 2024-10-29 114155](https://github.com/user-attachments/assets/88be334e-cf2c-4928-80a4-1f0f73240706)
+
+
+
+
+
+
 
 
 
