@@ -6,6 +6,7 @@ Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-se
 ### Features
 -Creation of new users (employees) and books  
 -Login/logout for user  
+-View Books/Profile
 -Full edit/delete of books
 
 ## Requirements
