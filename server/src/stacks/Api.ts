@@ -42,7 +42,7 @@ export class Api extends Stack {
 
         const optionsWithCors: ResourceOptions = {
             defaultCorsPreflightOptions: {
-                allowOrigins: ['http://localhost:5173'],
+                allowOrigins: ['http://localhost:5173' ],
                 allowMethods: Cors.ALL_METHODS,
             },
         }
