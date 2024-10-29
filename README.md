@@ -35,17 +35,5 @@ Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-se
 ## Delete Book
 ![Screenshot 2024-10-29 114155](https://github.com/user-attachments/assets/88be334e-cf2c-4928-80a4-1f0f73240706)
 ## View Profile
+![Screenshot 2024-10-29 122612](https://github.com/user-attachments/assets/378f4dac-2d8d-4a8a-9206-1865a68aab8f)
 
-
-
-
-
-
-
-
-
-
-
-
-
-#### test 4
