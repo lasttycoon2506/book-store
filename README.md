@@ -1,5 +1,5 @@
 Used [this learning resource](https://www.udemy.com/course/aws-typescript-cdk-serverless-react/) as a foundational guide  
-**note**public url hidden for security purposes
+**note** - public url hidden for security purposes
 # Overview
 **AWS Lambda/Dynamo DB Bookstore App using Typescript**
 
